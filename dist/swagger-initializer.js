@@ -8,10 +8,10 @@ window.onload = function() {
     deepLinking: true,
     presets: [
       SwaggerUIBundle.presets.apis,
-      SwaggerUIStandalonePreset
+      // SwaggerUIStandalonePreset
     ],
     plugins: [
-      SwaggerUIBundle.plugins.DownloadUrl
+      // SwaggerUIBundle.plugins.DownloadUrl
     ],
     layout: "StandaloneLayout"
   });
