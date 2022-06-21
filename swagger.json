@@ -2,7 +2,11 @@
   "info": {
     "description": "The API requires an ID and API Key for the auth endpoint; which returns a bearer token.",
     "title": "Tax Agile API Specification",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "contact": {
+      "name": "Tax Agile",
+      "url": "https://www.vatcalc.com/"
+    }
   },
   "paths": {
     "/auth": {
