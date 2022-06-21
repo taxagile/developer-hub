@@ -1,2 +1,0 @@
-# developer-hub
-swagger
