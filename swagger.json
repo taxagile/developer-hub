@@ -3,7 +3,7 @@
   "info": {
     "description": "The API requires an ID and API Key for the auth endpoint; which returns a bearer token.",
     "title": "Tax Agile API Specification",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "contact": {
       "name": "Issues",
       "url": "https://github.com/taxagile/developer-hub/issues"
@@ -97,6 +97,8 @@
     },
     "/determination/vat/transactions": {
       "post": {
+        "summary": "Send a transaction and receive a VAT determination.",
+        "description": "Send a transaction to the determination engine for VAT. The request body supports a large number of conditions which may be true on your transaction, but all are not required. It can be helpful to use VAT Advisor to enter a sample transaction to understand the request body you need to send. The transaction can be stored if you include the query parameter commit=true if stored, the response will provide a uuid.",
         "requestBody": {
           "required": true,
           "description": "The payload body requires a JSON object which represents the transaction. If fields are missing, the API will return a response object with context enriched guidance on how to correct the request. Then the caller can resend an updated transaction",
@@ -108,7 +110,17 @@
             }
           }
         },
-        "summary": "Send a transaction and receive a VAT determination.",
+        "parameters": [
+          {
+            "name": "commit",
+            "description": "Optional, defaults to false; if true the transaction is stored and a unique id is provided in the response.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "true"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -154,8 +166,8 @@
         ]
       },
       "get": {
-        "summary": "",
-        "description": "",
+        "summary": "Fetch a collection of transactions with filter params",
+        "description": "Returns a paginated dataset of the committed (saved) transactions stored on the platform. Takes filter criteria as query parameters and sets defaults to ensure a huge dataset is not fetched.  Can be used to collect data periodically to store in your analysis data store; or to build an interactive dashboard in your application.",
         "parameters": [
           {
             "name": "entryDateTimeFrom",
