@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": "The API requires an ID and API Key for the auth endpoint; which returns a bearer token.",
+    "description": "Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please contact us if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues, create an issue on our [Developer Hub](https://github.com/taxagile/developer-hub/issue)<hr> ",
     "title": "Tax Agile API Specification",
     "version": "1.0.1",
     "contact": {
-      "name": "Issues",
-      "url": "https://github.com/taxagile/developer-hub/issues"
+      "name": "Tax Agile",
+      "url": "https://www.vatcalc.com/contact/"
     }
   },
   "servers": [
@@ -22,9 +22,7 @@
   "paths": {
     "/auth": {
       "post": {
-        "tags": [
-          "Authentication"
-        ],
+        "tags": [ "Authentication" ],
         "responses": {
           "201": {
             "description": "Created",
@@ -75,7 +73,7 @@
                   "errorCode": "AU001"
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
+                  "$ref": "#/components/schemas/errorResponse",
                 }
               }
             }
@@ -161,11 +159,9 @@
             }
           }
         },
-        "tags": [
-          "VAT determination"
-        ]
+        "tags": [ "VAT determination" ]
       },
-      "get": {
+      "get":{
         "summary": "Fetch a collection of transactions with filter params",
         "description": "Returns a paginated dataset of the committed (saved) transactions stored on the platform. Takes filter criteria as query parameters and sets defaults to ensure a huge dataset is not fetched.  Can be used to collect data periodically to store in your analysis data store; or to build an interactive dashboard in your application.",
         "parameters": [
@@ -177,7 +173,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2022-06-28T00:00:00.000Z"
+            "example":"2022-06-28T00:00:00.000Z"
           },
           {
             "name": "entryDateTimeTo",
@@ -187,7 +183,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2022-06-28T23:59:59.999Z"
+            "example":"2022-06-28T23:59:59.999Z"
           },
           {
             "name": "page",
@@ -197,7 +193,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "1"
+            "example":"1"
           },
           {
             "name": "pageSize",
@@ -207,7 +203,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "20"
+            "example":"20"
           },
           {
             "name": "docNumber",
@@ -217,7 +213,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "12345678"
+            "example":"12345678"
           },
           {
             "name": "vatCode",
@@ -227,9 +223,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "BESICSG000"
-          }
-        ],
+            "example":"BESICSG000"
+          }],
         "responses": {
           "200": {
             "description": "OK",
@@ -280,6 +275,7 @@
                           "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=1&pageSize=20"
                         }
                       }
+
                     },
                     "data": {
                       "type": "array",
@@ -304,12 +300,13 @@
                           }
                         }
                       }
-                    }
+                    },
                   }
                 }
               }
             }
           },
+
           "401": {
             "description": "Unauthorized - invalid token",
             "content": {
@@ -325,20 +322,19 @@
             }
           }
         },
-        "tags": [
-          "VAT determination"
-        ]
+        "tags": [ "VAT determination" ]
       }
     },
     "/determination/vat/transactions/{id}": {
       "get": {
         "summary": "Return a specific transaction by id",
-        "description": "Providing the id of the transaction will fetch the transaction from  the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. Using the ?detail=true query parameter returns a full representation of the transaction and how it was processed by our engine.",
+        "description": "Providing the id of the transaction will fetch the transaction from
+        the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. Using the ?detail=true query parameter returns a full representation of the transaction and how it was processed by our engine.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "application/json": {
+              "application/json":{
                 "schema": {
                   "type": "object",
                   "properties": {
@@ -359,6 +355,20 @@
                       "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
                     }
                   }
+                },
+              },
+            },
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "QY001",
+                  "message": "Document 7942cf02-2067-4b37-8e00-e3bd3926d6e5 not found"
                 }
               }
             }
@@ -373,20 +383,6 @@
                 "example": {
                   "errorCode": "AU001",
                   "message": "Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "QY001",
-                  "message": "Document 7942cf02-2067-4b37-8e00-e3bd3926d6e5 not found"
                 }
               }
             }
@@ -414,9 +410,7 @@
             "example": true
           }
         ],
-        "tags": [
-          "VAT determination"
-        ]
+        "tags":[ "VAT determination" ]
       }
     }
   },
