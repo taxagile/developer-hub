@@ -5,8 +5,8 @@
     "title": "Tax Agile API Specification",
     "version": "1.0.0",
     "contact": {
-      "name": "Tax Agile",
-      "url": "https://www.vatcalc.com/"
+      "name": "Issues",
+      "url": "https://github.com/taxagile/developer-hub/issues"
     }
   },
   "servers": [
