@@ -231,6 +231,85 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 25
+                    },
+                    "next": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 3
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 20
+                        },
+                        "uri": {
+                          "type": "string",
+                          "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=3&pageSize=20"
+                        }
+                      }
+                    },
+                    "previous": {
+                      "type": "object",
+                      "properties": {
+                        "page": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1
+                        },
+                        "pageSize": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 20
+                        },
+                        "uri": {
+                          "type": "string",
+                          "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=1&pageSize=20"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "request": {
+                            "$ref": "#/components/schemas/determinationVatRequestBody"
+                          },
+                          "response": {
+                            "$ref": "#/components/schemas/determinationVatResponse200"
+                          },
+                          "entryDateTime": {
+                            "description": "Datetime the transaction was created on our platform",
+                            "type": "string",
+                            "example": "2022-06-28T14:12:35.000Z"
+                          },
+                          "_id": {
+                            "description": "Unique id issued by our platform for this transaction",
+                            "type": "string",
+                            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized - invalid token",
             "content": {
