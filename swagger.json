@@ -1,0 +1,340 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "description": "The API requires an ID and API Key for the auth endpoint; which returns a bearer token.",
+    "title": "Tax Agile API Specification",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Tax Agile",
+      "url": "https://www.vatcalc.com/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://test-api.taxagile.io/v1",
+      "description": "Test API"
+    },
+    {
+      "url": "https://api.taxagile.io/v1",
+      "description": "Production API"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "expiresIn": {
+                      "example": 86400,
+                      "description": "The time in seconds before the token is expired and can no longer be used",
+                      "type": "number"
+                    },
+                    "accessToken": {
+                      "description": "Use this token on subsequent API requests in the authorization header with the format 'Bearer <token>'",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJERU1PIiwiaWF0IjoxNjUzMDU3MjU2LCJleHAiOjE2NTMxNDM2NTZ9.bSMQE3mRHL0LGl9Fpn3rl8wJkvQC7WN9N-U7ikwaavQ",
+                      "type": "string"
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "example": "Bearer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "SV001",
+                  "message": "JSON schema validation failed: must NOT have fewer than 1 characters in: accountId"
+                },
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Unauthorized",
+                  "errorCode": "AU001"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse",
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Authenticate with API Key to receive a Bearer token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/authSchemaRequestBody"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/determination/vat/transactions": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "description": "The payload body requires a JSON object which represents the transaction. If fields are missing, the API will return a response object with context enriched guidance on how to correct the request. Then the caller can resend an updated transaction",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/determinationVatRequestBody"
+              }
+            }
+          }
+        },
+        "summary": "Send a transaction and receive a VAT determination.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/determinationVatResponse200"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "VD003",
+                  "message": "Missing field: date.docDate | Hint: What is the date of the document?"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            },
+            "description": "Bad request - missing fields"
+          },
+          "401": {
+            "description": "Unauthorized - invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "AU001",
+                  "message": "Unauthorized"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VAT determination"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "VAT determination"
+    },
+    {
+      "name": "Authentication"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "authSchemaRequestBody": {
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "d9b97d76-5b6c-426f-9625-a1f63b7e195b",
+            "minLength": 1,
+            "description": "The API key issued by Tax Agile"
+          },
+          "accountId": {
+            "minLength": 1,
+            "maxLength": 100,
+            "example": "1Qwj3WEgtaABCCkzgkAL",
+            "description": "The account id issued by Tax Agile",
+            "type": "string"
+          }
+        },
+        "title": "Auth request body",
+        "description": "API authentication resource",
+        "type": "object",
+        "required": [
+          "accountId",
+          "apiKey"
+        ],
+        "additionalProperties": false
+      },
+      "determinationVatResponse200": {
+        "title": "VAT determination 200 response body",
+        "description": "",
+        "properties": {
+          "transaction2": {
+            "type": "string",
+            "example": "N/A - N/A - No exemption - N/A",
+            "title": "Transaction 2"
+          },
+          "reversedOutputVatRate": {
+            "type": "number",
+            "title": "Reversed output VAT rate",
+            "example": 0
+          },
+          "reversedOutputVat": {
+            "title": "Reversed output VAT",
+            "example": 0,
+            "type": "number"
+          },
+          "importVatAmount": {
+            "type": "number",
+            "title": "Import VAT amount",
+            "example": 0
+          },
+          "invoiceMentioning": {
+            "example": "Article 138(1) Directive 2006/112 EC",
+            "type": "string",
+            "title": "Invoice mentioning"
+          },
+          "deductibleRate": {
+            "type": "number",
+            "title": "Deductible rate",
+            "example": 0
+          },
+          "sellerVatNo": {
+            "type": "string",
+            "title": "Seller VAT number country",
+            "example": "BE"
+          },
+          "deductibleInputVat": {
+            "example": 0,
+            "title": "Deductible input VAT",
+            "type": "number"
+          },
+          "transaction1": {
+            "type": "string",
+            "title": "Transaction 1",
+            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
+          },
+          "buyerVatNo": {
+            "example": "DE",
+            "type": "string",
+            "title": "Buyer VAT number country"
+          },
+          "rateT1": {
+            "type": "number",
+            "example": 0,
+            "title": "Rate T1"
+          },
+          "vatCode": {
+            "example": "BESICSG000",
+            "type": "string",
+            "title": "VAT code"
+          },
+          "vatBoxes": {
+            "title": "VAT box reporting",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "title": "Reporting country",
+                  "type": "string",
+                  "example": "BE"
+                },
+                "box": {
+                  "title": "Box name",
+                  "example": "01",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 0,
+                  "title": "Box value"
+                }
+              },
+              "title": "Items"
+            }
+          },
+          "taxPoint": {
+            "type": "string",
+            "example": "2022-05-09T00:00:00.000Z",
+            "title": "Tax point"
+          },
+          "vatAmount": {
+            "type": "number",
+            "title": "VAT amount",
+            "example": 0
+          },
+          "calculatedRate": {
+            "type": "number",
+            "title": "Calculated rate",
+            "example": 0
+          },
+          "baseAmount": {
+            "type": "number",
+            "example": 100,
+            "title": "Base amount"
+          }
+        },
+        "type": "object"
+      },
+      "determinationVatRequestBody": {
+        $ref: "vatDeterminationRequestBodySchema.json"
+      },
+      "errorResponse": {
+        "description": "Standardised error response returned with a code and message",
+        "title": "Standard error object",
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "example": "<error code>"
+          },
+          "message": {
+            "example": "<error message>",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
