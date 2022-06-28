@@ -61,7 +61,6 @@
                   "message": "JSON schema validation failed: must NOT have fewer than 1 characters in: accountId"
                 },
                 "schema": {
-                  "type": "object",
                   "$ref": "#/components/schemas/errorResponse"
                 }
               }
@@ -76,8 +75,7 @@
                   "errorCode": "AU001"
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/errorResponse",
-                  "type": "object"
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -89,7 +87,6 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
                 "$ref": "#/components/schemas/authSchemaRequestBody"
               }
             }
@@ -155,15 +152,191 @@
         "tags": [
           "VAT determination"
         ]
+      },
+      "get": {
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "entryDateTimeFrom",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format from which to select transactions to return. Optional, if not provided it defaults to current date time -30 days.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2022-06-28T00:00:00.000Z"
+          },
+          {
+            "name": "entryDateTimeTo",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format of the end of the date time range. Optional, no default if not provided.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2022-06-28T23:59:59.999Z"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number of the result set you want to fetch. Optional, defaults to 1.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of transactions to return in a page of results. Optional, defaults to 20.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          },
+          {
+            "name": "docNumber",
+            "in": "query",
+            "description": "Filter result set by matching a document number provided on the original request.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345678"
+          },
+          {
+            "name": "vatCode",
+            "in": "query",
+            "description": "Filter result set by matching a VAT code from the VAT determination made by our engine.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "BESICSG000"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized - invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "AU001",
+                  "message": "Unauthorized"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VAT determination"
+        ]
+      }
+    },
+    "/determination/vat/transactions/{id}": {
+      "get": {
+        "summary": "Return a specific transaction by id",
+        "description": "Providing the id of the transaction will fetch the transaction from  the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. Using the ?detail=true query parameter returns a full representation of the transaction and how it was processed by our engine.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "request": {
+                      "$ref": "#/components/schemas/determinationVatRequestBody"
+                    },
+                    "response": {
+                      "$ref": "#/components/schemas/determinationVatResponse200"
+                    },
+                    "entryDateTime": {
+                      "description": "Datetime the transaction was created on our platform",
+                      "type": "string",
+                      "example": "2022-06-28T14:12:35.000Z"
+                    },
+                    "_id": {
+                      "description": "Unique id issued by our platform for this transaction",
+                      "type": "string",
+                      "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "AU001",
+                  "message": "Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "QY001",
+                  "message": "Document 7942cf02-2067-4b37-8e00-e3bd3926d6e5 not found"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Uuid of the transaction",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "f17b19f2-391c-46b4-9857-025cb0d64a51"
+          },
+          {
+            "name": "detail",
+            "in": "query",
+            "description": "Optional parameter to fetch a detailed representation of the transactionl; if not used it defaults to a summary",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          }
+        ],
+        "tags": [
+          "VAT determination"
+        ]
       }
     }
   },
   "tags": [
     {
-      "name": "VAT determination"
+      "name": "VAT determination",
+      "description": "Access VAT Calc functionality via our determination endpoints."
     },
     {
-      "name": "Authentication"
+      "name": "Authentication",
+      "description": "Use these endpoints to get an active auth token."
     }
   ],
   "security": [
@@ -206,7 +379,7 @@
         "additionalProperties": false
       },
       "determinationVatResponse200": {
-        "title": "VAT determination 200 response body",
+        "title": "VAT determination response body",
         "description": "",
         "properties": {
           "transaction2": {
@@ -318,7 +491,7 @@
         "type": "object"
       },
       "determinationVatRequestBody": {
-        $ref: "vatDeterminationRequestBodySchema.json"
+        "$ref": "vatDeterminationRequestBodySchema.json"
       },
       "errorResponse": {
         "description": "Standardised error response returned with a code and message",
