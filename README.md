@@ -2,7 +2,9 @@
 Here you will find our latest API documentation and help getting started using our API.
 
 Jump to:
-   [Swagger API docs](https://taxagile.github.io/developer-hub)
+
+* [Swagger API docs](https://taxagile.github.io/developer-hub)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.1.postman_collection.json)
 
 ---
 
