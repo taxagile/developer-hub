@@ -4,7 +4,7 @@ th{ background-color: #343a98!important; color: #fff!important; }
 
 ![Tax Agile Logo](docs/Tax-Agile-Short.png)
 
-[Home](README.md) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html)
+[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html)
 
 # Developer Hub
 The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile. 
