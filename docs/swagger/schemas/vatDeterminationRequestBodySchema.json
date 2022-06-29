@@ -31,416 +31,19 @@
           }
         },
         "seller": {
-          "type": "object",
-          "properties": {
-            "isNonTaxableLegalPerson": {
-              "type": "boolean",
-              "description": "Is seller a non-taxable legal person?"
-            },
-            "euDistanceSellingThreshold": {
-              "type": "boolean",
-              "description": "Exceeded EUR 10k in calendar year (Post-July 21)?"
-            },
-            "registeredForOSS": {
-              "type": "boolean",
-              "description": "Is the supplier registered for OSS?"
-            },
-            "address": {
-              "type": "string",
-              "description": ""
-            },
-            "countriesImportDefermentLicence": {
-              "type": "string",
-              "description": "In which countries does the seller have a licence for import deferment?"
-            },
-            "establishedCountry": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 2,
-              "example": "GB",
-              "description": "In which country is the seller established?"
-            },
-            "city": {
-              "type": "string",
-              "description": ""
-            },
-            "vatIdCountry": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 2,
-              "example": "GB",
-              "description": "What is the country of the seller's VAT ID?"
-            },
-            "registeredForDistanceSales": {
-              "type": "boolean",
-              "description": "Registered for distance sales in ship to country (Pre-July 21)?"
-            },
-            "countriesFixedEstablishment": {
-              "type": "string",
-              "description": "In which countries does the seller have a fixed establishment?"
-            },
-            "isCharity": {
-              "type": "boolean",
-              "description": "Is the seller a charity?"
-            },
-            "registeredForNonUnionOSS": {
-              "type": "boolean",
-              "description": "Supplier registered for non-Union OSS?"
-            },
-            "countriesVATRegistration": {
-              "type": "string",
-              "description": "In which countries does the supplier have a VAT registration?"
-            },
-            "vatIdType": {
-              "type": "string",
-              "enum": [
-                "Fixed establishment",
-                "Fiscal representative",
-                "Direct",
-                "Permanent establishment"
-              ],
-              "description": "What type of VAT registration is it?"
-            },
-            "isTaxablePerson": {
-              "type": "boolean",
-              "description": "Is seller a taxable person?"
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of supplier"
-            },
-            "isHospital": {
-              "type": "boolean",
-              "description": "Is the seller a hospital?"
-            },
-            "postCode": {
-              "type": "string",
-              "description": "What is the postcode of the ship from address?"
-            },
-            "id": {
-              "type": "string",
-              "description": "What is the supplier's company ID?"
-            },
-            "registeredForIOSS": {
-              "type": "boolean",
-              "description": "Supplier registered for IOSS?"
-            },
-            "_id": {
-              "type": "string",
-              "description": "Internal Seller ID"
-            },
-            "sellerVatId": {
-              "type": "string",
-              "description": "What is the seller's VAT ID?"
-            }
-          }
+          "type": "string",
+          "description": ""
         },
         "item": {
           "type": "object",
           "properties": {
-            "isLead": {
-              "type": "boolean",
-              "description": "Is Lead?"
-            },
-            "isGasThroughNaturalGasSystem": {
-              "type": "boolean",
-              "description": "Is Gas through a natural gas system?"
-            },
-            "isConstructionOfSocialDwellings": {
-              "type": "boolean",
-              "description": "Is Construction of social dwellings?"
-            },
-            "isOrganisingOfEvents": {
-              "type": "boolean",
-              "description": "Is Organising of events?"
-            },
-            "isDevelopmentAndSaleOfNonStandardSoftware": {
-              "type": "boolean",
-              "description": "Is Development and sale of non-standard Software?"
-            },
-            "isTransportationOfPersonsByAir": {
-              "type": "boolean",
-              "description": "Is Transportation of persons by air?"
-            },
-            "isHaulageService": {
-              "type": "boolean",
-              "description": "Is Haulage services?"
-            },
-            "isFoodAndBeverageNonAlcoholic": {
-              "type": "boolean",
-              "description": "Is Food and beverage (non-alcoholic)?"
-            },
-            "isCollectorsItems": {
-              "type": "boolean",
-              "description": "Is Collectors' items?"
-            },
-            "isDisbursement": {
-              "type": "boolean",
-              "description": "Is Disbursement?"
-            },
-            "isSupplyOfLand": {
-              "type": "boolean",
-              "description": "Is Land?"
-            },
-            "isHairdressingServices": {
-              "type": "boolean",
-              "description": "Is Hairdressing services?"
-            },
-            "isAdmissionToACinema": {
-              "type": "boolean",
-              "description": "Is Admission to a cinema?"
-            },
-            "isStamps": {
-              "type": "boolean",
-              "description": "Is Stamps?"
-            },
-            "isEdibleOils": {
-              "type": "boolean",
-              "description": "Is Edible oils?"
-            },
-            "isAdvertisingServices": {
-              "type": "boolean",
-              "description": "Is Advertising services?"
-            },
-            "isDemolitionAndRebuildingOfHousesInMajorCities": {
-              "type": "boolean",
-              "description": "Is Demolition and rebuilding of houses in major cities?"
-            },
-            "isTrainingOnline": {
-              "type": "boolean",
-              "description": "Is Training (online)?"
-            },
-            "isAlcohol": {
-              "type": "boolean",
-              "description": "Is Alcohol?"
-            },
-            "isHireOfGoods": {
-              "type": "boolean",
-              "description": "Is Hire of goods?"
-            },
-            "isBooksEducationalOnly": {
-              "type": "boolean",
-              "description": "Is Books (educational only)?"
-            },
-            "isMovableTangibleProperty": {
-              "type": "boolean",
-              "description": "Is Movable, tangible property?"
-            },
-            "isHumanOrgansBloodAndMilk": {
-              "type": "boolean",
-              "description": "Is Human organs, blood and milk?"
-            },
-            "isComputersAndPeripheralEquipment": {
-              "type": "boolean",
-              "description": "Is Computers and peripheral equipment?"
-            },
-            "isMiscellaneousGoods": {
-              "type": "boolean",
-              "description": "Is Miscellaneous goods?"
-            },
-            "isConstructionWorkIncludingRepairCleaningMaintenanceDemolition": {
-              "type": "boolean",
-              "description": "Is Construction work, including repair, cleaning, maintenance, demolition?"
-            },
-            "isDataProcessing": {
-              "type": "boolean",
-              "description": "Is Data processing?"
-            },
-            "isEstateAgencyServices": {
-              "type": "boolean",
-              "description": "Is Estate agency services?"
-            },
-            "isModificationRepairMaintenanceCharteringOfVessels": {
-              "type": "boolean",
-              "description": "Is Modification, repair, maintenance and chartering of vessels?"
-            },
-            "isWritersComposersEtc": {
-              "type": "boolean",
-              "description": "Is Writers, composers, etc?"
-            },
-            "isWorkOnMoveableProperty": {
-              "type": "boolean",
-              "description": "Is Work on movable property?"
-            },
-            "isLawyersService": {
-              "type": "boolean",
-              "description": "Is Lawyer's service?"
-            },
-            "isArchitectureServices": {
-              "type": "boolean",
-              "description": "Is Architecture services?"
-            },
-            "isGoodsWithInstallation": {
-              "type": "boolean",
-              "description": "Is Goods supplied with installation?"
-            },
-            "isOtherEventServices": {
-              "type": "boolean",
-              "description": "Is Other event services?"
-            },
-            "isSupplyOfStaffByReligiousOrPhilosophicalInstitutionsForChildrensEducation": {
-              "type": "boolean",
-              "description": "Is Supply of staff by religious or philosophical institutions for children's education?"
-            },
-            "isCoffeeNotRoasted": {
-              "type": "boolean",
-              "description": "Is Coffee, not roasted?"
-            },
-            "isDigitalService": {
-              "type": "boolean",
-              "description": "Is Digital service?"
-            },
-            "isElectronicallySuppliedServices": {
-              "type": "boolean",
-              "description": "Is Electronically supplied services?"
-            },
-            "isGpService": {
-              "type": "boolean",
-              "description": "Is GP services?"
-            },
-            "isInsurance": {
-              "type": "boolean",
-              "description": "Is Insurance?"
-            },
-            "isSeaFreight": {
-              "type": "boolean",
-              "description": "Is Sea freight?"
-            },
-            "isAdmissionToASportingEvent": {
-              "type": "boolean",
-              "description": "Is Admission to a sporting event?"
-            },
-            "isLotteries": {
-              "type": "boolean",
-              "description": "Is Lotteries?"
-            },
-            "isTheGrantingAndNegotiationOfCredit": {
-              "type": "boolean",
-              "description": "Is The granting and negotiation of credit?"
-            },
-            "isRawOrSemiFinishedMetalsNotScrapMetals": {
-              "type": "boolean",
-              "description": "Is Raw or semi-finished metals (not scrap metals)?"
-            },
-            "isVan": {
-              "type": "boolean",
-              "description": "Is Van?"
-            },
-            "isSupplyOfStaffByReligiousOrPhilosophicalInstitutionsForWelfareAndSocialSecurityWork": {
-              "type": "boolean",
-              "description": "Is Supply of staff by religious or philosophical institutions for welfare and social security work?"
-            },
-            "isPhotographsAndOtherPrintedMatter": {
-              "type": "boolean",
-              "description": "Is Photographs and other printed matter?"
-            },
-            "isChemicals": {
-              "type": "boolean",
-              "description": "Is Chemicals?"
-            },
-            "isFootwear": {
-              "type": "boolean",
-              "description": "Is Footwear?"
-            },
-            "isOlives": {
-              "type": "boolean",
-              "description": "Is Olives?"
-            },
-            "isRefuelingAircraft": {
-              "type": "boolean",
-              "description": "Is Refuelling aircraft?"
-            },
-            "isSupplyOfStaffByReligiousOrPhilosophicalInstitutionsForHospitalAndMedicalCare": {
-              "type": "boolean",
-              "description": "Is Supply of staff by religious or philosophical institutions for hospital and medical care?"
-            },
-            "isOtherServices": {
-              "type": "boolean",
-              "description": "Is Other services?"
-            },
-            "isServicesToDisabledPersons": {
-              "type": "boolean",
-              "description": "Is Services to disabled persons?"
-            },
-            "isSmallRepairServicesToBicyclesShoesAndClothing": {
-              "type": "boolean",
-              "description": "Is Small repair services to bicycles, shoes and clothing?"
-            },
-            "isNewspapers": {
-              "type": "boolean",
-              "description": "Is Newspapers?"
-            },
-            "isTransportServicesForSickOrInjuredPeopleAmbulance": {
-              "type": "boolean",
-              "description": "Is Transport services for sick or injured people (ambulance)?"
-            },
-            "isTheLettingOfPermanentlyInstalledEquipmentAndMachinery": {
-              "type": "boolean",
-              "description": "Is The letting of permanently installed equipment and machinery?"
-            },
-            "isTheNegotiationOfOrAnyDealingsInCreditGuaranteesOrAnyOtherSecurityForMoneyAndTheManagementOfCreditGuaranteesByThePersonWhoIsGrantingTheCredit": {
-              "type": "boolean",
-              "description": "Is The negotiation of or any dealings in credit guarantees or any other security for money and the management of credit guarantees by the person who is granting the credit?"
-            },
-            "isMarketing": {
-              "type": "boolean",
-              "description": "Is Marketing?"
-            },
-            "itemDeductionRate": {
+            "totalAmount": {
               "type": "string",
-              "description": "What is the item deduction rate?"
+              "description": "What is the document total?"
             },
-            "isTransportationOfPersonsByLand": {
-              "type": "boolean",
-              "description": "Is Transportation of persons by land?"
-            },
-            "isAntiques": {
-              "type": "boolean",
-              "description": "Is Antiques?"
-            },
-            "isIntegratedCircuitDeviceOrComputerChip": {
-              "type": "boolean",
-              "description": "Is Integrated circuit devices or computer chips?"
-            },
-            "isPeriodicals": {
-              "type": "boolean",
-              "description": "Is Periodicals?"
-            },
-            "isHospitalCare": {
-              "type": "boolean",
-              "description": "Is Hospital care?"
-            },
-            "isTrainingPrivatelyContracted": {
-              "type": "boolean",
-              "description": "Is Training (privately contracted)?"
-            },
-            "isMedicalEquipment": {
-              "type": "boolean",
-              "description": "Is Medical equipment?"
-            },
-            "isVideoGamesConsolesLaptopsTablets": {
-              "type": "boolean",
-              "description": "Is Video games, games consoles, laptops, tablets?"
-            },
-            "isTheSupplyOfStaffEngagedInConstructionWork": {
-              "type": "boolean",
-              "description": "Is The supply of staff engaged in construction work?"
-            },
-            "isMobilePhone": {
-              "type": "boolean",
-              "description": "Is Mobile phone?"
-            },
-            "isSilver": {
-              "type": "boolean",
-              "description": "Is Silver?"
-            },
-            "isRubberInPrimaryFormsOrInPlatesSheetsOrStrip": {
-              "type": "boolean",
-              "description": "Is Rubber, in primary forms or in plates, sheets or strip?"
-            },
-            "isCourierService": {
-              "type": "boolean",
-              "description": "Is Courier service?"
+            "itemID": {
+              "type": "string",
+              "description": "What is the ID of the item?"
             },
             "itemType": {
               "type": "string",
@@ -448,6 +51,7 @@
                 "Accommodation for business associates",
                 "Accommodation for employees",
                 "Accountancy service",
+                "Activities carried out by television and radio bodies (non-commercial)",
                 "Admission to a cinema",
                 "Admission to a circus",
                 "Admission to a concert or theatre",
@@ -506,6 +110,7 @@
                 "Electricity",
                 "Electronically supplied services",
                 "Estate agency services",
+                "Extended warranty",
                 "Financial services that aren't exempt",
                 "Food and beverage (non-alcoholic)",
                 "Footwear",
@@ -553,7 +158,8 @@
                 "Mineral oils (including propane and butane; also including crude petroleum oils)",
                 "Miscellaneous goods",
                 "Mobile phone",
-                "Modification, repair, maintenance and chartering of vessels",
+                "Modification, repair or maintenance of a vessel",
+                "Modification, repair or maintenance of an aircraft",
                 "Motorbike",
                 "Movable, tangible property",
                 "Newspaper or periodical publishing service",
@@ -601,6 +207,7 @@
                 "Spirits",
                 "Stamps",
                 "Storage services",
+                "Supplies for goods or passenger transport",
                 "Supply of services linked to protection of children and young persons",
                 "Supply of a building",
                 "Supply of staff by religious or philosophical institutions for children's education",
@@ -656,585 +263,41 @@
               ],
               "description": "Item"
             },
-            "isPaymentServices": {
-              "type": "boolean",
-              "description": "Is Payment Services?"
-            },
-            "isZinc": {
-              "type": "boolean",
-              "description": "Is Zinc?"
-            },
-            "isBanking": {
-              "type": "boolean",
-              "description": "Is Banking?"
-            },
-            "isCo2EmmissionRights": {
-              "type": "boolean",
-              "description": "Is CO2 emission rights?"
-            },
-            "isValuationsOfMoveableProperty": {
-              "type": "boolean",
-              "description": "Is Valuation of movable proprty?"
-            },
-            "description": {
-              "type": "string",
-              "description": "Item description"
-            },
-            "isTransactionsIncludingNegotiationConcerningDepositAndCurrentAccountsPaymentsTransfersDebtsChequesAndOtherNegotiableInstrumentsButExcludingDebtCollection": {
-              "type": "boolean",
-              "description": "Is Transactions, including negotiation, concerning deposit and current accounts, payments, transfers, debts, cheques and other negotiable instruments, but excluding debt collection?"
-            },
-            "isNickel": {
-              "type": "boolean",
-              "description": "Is Nickel?"
-            },
-            "isTakewayFood": {
-              "type": "boolean",
-              "description": "Is Takeway food?"
-            },
-            "isSupplyOfServicesLinkedToProtectionOfChildrenAndYoungPersons": {
-              "type": "boolean",
-              "description": "Is Supply of services linked to protection of children and young persons?"
-            },
-            "itemID": {
-              "type": "string",
-              "description": "What is the ID of the item?"
-            },
-            "isPotatoes": {
-              "type": "boolean",
-              "description": "Is Potatoes?"
-            },
-            "isPrivateTuition": {
-              "type": "boolean",
-              "description": "Is Private tuition?"
-            },
-            "isPharmaceuticalProducts": {
-              "type": "boolean",
-              "description": "Is Pharmaceutical products?"
-            },
-            "isTruck": {
-              "type": "boolean",
-              "description": "Is Truck?"
-            },
-            "isSocialHousing": {
-              "type": "boolean",
-              "description": "Is Social housing?"
-            },
-            "isTransactionsIncludingNegotiationButNotManagementOrSafekeepingInSharesInterestsInCompaniesOrAssociationsDebenturesAndOtherSecuritiesButExcludingDocumentsEstablishingTitleToGoodsAndTheRightsOrSecurities": {
-              "type": "boolean",
-              "description": "Is Transactions, including negotiation but not management or safekeeping, in shares, interests in companies or associations, debentures and other securities, but excluding documents establishing title to goods, and the rights or securities?"
-            },
-            "isLivestock": {
-              "type": "boolean",
-              "description": "Is Livestock?"
-            },
-            "isCulturalSportingAndExhibitionServices": {
-              "type": "boolean",
-              "description": "Is Cultural, sporting and exhibition services?"
-            },
-            "isTheManagementOfSpecialInvestmentFundsAsDefinedByMemberStates": {
-              "type": "boolean",
-              "description": "Is The management of special investment funds as defined by Member States?"
-            },
-            "isActivitiesCarriedOutByTelevisionAndRadioBodiesNonCommercial": {
-              "type": "string",
-              "description": "Is Newspapers?"
-            },
-            "isServicesRenderedByOperatorsOfMuseumsBotanicalGardensAndZoos": {
-              "type": "boolean",
-              "description": "Is Services rendered by operators of museums, botanical gardens and zoos?"
-            },
-            "isFinancialServicesThatArentExempt": {
-              "type": "boolean",
-              "description": "Is Financial services that aren't exempt?"
-            },
-            "isMachinery": {
-              "type": "boolean",
-              "description": "Is Machinery?"
-            },
-            "isBabyFoodAndProcessedFoodStuff": {
-              "type": "boolean",
-              "description": "Is Baby food and processed food stuff?"
-            },
-            "isTin": {
-              "type": "boolean",
-              "description": "Is Tin?"
-            },
-            "isBetting": {
-              "type": "boolean",
-              "description": "Is Betting?"
-            },
-            "isServicesOfConsultantsEngineersConsultancyFirmsLawyersAccountantsAndOtherSimilarServicesAsWellAsDataProcessingAndTheProvisionOfInformation": {
-              "type": "boolean",
-              "description": "Is Services of consultants, engineers, consultancy firms, lawyers, accountants and other similar services, as well as data processing and the provision of information?"
-            },
-            "isHolidayCampAccommodation": {
-              "type": "boolean",
-              "description": "Is Holiday camp accommodation?"
-            },
-            "isDentalServices": {
-              "type": "boolean",
-              "description": "Is Dental services?"
-            },
-            "isGeologicalMaterials": {
-              "type": "boolean",
-              "description": "Is Geological materials?"
-            },
-            "isRenovationAndRepairOfPrivateDwellings": {
-              "type": "boolean",
-              "description": "Is Renovation and repair of private dwellings?"
-            },
-            "isCattleFood": {
-              "type": "boolean",
-              "description": "Is Cattle food?"
-            },
-            "isServicesLinkedToWelfareAndSocialSecurity": {
-              "type": "boolean",
-              "description": "Is Services linked to welfare and social security?"
-            },
-            "isMedication": {
-              "type": "boolean",
-              "description": "Is Medication?"
-            },
-            "isTransportationOfPersonsBySea": {
-              "type": "boolean",
-              "description": "Is Transportation of persons by sea?"
-            },
-            "isBus": {
-              "type": "boolean",
-              "description": "Is Bus?"
-            },
-            "isPetrol": {
-              "type": "boolean",
-              "description": "Is Petrol?"
-            },
-            "isSupplyOfStaffByReligiousOrPhilosophicalInstitutionsForTheProtectionOfChildrenAndYoungPersons": {
-              "type": "boolean",
-              "description": "Is Supply of staff by religious or philosophical institutions for the protection of children and young persons?"
-            },
-            "isOldUsedScrapMaterials": {
-              "type": "boolean",
-              "description": "Is Old, used, scrap materials?"
-            },
-            "isHeatingOrCoolingEnergyThroughNetworks": {
-              "type": "boolean",
-              "description": "Is Heating or cooling energy through networks?"
-            },
-            "isAluminium": {
-              "type": "boolean",
-              "description": "Is Aluminium?"
-            },
-            "isMineralOilsIncludingPropaneAndButaneAlsoIncludingCrudePetroleumOils": {
-              "type": "boolean",
-              "description": "Is Mineral oils (including propane and butane; also including crude petroleum oils)?"
-            },
-            "isUrnsAndCoffins": {
-              "type": "boolean",
-              "description": "Is Urns and coffins?"
-            },
-            "rateCategory": {
-              "type": "string",
-              "description": "What is the VAT rate category?"
-            },
-            "isVegetableOilsAndFatsAndTheirFractionsWhetherOrNotRefinedButNotChemicallyModified": {
-              "type": "boolean",
-              "description": "Is Vegetable oils and fats and their fractions, whether or not refined, but not chemically modified?"
-            },
-            "importVatAmount": {
-              "type": "string",
-              "description": "What is the import VAT amount on the customs document?"
-            },
-            "isTheSupplyOfStaff": {
-              "type": "boolean",
-              "description": "Is The supply of staff?"
-            },
-            "isTrainingWithAdmittance": {
-              "type": "boolean",
-              "description": "Is Training (with admittance)?"
-            },
-            "isBooks": {
-              "type": "boolean",
-              "description": "Is Books?"
-            },
-            "isAdmissionToACircus": {
-              "type": "boolean",
-              "description": "Is Admission to a circus?"
-            },
-            "isRenovationOfHousesOver10YearsOld": {
-              "type": "boolean",
-              "description": "Is Renovation of houses over 10 years old?"
-            },
-            "isRestaurantOrCateringOnboardTrainVesselAircraft": {
-              "type": "boolean",
-              "description": "Is Restaurant and catering services on board a ship, aircraft or train?"
-            },
-            "isCocoaBeansWholeOrBrokenRawOrRoasted": {
-              "type": "boolean",
-              "description": "Is Cocoa beans, whole or broken, raw or roasted?"
-            },
-            "isRawSugar": {
-              "type": "boolean",
-              "description": "Is Raw sugar?"
-            },
-            "isProvisionOfInformation": {
-              "type": "boolean",
-              "description": "Is Provision of information?"
-            },
-            "isPlatinumPalladiumRhodium": {
-              "type": "boolean",
-              "description": "Is Platinum (palladium, rhodium)?"
-            },
-            "isClothing": {
-              "type": "boolean",
-              "description": "Is Clothing?"
-            },
-            "isServiceForSportPhysicalEducationNonProfitMakingOrganisations": {
-              "type": "boolean",
-              "description": "Is Services linked to sport or physical education by non-profit making orangisations?"
-            },
-            "isGoodsSuppliedOnboardTrainVesselAircraft": {
-              "type": "boolean",
-              "description": "Is Goods supplied on board train, vessel or aircraft?"
-            },
-            "isHireOfVessel": {
-              "type": "boolean",
-              "description": "Is Hire of a vessel?"
-            },
-            "isAccommodationForBusinessAssociates": {
-              "type": "boolean",
-              "description": "Is Accommodation for business associates?"
-            },
-            "isVessel": {
-              "type": "boolean",
-              "description": "Is Vessel?"
-            },
-            "isWool": {
-              "type": "boolean",
-              "description": "Is Wool?"
-            },
-            "isLeasingOfBuilding": {
-              "type": "boolean",
-              "description": "Is Leasing of a building?"
-            },
-            "isReinsurance": {
-              "type": "boolean",
-              "description": "Is Reinsurance?"
-            },
-            "isInvestmentGold": {
-              "type": "boolean",
-              "description": "Is Investment gold?"
-            },
-            "isEbook": {
-              "type": "boolean",
-              "description": "Is eBook?"
-            },
             "reversedVatRate": {
               "type": "string",
               "description": "Reversed VAT rate percentage?"
-            },
-            "isAnimalFoodstuffs": {
-              "type": "boolean",
-              "description": "Is Animal foodstuffs?"
-            },
-            "totalAmountCurrency2": {
-              "type": "string",
-              "description": "What is the document total in crrency 2?"
-            },
-            "isHireOfAMotorVehicle": {
-              "type": "boolean",
-              "description": "Is Hire of a motor vehicle?"
-            },
-            "isVetinaryServices": {
-              "type": "boolean",
-              "description": "Is Vetinary services?"
-            },
-            "isStorageServices": {
-              "type": "boolean",
-              "description": "Is Storage services?"
-            },
-            "isDiesel": {
-              "type": "boolean",
-              "description": "Is Diesel?"
-            },
-            "isBread": {
-              "type": "boolean",
-              "description": "Is Bread?"
-            },
-            "isRestaurantService": {
-              "type": "boolean",
-              "description": "Is restaurant service?"
-            },
-            "isEducation": {
-              "type": "boolean",
-              "description": "Is Education?"
-            },
-            "isTea": {
-              "type": "boolean",
-              "description": "Is Tea?"
-            },
-            "isChildrensClothing": {
-              "type": "boolean",
-              "description": "Is Children's clothing?"
-            },
-            "isTrain": {
-              "type": "boolean",
-              "description": "Is Train?"
-            },
-            "isInstallationService": {
-              "type": "boolean",
-              "description": "Is Installation services?"
-            },
-            "isTheHiringOutOfMoveableTangiblePropertyExcludingMeansOfTransport": {
-              "type": "boolean",
-              "description": "Is The hiring out of moveable tangible property (excluding means of transport)?"
             },
             "vatRate": {
               "type": "string",
               "description": "VAT rate percentage?"
             },
-            "isConsultancyService": {
-              "type": "boolean",
-              "description": "Is Consultancy service?"
+            "description": {
+              "type": "string",
+              "description": "Item description"
             },
-            "isServiceForSportsCompetitionOrGameOfChance": {
-              "type": "boolean",
-              "description": "Is Services connected to sports competitions and games of chance?"
+            "totalAmountCurrency2": {
+              "type": "string",
+              "description": "What is the document total in crrency 2?"
             },
-            "isTobacco": {
-              "type": "boolean",
-              "description": "Is Tobacco?"
+            "itemDeductionRate": {
+              "type": "string",
+              "description": "What is the item deduction rate?"
             },
-            "isTransfersAndAssignmentsOfCopyrightsPatentsLicencesTradeMarksAndSimilarRights": {
-              "type": "boolean",
-              "description": "Is Transfers and assignments of copyrights, patents, licences, trade marks and similar rights?"
+            "rateCategory": {
+              "type": "string",
+              "description": "What is the VAT rate category?"
             },
-            "isCopper": {
-              "type": "boolean",
-              "description": "Is Copper?"
+            "importVatAmount": {
+              "type": "string",
+              "description": "What is the import VAT amount on the customs document?"
             },
-            "isWaterNonBranded": {
-              "type": "boolean",
-              "description": "Is Water (non-branded)?"
-            },
-            "isHireOfAnAircraft": {
-              "type": "boolean",
-              "description": "Is Hire of an aircraft?"
-            },
-            "isOtherNuts": {
-              "type": "boolean",
-              "description": "Is Other nuts?"
-            },
-            "isSupplyOfABuilding": {
-              "type": "boolean",
-              "description": "Is Supply of a building?"
-            },
-            "isServicesSuppliedByTravelAgents": {
-              "type": "boolean",
-              "description": "Is Services Supplied by Travel Agents?"
-            },
-            "isCoconutsBrazilNutsAndCashewNuts": {
-              "type": "boolean",
-              "description": "Is Coconuts, Brazil nuts and cashew nuts?"
-            },
-            "isMagazines": {
-              "type": "boolean",
-              "description": "Is Magazines?"
-            },
-            "isAdmissionToAConcertOrTheatre": {
-              "type": "boolean",
-              "description": "Is Admission to a concert or theatre?"
-            },
-            "isPostalServices": {
-              "type": "boolean",
-              "description": "Is Postal services?"
-            },
-            "isCereals": {
-              "type": "boolean",
-              "description": "Is Cereals?"
-            },
-            "isFuel": {
-              "type": "boolean",
-              "description": "Is Fuel?"
-            },
-            "isWasteCollection": {
-              "type": "boolean",
-              "description": "Is Waste collection?"
-            },
-            "isTheProvisionOfAccessToANaturalGasSystemSituatedWithinTheTerritoryOfTheCommunityOrToAnyNetworkConnectedToSuchASystem": {
-              "type": "boolean",
-              "description": "Is The provision of access to a natural gas system situated within the territory of the Community or to any network connected to such a system?"
-            },
-            "isTransportServicesSuchAsLoadingHandlingUnloading": {
-              "type": "boolean",
-              "description": "Is Transport services such as loading, handling, unloading?"
-            },
-            "isLettingAgencyServices": {
-              "type": "boolean",
-              "description": "Is Letting agency services?"
-            },
-            "isHuskedRice": {
-              "type": "boolean",
-              "description": "Is Husked rice?"
+            "value": {
+              "type": "string",
+              "description": "What is the amount of the item?"
             },
             "vatAmount": {
               "type": "string",
               "description": "What is the VAT amount of the item?"
-            },
-            "isRefuellingVessels": {
-              "type": "boolean",
-              "description": "Is Refuelling vessels?"
-            },
-            "isAirFreight": {
-              "type": "boolean",
-              "description": "Is Air freight?"
-            },
-            "totalAmount": {
-              "type": "string",
-              "description": "What is the document total?"
-            },
-            "isGasAndElectricityCertificates": {
-              "type": "boolean",
-              "description": "Is Gas and electricity certificates?"
-            },
-            "isBeddingPlantsSeedsFertilizersAndOtherAgrochemicalProducts": {
-              "type": "boolean",
-              "description": "Is Bedding plants, seeds, fertilizers and other agrochemical products?"
-            },
-            "isSocialCareForChildren": {
-              "type": "boolean",
-              "description": "Is Social care for children?"
-            },
-            "isBeveragesNonAlcoholic": {
-              "type": "boolean",
-              "description": "Is Beverages (non-alcoholic)?"
-            },
-            "isCar": {
-              "type": "boolean",
-              "description": "Is Car?"
-            },
-            "isConstructionErrectionOrHousingUsedOnAPermanentResidence": {
-              "type": "boolean",
-              "description": "Is Construction, errection or housing used on a permanent residence?"
-            },
-            "isAdmissionToAmusementParks": {
-              "type": "boolean",
-              "description": "Is Admission to amusement parks?"
-            },
-            "isBroadcastingServices": {
-              "type": "boolean",
-              "description": "Is Broadcasting services?"
-            },
-            "isRepairAndMaintenanceServices": {
-              "type": "boolean",
-              "description": "Is Repair and maintenance services?"
-            },
-            "isAccountancyService": {
-              "type": "boolean",
-              "description": "Is Accountancy service?"
-            },
-            "isCateringService": {
-              "type": "boolean",
-              "description": "Is catering service?"
-            },
-            "isLorry": {
-              "type": "boolean",
-              "description": "Is Lorry?"
-            },
-            "isMilk": {
-              "type": "boolean",
-              "description": "Is Milk?"
-            },
-            "isAircraft": {
-              "type": "boolean",
-              "description": "Is Aircraft?"
-            },
-            "isTelecommunicationService": {
-              "type": "boolean",
-              "description": "Is Telecommunications services?"
-            },
-            "isUseOfSportingFacilities": {
-              "type": "boolean",
-              "description": "Is Use of sporting facilities?"
-            },
-            "isGoodsEquipingFuelingProvisioningPleasureBoatsAircraft": {
-              "type": "boolean",
-              "description": "Is Goods for the equipping, fuelling and provisioning of pleasure boats and private aircraft or any other means of transport for private use?"
-            },
-            "isHotelAccommodation": {
-              "type": "boolean",
-              "description": "Is Hotel accommodation?"
-            },
-            "isBeer": {
-              "type": "boolean",
-              "description": "Is Beer?"
-            },
-            "isMediaStreaming": {
-              "type": "boolean",
-              "description": "Is Media streaming?"
-            },
-            "value": {
-              "type": "string",
-              "description": "What is the anount of the item?"
-            },
-            "isSpirits": {
-              "type": "boolean",
-              "description": "Is Spirits?"
-            },
-            "isLettingOfBuilding": {
-              "type": "boolean",
-              "description": "Is Letting of a building?"
-            },
-            "isTheHireOfSafes": {
-              "type": "boolean",
-              "description": "Is The hire of safes?"
-            },
-            "isGrainsAndOilSeedsIncludingSoyaBeansAndOleaginousFruits": {
-              "type": "boolean",
-              "description": "Is Grains and oil seeds (including soya beans) and oleaginous fruits?"
-            },
-            "isTextiles": {
-              "type": "boolean",
-              "description": "Is Textiles?"
-            },
-            "isAccommodationForEmployees": {
-              "type": "boolean",
-              "description": "Is Accommodation for employees?"
-            },
-            "isChildrensCarSeats": {
-              "type": "boolean",
-              "description": "Is Children's car seats?"
-            },
-            "isTheLettingOfPremisesAndSitesForTheParkingOfVehicles": {
-              "type": "boolean",
-              "description": "Is The letting of premises and sites for the parking of vehicles?"
-            },
-            "isWorksOfArt": {
-              "type": "boolean",
-              "description": "Is Works of art?"
-            },
-            "isElectricity": {
-              "type": "boolean",
-              "description": "Is Electricity?"
-            },
-            "isMotorbike": {
-              "type": "boolean",
-              "description": "Is Motorbike?"
-            },
-            "isWine": {
-              "type": "boolean",
-              "description": "Is Wine?"
-            },
-            "isNewspaperOrPeriodicalPublishingService": {
-              "type": "boolean",
-              "description": "Is Newspaper or periodical publishing service?"
-            },
-            "isTransactionsIncludingNegotiationConcerningCurrencyBankNotesAndCoinsUsedAsLegalTenderWithTheExceptionOfCollectorsItems": {
-              "type": "boolean",
-              "description": "Is Transactions, including negotiation, concerning currency, bank notes and coins used as legal tender, with the exception of collectors' items?"
-            },
-            "isAdmissionToEvent": {
-              "type": "boolean",
-              "description": "Is Admission to events?"
             }
           }
         },
@@ -1340,33 +403,33 @@
         "itemProperties": {
           "type": "object",
           "properties": {
-            "isAncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities": {
-              "type": "boolean",
-              "description": "is AncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities?"
-            },
             "isServicesConnectedWithImmovableProperty": {
               "type": "boolean",
               "description": "is ServicesConnectedWithImmovableProperty?"
             },
-            "isSuppliedByIntermediary": {
+            "isAncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities": {
               "type": "boolean",
-              "description": "is SuppliedByIntermediary?"
-            },
-            "isDigitalService": {
-              "type": "boolean",
-              "description": "is DigitalService?"
+              "description": "is AncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities?"
             },
             "isImmovableProperty": {
               "type": "boolean",
               "description": "is ImmovableProperty?"
             },
-            "isWelfareAndSocialSecurity": {
+            "isDigitalService": {
               "type": "boolean",
-              "description": "is WelfareAndSocialSecurity?"
+              "description": "is DigitalService?"
+            },
+            "isSuppliedByIntermediary": {
+              "type": "boolean",
+              "description": "is SuppliedByIntermediary?"
             },
             "isOnboardShipAircraftTrain": {
               "type": "boolean",
               "description": "on board ship, aircraft ot train?"
+            },
+            "isWelfareAndSocialSecurity": {
+              "type": "boolean",
+              "description": "is WelfareAndSocialSecurity?"
             },
             "isTransportationOfPersons": {
               "type": "boolean",
@@ -1404,21 +467,17 @@
               "type": "boolean",
               "description": "is Admission?"
             },
-            "isInsuranceOrReinsurance": {
-              "type": "boolean",
-              "description": "is InsuranceOrReinsurance?"
-            },
             "isAccommodation": {
               "type": "boolean",
               "description": "is Accommodation?"
             },
+            "isInsuranceOrReinsurance": {
+              "type": "boolean",
+              "description": "is InsuranceOrReinsurance?"
+            },
             "isPublicPostalService": {
               "type": "boolean",
               "description": "is PublicPostalService?"
-            },
-            "isTheSupplyOfStaffServices": {
-              "type": "boolean",
-              "description": "is TheSupplyOfStaffServices?"
             },
             "isSecondHand": {
               "type": "boolean",
@@ -1427,6 +486,10 @@
             "isGood": {
               "type": "boolean",
               "description": "is Good?"
+            },
+            "isTheSupplyOfStaffServices": {
+              "type": "boolean",
+              "description": "is TheSupplyOfStaffServices?"
             },
             "isNewMeansOfTransport": {
               "type": "boolean",
@@ -1476,13 +539,6 @@
               "example": "GB",
               "description": "What is the ship from?"
             },
-            "departureCountry": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 2,
-              "example": "GB",
-              "description": "What is the country of departure?"
-            },
             "placeOfGoods": {
               "type": "string",
               "minLength": 2,
@@ -1490,12 +546,12 @@
               "example": "GB",
               "description": "What is the place of the goods?"
             },
-            "placeOfService": {
+            "departureCountry": {
               "type": "string",
               "minLength": 2,
               "maxLength": 2,
               "example": "GB",
-              "description": "Where was the service carried out?"
+              "description": "What is the country of departure?"
             },
             "countryImport": {
               "type": "string",
@@ -1504,12 +560,12 @@
               "example": "GB",
               "description": "What is the country of importation?"
             },
-            "shipTo": {
+            "placeOfService": {
               "type": "string",
               "minLength": 2,
               "maxLength": 2,
               "example": "GB",
-              "description": "Ship to"
+              "description": "Where was the service carried out?"
             },
             "arrivalCountry": {
               "type": "string",
@@ -1517,6 +573,13 @@
               "maxLength": 2,
               "example": "GB",
               "description": "What is the country of arrival?"
+            },
+            "shipTo": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "GB",
+              "description": "Ship to"
             }
           }
         },
@@ -1551,13 +614,49 @@
         "transactionDetail": {
           "type": "object",
           "properties": {
-            "durationOfHire": {
+            "isBusinessEntertainment": {
+              "type": "boolean",
+              "description": "For business entertainment"
+            },
+            "isForProvisioningOfVessel": {
+              "type": "boolean",
+              "description": "For the provisioning of a vessel?"
+            },
+            "isFreeZone": {
+              "type": "boolean",
+              "description": "Goods placed in free zone?"
+            },
+            "isExternalTransit": {
+              "type": "boolean",
+              "description": "Goods under external transit procedure?"
+            },
+            "isDonatedItem": {
+              "type": "boolean",
+              "description": "Is/Was the item donated to the charity?"
+            },
+            "isCustomsWarehouse": {
+              "type": "boolean",
+              "description": "Goods placed in customs warehouse?"
+            },
+            "warehouseFiscalRepresentative": {
+              "type": "boolean",
+              "description": "Appointed local fiscal representative?"
+            },
+            "customsDutyAndLevyAmount": {
               "type": "string",
-              "description": "Duration of hire (days)?"
+              "description": "Other duties taxes and levies on import"
+            },
+            "optedNotToTax": {
+              "type": "boolean",
+              "description": "Has the supplier opted not to tax?"
             },
             "optedToTax": {
               "type": "boolean",
               "description": "Has the supplier opted to tax?"
+            },
+            "durationOfHire": {
+              "type": "string",
+              "description": "Duration of hire (days)?"
             },
             "callOffStock": {
               "type": "boolean",
@@ -1571,13 +670,13 @@
               "type": "string",
               "description": "Shipping and handling amount"
             },
-            "betweenContractors": {
-              "type": "boolean",
-              "description": "Transaction between two contractors?"
-            },
             "isTemporaryStorage": {
               "type": "boolean",
               "description": "Goods placed under temporary storage?"
+            },
+            "betweenContractors": {
+              "type": "boolean",
+              "description": "Transaction between two contractors?"
             },
             "importedUnderDefermentScheme": {
               "type": "boolean",
@@ -1587,13 +686,9 @@
               "type": "boolean",
               "description": "Sold on a marketplace?"
             },
-            "isFreeZone": {
+            "isForProvisioningOfAirline": {
               "type": "boolean",
-              "description": "Goods placed in free zone?"
-            },
-            "isExternalTransit": {
-              "type": "boolean",
-              "description": "Goods under external transit procedure?"
+              "description": "For the provisioning of an airline?"
             },
             "isInwardProcessing": {
               "type": "boolean",
@@ -1603,21 +698,9 @@
               "type": "boolean",
               "description": "Under Relevant Contracts Tax / CIS?"
             },
-            "isDonatedItem": {
-              "type": "boolean",
-              "description": "Is/Was the item donated to the charity?"
-            },
             "isCustomsProcedure": {
               "type": "boolean",
               "description": "Goods placed under customs procedure?"
-            },
-            "isCustomsWarehouse": {
-              "type": "boolean",
-              "description": "Goods placed in customs warehouse?"
-            },
-            "warehouseFiscalRepresentative": {
-              "type": "boolean",
-              "description": "Appointed local fiscal representative?"
             },
             "isVatWarehouse": {
               "type": "boolean",
@@ -1627,17 +710,9 @@
               "type": "boolean",
               "description": "Using cash accounting?"
             },
-            "customsDutyAndLevyAmount": {
-              "type": "string",
-              "description": "Other duties taxes and levies on import"
-            },
             "linkedToExport": {
               "type": "boolean",
               "description": "is the transaction related to an export?"
-            },
-            "optedNotToTax": {
-              "type": "boolean",
-              "description": "Has the supplier opted not to tax?"
             },
             "isSuccessiveSupply": {
               "type": "boolean",
@@ -1646,101 +721,8 @@
           }
         },
         "buyer": {
-          "type": "object",
-          "properties": {
-            "isNonTaxableLegalPerson": {
-              "type": "boolean",
-              "description": "Is buyer a non-taxable legal person?"
-            },
-            "address": {
-              "type": "string",
-              "description": "???"
-            },
-            "countriesImportDefermentLicence": {
-              "type": "string",
-              "description": "In which countries does the customer have a licence for import deferment?"
-            },
-            "establishedCountry": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 2,
-              "example": "GB",
-              "description": "In which country is the buyer established?"
-            },
-            "city": {
-              "type": "string",
-              "description": ""
-            },
-            "vatIdCountry": {
-              "type": "string",
-              "minLength": 2,
-              "maxLength": 2,
-              "example": "GB",
-              "description": "What is the country of the buyer's VAT ID?"
-            },
-            "buyerVatId": {
-              "type": "string",
-              "description": "What is the buyer's VAT ID?"
-            },
-            "countriesFixedEstablishment": {
-              "type": "string",
-              "description": "In which countries does the customer have a fixed establishment?"
-            },
-            "isPrivateIndividual": {
-              "type": "boolean",
-              "description": "Is the customer a private individual?"
-            },
-            "isCharity": {
-              "type": "boolean",
-              "description": "Is the buyer a charity?"
-            },
-            "countriesVATRegistration": {
-              "type": "string",
-              "description": "In which countries does the customer have a VAT registration?"
-            },
-            "isTaxablePerson": {
-              "type": "boolean",
-              "description": "Is buyer a taxable person?"
-            },
-            "vatIdType": {
-              "type": "string",
-              "enum": [
-                "Fixed establishment",
-                "Fiscal representative",
-                "Direct",
-                "Permanent establishment"
-              ],
-              "description": "What type of VAT registration is it?"
-            },
-            "exportLicence": {
-              "type": "boolean",
-              "description": "Does the buyer hold an export licence?"
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of customer?"
-            },
-            "postCode": {
-              "type": "string",
-              "description": "What is the postcode of the ship to address?"
-            },
-            "isHospital": {
-              "type": "boolean",
-              "description": "Is the buyer a hospital?"
-            },
-            "id": {
-              "type": "string",
-              "description": "What is the customer's company ID?"
-            },
-            "_id": {
-              "type": "string",
-              "description": "Internal Buyer ID"
-            },
-            "isGasElecTaxableDealer": {
-              "type": "boolean",
-              "description": "Is the supply to a taxable dealer?"
-            }
-          }
+          "type": "string",
+          "description": ""
         }
       }
     }
