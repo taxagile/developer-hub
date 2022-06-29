@@ -1,13 +1,10 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": "Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues, create an issue on our [Developer Hub](https://github.com/taxagile/developer-hub/issues)<hr> ",
+    "description": "[Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/)  <br /><br />Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues [create an issue](https://github.com/taxagile/developer-hub/issues)",
     "title": "Tax Agile API Specification",
-    "version": "1.0.1",
-    "contact": {
-      "name": "Tax Agile",
-      "url": "https://www.vatcalc.com/contact/"
-    }
+    "version": "1.0.1"
+
   },
   "servers": [
     {
@@ -576,7 +573,7 @@
         "type": "object"
       },
       "determinationVatRequestBody": {
-        "$ref": "vatDeterminationRequestBodySchema.json"
+        "$ref": "./schemas/vatDeterminationRequestBodySchema.json"
       },
       "errorResponse": {
         "description": "Standardised error response returned with a code and message",
