@@ -31,8 +31,122 @@
           }
         },
         "seller": {
-          "type": "string",
-          "description": ""
+          "type": "object",
+          "properties": {
+            "sellerUnionOssId": {
+              "type": "string",
+              "description": "What is the seller's Union OSS ID?"
+            },
+            "euDistanceSellingThreshold": {
+              "type": "boolean",
+              "description": "Exceeded EUR 10k in calendar year (Post-July 21)?"
+            },
+            "address": {
+              "type": "string",
+              "description": ""
+            },
+            "sellerIossId": {
+              "type": "string",
+              "description": "What is the seller's IOSS ID?"
+            },
+            "countriesImportDefermentLicence": {
+              "type": "string",
+              "description": "In which countries does the seller have a licence for import deferment?"
+            },
+            "city": {
+              "type": "string",
+              "description": ""
+            },
+            "establishedCountry": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "GB",
+              "description": "In which country is the seller established?"
+            },
+            "combinationGroupID": {
+              "type": "string",
+              "description": "What is the name of the combination group this company belongs to?"
+            },
+            "vatIdCountry": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "GB",
+              "description": "What is the country of the seller's VAT ID?"
+            },
+            "registeredForDistanceSales": {
+              "type": "boolean",
+              "description": "Registered for distance sales in ship to country (Pre-July 21)?"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Taxable person",
+                "Non-taxable legal person",
+                "Private person",
+                "European Union body",
+                "Embassy",
+                "International body",
+                "NATO"
+              ],
+              "description": "What is the seller type?"
+            },
+            "countriesFixedEstablishment": {
+              "type": "string",
+              "description": "In which countries does the seller have a fixed establishment?"
+            },
+            "isCharity": {
+              "type": "boolean",
+              "description": "Is the seller a charity?"
+            },
+            "countriesVATRegistration": {
+              "type": "string",
+              "description": "In which countries does the supplier have a VAT registration?"
+            },
+            "vatIdType": {
+              "type": "string",
+              "enum": [
+                "Fixed establishment",
+                "Fiscal representative",
+                "Direct",
+                "Permanent establishment"
+              ],
+              "description": "What type of VAT registration is it?"
+            },
+            "vatGroupID": {
+              "type": "string",
+              "description": "What is the name of the VAT Group this company belongs to?"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of supplier"
+            },
+            "postCode": {
+              "type": "string",
+              "description": "What is the postcode of the ship from address?"
+            },
+            "isHospital": {
+              "type": "boolean",
+              "description": "Is the seller a hospital?"
+            },
+            "_id": {
+              "type": "string",
+              "description": "Internal Seller ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "What is the supplier's company ID?"
+            },
+            "sellerNonUnionOssId": {
+              "type": "string",
+              "description": "What is the seller's non-Union OSS ID?"
+            },
+            "sellerVatId": {
+              "type": "string",
+              "description": "What is the seller's VAT ID?"
+            }
+          }
         },
         "item": {
           "type": "object",
@@ -721,8 +835,118 @@
           }
         },
         "buyer": {
-          "type": "string",
-          "description": ""
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": ""
+            },
+            "countriesImportDefermentLicence": {
+              "type": "string",
+              "description": "In which countries does the customer have a licence for import deferment?"
+            },
+            "city": {
+              "type": "string",
+              "description": ""
+            },
+            "establishedCountry": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "GB",
+              "description": "In which country is the buyer established?"
+            },
+            "isAirline": {
+              "type": "boolean",
+              "description": "Is the customer a airline that carries passengers or goods?"
+            },
+            "vatIdCountry": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "GB",
+              "description": "What is the country of the buyer's VAT ID?"
+            },
+            "combinationGroupID": {
+              "type": "string",
+              "description": "What is the name of the combination group this company belongs to?"
+            },
+            "buyerVatId": {
+              "type": "string",
+              "description": "What is the buyer's VAT ID?"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Taxable person",
+                "Non-taxable legal person",
+                "Private person",
+                "European Union body",
+                "Embassy",
+                "International body",
+                "NATO"
+              ],
+              "description": "What is the buyer type?"
+            },
+            "countriesFixedEstablishment": {
+              "type": "string",
+              "description": "In which countries does the customer have a fixed establishment?"
+            },
+            "isVessel": {
+              "type": "boolean",
+              "description": "Is the customer a vessel that carries passengers or goods?"
+            },
+            "isCharity": {
+              "type": "boolean",
+              "description": "Is the buyer a charity?"
+            },
+            "countriesVATRegistration": {
+              "type": "string",
+              "description": "In which countries does the customer have a VAT registration?"
+            },
+            "vatIdType": {
+              "type": "string",
+              "enum": [
+                "Fixed establishment",
+                "Fiscal representative",
+                "Direct",
+                "Permanent establishment"
+              ],
+              "description": "What type of VAT registration is it?"
+            },
+            "exportLicence": {
+              "type": "boolean",
+              "description": "Does the buyer hold an export licence?"
+            },
+            "vatGroupID": {
+              "type": "string",
+              "description": "What is the name of the VAT Group this company belongs to?"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of customer?"
+            },
+            "postCode": {
+              "type": "string",
+              "description": "What is the postcode of the ship to address?"
+            },
+            "isHospital": {
+              "type": "boolean",
+              "description": "Is the buyer a hospital?"
+            },
+            "_id": {
+              "type": "string",
+              "description": "Internal Buyer ID"
+            },
+            "id": {
+              "type": "string",
+              "description": "What is the customer's company ID?"
+            },
+            "isGasElecTaxableDealer": {
+              "type": "boolean",
+              "description": "Is the supply to a taxable dealer?"
+            }
+          }
         }
       }
     }
