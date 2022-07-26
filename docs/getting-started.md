@@ -4,7 +4,7 @@ th{ background-color: #343a98!important; color: #fff!important; }
 
 ![Tax Agile Logo](Tax-Agile-Short.png)
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md)
 
 # Getting started
 The Tax Agile API is a RESTful implementation closely following [Microsoft API design guidance](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) 

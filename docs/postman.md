@@ -4,7 +4,7 @@ th{ background-color: #343a98!important; color: #fff!important; }
 
 ![Tax Agile Logo](Tax-Agile-Short.png)
 
-[Home](../README.md) \| [Getting started](getting-started.md) \|  [Postman](postman.md) \| [Swagger](../docs/swagger/index.html)
+[Home](../README.md) \| [Getting started](getting-started.md) \|  [Postman](postman.md) \| [Swagger](../docs/swagger/index.html) \| [Change log](changelog.md)
 
 # Postman sample collection
 The Postman collection is available to help you get started integrating to the Tax Agile API; and is published with
@@ -16,7 +16,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.1.postman_collection.json)
+* [Download the latest sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.2.postman_collection.json)
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
