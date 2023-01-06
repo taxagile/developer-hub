@@ -14,7 +14,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 The Hub is hosted on GitHub and you can report issues to us using the GitHub Issues functionality.
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.0.2-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Version-v1.0.2-green.svg)]()
 
 In this version of the API you have methods to authenticate and invoke the VAT Determination API.
 
@@ -30,17 +30,11 @@ In this version of the API you have methods to authenticate and invoke the VAT D
   * Filter parameters on entry date/time range, document number & VAT code
   * This can be used to collect data from Tax Agile and store in your data warehouse
 
-# Need help?
-If you have any problems, reach out to us: 
-* Contact Us [https://www.vatcalc.com/contact/](https://www.vatcalc.com/contact/)
-* Create an Issue [https://github.com/taxagile/developer-hub/issues](https://github.com/taxagile/developer-hub/issues)
-=======
 Jump to:
-
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
 * [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.1.postman_collection.json) (right click 'Save As...' to save a local copy)
 
----
+
 ## Need help?
 
 ### Getting Credentials
