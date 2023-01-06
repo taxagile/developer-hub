@@ -34,3 +34,14 @@ In this version of the API you have methods to authenticate and invoke the VAT D
 If you have any problems, reach out to us: 
 * Contact Us [https://www.vatcalc.com/contact/](https://www.vatcalc.com/contact/)
 * Create an Issue [https://github.com/taxagile/developer-hub/issues](https://github.com/taxagile/developer-hub/issues)
+=======
+Jump to:
+
+* [Swagger API docs](https://taxagile.github.io/developer-hub)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.1.postman_collection.json) (right click 'Save As...' to save a local copy)
+
+---
+## Need help?
+
+### Getting Credentials
+Get in touch via our website: [vatcalc.com/contact](https://www.vatcalc.com/contact/) to setup a demo and we can provide you with a trial!
