@@ -12,7 +12,3 @@ Jump to:
 ### Getting Credentials
 Get in touch via our website: [vatcalc.com/contact](https://www.vatcalc.com/contact/) to setup a demo and we can provide you with a trial!
 
-### Found a bug?
-If you already have credentials and are having any trouble using our API you can create tickets with our support desk via
-the [issues tab](https://github.com/taxagile/developer-hub/issues)
-
