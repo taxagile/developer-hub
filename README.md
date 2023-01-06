@@ -14,7 +14,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 The Hub is hosted on GitHub and you can report issues to us using the GitHub Issues functionality.
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.0.1-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Version-v1.0.2-green.svg)](https://shields.io/)
 
 In this version of the API you have methods to authenticate and invoke the VAT Determination API.
 
