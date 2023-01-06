@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "VAT Determination",
+			"name": "VAT Determination - intra-community supply",
 			"event": [
 				{
 					"listen": "test",
@@ -78,7 +78,58 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"transactionData\":\n  {\n    \"date\": {\n      \"docDate\": \"2022-05-09T00:00:00.000Z\",\n      \"supplyDate\": \"2022-05-09T00:00:00.000Z\",\n      \"dateOfTransaction\": \"2022-05-09T00:00:00.000Z\",\n      \"paymentDate\": \"2022-05-09T00:00:00.000Z\"\n    },\n    \"seller\": {\n      \"isNonTaxableLegalPerson\": false,\n      \"address\": \"Rue Gillon 59\",\n      \"establishedCountry\": \"BE\",\n      \"city\": \"Brussels\",\n      \"vatIdCountry\": \"BE\",\n      \"countriesFixedEstablishment\": \"BE\",\n      \"countriesVATRegistration\": \"AT,BE,BG,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GR,HR,HU,IE,IT,LT,LU,LV,MT,XI,NL,PL,PT,RO,SE,SI,SK,NO\",\n      \"isTaxablePerson\": true,\n      \"name\": \"BE Trading BVBA\",\n      \"postCode\": \"1210\"\n    },\n    \"item\": {\n      \"itemType\": \"Animal foodstuffs\",\n      \"itemID\": \"\",\n      \"reversedVatRate\": 0,\n      \"totalAmountCurrency2\": 0,\n      \"vatRate\": 0,\n      \"totalAmount\": 0,\n      \"value\": 100\n    },\n    \"document\": {\n      \"quantity\": 1,\n      \"docNumber\": \"900001\",\n      \"docType\": \"Sales invoice\",\n      \"currency\": \"EUR\",\n      \"lineNumber\": 1\n    },\n    \"buyer\": {\n      \"isNonTaxableLegalPerson\": false,\n      \"address\": \"Kurfuerstendamm 45\",\n      \"countriesImportDefermentLicence\": \"\",\n      \"establishedCountry\": \"DE\",\n      \"city\": \"München\",\n      \"vatIdCountry\": \"DE\",\n      \"countriesFixedEstablishment\": \"DE\",\n      \"isPrivateIndividual\": false,\n      \"countriesVATRegistration\": \"DE\",\n      \"isTaxablePerson\": true,\n      \"name\": \"DE Company GmbH\",\n      \"postCode\": \"80011\"\n    },\n    \"locations\": {\n      \"shipFrom\": \"BE\",\n      \"shipTo\": \"DE\"\n    },\n    \"transportTerms\": {\n      \"transport\": \"Seller\"\n    },\n    \"transactionDetail\": {\n      \"callOffStock\": false,\n      \"cashAccounting\": false\n    }\n  }\n}\n",
+					"raw": "{\n  \"transactionData\":\n  {\n    \"date\": {\n      \"docDate\": \"2022-05-09T00:00:00.000Z\",\n      \"supplyDate\": \"2022-05-09T00:00:00.000Z\",\n      \"dateOfTransaction\": \"2022-05-09T00:00:00.000Z\",\n      \"paymentDate\": \"2022-05-09T00:00:00.000Z\"\n    },\n    \"seller\": {\n      \"type\": \"Taxable person\",\n      \"address\": \"Rue Gillon 59\",\n      \"establishedCountry\": \"BE\",\n      \"city\": \"Brussels\",\n      \"vatIdCountry\": \"BE\",\n      \"countriesFixedEstablishment\": \"BE\",\n      \"countriesVATRegistration\": \"AT,BE,BG,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GR,HR,HU,IE,IT,LT,LU,LV,MT,XI,NL,PL,PT,RO,SE,SI,SK,NO\",\n      \"name\": \"BE Trading BVBA\",\n      \"postCode\": \"1210\"\n    },\n    \"item\": {\n      \"itemType\": \"Animal foodstuffs\",\n      \"itemID\": \"\",\n      \"reversedVatRate\": 0,\n      \"totalAmountCurrency2\": 0,\n      \"vatRate\": 0,\n      \"totalAmount\": 0,\n      \"value\": 100\n    },\n    \"document\": {\n      \"quantity\": 1,\n      \"docNumber\": \"900001\",\n      \"docType\": \"Sales invoice\",\n      \"currency\": \"EUR\",\n      \"lineNumber\": 1\n    },\n    \"buyer\": {\n      \"type\": \"Taxable person\",\n      \"address\": \"Kurfuerstendamm 45\",\n      \"countriesImportDefermentLicence\": \"\",\n      \"establishedCountry\": \"DE\",\n      \"city\": \"München\",\n      \"vatIdCountry\": \"DE\",\n      \"countriesFixedEstablishment\": \"DE\",\n      \"countriesVATRegistration\": \"DE\",\n      \"name\": \"DE Company GmbH\",\n      \"postCode\": \"80011\"\n    },\n    \"locations\": {\n      \"shipFrom\": \"BE\",\n      \"shipTo\": \"DE\"\n    },\n    \"transportTerms\": {\n      \"transport\": \"Seller\"\n    },\n    \"transactionDetail\": {\n      \"callOffStock\": false,\n      \"cashAccounting\": false\n    }\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_ROOT}}/v1/determination/vat/transactions",
+					"host": [
+						"{{API_ROOT}}"
+					],
+					"path": [
+						"v1",
+						"determination",
+						"vat",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VAT Determination - local supply",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"ID\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transactionData\": {\n        \"date\": {\n            \"dateOfTransaction\": \"2022-07-01T00:00:00.000Z\",\n            \"docDate\": \"2022-07-01T00:00:00.000Z\",\n            \"supplyDate\": \"2022-07-01T00:00:00.000Z\",\n            \"paymentDate\": \"2022-07-01T00:00:00.000Z\"\n        },\n        \"seller\": {\n            \"address\": \"Rue Gillon 59\",\n            \"city\": \"Brussels\",\n            \"establishedCountry\": \"BE\",\n            \"vatIdCountry\": \"BE\",\n            \"type\": \"Taxable person\",\n            \"countriesFixedEstablishment\": \"BE\",\n            \"isCharity\": false,\n            \"countriesVATRegistration\": \"BE\",\n            \"vatGroupID\": \"BE101\",\n            \"name\": \"BE Company BVBA\",\n            \"postCode\": \"1210\",\n            \"isHospital\": false\n        },\n        \"item\": {\n            \"totalAmount\": 10000,\n            \"itemType\": \"Miscellaneous goods\",\n            \"value\": 10000\n        },\n        \"document\": {\n            \"quantity\": 1,\n            \"docNumber\": \"000001\",\n            \"docType\": \"Sales invoice\",\n            \"currency\": \"EUR\",\n            \"lineNumber\": 1\n        },\n        \"locations\": {\n            \"shipFrom\": \"BE\",\n            \"shipTo\": \"BE\"\n        },\n        \"transportTerms\": {\n            \"transport\": \"Seller\"\n        },\n        \"transactionDetail\": {\n            \"callOffStock\": false,\n            \"cashAccounting\": false\n        },\n        \"buyer\": {\n            \"address\": \"Rue Gillon 59\",\n            \"city\": \"Brussels\",\n            \"establishedCountry\": \"BE\",\n            \"isAirline\": false,\n            \"vatIdCountry\": \"BE\",\n            \"type\": \"Taxable person\",\n            \"countriesFixedEstablishment\": \"BE\",\n            \"isVessel\": false,\n            \"isCharity\": false,\n            \"countriesVATRegistration\": \"BE\",\n            \"vatGroupID\": \"BE101\",\n            \"name\": \"BE Company BVBA\",\n            \"postCode\": \"1210\",\n            \"isHospital\": false\n        }\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -129,7 +180,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"transactionData\":\n  {\n    \"date\": {\n      \"docDate\": \"2022-05-09T00:00:00.000Z\",\n      \"supplyDate\": \"2022-05-09T00:00:00.000Z\",\n      \"dateOfTransaction\": \"2022-05-09T00:00:00.000Z\",\n      \"paymentDate\": \"2022-05-09T00:00:00.000Z\"\n    },\n    \"seller\": {\n      \"isNonTaxableLegalPerson\": false,\n      \"address\": \"Rue Gillon 59\",\n      \"establishedCountry\": \"BE\",\n      \"city\": \"Brussels\",\n      \"vatIdCountry\": \"BE\",\n      \"countriesFixedEstablishment\": \"BE\",\n      \"countriesVATRegistration\": \"AT,BE,BG,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GR,HR,HU,IE,IT,LT,LU,LV,MT,XI,NL,PL,PT,RO,SE,SI,SK,NO\",\n      \"isTaxablePerson\": true,\n      \"name\": \"BE Trading BVBA\",\n      \"postCode\": \"1210\"\n    },\n    \"item\": {\n      \"itemType\": \"Animal foodstuffs\",\n      \"itemID\": \"\",\n      \"reversedVatRate\": 0,\n      \"totalAmountCurrency2\": 0,\n      \"vatRate\": 0,\n      \"totalAmount\": 0,\n      \"value\": 100\n    },\n    \"document\": {\n      \"quantity\": 1,\n      \"docNumber\": \"900001\",\n      \"docType\": \"Sales invoice\",\n      \"currency\": \"EUR\",\n      \"lineNumber\": 1\n    },\n    \"buyer\": {\n      \"isNonTaxableLegalPerson\": false,\n      \"address\": \"Kurfuerstendamm 45\",\n      \"countriesImportDefermentLicence\": \"\",\n      \"establishedCountry\": \"DE\",\n      \"city\": \"München\",\n      \"vatIdCountry\": \"DE\",\n      \"countriesFixedEstablishment\": \"DE\",\n      \"isPrivateIndividual\": false,\n      \"countriesVATRegistration\": \"DE\",\n      \"isTaxablePerson\": true,\n      \"name\": \"DE Company GmbH\",\n      \"postCode\": \"80011\"\n    },\n    \"locations\": {\n      \"shipFrom\": \"BE\",\n      \"shipTo\": \"DE\"\n    },\n    \"transportTerms\": {\n      \"transport\": \"Seller\"\n    },\n    \"transactionDetail\": {\n      \"callOffStock\": false,\n      \"cashAccounting\": false\n    }\n  }\n}\n",
+					"raw": "{\n  \"transactionData\":\n  {\n    \"date\": {\n      \"docDate\": \"2022-05-09T00:00:00.000Z\",\n      \"supplyDate\": \"2022-05-09T00:00:00.000Z\",\n      \"dateOfTransaction\": \"2022-05-09T00:00:00.000Z\",\n      \"paymentDate\": \"2022-05-09T00:00:00.000Z\"\n    },\n    \"seller\": {\n      \"type\": \"Taxable person\",\n      \"address\": \"Rue Gillon 59\",\n      \"establishedCountry\": \"BE\",\n      \"city\": \"Brussels\",\n      \"vatIdCountry\": \"BE\",\n      \"countriesFixedEstablishment\": \"BE\",\n      \"countriesVATRegistration\": \"AT,BE,BG,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GR,HR,HU,IE,IT,LT,LU,LV,MT,XI,NL,PL,PT,RO,SE,SI,SK,NO\",\n      \"name\": \"BE Trading BVBA\",\n      \"postCode\": \"1210\"\n    },\n    \"item\": {\n      \"itemType\": \"Animal foodstuffs\",\n      \"itemID\": \"\",\n      \"reversedVatRate\": 0,\n      \"totalAmountCurrency2\": 0,\n      \"vatRate\": 0,\n      \"totalAmount\": 0,\n      \"value\": 100\n    },\n    \"document\": {\n      \"quantity\": 1,\n      \"docNumber\": \"900001\",\n      \"docType\": \"Sales invoice\",\n      \"currency\": \"EUR\",\n      \"lineNumber\": 1\n    },\n    \"buyer\": {\n      \"type\": \"Taxable person\",\n      \"address\": \"Kurfuerstendamm 45\",\n      \"countriesImportDefermentLicence\": \"\",\n      \"establishedCountry\": \"DE\",\n      \"city\": \"München\",\n      \"vatIdCountry\": \"DE\",\n      \"countriesFixedEstablishment\": \"DE\",\n      \"countriesVATRegistration\": \"DE\",\n      \"name\": \"DE Company GmbH\",\n      \"postCode\": \"80011\"\n    },\n    \"locations\": {\n      \"shipFrom\": \"BE\",\n      \"shipTo\": \"DE\"\n    },\n    \"transportTerms\": {\n      \"transport\": \"Seller\"\n    },\n    \"transactionDetail\": {\n      \"callOffStock\": false,\n      \"cashAccounting\": false\n    }\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -228,7 +279,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{API_ROOT}}/v1/determination/vat/transactions?pageSize=5&page=1&entryDateTimeFrom=2022-06-01T00:00:00.000Z&entryDateTimeTo=2022-06-29T23:59:59.999Z",
+					"raw": "{{API_ROOT}}/v1/determination/vat/transactions?pageSize=5&page=1&entryDateTimeFrom=2022-06-01T00:00:00.000Z",
 					"host": [
 						"{{API_ROOT}}"
 					],
@@ -268,8 +319,9 @@
 						},
 						{
 							"key": "entryDateTimeTo",
-							"value": "2022-06-29T23:59:59.999Z",
-							"description": "Entry date/time to"
+							"value": "2022-07-01T23:59:59.999Z",
+							"description": "Entry date/time to",
+							"disabled": true
 						}
 					]
 				}

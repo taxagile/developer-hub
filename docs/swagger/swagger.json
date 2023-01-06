@@ -1,13 +1,10 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": "Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues, create an issue on our [Developer Hub](https://github.com/taxagile/developer-hub/issues)<hr> ",
+    "description": "[Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/)  <br /><br />Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues [create an issue](https://github.com/taxagile/developer-hub/issues)",
     "title": "Tax Agile API Specification",
-    "version": "1.0.1",
-    "contact": {
-      "name": "Tax Agile",
-      "url": "https://www.vatcalc.com/contact/"
-    }
+    "version": "1.0.2"
+
   },
   "servers": [
     {
@@ -73,7 +70,7 @@
                   "errorCode": "AU001"
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/errorResponse",
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -300,7 +297,7 @@
                           }
                         }
                       }
-                    },
+                    }
                   }
                 }
               }
@@ -329,35 +326,21 @@
       "get": {
         "summary": "Return a specific transaction by id",
         "description": "Providing the id of the transaction will fetch the transaction from
-        the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. Using the ?detail=true query parameter returns a full representation of the transaction and how it was processed by our engine.",
+        the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back.,
+        <br/><br/>Using the ?detail=true query parameter returns a detail representation of the transaction and how it was processed by our engine.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json":{
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "request": {
-                      "$ref": "#/components/schemas/determinationVatRequestBody"
-                    },
-                    "response": {
-                      "$ref": "#/components/schemas/determinationVatResponse200"
-                    },
-                    "entryDateTime": {
-                      "description": "Datetime the transaction was created on our platform",
-                      "type": "string",
-                      "example": "2022-06-28T14:12:35.000Z"
-                    },
-                    "_id": {
-                      "description": "Unique id issued by our platform for this transaction",
-                      "type": "string",
-                      "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
-                    }
-                  }
-                },
-              },
-            },
+                  "oneOf": [
+                    {"$ref": "#/components/schemas/summaryTransactionResponse"},
+                    {"$ref": "#/components/schemas/detailTransactionResponse"}
+                  ]
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found",
@@ -576,7 +559,7 @@
         "type": "object"
       },
       "determinationVatRequestBody": {
-        "$ref": "vatDeterminationRequestBodySchema.json"
+        "$ref": "./schemas/vatDeterminationRequestBodySchema.json"
       },
       "errorResponse": {
         "description": "Standardised error response returned with a code and message",
@@ -590,6 +573,83 @@
           "message": {
             "example": "<error message>",
             "type": "string"
+          }
+        }
+      },
+      "summaryTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/determinationVatRequestBody"
+          },
+          "response": {
+            "$ref": "#/components/schemas/determinationVatResponse200"
+          },
+          "entryDateTime": {
+            "description": "Datetime the transaction was created on our platform",
+            "type": "string",
+            "example": "2022-06-28T14:12:35.000Z"
+          },
+          "_id": {
+            "description": "Unique id issued by our platform for this transaction",
+            "type": "string",
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+          },
+          "source": {
+            "description": "Entry point source on the platform",
+            "type": "string",
+            "example": "api"
+          }
+        }
+      },
+      "detailTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "entryDateTime": {
+            "description": "Datetime the transaction was created on our platform",
+            "type": "string",
+            "example": "2022-06-28T14:12:35.000Z"
+          },
+          "_id": {
+            "description": "Unique id issued by our platform for this transaction",
+            "type": "string",
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+          },
+          "source": {
+            "description": "Entry point source on the platform",
+            "type": "string",
+            "example": "api"
+          },
+          "determinationData": {
+            "type": "object",
+            "description": "Detailed insights into the transactions determination",
+            "properties": {
+              "calcBuffer": {
+                "type": "object"
+              },
+              "analysisResult": {
+                "type": "object"
+              },
+              "auditResult": {
+                "type": "object"
+              }
+            }
+          },
+          "transactionData": {
+            "type": "object",
+            "description": "Attributes of the transaction"
+          },
+          "apiRequestData": {
+            "type": "object",
+            "description": "If the transaction was loaded via API this will contain the request and response",
+            "properties": {
+              "request": {
+                "$ref": "#/components/schemas/determinationVatRequestBody"
+              },
+              "response": {
+                "$ref": "#/components/schemas/determinationVatResponse200"
+              }
+            }
           }
         }
       }
