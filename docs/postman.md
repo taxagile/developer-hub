@@ -16,7 +16,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.0.2.postman_collection.json)
+* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.0.postman_collection.json)
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
@@ -45,15 +45,30 @@ available on the API which are not demonstrated in the collection, please check 
 for all the available options.
 
 There is a logical order to these requests, by first doing an Auth, the Bearer token is automatically 
-used on the following requests.  In order for the GET requests to work, you must have POST a VAT 
-Determination with the `commit=true` parameter to save the transaction on the platform.
+used on the following requests. 
 
 | Name | Functionality                                                                       |
 | :--- |:------------------------------------------------------------------------------------|
 | POST Auth | 	Takes `ACCOUNT_ID` and `API_KEY` environment variables and creates a new Bearer token. |
-| POST VAT Determination| Makes a VAT Determination which is not committed (saved).                           |
+| POST VAT Determination - ICS | Makes a VAT Determination which is not committed (saved).                           |
+| POST VAT Determination - local supply | Makes a VAT Determination which is not committed (saved).                           |
 | POST VAT Determination with commit | Makes a VAT Determination with the `commit=true` parameter so save the transaction.   |
 | GET VAT Determination by ID | Returns a summary of the request sent and response given for the transaction; using the uuid returned on the commited determination as the ID.                                                                                    |
 | GET VAT Determination for date range |     	Queries the commited (saved) transactions and returns a paged result set. The example shows a date/time range filter, but other filter options are set on the request and can be enabled.                                                                                |
+| POST Create Audit with json | Submits transaction data to create an Audit. Returns an operation id to poll |
+| GET Poll operations endpoint | Poll for a completed status |
+| GET Audit summary by ID | Using the audit resource id, fetch a summary of the audit |
+| GET Audits - list latest 100 | List of latest 100 audits | 
+| DELETE Audit by ID | Remove an audit from the system |
 
 
+## Postman settings
+### Redirects
+By default, Postman will follow redirects, but for a logical demonstration of the API, it is preferable to see the response, and then make a new request to the new location.
+
+In the sample collection, we have changed the default setting "Automatically follow redirects" to OFF; on the operations poll request so that you can see the 303 response; before calling the GET Audit summary by ID.
+
+### File Upload
+There is the option to use a form-data body, to send an Excel sheet to VAT Auditor, however you must give Postman permission to read the files on your local machine.
+
+This community post may help: [Postman Community](https://community.postman.com/t/cant-select-file-at-form-data-make-sure-that-postman-can-read-files-inside-the-working-directory/16440/2)
