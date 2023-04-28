@@ -1,23 +1,412 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": "[Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/)  <br /><br />Tax Agile provides the powerful VAT Calc determination engine over a RESTful API. The API requires an Account ID and API Key for the auth endpoint; please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. <br /> <br />Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/) <br /><br />If you have access, but run into any issues [create an issue](https://github.com/taxagile/developer-hub/issues)",
+    "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.0.2"
-
+    "version": "1.1.0",
+    "contact": {
+      "name": "Tax Agile Support",
+      "url": "https://vatcalc.freshdesk.com/support/home"
+    }
+  },
+  "externalDocs": {
+    "description": "Latest Release Notes",
+    "url": "https://github.com/taxagile/developer-hub/releases/latest"
   },
   "servers": [
     {
-      "url": "https://test-api.taxagile.io/v1",
+      "url": "https://test-api.taxagile.io/",
       "description": "Test API"
     },
     {
-      "url": "https://api.taxagile.io/v1",
+      "url": "https://api.taxagile.io/",
       "description": "Production API"
     }
   ],
   "paths": {
-    "/auth": {
+    "/v1/operations/{id}": {
+      "get": {
+        "tags": [ "Operations"],
+        "summary": "Status of a long-running operation. [ready to publish]",
+        "description": "## Returns details of a long-running operation. \n\n Use this endpoint to poll for completion of an operation. When the operation completes this endpoint returns a new location header and href in body of the new resource on a `302 See Other` status.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Uuid of the specific operation",
+            "required": true,
+            "example": "e7c54568-6a4a-4e73-a176-dc59d0ec5604",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Operation incomplete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/operationsResponse200"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Refers to this endpoint when incomplete status",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+        
+          },
+          "303": {
+            "description": "See Other - Operation complete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/operationsResponse303"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Path to find new resource",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "OP001",
+                  "message": "Operation Id is a mandatory path parameter"
+                }
+              }
+            }
+
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "OP003",
+                  "message": "Error encountered fetching operation ${operationId}"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+         }
+      }
+    },
+    "/v1/auditor/vat/audits":{
+      "post": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Create a new audit.",
+        "description": "## Submit transaction data to VAT Auditor \n Send it as either body JSON, or as an Excel xlsx as multipart form-data, which has been mapped to our data model.\n\nThis endpoint returns with an operation token to use with the `GET /operations/{id}` endpoint to poll for the Audit completion.",
+        "parameters": [],
+        "requestBody": { 
+          "required": true,
+          "description": "The request can be sent as an `application/json` body, or a `multipart/form-data`. \n\n ### application/json \n\n An array of data [ vatDataModelSchema ] transactions, plus an options object which specifies how the system handles the Audit.  When sending Tax Agile data model format JSON, the mappingId should be set to 'default'.\n\n ### multipart/form-data \n\n Has two fields one called 'file' which takes an excel sheet xlsx file; the second called 'options' which takes a json {} with the Audit options. \n\n #### Note: Maximum file size 5mb",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/vatAuditRequestBody"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object", 
+                "properties": {
+                  "file":{
+                    "type": "string",
+                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                  },
+                  "options": {
+                    "$ref": "#/components/schemas/vatAuditOptions"
+                  }
+                }
+              }
+            }
+    
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted request and an operation ID issued.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/longRunningAccepted202"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Path to find the polling operation",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request \n\n VA001 - Invalid content-type in request header \n\n VA002 - Request options - missing options.mappingId \n\n VA003 - Data mapping record not found - check options.mappingId \n\n VA005 - File not uploaded to cloud storage \n\n VA006 - Unhandled error \n\n VA007 - Request body in an unexpected format. Check content-type is set correctly \n\n IO001 - File not found or not of a supported type",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "VA001",
+                  "message": "Invalid content-type in request header"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "VA006",
+                  "message": "_error details_"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+         }
+      }
+    },
+    "/v0/auditor/vat/audits":{
+      "get": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Summary list of audits.",
+        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n In particular we expect to add paging of results if the most recent 100 isn't sufficient.\n\n## List of 100 most recent audits. \n If there a no items in the list this will return an empty array, on a 200 OK.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json" : {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "FQWaTQN3TXdTD8MGYaXJ"
+                      },
+                      "entryDateTime": {
+                        "type": "string",
+                        "example": "2023-03-30T15:13:18.347Z"
+                      },
+                      "dataSourceName": {
+                        "type": "string",
+                        "example":"2023-03-30T15:13:17.094Z.json"
+                      },
+                      "mappingName": {
+                        "type": "string",
+                        "example":"Tax Agile default json schema"
+                      },
+                      "dataSource": {
+                        "type": "string",
+                        "example": "api"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Complete"
+                      }
+                    }
+  
+
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          }
+        }
+      }
+    },
+    "/v0/auditor/vat/audits/{id}":{
+      "get": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Details of a specific audit.",
+        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n In particular the ?detail=true response is likely to change as it returns a lot of data when the Audit contains a large number of transactions.\n\n## Details of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, datasource information, missing data and transactions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the audit",
+            "required": true,
+            "example": "9A8FL3X3hr6I0QSLNFAA",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "detail",
+            "in": "query",
+            "description": "Optional parameter to fetch a detailed representation of the Audit; if not used it defaults to a summary",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          }
+        ],
+        "responses": { 
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vatAuditSummaryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA008",
+                  "message": "Audit Id is a mandatory path parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA010",
+                  "message": "Error encountered fetching audit {id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auditor/vat/audits/{id}":{
+      "delete": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Removes audit results and data from the platform.",
+        "description": "## Deletes audit and associated data.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the specific audit",
+            "required": true,
+            "example": "9A8FL3X3hr6I0QSLNFAA",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete request accepted with no content"           
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA008",
+                  "message": "Audit Id is a mandatory path parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA011",
+                  "message": "Error encountered deleting audit {id}"
+                }
+              }
+            }
+          }
+         }
+      }
+    },
+    "/v1/auth": {
       "post": {
         "tags": [ "Authentication" ],
         "responses": {
@@ -62,21 +451,11 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Unauthorized",
-                  "errorCode": "AU001"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                }
-              }
-            }
+            "$ref": "#/components/responses/error401"
           }
         },
         "summary": "Authenticate with API Key to receive a Bearer token",
+        "description": "Use API key and accountId to authenticate, and receive a time-based Bearer token which is then used on subsequent requests in the Authorization header.",
         "requestBody": {
           "required": true,
           "content": {
@@ -90,7 +469,7 @@
         }
       }
     },
-    "/determination/vat/transactions": {
+    "/v1/determination/vat/transactions": {
       "post": {
         "summary": "Send a transaction and receive a VAT determination.",
         "description": "Send a transaction to the determination engine for VAT. The request body supports a large number of conditions which may be true on your transaction, but all are not required. It can be helpful to use VAT Advisor to enter a sample transaction to understand the request body you need to send. The transaction can be stored if you include the query parameter commit=true if stored, the response will provide a uuid.",
@@ -128,6 +507,7 @@
             "description": "OK"
           },
           "400": {
+            "description": "Bad request \n\n VD001 - Request body data malformed \n\n VD002 - Unhandled content-type \n\n VD003 - Missing field in data",
             "content": {
               "application/json": {
                 "example": {
@@ -138,27 +518,15 @@
                   "$ref": "#/components/schemas/errorResponse"
                 }
               }
-            },
-            "description": "Bad request - missing fields"
+            }
           },
           "401": {
-            "description": "Unauthorized - invalid token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "AU001",
-                  "message": "Unauthorized"
-                }
-              }
-            }
+            "$ref": "#/components/responses/error401"
           }
         },
-        "tags": [ "VAT determination" ]
+        "tags": [ "VAT Calc" ]
       },
-      "get":{
+      "get": {
         "summary": "Fetch a collection of transactions with filter params",
         "description": "Returns a paginated dataset of the committed (saved) transactions stored on the platform. Takes filter criteria as query parameters and sets defaults to ensure a huge dataset is not fetched.  Can be used to collect data periodically to store in your analysis data store; or to build an interactive dashboard in your application.",
         "parameters": [
@@ -248,7 +616,7 @@
                           "format": "int32",
                           "example": 20
                         },
-                        "uri": {
+                        "href": {
                           "type": "string",
                           "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=3&pageSize=20"
                         }
@@ -267,7 +635,7 @@
                           "format": "int32",
                           "example": 20
                         },
-                        "uri": {
+                        "href": {
                           "type": "string",
                           "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=1&pageSize=20"
                         }
@@ -303,31 +671,17 @@
               }
             }
           },
-
           "401": {
-            "description": "Unauthorized - invalid token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "AU001",
-                  "message": "Unauthorized"
-                }
-              }
-            }
+            "$ref": "#/components/responses/error401"
           }
         },
-        "tags": [ "VAT determination" ]
+        "tags": [ "VAT Calc" ]
       }
     },
-    "/determination/vat/transactions/{id}": {
+    "/v1/determination/vat/transactions/{id}": {
       "get": {
         "summary": "Return a specific transaction by id",
-        "description": "Providing the id of the transaction will fetch the transaction from
-        the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back.,
-        <br/><br/>Using the ?detail=true query parameter returns a detail representation of the transaction and how it was processed by our engine.",
+        "description": "Providing the id of the transaction will fetch the transaction from the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. \n\n Using the `?detail=true` query parameter returns a detail representation of the transaction and how it was processed by our engine.",
         "responses": {
           "200": {
             "description": "OK",
@@ -357,18 +711,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - invalid token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "AU001",
-                  "message": "Unauthorized"
-                }
-              }
-            }
+            "$ref": "#/components/responses/error401"
           }
         },
         "parameters": [
@@ -385,7 +728,7 @@
           {
             "name": "detail",
             "in": "query",
-            "description": "Optional parameter to fetch a detailed representation of the transactionl; if not used it defaults to a summary",
+            "description": "Optional parameter to fetch a detailed representation of the transaction; if not used it defaults to a summary",
             "required": false,
             "schema": {
               "type": "boolean"
@@ -393,18 +736,26 @@
             "example": true
           }
         ],
-        "tags":[ "VAT determination" ]
+        "tags":[ "VAT Calc" ]
       }
     }
   },
   "tags": [
     {
-      "name": "VAT determination",
-      "description": "Access VAT Calc functionality via our determination endpoints."
+      "name": "Authentication",
+      "description": "Authentication endpoints."
     },
     {
-      "name": "Authentication",
-      "description": "Use these endpoints to get an active auth token."
+      "name": "VAT Calc",
+      "description": "Use our engine to do VAT determination on transactions."
+    },
+    {
+      "name": "VAT Auditor",
+      "description": "Complete an Audit of VAT compliance on your data."
+    },
+    {
+      "name": "Operations",
+      "description": "Manage async operation queues."
     }
   ],
   "security": [
@@ -437,7 +788,7 @@
             "type": "string"
           }
         },
-        "title": "Auth request body",
+        "title": "Auth request",
         "description": "API authentication resource",
         "type": "object",
         "required": [
@@ -447,7 +798,7 @@
         "additionalProperties": false
       },
       "determinationVatResponse200": {
-        "title": "VAT determination response body",
+        "title": "VAT Determination response",
         "description": "",
         "properties": {
           "transaction2": {
@@ -563,7 +914,7 @@
       },
       "errorResponse": {
         "description": "Standardised error response returned with a code and message",
-        "title": "Standard error object",
+        "title": "Error",
         "type": "object",
         "properties": {
           "errorCode": {
@@ -577,6 +928,7 @@
         }
       },
       "summaryTransactionResponse": {
+        "title": "VAT Determination Summary",
         "type": "object",
         "properties": {
           "request": {
@@ -603,6 +955,7 @@
         }
       },
       "detailTransactionResponse": {
+        "title": "VAT Determination Detail",
         "type": "object",
         "properties": {
           "entryDateTime": {
@@ -649,6 +1002,300 @@
               "response": {
                 "$ref": "#/components/schemas/determinationVatResponse200"
               }
+            }
+          }
+        }
+      },
+      "vatAuditSummaryResponse": {
+        "title": "VAT Audit Summary",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "entryDateTime": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "auditMetrics": {
+                "type": "object",
+                "properties": {
+                  "accuracyScore": {
+                    "type": "integer"
+                  },
+                  "docsPerSecondConversion": {
+                    "type": "integer"
+                  },
+                  "qualityScore": {
+                    "type": "integer"
+                  },
+                  "totalExposure": {
+                    "type": "integer"
+                  },
+                  "docsPerSecondAnalysed": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "dataSummary": {
+                "type": "object"
+              },
+              "failedChecks": {
+                "type": "integer"
+              },
+              "totalDocuments": {
+                "type": "integer"
+              }
+            }
+          },
+          "dataDetails": {
+            "type": "object",
+            "properties": {
+              "dataSource": {
+                "type": "string"
+              },
+              "dataSourceName": {
+                "type": "string"
+              },
+              "dataSourceType": {
+                "type": "string"
+              },
+              "mappingId": {
+                "type": "string"
+              },
+              "mappingName": {
+                "type": "string"
+              }
+            }
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "storeTransactions": {
+                "type": "boolean"
+              },
+              "doTaxCodeMapping": {
+                "type": "boolean"
+              },
+              "sendToFiler": {
+                "type": "boolean"
+              }
+            }
+          },
+          "missingData": {
+            "type": "array",
+            "items":{
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "docNumber": {
+                  "type": "string"
+                }, 
+                "docDate": {
+                  "type": "string"
+                },
+                "missing": {
+                  "type": "string",
+                  "example": "a blank value is not a correct value for \"transportTerms.transport\". Check the mapping"
+                }
+              }
+            }
+          },
+          "transactions": {
+            "type": "array",
+            "items":{
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "docNumber": {
+                  "type": "string"
+                }, 
+                "docDate": {
+                  "type": "string"
+                },
+                "auditResult":{
+                  "type": "object",
+                  "properties": {
+                    "errors":{
+                      "type": "array",
+                      "items": {
+                        "description": "Error object is specific to each error.checkId",
+                        "type": "object",
+                        "properties": {
+                          "checkId": {
+                            "type": "string",
+                            "example": "checkVatAmountDifference"
+                          },
+                          "errorMessage": {
+                            "type": "string",
+                            "example": "VAT amount"
+                          },
+                          "valueInData": {
+                            "type": "string",
+                            "example": "0"
+                          }, 
+                          "valueCalculated": {
+                            "type": "string",
+                            "example": "400"
+                          },
+                          "exposure": {
+                            "type": "number",
+                            "example": 400
+                          },
+                          "company": {
+                            "type": "string",
+                            "example": "buyer"
+                          }, 
+                          "counterpary": {
+                            "type": "string",
+                            "example": "seller"
+                          }
+                        }
+                      }
+                    },
+                    "done": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "vatAuditRequestBody": {
+        "title": "VAT Audit request",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "./schemas/vatDataModelSchema.json"
+            }
+          },
+          "options": {
+            "$ref": "#/components/schemas/vatAuditOptions"
+          }
+        }
+      },
+      "longRunningAccepted202": {
+        "title": "Operation Accepted",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "Unique operation id",
+            "type": "string", 
+            "example": "ceb50cb0-0135-4fdf-bcd3-dbfc9d4d9adc"
+          },
+          "href": {
+            "description": "Location to poll for operation status",
+            "type": "string",
+            "example": "/v1/operations/ceb50cb0-0135-4fdf-bcd3-dbfc9d4d9adc"
+          }
+        }
+      },
+      "operationsResponse200": {
+        "title": "Operation Poll",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "Unique operation id",
+            "type": "string", 
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6"
+          },
+          "status": {
+            "description": "Operation status",
+            "type": "string",
+            "example": "Pending | Inprogress"
+          },
+          "href": {
+            "description": "Location to poll for operation status",
+            "type": "string",
+            "example": "/v1/operations/7942cf02-2067-4b37-8e00-e3bd3926d6"
+          }
+        }
+      },
+      "operationsResponse303": {
+        "title": "Operation Complete",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "Unique operation id",
+            "type": "string", 
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6"
+          },
+          "status": {
+            "description": "Operation status",
+            "type":"string",
+            "example": "Complete"
+          },
+          "href": {
+            "description": "Resource uri",
+            "type": "string",
+            "example": "/v1/auditor/vat/audits/6gmTpTAM3xC7m3v66xB8"
+          }
+        }
+      },
+      "vatAuditOptions": {
+          "title": "VAT Audit Options",
+          "type": "object",
+          "required": [ "mappingId" ],
+          "properties": {
+            "mappingId": {
+              "type": "string",
+              "example": "CTDCqBkBozNOQe1NFoaa"
+            },
+            "sendToFiler": {
+              "type": "boolean",
+              "default": false
+            },
+            "sendToInsights": {
+              "type": "boolean",
+              "default": false
+            },
+            "storeTransactions": {
+              "type": "boolean",
+              "default": true
+            },
+            "doTaxCodeMapping": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+      }
+    },
+    "requestBodies": {},
+    "responses": {
+      "error401": {
+        "description": "Unauthorized - invalid token",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorResponse"
+            },
+            "example": {
+              "errorCode": "AU001",
+              "message": "Unauthorized"
+            }
+          }
+        }
+      },
+      "error404": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/errorResponse"
+            },
+            "example": {
+              "errorCode": "QY001",
+              "message": "Not found"
             }
           }
         }
