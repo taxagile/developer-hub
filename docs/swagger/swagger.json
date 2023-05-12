@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -292,7 +292,7 @@
           {
             "name": "detail",
             "in": "query",
-            "description": "Optional parameter to fetch a detailed representation of the Audit; if not used it defaults to a summary",
+            "description": "Optional parameter to fetch a detailed representation of the Audit; if not used it defaults to a summary. \n\nSet to true adds the determination results from the engine for each transaction in the path: transactions[].analysisResult\n\n See the schema 'VAT Determination response' for the format of the analysisResult object.",
             "required": false,
             "schema": {
               "type": "boolean"
@@ -801,30 +801,55 @@
         "title": "VAT Determination response",
         "description": "",
         "properties": {
+          "transaction1": {
+            "type": "string",
+            "title": "Transaction 1",
+            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
+          },
           "transaction2": {
             "type": "string",
             "example": "N/A - N/A - No exemption - N/A",
             "title": "Transaction 2"
-          },
-          "reversedOutputVatRate": {
-            "type": "number",
-            "title": "Reversed output VAT rate",
-            "example": 0
           },
           "reversedOutputVat": {
             "title": "Reversed output VAT",
             "example": 0,
             "type": "number"
           },
-          "importVatAmount": {
+          "reversedOutputVatRate": {
             "type": "number",
-            "title": "Import VAT amount",
+            "title": "Reversed output VAT rate",
             "example": 0
+          },
+          "deductibleInputVat": {
+            "example": 0,
+            "title": "Deductible input VAT",
+            "type": "number"
           },
           "invoiceMentioning": {
             "example": "Article 138(1) Directive 2006/112 EC",
             "type": "string",
             "title": "Invoice mentioning"
+          },
+          "invoiceMentioninEu": {
+            "example": "Article 138(1) Council Directive 2006/112 EC",
+            "type": "string",
+            "title": "Invoice mentioning EU"
+          },
+          "buyerVatNo": {
+            "example": "DE",
+            "type": "string",
+            "title": "Buyer VAT number country"
+          },
+          "taxPoint": {
+            "type": "string",
+            "example": "2022-05-09T00:00:00.000Z",
+            "title": "Tax point"
+          },
+          "deductibleInputVatLocalCurrencyAdvisor": {
+            "type": "number",
+            "title": "Deductible local currency",
+            "example": 0
           },
           "deductibleRate": {
             "type": "number",
@@ -836,30 +861,65 @@
             "title": "Seller VAT number country",
             "example": "BE"
           },
-          "deductibleInputVat": {
-            "example": 0,
-            "title": "Deductible input VAT",
-            "type": "number"
-          },
-          "transaction1": {
-            "type": "string",
-            "title": "Transaction 1",
-            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
-          },
-          "buyerVatNo": {
-            "example": "DE",
-            "type": "string",
-            "title": "Buyer VAT number country"
-          },
-          "rateT1": {
+          "baseAmount": {
             "type": "number",
-            "example": 0,
-            "title": "Rate T1"
+            "example": 100,
+            "title": "Base amount"
           },
           "vatCode": {
             "example": "BESICSG000",
             "type": "string",
             "title": "VAT code"
+          },
+          "transType": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Transaction type"
+          },
+          "auditorCounterpartyVatId": {
+            "example": "DE",
+            "type": "string",
+            "title": "Auditor calculated counterparty VAT Id"
+          },
+          "auditorUserVatId": {
+            "example": "BE",
+            "type": "string",
+            "title": "Auditor user supplied VAT Id"
+          },
+          "taxableTransactionT1": {
+            "example": "Supply of goods",
+            "type": "string",
+            "title": "Taxable transaction"
+          },
+          "posT1": {
+            "example": "BE",
+            "type": "string",
+            "title": "Place of supply"
+          },
+          "exemptionDescriptionT1": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Exemption description"
+          },
+          "obligationToPayT1": {
+            "example": "N/A",
+            "type": "string",
+            "title": "Obligation to pay"
+          },      
+          "rateT1": {
+            "type": "number",
+            "example": 0,
+            "title": "Rate T1"
+          },
+          "vatAmount": {
+            "type": "number",
+            "title": "VAT amount",
+            "example": 0
+          },
+          "calculatedRate": {
+            "type": "number",
+            "title": "Calculated rate",
+            "example": 0
           },
           "vatBoxes": {
             "title": "VAT box reporting",
@@ -885,27 +945,7 @@
               },
               "title": "Items"
             }
-          },
-          "taxPoint": {
-            "type": "string",
-            "example": "2022-05-09T00:00:00.000Z",
-            "title": "Tax point"
-          },
-          "vatAmount": {
-            "type": "number",
-            "title": "VAT amount",
-            "example": 0
-          },
-          "calculatedRate": {
-            "type": "number",
-            "title": "Calculated rate",
-            "example": 0
-          },
-          "baseAmount": {
-            "type": "number",
-            "example": 100,
-            "title": "Base amount"
-          }
+          } 
         },
         "type": "object"
       },
