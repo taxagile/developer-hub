@@ -811,6 +811,11 @@
             "example": "N/A - N/A - No exemption - N/A",
             "title": "Transaction 2"
           },
+          "rateT1": {
+            "type": "number",
+            "example": 0,
+            "title": "Rate T1"
+          },
           "reversedOutputVat": {
             "title": "Reversed output VAT",
             "example": 0,
@@ -831,65 +836,20 @@
             "type": "string",
             "title": "Invoice mentioning"
           },
-          "invoiceMentioninEu": {
+          "invoiceMentioningEu": {
             "example": "Article 138(1) Council Directive 2006/112 EC",
             "type": "string",
             "title": "Invoice mentioning EU"
-          },
-          "buyerVatNo": {
-            "example": "DE",
-            "type": "string",
-            "title": "Buyer VAT number country"
-          },
-          "taxPoint": {
-            "type": "string",
-            "example": "2022-05-09T00:00:00.000Z",
-            "title": "Tax point"
-          },
-          "deductibleInputVatLocalCurrencyAdvisor": {
-            "type": "number",
-            "title": "Deductible local currency",
-            "example": 0
-          },
-          "deductibleRate": {
-            "type": "number",
-            "title": "Deductible rate",
-            "example": 0
-          },
-          "sellerVatNo": {
-            "type": "string",
-            "title": "Seller VAT number country",
-            "example": "BE"
-          },
-          "baseAmount": {
-            "type": "number",
-            "example": 100,
-            "title": "Base amount"
-          },
-          "vatCode": {
-            "example": "BESICSG000",
-            "type": "string",
-            "title": "VAT code"
-          },
-          "transType": {
-            "example": "Intra-Community supply",
-            "type": "string",
-            "title": "Transaction type"
-          },
-          "auditorCounterpartyVatId": {
-            "example": "DE",
-            "type": "string",
-            "title": "Auditor calculated counterparty VAT Id"
-          },
-          "auditorUserVatId": {
-            "example": "BE",
-            "type": "string",
-            "title": "Auditor user supplied VAT Id"
           },
           "taxableTransactionT1": {
             "example": "Supply of goods",
             "type": "string",
             "title": "Taxable transaction"
+          },
+          "transType": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Transaction type"
           },
           "posT1": {
             "example": "BE",
@@ -906,20 +866,55 @@
             "type": "string",
             "title": "Obligation to pay"
           },      
-          "rateT1": {
+          "taxPoint": {
+            "type": "string",
+            "example": "2022-05-09T00:00:00.000Z",
+            "title": "Tax point"
+          },
+          "deductibleRate": {
             "type": "number",
-            "example": 0,
-            "title": "Rate T1"
+            "title": "Deductible rate",
+            "example": 0
+          },
+          "sellerVatNo": {
+            "type": "string",
+            "title": "Seller VAT number country",
+            "example": "BE"
+          },
+          "buyerVatNo": {
+            "example": "DE",
+            "type": "string",
+            "title": "Buyer VAT number country"
+          },
+          "baseAmount": {
+            "type": "number",
+            "example": 100,
+            "title": "Base amount"
           },
           "vatAmount": {
             "type": "number",
             "title": "VAT amount",
             "example": 0
           },
+          "importVatAmount": {
+            "type": "number",
+            "title": "Import VAT amount",
+            "example": 0
+          },
+          "vatCode": {
+            "example": "BESICSG000",
+            "type": "string",
+            "title": "VAT code"
+          },
           "calculatedRate": {
             "type": "number",
             "title": "Calculated rate",
             "example": 0
+          },
+          "uuid": {
+            "type": "string",
+            "title":"Unique id of transaction",
+            "example": "fea0f7da-074e-47e9-8bde-51b8b5f778da"
           },
           "vatBoxes": {
             "title": "VAT box reporting",
