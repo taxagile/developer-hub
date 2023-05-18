@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "50bf2d29-34cd-4b5d-9935-d72f4c613728",
 		"name": "Tax Agile - sample collection - v1.1.1",
-		"description": "##### API Version: v1.1.1\n\nThis sample Postman collection is provided to help understand the Tax Agile API, it can be used in conjunction with our swagger OAS3 documentation [https://taxagile.github.io/developer-hub/](https://taxagile.github.io/developer-hub/API)\n\n# Set up\n\nYou need to setup an Environment in Postman and it needs three fields:\n\n## API_ROOT\n\nThis is the server hosting the API you want to make requests to, possible values are:\n\n| **Server** | **API_ROOT** |\n| --- | --- |\n| Production | [https://api.taxagile.io](https://api.taxagile.io) |\n| Staging | [https://test-api.taxagile.io/](https://test-api.taxagile.io/) |\n\n## ACCOUNT_ID\n\nThis is your Tax Agile tenant on our platform, so this is not a username, but instead a identifier of your account as a whole.\n\nWe will provide you your Account Id and API key when you start to implement to our API.\n\n_Note: these credentials will be provisioned against a server, so you must use Production credentials with the Production API_ROOT._\n\n## API_KEY\n\nThis is a uuid string which will be provided by us when you start to implement to our API.\n\n# Collection requests\n\nIn the collection root there are 12 example requests:\n\n| **Name** | **Functionality** |\n| --- | --- |\n| **GET /health** | An unauthenticated endpoint, you can call to check you have the correct hostname and your firewall is letting you connect with Tax Agile. |\n| **POST Auth** | Takes ACCOUNT_ID and API_KEY environment variables and creates a new Bearer token. |\n| **POST VAT Determination - ICS** | Makes a VAT Determination which is not committed (saved) |\n| **POST VAT Determination - Local supply** | Makes a VAT Determination which is not committed (saved) |\n| **POST VAT Determination with commit** | Makes a VAT Determination with the commit=true parameter so save the transaction. |\n| **GET VAT Determination by ID** | Returns a summary of the request sent and response given for the transaction; using the uuid returned on the commited determination as the ID. |\n| **GET VAT Determinations for date range** | Queries the commited (saved) transactions and returns a paged result set. The example shows a date/time range filter, but other filter options are set on the request and can be enabled. |\n| **POST Create VAT Audit (json)** | Create a new audit by sending in transactions in a JSON body |\n| **POST VAT Audit (xlsx)** | Create a new audit by sending in transactions from an uploaded Excel sheet. |\n| **GET Poll Operations endpoint** | Poll the operation for a complete status |\n| **GET VAT Audit summary by ID** | Fetch a summary of the audit job |\n| **GET VAT Audits list** | List top 100 audits in your account |\n| **DELETE VAT Audit by ID** | Delete an audit |\n\nYou can duplicate the sample requests and modify to fit your use-cases.\n\n# Getting Started\n\nWhen you have setup your environment, you should be able to use the \"Auth\" request without changing anything. If that doesn't work, then there is an issue with your setup; get in touch for help.\n\nWhen you have successfully authenticated, the response contains a Bearer token and the Postman collection has some code in the requests to populate a local collection variable (AUTH_TOKEN) with that bearer token.\n\nYou can now try the \"VAT Determination\" endpoint; that automatically uses the Bearer token from your Auth request, so again it should work without changing anything.",
+		"description": "##### API Version: v1.1.1\n\nThis sample Postman collection is provided to help understand the Tax Agile API, it can be used in conjunction with our swagger OAS3 documentation [https://taxagile.github.io/developer-hub/](https://taxagile.github.io/developer-hub/API)\n\n# Set up\n\nYou need to setup an Environment in Postman and it needs three fields:\n\n## API_ROOT\n\nThis is the server hosting the API you want to make requests to, possible values are:\n\n| **Server** | **API_ROOT** |\n| --- | --- |\n| Production | [https://api.taxagile.io](https://api.taxagile.io) |\n| Staging | [https://test-api.taxagile.io/](https://test-api.taxagile.io/) |\n\n## ACCOUNT_ID\n\nThis is your Tax Agile tenant on our platform, so this is not a username, but instead a identifier of your account as a whole.\n\nWe will provide you your Account Id and API key when you start to implement to our API.\n\n_Note: these credentials will be provisioned against a server, so you must use Production credentials with the Production API_ROOT._\n\n## API_KEY\n\nThis is a uuid string which will be provided by us when you start to implement to our API.\n\n# Collection requests\n\nIn the collection root there are 12 example requests:\n\n| **Name** | **Functionality** |\n| --- | --- |\n| **GET /health** | An unauthenticated endpoint, you can call to check you have the correct hostname and your firewall is letting you connect with Tax Agile. |\n| **POST Auth** | Takes ACCOUNT_ID and API_KEY environment variables and creates a new Bearer token. |\n| **POST VAT Determination - ICS** | Makes a VAT Determination which is not committed (saved) |\n| **POST VAT Determination - Local supply** | Makes a VAT Determination which is not committed (saved) |\n| **POST VAT Determination with commit** | Makes a VAT Determination with the commit=true parameter so save the transaction. |\n| **GET VAT Determination by ID** | Returns a summary of the request sent and response given for the transaction; using the uuid returned on the commited determination as the ID. |\n| **GET VAT Determinations for date range** | Queries the commited (saved) transactions and returns a paged result set. The example shows a date/time range filter, but other filter options are set on the request and can be enabled. |\n| **POST Create Audit with json** | Create a new audit by sending in transactions in a JSON body |\n| **POST Create Audit - Excel (form-data)** | Create a new audit by sending in transactions from an uploaded Excel sheet. |\n| **GET Poll Operations endpoint** | Poll the operation for a complete status |\n| **GET Audit summary by ID** | Fetch a summary of the audit job |\n| **GET Audit results by ID** | Retrieve the detail of the audit |\n| **GET Audits - list latest 100** | List top 100 audits in your account |\n| **DELETE Audit by ID** | Delete an audit |\n\nYou can duplicate the sample requests and modify to fit your use-cases.\n\n# Getting Started\n\nWhen you have setup your environment, you should be able to use the \"Auth\" request without changing anything. If that doesn't work, then there is an issue with your setup; get in touch for help.\n\nWhen you have successfully authenticated, the response contains a Bearer token and the Postman collection has some code in the requests to populate a local collection variable (AUTH_TOKEN) with that bearer token.\n\nYou can now try the \"VAT Determination\" endpoint; that automatically uses the Bearer token from your Auth request, so again it should work without changing anything.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20900666"
 	},
@@ -441,6 +441,95 @@
 			"response": []
 		},
 		{
+			"name": "Create Audit - Excel (form-data)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"OPERATION_ID\", jsonData._id);",
+							"",
+							"pm.test(\"Status code is 202\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"",
+							"var schema = {   ",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"        \"_id\": {",
+							"        \"type\": \"string\"",
+							"        },",
+							"        \"href\": {",
+							"        \"type\": \"string\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"_id\",",
+							"    \"href\"",
+							"  ]",
+							"};",
+							"",
+							"pm.test('Schema is valid', function () {",
+							"    pm.response.to.have.jsonSchema(schema);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{AUTH_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "Upload file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "options",
+							"value": "{\"doTaxCodeMapping\": false, \"sendToFiler\": false, \"mappingId\": \"PMTyBJlgbaa2ChOEydk3\"}",
+							"description": "Upload options",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{API_ROOT}}/v1/auditor/vat/audits",
+					"host": [
+						"{{API_ROOT}}"
+					],
+					"path": [
+						"v1",
+						"auditor",
+						"vat",
+						"audits"
+					]
+				},
+				"description": "For the form-data body, you may have trouble getting Postman to upload a file from your local machine.\n\nCheck the settings:\n\n<img src=\"https://content.pstmn.io/fcb6936e-7921-475b-a525-1c6183d461a4/U2NyZWVuc2hvdCAyMDIzLTA0LTAzIGF0IDE2LjMxLjMwLnBuZw==\" alt=\"\">\n\nIf you have it set like this, you must put your Excel files, in the named Location; or you can turn on \"Allow reading files outside working directory\" to be able to browse your computer for a file."
+			},
+			"response": []
+		},
+		{
 			"name": "Poll Operations endpoint",
 			"event": [
 				{
@@ -448,8 +537,10 @@
 					"script": {
 						"exec": [
 							"var jsonData = pm.response.json();",
-							"pm.collectionVariables.set(\"AUDIT_HREF\", jsonData.href);",
-							"pm.collectionVariables.set(\"AUDIT_ID\", jsonData.href.split('/')[5]);",
+							"if (pm.response.code === 303) {",
+							"    pm.collectionVariables.set(\"AUDIT_HREF\", jsonData.href);",
+							"    pm.collectionVariables.set(\"AUDIT_ID\", jsonData.href.split('/')[5]);",
+							"}",
 							"",
 							"var schema = { ",
 							"    \"type\": \"object\",",
@@ -635,7 +726,8 @@
 							"    \"entryDateTime\",",
 							"    \"summary\",",
 							"    \"dataDetails\",",
-							"    \"options\"",
+							"    \"options\",",
+							"    \"results\"",
 							"  ]",
 							"};",
 							"",
@@ -681,7 +773,7 @@
 			"response": []
 		},
 		{
-			"name": "Audit detail by ID",
+			"name": "Audit results by ID",
 			"event": [
 				{
 					"listen": "test",
@@ -693,115 +785,146 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"var schema = { ",
-							"    \"type\": \"object\",",
-							"    \"properties\": {",
-							"    \"_id\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"entryDateTime\": {",
-							"      \"type\": \"string\"",
-							"    },",
-							"    \"summary\": {",
-							"      \"type\": \"object\",",
-							"      \"properties\": {",
-							"        \"auditMetrics\": {",
+							"var schema = {",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"transactions\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": [",
+							"        {",
 							"          \"type\": \"object\",",
 							"          \"properties\": {",
-							"            \"accuracyScore\": {",
-							"              \"type\": \"integer\"",
+							"            \"_id\": {",
+							"              \"type\": \"string\"",
 							"            },",
-							"            \"docsPerSecondConversion\": {",
-							"              \"type\": \"integer\"",
+							"            \"docNumber\": {",
+							"              \"type\": \"string\"",
 							"            },",
-							"            \"qualityScore\": {",
-							"              \"type\": \"integer\"",
+							"            \"docDate\": {",
+							"              \"type\": \"string\"",
 							"            },",
-							"            \"totalExposure\": {",
-							"              \"type\": \"integer\"",
+							"            \"auditResult\": {",
+							"              \"type\": \"object\",",
+							"              \"properties\": {",
+							"                \"errors\": {",
+							"                  \"type\": \"array\",",
+							"                  \"items\": {}",
+							"                },",
+							"                \"done\": {",
+							"                  \"type\": \"boolean\"",
+							"                }",
+							"              },",
+							"              \"required\": [",
+							"                \"errors\"",
+							"              ]",
 							"            },",
-							"            \"docsPerSecondAnalysed\": {",
-							"              \"type\": \"integer\"",
+							"            \"analysisResult\": {",
+							"              \"type\": \"object\",",
+							"              \"properties\": {",
+							"                \"transaction1\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"transaction2\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"reversedOutputVat\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"reversedOutputVatRate\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"deductibleInputVat\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"invoiceMentioning\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"invoiceMentioningEu\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"buyerVatNo\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"taxPoint\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"deductibleRate\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"sellerVatNo\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"baseAmount\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"vatCode\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"transType\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"taxableTransactionT1\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"posT1\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"exemptionDescriptionT1\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"obligationToPayT1\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"rateT1\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"vatAmount\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"calculatedRate\": {",
+							"                  \"type\": \"integer\"",
+							"                },",
+							"                \"vatBoxes\": {",
+							"                  \"type\": \"array\",",
+							"                  \"items\": [",
+							"                    {",
+							"                      \"type\": \"object\",",
+							"                      \"properties\": {",
+							"                        \"country\": {",
+							"                          \"type\": \"string\"",
+							"                        },",
+							"                        \"box\": {",
+							"                          \"type\": \"string\"",
+							"                        },",
+							"                        \"value\": {",
+							"                          \"type\": \"integer\"",
+							"                        }",
+							"                      },",
+							"                      \"required\": [",
+							"                        \"country\",",
+							"                        \"box\",",
+							"                        \"value\"",
+							"                      ]",
+							"                    }",
+							"                  ]",
+							"                }",
+							"              },",
+							"              \"required\": []",
 							"            }",
 							"          },",
 							"          \"required\": [",
-							"            \"accuracyScore\",",
-							"            \"docsPerSecondConversion\",",
-							"            \"qualityScore\",",
-							"            \"totalExposure\",",
-							"            \"docsPerSecondAnalysed\"",
+							"            \"_id\",",
+							"            \"docNumber\",",
+							"            \"docDate\",",
+							"            \"auditResult\",",
+							"            \"analysisResult\"",
 							"          ]",
-							"        },",
-							"        \"dataSummary\": {",
-							"          \"type\": \"object\"",
-							"        },",
-							"        \"failedChecks\": {",
-							"          \"type\": \"integer\"",
-							"        },",
-							"        \"totalDocuments\": {",
-							"          \"type\": \"integer\"",
 							"        }",
-							"      },",
-							"      \"required\": [",
-							"        \"auditMetrics\",",
-							"        \"dataSummary\",",
-							"        \"failedChecks\",",
-							"        \"totalDocuments\"",
-							"      ]",
-							"    },",
-							"    \"dataDetails\": {",
-							"      \"type\": \"object\",",
-							"      \"properties\": {",
-							"        \"dataSource\": {",
-							"          \"type\": \"string\"",
-							"        },",
-							"        \"dataSourceName\": {",
-							"          \"type\": \"string\"",
-							"        },",
-							"        \"dataSourceType\": {",
-							"          \"type\": \"string\"",
-							"        },",
-							"        \"mappingId\": {",
-							"          \"type\": \"string\"",
-							"        },",
-							"        \"mappingName\": {",
-							"          \"type\": \"string\"",
-							"        }",
-							"      },",
-							"      \"required\": [",
-							"        \"dataSource\",",
-							"        \"dataSourceName\",",
-							"        \"dataSourceType\",",
-							"        \"mappingId\",",
-							"        \"mappingName\"",
-							"      ]",
-							"    },",
-							"    \"options\": {",
-							"      \"type\": \"object\",",
-							"      \"properties\": {",
-							"        \"storeTransactions\": {",
-							"          \"type\": \"boolean\"",
-							"        },",
-							"        \"doTaxCodeMapping\": {",
-							"          \"type\": \"boolean\"",
-							"        },",
-							"        \"sendToFiler\": {",
-							"          \"type\": \"boolean\"",
-							"        }",
-							"      },",
-							"      \"required\": [",
-							"        \"storeTransactions\",",
-							"        \"doTaxCodeMapping\",",
-							"        \"sendToFiler\"",
 							"      ]",
 							"    }",
 							"  },",
 							"  \"required\": [",
-							"    \"_id\",",
-							"    \"entryDateTime\",",
-							"    \"summary\",",
-							"    \"dataDetails\",",
-							"    \"options\"",
+							"    \"transactions\"",
 							"  ]",
 							"};",
 							"",
@@ -831,7 +954,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{API_ROOT}}/v0/auditor/vat/audits/{{AUDIT_ID}}?detail=true",
+					"raw": "{{API_ROOT}}/v0/auditor/vat/audits/{{AUDIT_ID}}/results",
 					"host": [
 						"{{API_ROOT}}"
 					],
@@ -840,104 +963,10 @@
 						"auditor",
 						"vat",
 						"audits",
-						"{{AUDIT_ID}}"
-					],
-					"query": [
-						{
-							"key": "detail",
-							"value": "true"
-						}
+						"{{AUDIT_ID}}",
+						"results"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Audit - Excel (form-data)",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = pm.response.json();",
-							"pm.collectionVariables.set(\"OPERATION_ID\", jsonData._id);",
-							"",
-							"pm.test(\"Status code is 202\", function () {",
-							"    pm.response.to.have.status(202);",
-							"});",
-							"",
-							"",
-							"var schema = {   ",
-							"    \"type\": \"object\",",
-							"    \"properties\": {",
-							"        \"_id\": {",
-							"        \"type\": \"string\"",
-							"        },",
-							"        \"href\": {",
-							"        \"type\": \"string\"",
-							"    }",
-							"  },",
-							"  \"required\": [",
-							"    \"_id\",",
-							"    \"href\"",
-							"  ]",
-							"};",
-							"",
-							"pm.test('Schema is valid', function () {",
-							"    pm.response.to.have.jsonSchema(schema);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{AUTH_TOKEN}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"description": "Upload file",
-							"type": "file",
-							"src": []
-						},
-						{
-							"key": "options",
-							"value": "{\"doTaxCodeMapping\": false, \"sendToFiler\": false, \"mappingId\": \"CTDCqBkBozNOQe1NFoaa\"}",
-							"description": "Upload options",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{API_ROOT}}/v1/auditor/vat/audits",
-					"host": [
-						"{{API_ROOT}}"
-					],
-					"path": [
-						"v1",
-						"auditor",
-						"vat",
-						"audits"
-					]
-				},
-				"description": "For the form-data body, you may have trouble getting Postman to upload a file from your local machine.\n\nCheck the settings:\n\n<img src=\"https://content.pstmn.io/fcb6936e-7921-475b-a525-1c6183d461a4/U2NyZWVuc2hvdCAyMDIzLTA0LTAzIGF0IDE2LjMxLjMwLnBuZw==\" alt=\"\">\n\nIf you have it set like this, you must put your Excel files, in the named Location; or you can turn on \"Allow reading files outside working directory\" to be able to browse your computer for a file."
 			},
 			"response": []
 		},

@@ -56,8 +56,10 @@ used on the following requests.
 | GET VAT Determination by ID | Returns a summary of the request sent and response given for the transaction; using the uuid returned on the commited determination as the ID.                                                                                    |
 | GET VAT Determination for date range |     	Queries the commited (saved) transactions and returns a paged result set. The example shows a date/time range filter, but other filter options are set on the request and can be enabled.                                                                                |
 | POST Create Audit with json | Submits transaction data to create an Audit. Returns an operation id to poll |
+| POST Create Audit - Excel (form-data) | Demonstrates the file upload usage |
 | GET Poll operations endpoint | Poll for a completed status |
 | GET Audit summary by ID | Using the audit resource id, fetch a summary of the audit |
+| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit |
 | GET Audits - list latest 100 | List of latest 100 audits | 
 | DELETE Audit by ID | Remove an audit from the system |
 

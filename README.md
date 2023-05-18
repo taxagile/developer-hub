@@ -37,12 +37,13 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 * Create an Audit 
   * Receive an operation id to poll for audit completion
 * Get a list of audits on the system
-* Fetch details of a specific audit by resource id
+* Fetch summary details of a specific audit by id
+* Fetch audit results by id
 * Delete an audit by id
 
 Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.0.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.1.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 # Need help?
