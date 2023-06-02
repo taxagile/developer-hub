@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -276,8 +276,8 @@
     "/v0/auditor/vat/audits/{id}":{
       "get": {
         "tags": [ "VAT Auditor"],
-        "summary": "Details of a specific audit.",
-        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n In particular the ?detail=true response is likely to change as it returns a lot of data when the Audit contains a large number of transactions.\n\n## Details of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, datasource information, missing data and transactions.",
+        "summary": "Summary of a specific audit.",
+        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n ## Summary of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
         "parameters": [
           {
             "name": "id",
@@ -288,16 +288,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "detail",
-            "in": "query",
-            "description": "Optional parameter to fetch a detailed representation of the Audit; if not used it defaults to a summary",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            },
-            "example": true
           }
         ],
         "responses": { 
@@ -340,6 +330,71 @@
                 },
                 "example": {
                   "errorCode": "VA010",
+                  "message": "Error encountered fetching audit {id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/auditor/vat/audits/{id}/results":{
+      "get": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Results of a specific audit.",
+        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n ## Results of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the audit",
+            "required": true,
+            "example": "9A8FL3X3hr6I0QSLNFAA",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": { 
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vatAuditResultsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA008",
+                  "message": "Audit Id is a mandatory path parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA009",
                   "message": "Error encountered fetching audit {id}"
                 }
               }
@@ -640,7 +695,6 @@
                           "example": "/v1/determination/vat/transactions?entryDateTimeFrom=2022-06-28T15%3A18%3A28.823Z&page=1&pageSize=20"
                         }
                       }
-
                     },
                     "data": {
                       "type": "array",
@@ -801,30 +855,75 @@
         "title": "VAT Determination response",
         "description": "",
         "properties": {
+          "transaction1": {
+            "type": "string",
+            "title": "Transaction 1",
+            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
+          },
           "transaction2": {
             "type": "string",
             "example": "N/A - N/A - No exemption - N/A",
             "title": "Transaction 2"
           },
-          "reversedOutputVatRate": {
+          "rateT1": {
             "type": "number",
-            "title": "Reversed output VAT rate",
-            "example": 0
+            "example": 0,
+            "title": "Rate T1"
           },
           "reversedOutputVat": {
             "title": "Reversed output VAT",
             "example": 0,
             "type": "number"
           },
-          "importVatAmount": {
+          "reversedOutputVatRate": {
             "type": "number",
-            "title": "Import VAT amount",
+            "title": "Reversed output VAT rate",
             "example": 0
+          },
+          "deductibleInputVat": {
+            "example": 0,
+            "title": "Deductible input VAT",
+            "type": "number"
           },
           "invoiceMentioning": {
             "example": "Article 138(1) Directive 2006/112 EC",
             "type": "string",
             "title": "Invoice mentioning"
+          },
+          "invoiceMentioningEu": {
+            "example": "Article 138(1) Council Directive 2006/112 EC",
+            "type": "string",
+            "title": "Invoice mentioning EU"
+          },
+          "taxableTransactionT1": {
+            "example": "Supply of goods",
+            "type": "string",
+            "title": "Taxable transaction"
+          },
+          "transType": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Transaction type"
+          },
+          "posT1": {
+            "example": "BE",
+            "type": "string",
+            "title": "Place of supply"
+          },
+          "exemptionDescriptionT1": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Exemption description"
+          },
+          "obligationToPayT1": {
+            "example": "N/A",
+            "type": "string",
+            "title": "Obligation to pay"
+          },      
+          "taxPoint": {
+            "type": "string",
+            "example": "2022-05-09T00:00:00.000Z",
+            "title": "Tax point"
           },
           "deductibleRate": {
             "type": "number",
@@ -836,30 +935,40 @@
             "title": "Seller VAT number country",
             "example": "BE"
           },
-          "deductibleInputVat": {
-            "example": 0,
-            "title": "Deductible input VAT",
-            "type": "number"
-          },
-          "transaction1": {
-            "type": "string",
-            "title": "Transaction 1",
-            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
-          },
           "buyerVatNo": {
             "example": "DE",
             "type": "string",
             "title": "Buyer VAT number country"
           },
-          "rateT1": {
+          "baseAmount": {
             "type": "number",
-            "example": 0,
-            "title": "Rate T1"
+            "example": 100,
+            "title": "Base amount"
+          },
+          "vatAmount": {
+            "type": "number",
+            "title": "VAT amount",
+            "example": 0
+          },
+          "importVatAmount": {
+            "type": "number",
+            "title": "Import VAT amount",
+            "example": 0
           },
           "vatCode": {
             "example": "BESICSG000",
             "type": "string",
             "title": "VAT code"
+          },
+          "calculatedRate": {
+            "type": "number",
+            "title": "Calculated rate",
+            "example": 0
+          },
+          "uuid": {
+            "type": "string",
+            "title":"Unique id of transaction",
+            "example": "fea0f7da-074e-47e9-8bde-51b8b5f778da"
           },
           "vatBoxes": {
             "title": "VAT box reporting",
@@ -885,27 +994,7 @@
               },
               "title": "Items"
             }
-          },
-          "taxPoint": {
-            "type": "string",
-            "example": "2022-05-09T00:00:00.000Z",
-            "title": "Tax point"
-          },
-          "vatAmount": {
-            "type": "number",
-            "title": "VAT amount",
-            "example": 0
-          },
-          "calculatedRate": {
-            "type": "number",
-            "title": "Calculated rate",
-            "example": 0
-          },
-          "baseAmount": {
-            "type": "number",
-            "example": 100,
-            "title": "Base amount"
-          }
+          } 
         },
         "type": "object"
       },
@@ -1011,10 +1100,12 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "string"
+            "type": "string",
+            "example": "i1yKcOrT2Rv9neYsKwvG"
           },
           "entryDateTime": {
-            "type": "string"
+            "type": "string",
+            "example": "2023-05-18T09:45:57.204Z"
           },
           "summary": {
             "type": "object",
@@ -1023,19 +1114,24 @@
                 "type": "object",
                 "properties": {
                   "accuracyScore": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100
                   },
                   "docsPerSecondConversion": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 200
                   },
                   "qualityScore": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 100
                   },
                   "totalExposure": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
                   },
                   "docsPerSecondAnalysed": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 2
                   }
                 }
               },
@@ -1043,10 +1139,12 @@
                 "type": "object"
               },
               "failedChecks": {
-                "type": "integer"
+                "type": "integer",
+                "example": 0
               },
               "totalDocuments": {
-                "type": "integer"
+                "type": "integer",
+                "example": 1
               }
             }
           },
@@ -1054,19 +1152,24 @@
             "type": "object",
             "properties": {
               "dataSource": {
-                "type": "string"
+                "type": "string",
+                "example": "api"
               },
               "dataSourceName": {
-                "type": "string"
+                "type": "string",
+                "example": "2023-05-18T09:45:55.923Z.json"
               },
               "dataSourceType": {
-                "type": "string"
+                "type": "string",
+                "example": "application/json"
               },
               "mappingId": {
-                "type": "string"
+                "type": "string",
+                "example": "PMTyBJlgbaa2ChOEydk3"
               },
               "mappingName": {
-                "type": "string"
+                "type": "string",
+                "example": "VAT Calc Demo Company"
               }
             }
           },
@@ -1074,50 +1177,50 @@
             "type": "object",
             "properties": {
               "storeTransactions": {
-                "type": "boolean"
+                "type": "boolean",
+                "example": "true"
               },
               "doTaxCodeMapping": {
-                "type": "boolean"
+                "type": "boolean",
+                "example": "false"
               },
               "sendToFiler": {
-                "type": "boolean"
+                "type": "boolean",
+                "example": "false"
               }
             }
           },
-          "missingData": {
-            "type": "array",
-            "items":{
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string"
-                },
-                "docNumber": {
-                  "type": "string"
-                }, 
-                "docDate": {
-                  "type": "string"
-                },
-                "missing": {
-                  "type": "string",
-                  "example": "a blank value is not a correct value for \"transportTerms.transport\". Check the mapping"
-                }
+          "results": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "example": "/v0/auditor/vat/audits/i1yKcOrT2Rv9neYsKwvG/results"
               }
             }
-          },
+          }
+        }
+      },
+      "vatAuditResultsResponse": {
+        "title": "VAT Audit Results",
+        "type": "object",
+        "properties": {
           "transactions": {
             "type": "array",
             "items":{
               "type": "object",
               "properties": {
                 "_id": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "1a1da4fa-270c-4aae-bf4d-5b7af11b693d"
                 },
                 "docNumber": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "BE 102202"
                 }, 
                 "docDate": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "2023-02-05"
                 },
                 "auditResult":{
                   "type": "object",
@@ -1125,7 +1228,7 @@
                     "errors":{
                       "type": "array",
                       "items": {
-                        "description": "Error object is specific to each error.checkId",
+                        "description": "Error object is specific to each error type",
                         "type": "object",
                         "properties": {
                           "checkId": {
@@ -1163,6 +1266,9 @@
                       "type": "boolean"
                     }
                   }
+                },
+                "analysisResult": {
+                    "$ref": "#/components/schemas/determinationVatResponse200"
                 }
               }
             }
