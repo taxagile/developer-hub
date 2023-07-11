@@ -27,7 +27,7 @@
     "/v1/operations/{id}": {
       "get": {
         "tags": [ "Operations"],
-        "summary": "Status of a long-running operation. [ready to publish]",
+        "summary": "Status of a long-running operation.",
         "description": "## Returns details of a long-running operation. \n\n Use this endpoint to poll for completion of an operation. When the operation completes this endpoint returns a new location header and href in body of the new resource on a `302 See Other` status.",
         "parameters": [
           {
@@ -218,13 +218,11 @@
             }
           }
          }
-      }
-    },
-    "/v0/auditor/vat/audits":{
+      },
       "get": {
         "tags": [ "VAT Auditor"],
         "summary": "Summary list of audits.",
-        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n In particular we expect to add paging of results if the most recent 100 isn't sufficient.\n\n## List of 100 most recent audits. \n If there a no items in the list this will return an empty array, on a 200 OK.",
+        "description": "## Lists the (100) most recent audits. \n If there a no items in the list this will return an empty array, on a 200 OK.",
         "responses": {
           "200": {
             "description": "OK",
@@ -273,11 +271,11 @@
         }
       }
     },
-    "/v0/auditor/vat/audits/{id}":{
+    "/v1/auditor/vat/audits/{id}":{
       "get": {
         "tags": [ "VAT Auditor"],
         "summary": "Summary of a specific audit.",
-        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n ## Summary of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
+        "description": "## Summary of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
         "parameters": [
           {
             "name": "id",
@@ -336,74 +334,7 @@
             }
           }
         }
-      }
-    },
-    "/v0/auditor/vat/audits/{id}/results":{
-      "get": {
-        "tags": [ "VAT Auditor"],
-        "summary": "Results of a specific audit.",
-        "description": "# Beta v0 endpoint - response body may change.\n\n Provided in v1.1.0 for further feedback, may be used for evaluation purposes.\n\n ## Results of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id of the audit",
-            "required": true,
-            "example": "9A8FL3X3hr6I0QSLNFAA",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": { 
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/vatAuditResultsResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "VA008",
-                  "message": "Audit Id is a mandatory path parameter"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/error401"
-          },
-          "404": {
-            "$ref": "#/components/responses/error404"
-          },
-          "500": {
-            "description": "Unhandled error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "VA009",
-                  "message": "Error encountered fetching audit {id}"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/auditor/vat/audits/{id}":{
+      },
       "delete": {
         "tags": [ "VAT Auditor"],
         "summary": "Removes audit results and data from the platform.",
@@ -461,6 +392,92 @@
          }
       }
     },
+    "/v1/auditor/vat/audits/{id}/results":{
+      "get": {
+        "tags": [ "VAT Auditor"],
+        "summary": "Results of a specific audit.",
+        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the audit",
+            "required": true,
+            "example": "9A8FL3X3hr6I0QSLNFAA",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "State the number of transactions to return in the response.\n\nMaximum value 1000. If not provided defaults to 20.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "example":"100"
+          },
+          {
+            "name": "startAfter",
+            "in": "query",
+            "description": "When moving through the results dataset provide the id of the last transaction in the previous page, and the response will 'startAfter' that transaction.\n\nLeave blank to receive the first page of data.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example":"b5e9282e-8a40-4462-81c3-2ab28b904f57"
+          }
+        ],
+        "responses": { 
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vatAuditResultsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA008",
+                  "message": "Audit Id is a mandatory path parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VA009",
+                  "message": "Error encountered fetching audit {id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/v1/auth": {
       "post": {
         "tags": [ "Authentication" ],
@@ -1113,38 +1130,69 @@
               "auditMetrics": {
                 "type": "object",
                 "properties": {
-                  "accuracyScore": {
+                  "totalQualityOk": {
                     "type": "integer",
-                    "example": 100
+                    "description": "Count of transactions which could be audited",
+                    "example": 20
                   },
-                  "docsPerSecondConversion": {
+                  "totalAccurate": {
                     "type": "integer",
-                    "example": 200
-                  },
-                  "qualityScore": {
-                    "type": "integer",
-                    "example": 100
+                    "description": "Count of transactions with no problems found",
+                    "example": 13
                   },
                   "totalExposure": {
                     "type": "integer",
-                    "example": 0
-                  },
-                  "docsPerSecondAnalysed": {
-                    "type": "integer",
-                    "example": 2
+                    "example": 4770
                   }
                 }
               },
               "dataSummary": {
-                "type": "object"
+                "type": "array",
+                "description": "Array of data quality issues in audit",
+                "items":{
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Description of problem",
+                      "type": "string",
+                      "example": "A blank value is not a correct value for \"buyer.VatIdCountry\". Check the mapping."
+                    }, 
+                    "count": {
+                      "description": "Count of transactions with this error",
+                      "type": "integer",
+                      "example": 1
+                    }
+                  }
+                }
               },
-              "failedChecks": {
-                "type": "integer",
-                "example": 0
+              "errors": {
+                "type": "array",
+                "description": "Summary of all errors in the audit",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "checkVatAmountDifference",
+                      "description": "Unique id of the audit error"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "example": "VAT amount",
+                      "description": "Label text for this error check"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "example": 6,
+                      "description": "Count of occurances of this error in audit"
+                    }
+                  }
+                }
               },
               "totalDocuments": {
                 "type": "integer",
-                "example": 1
+                "example": 25,
+                "description": "Total number of documents in the audit"
               }
             }
           },
@@ -1228,48 +1276,111 @@
                     "errors":{
                       "type": "array",
                       "items": {
-                        "description": "Error object is specific to each error type",
                         "type": "object",
                         "properties": {
-                          "checkId": {
+                          "id": {
                             "type": "string",
-                            "example": "checkVatAmountDifference"
+                            "example": "checkVatAmountDifference",
+                            "description": "Name of the error"
                           },
-                          "errorMessage": {
+                          "message": {
                             "type": "string",
-                            "example": "VAT amount"
-                          },
-                          "valueInData": {
-                            "type": "string",
-                            "example": "0"
-                          }, 
-                          "valueCalculated": {
-                            "type": "string",
-                            "example": "400"
+                            "example": "VAT amount in data (630.00) does not match the value Auditor calculated (0.00)"
                           },
                           "exposure": {
                             "type": "number",
                             "example": 400
                           },
-                          "company": {
+                          "type": {
                             "type": "string",
-                            "example": "buyer"
-                          }, 
-                          "counterpary": {
-                            "type": "string",
-                            "example": "seller"
+                            "example": "engineCheck",
+                            "description": "Identifies the error as engineCheck, requiredData, conditionCheck or unhandledException"
                           }
                         }
                       }
                     },
                     "done": {
                       "type": "boolean"
+                    },
+                    "parties": {
+                      "type": "object",
+                      "description": "Indentifies who was the company and counterparty for the transaction based on document type",
+                      "properties": {
+                        "company" : {
+                          "type": "string",
+                          "example": "seller",
+                          "description": "seller or buyer"
+                        },
+                        "companyName": {
+                          "type": "string",
+                          "example": "VAT Calc Demo Co BVBA"
+                        }, 
+                        "counterparty": {
+                          "type": "string",
+                          "example": "buyer",
+                          "description": "seller or buyer"
+                        },
+                        "counterpartyName": {
+                          "type": "string",
+                          "example": "BE Company Customer Ltd"
+                        }
+                      }
+                    },
+                    "hasErrors": {
+                      "type": "boolean",
+                      "description": "Flag whether there are errors in this transaction",
+                      "example": true
+                    },
+                    "exposure": {
+                      "type": "integer",
+                      "example": 630
                     }
                   }
                 },
                 "analysisResult": {
                     "$ref": "#/components/schemas/determinationVatResponse200"
                 }
+              }
+            }
+          },
+          "count": {
+            "type": "object",
+            "properties": {
+              "totalInAudit": {
+                "type": "integer",
+                "description": "Total number of transactions in the audit batch",
+                "example": 30
+              },
+              "showing": {
+                "type": "integer",
+                "example": 20,
+                "description": "Number of transactions shown in this response"
+              }
+            }
+          },
+          "next": {
+            "type": "object",
+            "description": "Object to assist in fetching the next page of results",
+            "properties": {
+              "pageSize": {
+                "type": "integer",
+                "example": 20
+              },
+              "href": {
+                "type": "string",
+                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?startAfter=b5e9282e-8a40-4462-81c3-2ab28b904f57&pageSize=20",
+                "description": "Reference to the first page of results"
+              }
+            }
+          },
+          "first": {
+            "type": "object",
+            "description": "Object to assist in fetching the first page of results",
+            "properties": {
+              "href": {
+                "type": "string",
+                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?pageSize=20",
+                "description": "Reference to the first page of results"
               }
             }
           }
@@ -2711,14 +2822,6 @@
             "sendToFiler": {
               "type": "boolean",
               "default": false
-            },
-            "sendToInsights": {
-              "type": "boolean",
-              "default": false
-            },
-            "storeTransactions": {
-              "type": "boolean",
-              "default": true
             },
             "doTaxCodeMapping": {
               "type": "boolean",

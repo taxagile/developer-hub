@@ -43,7 +43,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.1.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.2.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 # Need help?

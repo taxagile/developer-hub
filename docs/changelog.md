@@ -1,4 +1,9 @@
 # Change Log
+### v1.1.2
+* Published ``` GET /v1/auditor/vat/audits/{id}/results ```
+* Published ``` GET /v1/auditor/vat/audits ```
+* Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.1.2.postman_collection.json)
+
 ### v1.1.1
 * Published ``` GET /v0/auditor/vat/audits/{id}/results ```
 * Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.1.1.postman_collection.json)
