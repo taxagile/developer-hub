@@ -16,7 +16,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.1.postman_collection.json)
+* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.2.postman_collection.json)
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
@@ -59,7 +59,7 @@ used on the following requests.
 | POST Create Audit - Excel (form-data) | Demonstrates the file upload usage |
 | GET Poll operations endpoint | Poll for a completed status |
 | GET Audit summary by ID | Using the audit resource id, fetch a summary of the audit |
-| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit |
+| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit with paged responses |
 | GET Audits - list latest 100 | List of latest 100 audits | 
 | DELETE Audit by ID | Remove an audit from the system |
 

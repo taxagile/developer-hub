@@ -13,7 +13,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.1.1-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.1.2-green.svg)]()
 
 
 ## Authentication
@@ -41,15 +41,16 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 * Fetch audit results by id
 * Delete an audit by id
 
-Jump to:
+
+## Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.1.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.2.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
-# Need help?
+## Need help?
 
-## Getting Credentials
+### Getting Credentials
 Get in touch via our website: [vatcalc.com/contact](https://www.vatcalc.com/contact/) to setup a demo and we can provide you with a trial!
 
-## Contact Support
+### Contact Support
 Create a ticket in our [online service desk](https://vatcalc.freshdesk.com/support/home)
