@@ -59,7 +59,7 @@ used on the following requests.
 | POST Create Audit - Excel (form-data) | Demonstrates the file upload usage |
 | GET Poll operations endpoint | Poll for a completed status |
 | GET Audit summary by ID | Using the audit resource id, fetch a summary of the audit |
-| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit |
+| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit with paged responses |
 | GET Audits - list latest 100 | List of latest 100 audits | 
 | DELETE Audit by ID | Remove an audit from the system |
 
