@@ -13,7 +13,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.2.0-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.2.1-green.svg)]()
 
 
 ## Authentication
@@ -28,6 +28,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
   * Receiving back context rich error messaging if your transaction is missing a field required for the determination to complete
   * Returns an analysis for the transaction
   * Allows for the transaction to be sent and not saved, or sent with a commit flag
+  * Can use tax codes setup in the application to include an ERP tax code in the response, with the useTaxCodes flag
 * Get a list of transactions saved
   * Paginated results
   * Filter parameters on entry date/time range, document number & VAT code
@@ -44,7 +45,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 ## Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.2.0.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.2.1.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 ## Need help?

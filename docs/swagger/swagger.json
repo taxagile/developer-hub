@@ -565,6 +565,15 @@
               "type": "string",
               "example": "true"
             }
+          },
+          {
+            "name": "useTaxCodes",
+            "description": "Optional, defaults to false; if true the engine will check the ERP tax codes setup in our system and return the matching ERP code.",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "true"
+            }
           }
         ],
         "responses": {
@@ -976,6 +985,12 @@
             "example": "BESICSG000",
             "type": "string",
             "title": "VAT code"
+          },
+          "taxCode": {
+            "title": "Tax code",
+            "type": "string",
+            "example": ["A3", "IC0", "B0"],
+            "description": "Only returned when the request uses the useTaxCodes=true query parameter "
           },
           "calculatedRate": {
             "type": "number",
