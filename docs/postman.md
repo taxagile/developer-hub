@@ -16,7 +16,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.1.2.postman_collection.json)
+* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.2.0.postman_collection.json)
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
