@@ -1,7 +1,9 @@
 # Change Log
-### v1.2.1
+
+### v1.2.1
 * Updated ``` POST /v1/determination/vat/transactions```
 * Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.1.postman_collection.json)
+
 ### v1.2.0
 * Updated ``` POST /v1/determination/vat/transactions```
 * Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.0.postman_collection.json)
