@@ -1,4 +1,6 @@
 # Change Log
+### v1.2.2
+* Updated ``` GET /v1/auditor/vat/audits/{id}/results```
 
 ### v1.2.1
 * Updated ``` POST /v1/determination/vat/transactions```

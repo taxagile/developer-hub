@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.2.0",
+    "version": "1.2.2",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -396,7 +396,7 @@
       "get": {
         "tags": [ "VAT Auditor"],
         "summary": "Results of a specific audit.",
-        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions.",
+        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions. \n\nTo get a JSON summary of each error in the audit, use the `format=errorList` query parameter _only_ (don't combine with pageSize and startAfter). It returns the first 10,000 errors.",
         "parameters": [
           {
             "name": "id",
@@ -427,6 +427,16 @@
               "type": "string"
             },
             "example":"b5e9282e-8a40-4462-81c3-2ab28b904f57"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Use `format=errorList` to get a list of each error. Limited to 10,000 records.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "errorList"
           }
         ],
         "responses": { 
@@ -435,7 +445,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/vatAuditResultsResponse"
+                   "oneOf": [
+                    { "$ref": "#/components/schemas/vatAuditResultsResponse" },
+                    { "$ref": "#/components/schemas/vatAuditResultsErrorListResponse"}
+                   ]
                 }
               }
             }
@@ -1396,6 +1409,44 @@
                 "type": "string",
                 "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?pageSize=20",
                 "description": "Reference to the first page of results"
+              }
+            }
+          }
+        }
+      },
+      "vatAuditResultsErrorListResponse": {
+        "title": "VAT Audit Results - Error list",
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items":{
+              "type": "object",
+              "properties": {
+                "docNumber": {
+                  "type": "string",
+                  "example": "BE 102202"
+                }, 
+                "docDate": {
+                  "type": "string",
+                  "example": "2023-02-05"
+                },
+                "errorId": {
+                  "type": "string",
+                  "example": "checkVatIdCountry"
+                },
+                "errorType": {
+                  "type": "string",
+                  "example": "engineCheck"
+                },
+                "errorMessage": {
+                  "type": "string",
+                  "example": "VAT amount in data (0.00) does not match the value Auditor calculated (400.00)"
+                }, 
+                "exposure": {
+                  "type": "number",
+                  "example": 400
+                }
               }
             }
           }
