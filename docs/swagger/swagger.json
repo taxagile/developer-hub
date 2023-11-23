@@ -1446,6 +1446,34 @@
                 "exposure": {
                   "type": "number",
                   "example": 400
+                },
+                "type": {
+                  "type": "string",
+                  "example": "Domestic"
+                },
+                "transaction": {
+                  "type": "string",
+                  "example": "Supply of goods and services"
+                }, 
+                "placeOfSupply": {
+                  "type": "string",
+                  "example": "BE"
+                },
+                "exemption": {
+                  "type": "string",
+                  "example": "Waste and scrap"
+                }, 
+                "obligationToPay": {
+                  "type": "string",
+                  "example": "Customer"
+                }, 
+                "company": {
+                  "type": "string",
+                  "example": "VAT Calc Demo Co BVBA"
+                }, 
+                "counterparty": {
+                  "type": "string",
+                  "example": "CH Company GmbH"
                 }
               }
             }
