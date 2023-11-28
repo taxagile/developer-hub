@@ -1,6 +1,7 @@
 # Change Log
 ### v1.2.2
 * Updated ``` GET /v1/auditor/vat/audits/{id}/results```
+* Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.2.postman_collection.json)
 
 ### v1.2.1
 * Updated ``` POST /v1/determination/vat/transactions```
