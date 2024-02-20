@@ -13,7 +13,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.2.2-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.2.3-green.svg)]()
 
 
 ## Authentication
