@@ -1,4 +1,14 @@
 # Change Log
+### v1.2.3
+* Updated VAT Data model to add 4 new fields:
+  * date.originalDocDate
+  * document.originalDocNumber
+  * item.originalValue
+  * item.originalVatAmountToCheck
+* These fields are available in the body requests of: 
+  * ``` POST /v1/determination/vat/transactions ```
+  * ``` POST /v1/auditor/vat/audits ```
+
 ### v1.2.2
 * Updated ``` GET /v1/auditor/vat/audits/{id}/results```
 * Sample [Postman collection](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.2.postman_collection.json)
