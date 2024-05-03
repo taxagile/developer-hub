@@ -589,7 +589,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Audit - Avalara VAT Reporting",
+			"name": "Create Audit - Avalara iVAT XML",
 			"event": [
 				{
 					"listen": "test",
@@ -659,8 +659,8 @@
 						},
 						{
 							"key": "options",
-							"value": "{\"doTaxCodeMapping\": false, \"sendToFiler\": false, \"mappingId\": \"PMTyBJlgbaa2ChOEydk3\"}",
-							"description": "Upload options",
+							"value": "{\"doTaxCodeMapping\": false, \"sendToFiler\": false, \"mappingId\": \"vnd.avalara.ivat.reporting+xml\"}",
+							"description": "Upload options: mappingId needs to be vnd.avalara.ivat.reporting+xml",
 							"type": "text"
 						}
 					]

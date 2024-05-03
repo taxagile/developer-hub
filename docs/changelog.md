@@ -1,6 +1,6 @@
 # Change Log
 ### v1.2.4
-* Added support for the Avalara VAT Reporting XML as an input format for VAT Filer
+* Added support for the Avalara iVAT Reporting XML as an input format for VAT Filer
   *  Updated ``` POST /v1/auditor/vat/audits ```
 * Sample [Postman collection v1.2.4](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.4.postman_collection.json)
 
