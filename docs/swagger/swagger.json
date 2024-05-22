@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -587,6 +587,15 @@
               "type": "string",
               "example": "true"
             }
+          },
+          {
+            "name": "taxCodeScheme",
+            "description": "Optional, if used it specifies which kind of taxCode to return. Must be used with useTaxCodes=true",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "avalara"
+            }
           }
         ],
         "responses": {
@@ -601,7 +610,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request \n\n VD001 - Request body data malformed \n\n VD002 - Unhandled content-type \n\n VD003 - Missing field in data",
+            "description": "Bad request \n\n VD001 - Request body data malformed \n\n VD002 - Unhandled content-type \n\n VD003 - Missing field in data \n\n VD007 - Specified taxCodeScheme is not supported",
             "content": {
               "application/json": {
                 "example": {

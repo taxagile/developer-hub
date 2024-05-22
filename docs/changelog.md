@@ -1,4 +1,9 @@
 # Change Log
+### v1.2.5
+* Updated ``` POST /v1/determination/vat/transactions ``` 
+  * Added a query parameter ``` taxCodeScheme ``` which can be used with ``` useTaxCodes ``` parameter to specify whether the taxCode in the response body is from Tax Codes setup in your account, or returning a known scheme (e.g. Avalara).
+* Sample [Postman collection v1.2.5](Tax%20Agile%20-%20sample%20collection%20-%20v1.2.5.postman_collection.json)
+
 ### v1.2.4
 * Added support for the Avalara iVAT Reporting XML as an input format for VAT Filer
   *  Updated ``` POST /v1/auditor/vat/audits ```
