@@ -1,4 +1,16 @@
 # Change Log
+### v1.3.0
+* Published ``` POST /v1/datamanager/vat/uploads ```
+* Published ``` GET /v1/datamanager/vat/uploads ```
+* Published ``` GET /v1/datamanager/vat/uploads/{id} ```
+* Published ``` DELETE /v1/datamanager/vat/uploads/{id} ```
+* Changed ``` POST /v1/auditor/vat/audits ```
+* Changed ``` GET /v1/auditor/vat/audits ```
+* Changed ``` GET /v1/auditor/vat/audits/{id} ```
+* Changed ``` GET /v1/auditor/vat/audits/{id}/results ```
+* Changed ``` DELETE /v1/auditor/vat/audits/{id} ```
+* Sample [Postman collection v1.3.0](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.0.postman_collection.json)
+
 ### v1.2.5
 * Updated ``` POST /v1/determination/vat/transactions ``` 
   * Added a query parameter ``` taxCodeScheme ``` which can be used with ``` useTaxCodes ``` parameter to specify whether the taxCode in the response body is from Tax Codes setup in your account, or returning a known scheme (e.g. Avalara).

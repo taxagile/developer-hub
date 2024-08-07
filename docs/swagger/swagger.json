@@ -1,16 +1,16 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n #### Tax Agile provides the powerful VAT Calc determination engine and VAT Auditor tool over a RESTful API. \nYou need an Account ID and API Key pair for the `POST /v1/auth` endpoint which will then return a time-limited Bearer token in the response. Us this Bearer token in the Authorization header of requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
+    "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n ## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.2.5",
+    "version": "1.3.0",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
     }
   },
   "externalDocs": {
-    "description": "Latest Release Notes",
+    "description": "Latest API Release Notes",
     "url": "https://github.com/taxagile/developer-hub/releases/latest"
   },
   "servers": [
@@ -24,69 +24,32 @@
     }
   ],
   "paths": {
-    "/v1/operations/{id}": {
-      "get": {
-        "tags": [ "Operations"],
-        "summary": "Status of a long-running operation.",
-        "description": "## Returns details of a long-running operation. \n\n Use this endpoint to poll for completion of an operation. When the operation completes this endpoint returns a new location header and href in body of the new resource on a `302 See Other` status.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Uuid of the specific operation",
-            "required": true,
-            "example": "e7c54568-6a4a-4e73-a176-dc59d0ec5604",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+    "/v1/auth": {
+      "post": {
+        "tags": [ "Authentication" ],
         "responses": {
-          "200": {
-            "description": "OK - Operation incomplete",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/operationsResponse200"
-                }
-              }
-            },
-            "headers": {
-              "Location": {
-                "description": "Refers to this endpoint when incomplete status",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Retry-After": {
-                "description": "Delay seconds",
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-        
-          },
-          "303": {
-            "description": "See Other - Operation complete",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/operationsResponse303"
-                }
-              }
-            },
-            "headers": {
-              "Location": {
-                "description": "Path to find new resource",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Retry-After": {
-                "description": "Delay seconds",
-                "schema": {
-                  "type": "integer"
+                  "type": "object",
+                  "properties": {
+                    "expiresIn": {
+                      "example": 86400,
+                      "description": "The time in seconds before the token is expired and can no longer be used",
+                      "type": "number"
+                    },
+                    "accessToken": {
+                      "description": "Use this token on subsequent API requests in the authorization header with the format 'Bearer <token>'",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJERU1PIiwiaWF0IjoxNjUzMDU3MjU2LCJleHAiOjE2NTMxNDM2NTZ9.bSMQE3mRHL0LGl9Fpn3rl8wJkvQC7WN9N-U7ikwaavQ",
+                      "type": "string"
+                    },
+                    "tokenType": {
+                      "type": "string",
+                      "example": "Bearer"
+                    }
+                  }
                 }
               }
             }
@@ -95,53 +58,48 @@
             "description": "Bad request",
             "content": {
               "application/json": {
+                "example": {
+                  "errorCode": "SV001",
+                  "message": "JSON schema validation failed: must NOT have fewer than 1 characters in: accountId"
+                },
                 "schema": {
                   "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "OP001",
-                  "message": "Operation Id is a mandatory path parameter"
                 }
               }
             }
-
           },
           "401": {
             "$ref": "#/components/responses/error401"
-          },
-          "404": {
-            "$ref": "#/components/responses/error404"
-          },
-          "500": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "example": {
-                  "errorCode": "OP003",
-                  "message": "Error encountered fetching operation ${operationId}"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                }
+          }
+        },
+        "summary": "Authenticate API Key to receive a Bearer token.",
+        "description": "Use API key and accountId to authenticate, and receive a time-based Bearer token which is then used on subsequent requests in the Authorization header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/authSchemaRequestBody"
               }
             }
-          }
-         }
+          },
+          "description": ""
+        }
       }
     },
     "/v1/auditor/vat/audits":{
       "post": {
         "tags": [ "VAT Auditor"],
         "summary": "Create a new audit.",
-        "description": "## Submit transaction data to VAT Auditor and VAT Filer \n Send it as either body JSON, or as an Excel xlsx as multipart form-data, which has been mapped to our data model.\n\n**New in v1.2.4:** We now support **Avalara iVAT Reporting XML** format as a file which can be sent to VAT Filer using multipart form-data.\n\nThis endpoint returns with an operation token to use with the `GET /operations/{id}` endpoint to poll for the Audit completion.",
+        "description": "## Submit transaction data to VAT Auditor \n Send it as either body JSON, or as an Excel xlsx as multipart form-data, which has been mapped to our data model.\n\nThis endpoint returns with an operation token to use with the `GET /operations/{id}` endpoint to poll for the Audit completion.\n\nIn **v1.3.0** we added the `POST /datamanager/vat/uploads` endpoint which should now be used for sending data to VAT Filer, previously this resource supported that use-case, but that is now _deprecated_.",
         "parameters": [],
         "requestBody": { 
           "required": true,
-          "description": "The request can be sent as an `application/json` in the request body, or a `multipart/form-data`. \n\n ### application/json \n\n An array of data [ vatDataModelSchema ] transactions, plus an options object which specifies how the system handles the Audit.  When sending Tax Agile data model format JSON, the mappingId should be set to 'default'.\n\n ### multipart/form-data \n\n The form two fields 'file' and 'options'. \n\n - The 'options' field takes a json {} with the Audit options.\n\n - The 'file' field takes a file object which can be either an Excel xlsx file, or an Avalara VAT Reporting XML file.\n\nIf sending the Avalara XML format you **must** set the Content-Type of the 'file' field to `application/vnd.avalara.ivat.reporting+xml` and the mappingId set to `vnd.avalara.ivat.reporting+xml`.\n\nCheck out the example in the v1.2.4 Postman Sample Collection as the multipart/form-data request has it's own Content-Type, as does the 'options' field. \n\n #### Note: Maximum file size 5mb",
+          "description": "The request can be sent as an `application/json` in the request body, or a `multipart/form-data`. \n\n ### application/json \n\n An array of data [ vatDataModelSchema ] transactions, plus an options object which specifies how the system handles the Audit.  When sending Tax Agile data model format JSON, the mappingId should be set to 'default'.\n\n ### multipart/form-data \n\n The form two fields 'file' and 'options'. \n\n - The 'options' field takes a json {} with the Audit options.\n\n - The 'file' field takes a file object which can be either an Excel xlsx file, or an Avalara iVAT Reporting XML file.\n\nIf sending the Avalara XML format you **must** set the Content-Type of the 'file' field to `application/vnd.avalara.ivat.reporting+xml` and the mappingId set to `vnd.avalara.ivat.reporting+xml`.\n\nCheck out the example in the Postman Sample Collection as the multipart/form-data request has it's own Content-Type, as does the 'options' field. \n\n #### Note: Maximum file size 5mb",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/vatAuditRequestBody"
+                "$ref": "#/components/schemas/vatUploadRequestBody"
               }
             },
             "multipart/form-data": {
@@ -153,7 +111,7 @@
                     "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
                   },
                   "options": {
-                    "$ref": "#/components/schemas/vatAuditOptions"
+                    "$ref": "#/components/schemas/vatUploadOptions"
                   }
                 }
               }
@@ -490,70 +448,6 @@
         }
       }
     },
-
-    "/v1/auth": {
-      "post": {
-        "tags": [ "Authentication" ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "expiresIn": {
-                      "example": 86400,
-                      "description": "The time in seconds before the token is expired and can no longer be used",
-                      "type": "number"
-                    },
-                    "accessToken": {
-                      "description": "Use this token on subsequent API requests in the authorization header with the format 'Bearer <token>'",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJERU1PIiwiaWF0IjoxNjUzMDU3MjU2LCJleHAiOjE2NTMxNDM2NTZ9.bSMQE3mRHL0LGl9Fpn3rl8wJkvQC7WN9N-U7ikwaavQ",
-                      "type": "string"
-                    },
-                    "tokenType": {
-                      "type": "string",
-                      "example": "Bearer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "errorCode": "SV001",
-                  "message": "JSON schema validation failed: must NOT have fewer than 1 characters in: accountId"
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/error401"
-          }
-        },
-        "summary": "Authenticate with API Key to receive a Bearer token",
-        "description": "Use API key and accountId to authenticate, and receive a time-based Bearer token which is then used on subsequent requests in the Authorization header.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/authSchemaRequestBody"
-              }
-            }
-          },
-          "description": ""
-        }
-      }
-    },
     "/v1/determination/vat/transactions": {
       "post": {
         "summary": "Send a transaction and receive a VAT determination.",
@@ -630,7 +524,7 @@
         "tags": [ "VAT Calc" ]
       },
       "get": {
-        "summary": "Fetch a collection of transactions with filter params",
+        "summary": "Fetch a collection of transactions with filter params.",
         "description": "Returns a paginated dataset of the committed (saved) transactions stored on the platform. Takes filter criteria as query parameters and sets defaults to ensure a huge dataset is not fetched.  Can be used to collect data periodically to store in your analysis data store; or to build an interactive dashboard in your application.",
         "parameters": [
           {
@@ -782,7 +676,7 @@
     },
     "/v1/determination/vat/transactions/{id}": {
       "get": {
-        "summary": "Return a specific transaction by id",
+        "summary": "Return a specific transaction by id.",
         "description": "Providing the id of the transaction will fetch the transaction from the Tax Agile platform; by default it returns a summary of the payload sent in, and our response back. \n\n Using the `?detail=true` query parameter returns a detail representation of the transaction and how it was processed by our engine.",
         "responses": {
           "200": {
@@ -840,24 +734,367 @@
         ],
         "tags":[ "VAT Calc" ]
       }
+    },
+    "/v1/datamanger/vat/uploads": {
+      "post": {
+        "tags": ["VAT Data manager"],
+        "summary": "Create an upload of data with data pipeline options.",
+        "description": "Send data in either json or multi-part form data. \n\n Providing options which link the upload to pipeline options like enrichment and sending to Filer or Auditor.",
+        "requestBody": {
+          "required": true,
+          "description": "The request can be sent as an `application/json` in the request body, or a `multipart/form-data`. \n\n ### application/json \n\n An array of data [ vatDataModelSchema ] transactions, plus an options object which specifies data pipeline.  When sending Tax Agile data model format JSON, the mappingId should be set to 'default'.\n\n ### multipart/form-data \n\n The form two fields 'file' and 'options'. \n\n - The 'options' field takes a json {} with the pipeline options.\n\n - The 'file' field takes a file object which can be either an Excel xlsx file, or an Avalara iVAT Reporting XML file.\n\nIf sending the Avalara XML format you **must** set the Content-Type of the 'file' field to `application/vnd.avalara.ivat.reporting+xml` and the mappingId set to `vnd.avalara.ivat.reporting+xml`.\n\nCheck out the example in the Postman Sample Collection as the multipart/form-data request has it's own Content-Type, as does the 'options' field. \n\n #### Note: Maximum file size 5mb",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/vatUploadRequestBody"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object", 
+                "properties": {
+                  "file":{
+                    "type": "string",
+                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                  },
+                  "options": {
+                    "$ref": "#/components/schemas/vatUploadOptions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted request and an operation ID issued.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/longRunningAccepted202"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Path to find the polling operation",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request \n\n DM??? - Invalid content-type in request header \n\n DM??? - Request options - missing options.mappingId \n\n DM??? - Data mapping record not found - check options.mappingId \n\n DM??? - File not uploaded to cloud storage \n\n DM??? - Unhandled error \n\n DM??? - Request body in an unexpected format. Check content-type is set correctly \n\n IO001 - File not found or not of a supported type",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "DM???",
+                  "message": "Invalid content-type in request header"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "429": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "DM???",
+                  "message": ""
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "DM???",
+                  "message": "_error details_"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }, 
+      "get": {
+        "tags": ["VAT Data manager"],
+        "summary": "Summary list of the most recent 100 uploads.",
+        "description": "Summary list of the most recent 100 uploads.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vatUploadSummaryListResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          }
+        }
+      }
+    },
+    "/v1/datamanger/vat/uploads/{id}": {
+      "get": {
+        "tags": ["VAT Data manager"],
+        "summary": "Returns the specific upload record.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the upload",
+            "required": true,
+            "example": "4e9a3622-c743-46e7-8bb0-f4fa51795164",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/vatUploadsDetailResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "DM???",
+                  "message": "Error encountered fetching upload {id}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["VAT Data manager"],
+        "summary": "Deletes the upload including the data created by the upload pipeline.",
+        "description": "This endpoint deletes the upload resource, and the associated data created during the upload. \n\n If sendToFiler was used when loading the data, then deleting the upload, removes the data from the returns in VAT Filer. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the upload",
+            "required": true,
+            "example": "4e9a3622-c743-46e7-8bb0-f4fa51795164",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete completed with no content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "DM???",
+                  "message": "Upload Id is a mandatory path parameter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unhandled error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "DM???",
+                  "message": "Error encountered deleting upload {id}"
+                }
+              }
+            }
+          }
+        }
+
+      } 
+    },
+    "/v1/operations/{id}": {
+      "get": {
+        "tags": [ "Operations"],
+        "summary": "Status of a long-running operation.",
+        "description": "## Returns details of a long-running operation. \n\n Use this endpoint to poll for completion of an operation. When the operation completes this endpoint returns a new location header and href in body of the new resource on a `302 See Other` status.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Uuid of the specific operation",
+            "required": true,
+            "example": "e7c54568-6a4a-4e73-a176-dc59d0ec5604",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Operation incomplete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/operationsResponse200"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Refers to this endpoint when incomplete status",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+        
+          },
+          "303": {
+            "description": "See Other - Operation complete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/operationsResponse303"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Path to find new resource",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Delay seconds",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "OP001",
+                  "message": "Operation Id is a mandatory path parameter"
+                }
+              }
+            }
+
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "$ref": "#/components/responses/error404"
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "OP003",
+                  "message": "Error encountered fetching operation ${operationId}"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+         }
+      }
     }
   },
   "tags": [
     {
       "name": "Authentication",
-      "description": "Authentication endpoints."
+      "description": "Use API key to fetch a short-lived session JWT."
     },
     {
-      "name": "VAT Calc",
-      "description": "Use our engine to do VAT determination on transactions."
+      "name": "Operations",
+      "description": "Long running operation queues."
     },
     {
       "name": "VAT Auditor",
       "description": "Complete an Audit of VAT compliance on your data."
     },
     {
-      "name": "Operations",
-      "description": "Manage async operation queues."
+      "name": "VAT Calc",
+      "description": "Use our engine to do VAT determination on transactions."
+    },
+    {
+      "name": "VAT Data manager",
+      "description": "VAT Data manager for uploads - includes details of the data pipeline options selected. "
     }
   ],
   "security": [
@@ -873,188 +1110,6 @@
       }
     },
     "schemas": {
-      "authSchemaRequestBody": {
-        "properties": {
-          "apiKey": {
-            "type": "string",
-            "maxLength": 40,
-            "example": "d9b97d76-5b6c-426f-9625-a1f63b7e195b",
-            "minLength": 1,
-            "description": "The API key issued by Tax Agile"
-          },
-          "accountId": {
-            "minLength": 1,
-            "maxLength": 100,
-            "example": "1Qwj3WEgtaABCCkzgkAL",
-            "description": "The account id issued by Tax Agile",
-            "type": "string"
-          }
-        },
-        "title": "Auth request",
-        "description": "API authentication resource",
-        "type": "object",
-        "required": [
-          "accountId",
-          "apiKey"
-        ],
-        "additionalProperties": false
-      },
-      "determinationVatResponse200": {
-        "title": "VAT Determination response",
-        "description": "",
-        "properties": {
-          "transaction1": {
-            "type": "string",
-            "title": "Transaction 1",
-            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
-          },
-          "transaction2": {
-            "type": "string",
-            "example": "N/A - N/A - No exemption - N/A",
-            "title": "Transaction 2"
-          },
-          "rateT1": {
-            "type": "number",
-            "example": 0,
-            "title": "Rate T1"
-          },
-          "reversedOutputVat": {
-            "title": "Reversed output VAT",
-            "example": 0,
-            "type": "number"
-          },
-          "reversedOutputVatRate": {
-            "type": "number",
-            "title": "Reversed output VAT rate",
-            "example": 0
-          },
-          "deductibleInputVat": {
-            "example": 0,
-            "title": "Deductible input VAT",
-            "type": "number"
-          },
-          "invoiceMentioning": {
-            "example": "Article 138(1) Directive 2006/112 EC",
-            "type": "string",
-            "title": "Invoice mentioning"
-          },
-          "invoiceMentioningEu": {
-            "example": "Article 138(1) Council Directive 2006/112 EC",
-            "type": "string",
-            "title": "Invoice mentioning EU"
-          },
-          "taxableTransactionT1": {
-            "example": "Supply of goods",
-            "type": "string",
-            "title": "Taxable transaction"
-          },
-          "transType": {
-            "example": "Intra-Community supply",
-            "type": "string",
-            "title": "Transaction type"
-          },
-          "posT1": {
-            "example": "BE",
-            "type": "string",
-            "title": "Place of supply"
-          },
-          "exemptionDescriptionT1": {
-            "example": "Intra-Community supply",
-            "type": "string",
-            "title": "Exemption description"
-          },
-          "obligationToPayT1": {
-            "example": "N/A",
-            "type": "string",
-            "title": "Obligation to pay"
-          },      
-          "taxPoint": {
-            "type": "string",
-            "example": "2022-05-09T00:00:00.000Z",
-            "title": "Tax point"
-          },
-          "deductibleRate": {
-            "type": "number",
-            "title": "Deductible rate",
-            "example": 0
-          },
-          "sellerVatNo": {
-            "type": "string",
-            "title": "Seller VAT number country",
-            "example": "BE"
-          },
-          "buyerVatNo": {
-            "example": "DE",
-            "type": "string",
-            "title": "Buyer VAT number country"
-          },
-          "baseAmount": {
-            "type": "number",
-            "example": 100,
-            "title": "Base amount"
-          },
-          "vatAmount": {
-            "type": "number",
-            "title": "VAT amount",
-            "example": 0
-          },
-          "importVatAmount": {
-            "type": "number",
-            "title": "Import VAT amount",
-            "example": 0
-          },
-          "vatCode": {
-            "example": "BESICSG000",
-            "type": "string",
-            "title": "VAT code"
-          },
-          "taxCode": {
-            "title": "Tax code",
-            "type": "string",
-            "example": ["A3", "IC0", "B0"],
-            "description": "Only returned when the request uses the useTaxCodes=true query parameter "
-          },
-          "calculatedRate": {
-            "type": "number",
-            "title": "Calculated rate",
-            "example": 0
-          },
-          "uuid": {
-            "type": "string",
-            "title":"Unique id of transaction",
-            "example": "fea0f7da-074e-47e9-8bde-51b8b5f778da"
-          },
-          "vatBoxes": {
-            "title": "VAT box reporting",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "country": {
-                  "title": "Reporting country",
-                  "type": "string",
-                  "example": "BE"
-                },
-                "box": {
-                  "title": "Box name",
-                  "example": "01",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "number",
-                  "example": 0,
-                  "title": "Box value"
-                }
-              },
-              "title": "Items"
-            }
-          } 
-        },
-        "type": "object"
-      },
-      "determinationVatRequestBody": {
-        "$ref": "./schemas/vatDeterminationRequestBodySchema.json"
-      },
       "errorResponse": {
         "description": "Standardised error response returned with a code and message",
         "title": "Error",
@@ -1068,444 +1123,11 @@
             "example": "<error message>",
             "type": "string"
           }
-        }
-      },
-      "summaryTransactionResponse": {
-        "title": "VAT Determination Summary",
-        "type": "object",
-        "properties": {
-          "request": {
-            "$ref": "#/components/schemas/determinationVatRequestBody"
-          },
-          "response": {
-            "$ref": "#/components/schemas/determinationVatResponse200"
-          },
-          "entryDateTime": {
-            "description": "Datetime the transaction was created on our platform",
-            "type": "string",
-            "example": "2022-06-28T14:12:35.000Z"
-          },
-          "_id": {
-            "description": "Unique id issued by our platform for this transaction",
-            "type": "string",
-            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
-          },
-          "source": {
-            "description": "Entry point source on the platform",
-            "type": "string",
-            "example": "api"
-          }
-        }
-      },
-      "detailTransactionResponse": {
-        "title": "VAT Determination Detail",
-        "type": "object",
-        "properties": {
-          "entryDateTime": {
-            "description": "Datetime the transaction was created on our platform",
-            "type": "string",
-            "example": "2022-06-28T14:12:35.000Z"
-          },
-          "_id": {
-            "description": "Unique id issued by our platform for this transaction",
-            "type": "string",
-            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
-          },
-          "source": {
-            "description": "Entry point source on the platform",
-            "type": "string",
-            "example": "api"
-          },
-          "determinationData": {
-            "type": "object",
-            "description": "Detailed insights into the transactions determination",
-            "properties": {
-              "calcBuffer": {
-                "type": "object"
-              },
-              "analysisResult": {
-                "type": "object"
-              },
-              "auditResult": {
-                "type": "object"
-              }
-            }
-          },
-          "transactionData": {
-            "type": "object",
-            "description": "Attributes of the transaction"
-          },
-          "apiRequestData": {
-            "type": "object",
-            "description": "If the transaction was loaded via API this will contain the request and response",
-            "properties": {
-              "request": {
-                "$ref": "#/components/schemas/determinationVatRequestBody"
-              },
-              "response": {
-                "$ref": "#/components/schemas/determinationVatResponse200"
-              }
-            }
-          }
-        }
-      },
-      "vatAuditSummaryResponse": {
-        "title": "VAT Audit Summary",
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "example": "i1yKcOrT2Rv9neYsKwvG"
-          },
-          "entryDateTime": {
-            "type": "string",
-            "example": "2023-05-18T09:45:57.204Z"
-          },
-          "summary": {
-            "type": "object",
-            "properties": {
-              "auditMetrics": {
-                "type": "object",
-                "properties": {
-                  "totalQualityOk": {
-                    "type": "integer",
-                    "description": "Count of transactions which could be audited",
-                    "example": 20
-                  },
-                  "totalAccurate": {
-                    "type": "integer",
-                    "description": "Count of transactions with no problems found",
-                    "example": 13
-                  },
-                  "totalExposure": {
-                    "type": "integer",
-                    "example": 4770
-                  }
-                }
-              },
-              "dataSummary": {
-                "type": "array",
-                "description": "Array of data quality issues in audit",
-                "items":{
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "description": "Description of problem",
-                      "type": "string",
-                      "example": "A blank value is not a correct value for \"buyer.VatIdCountry\". Check the mapping."
-                    }, 
-                    "count": {
-                      "description": "Count of transactions with this error",
-                      "type": "integer",
-                      "example": 1
-                    }
-                  }
-                }
-              },
-              "errors": {
-                "type": "array",
-                "description": "Summary of all errors in the audit",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "checkVatAmountDifference",
-                      "description": "Unique id of the audit error"
-                    }, 
-                    "name": {
-                      "type": "string",
-                      "example": "VAT amount",
-                      "description": "Label text for this error check"
-                    },
-                    "count": {
-                      "type": "integer",
-                      "example": 6,
-                      "description": "Count of occurances of this error in audit"
-                    }
-                  }
-                }
-              },
-              "totalDocuments": {
-                "type": "integer",
-                "example": 25,
-                "description": "Total number of documents in the audit"
-              }
-            }
-          },
-          "dataDetails": {
-            "type": "object",
-            "properties": {
-              "dataSource": {
-                "type": "string",
-                "example": "api"
-              },
-              "dataSourceName": {
-                "type": "string",
-                "example": "2023-05-18T09:45:55.923Z.json"
-              },
-              "dataSourceType": {
-                "type": "string",
-                "example": "application/json"
-              },
-              "mappingId": {
-                "type": "string",
-                "example": "PMTyBJlgbaa2ChOEydk3"
-              },
-              "mappingName": {
-                "type": "string",
-                "example": "VAT Calc Demo Company"
-              }
-            }
-          },
-          "options": {
-            "type": "object",
-            "properties": {
-              "storeTransactions": {
-                "type": "boolean",
-                "example": "true"
-              },
-              "doTaxCodeMapping": {
-                "type": "boolean",
-                "example": "false"
-              },
-              "sendToFiler": {
-                "type": "boolean",
-                "example": "false"
-              }
-            }
-          },
-          "results": {
-            "type": "object",
-            "properties": {
-              "href": {
-                "type": "string",
-                "example": "/v0/auditor/vat/audits/i1yKcOrT2Rv9neYsKwvG/results"
-              }
-            }
-          }
-        }
-      },
-      "vatAuditResultsResponse": {
-        "title": "VAT Audit Results",
-        "type": "object",
-        "properties": {
-          "transactions": {
-            "type": "array",
-            "items":{
-              "type": "object",
-              "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "1a1da4fa-270c-4aae-bf4d-5b7af11b693d"
-                },
-                "docNumber": {
-                  "type": "string",
-                  "example": "BE 102202"
-                }, 
-                "docDate": {
-                  "type": "string",
-                  "example": "2023-02-05"
-                },
-                "auditResult":{
-                  "type": "object",
-                  "properties": {
-                    "errors":{
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "example": "checkVatAmountDifference",
-                            "description": "Name of the error"
-                          },
-                          "message": {
-                            "type": "string",
-                            "example": "VAT amount in data (630.00) does not match the value Auditor calculated (0.00)"
-                          },
-                          "exposure": {
-                            "type": "number",
-                            "example": 400
-                          },
-                          "type": {
-                            "type": "string",
-                            "example": "engineCheck",
-                            "description": "Identifies the error as engineCheck, requiredData, conditionCheck or unhandledException"
-                          }
-                        }
-                      }
-                    },
-                    "done": {
-                      "type": "boolean"
-                    },
-                    "parties": {
-                      "type": "object",
-                      "description": "Indentifies who was the company and counterparty for the transaction based on document type",
-                      "properties": {
-                        "company" : {
-                          "type": "string",
-                          "example": "seller",
-                          "description": "seller or buyer"
-                        },
-                        "companyName": {
-                          "type": "string",
-                          "example": "VAT Calc Demo Co BVBA"
-                        }, 
-                        "counterparty": {
-                          "type": "string",
-                          "example": "buyer",
-                          "description": "seller or buyer"
-                        },
-                        "counterpartyName": {
-                          "type": "string",
-                          "example": "BE Company Customer Ltd"
-                        }
-                      }
-                    },
-                    "hasErrors": {
-                      "type": "boolean",
-                      "description": "Flag whether there are errors in this transaction",
-                      "example": true
-                    },
-                    "exposure": {
-                      "type": "integer",
-                      "example": 630
-                    }
-                  }
-                },
-                "analysisResult": {
-                    "$ref": "#/components/schemas/determinationVatResponse200"
-                }
-              }
-            }
-          },
-          "count": {
-            "type": "object",
-            "properties": {
-              "totalInAudit": {
-                "type": "integer",
-                "description": "Total number of transactions in the audit batch",
-                "example": 30
-              },
-              "showing": {
-                "type": "integer",
-                "example": 20,
-                "description": "Number of transactions shown in this response"
-              }
-            }
-          },
-          "next": {
-            "type": "object",
-            "description": "Object to assist in fetching the next page of results",
-            "properties": {
-              "pageSize": {
-                "type": "integer",
-                "example": 20
-              },
-              "href": {
-                "type": "string",
-                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?startAfter=b5e9282e-8a40-4462-81c3-2ab28b904f57&pageSize=20",
-                "description": "Reference to the first page of results"
-              }
-            }
-          },
-          "first": {
-            "type": "object",
-            "description": "Object to assist in fetching the first page of results",
-            "properties": {
-              "href": {
-                "type": "string",
-                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?pageSize=20",
-                "description": "Reference to the first page of results"
-              }
-            }
-          }
-        }
-      },
-      "vatAuditResultsErrorListResponse": {
-        "title": "VAT Audit Results - Error list",
-        "type": "object",
-        "properties": {
-          "transactions": {
-            "type": "array",
-            "items":{
-              "type": "object",
-              "properties": {
-                "docNumber": {
-                  "type": "string",
-                  "example": "BE 102202"
-                }, 
-                "docDate": {
-                  "type": "string",
-                  "example": "2023-02-05"
-                },
-                "errorId": {
-                  "type": "string",
-                  "example": "checkVatIdCountry"
-                },
-                "errorType": {
-                  "type": "string",
-                  "example": "engineCheck"
-                },
-                "errorMessage": {
-                  "type": "string",
-                  "example": "VAT amount in data (0.00) does not match the value Auditor calculated (400.00)"
-                }, 
-                "exposure": {
-                  "type": "number",
-                  "example": 400
-                },
-                "type": {
-                  "type": "string",
-                  "example": "Domestic"
-                },
-                "transaction": {
-                  "type": "string",
-                  "example": "Supply of goods and services"
-                }, 
-                "placeOfSupply": {
-                  "type": "string",
-                  "example": "BE"
-                },
-                "exemption": {
-                  "type": "string",
-                  "example": "Waste and scrap"
-                }, 
-                "obligationToPay": {
-                  "type": "string",
-                  "example": "Customer"
-                }, 
-                "company": {
-                  "type": "string",
-                  "example": "VAT Calc Demo Co BVBA"
-                }, 
-                "counterparty": {
-                  "type": "string",
-                  "example": "CH Company GmbH"
-                }
-              }
-            }
-          }
-        }
-      },
-      "vatAuditRequestBody": {
-        "title": "VAT Audit request",
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/vatDataModelSchema"
-              }   
-          },
-          "options": {
-            "$ref": "#/components/schemas/vatAuditOptions"
-          }
-        }
+        },
+        "example": "{ errorCode: 'DM001', message: 'File type not allowed' }"
       },
       "vatDataModelSchema": {
-        "title":"VAT data model",
+        "title":"VAT Data Model",
         "type":"object",
         "properties": 
         {
@@ -3114,6 +2736,32 @@
           }
         }
       },
+      "authSchemaRequestBody": {
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "d9b97d76-5b6c-426f-9625-a1f63b7e195b",
+            "minLength": 1,
+            "description": "The API key issued by Tax Agile"
+          },
+          "accountId": {
+            "minLength": 1,
+            "maxLength": 100,
+            "example": "1Qwj3WEgtaABCCkzgkAL",
+            "description": "The account id issued by Tax Agile",
+            "type": "string"
+          }
+        },
+        "title": "Auth - Request",
+        "description": "API authentication resource",
+        "type": "object",
+        "required": [
+          "accountId",
+          "apiKey"
+        ],
+        "additionalProperties": false
+      },
       "longRunningAccepted202": {
         "title": "Operation Accepted",
         "type": "object",
@@ -3172,24 +2820,735 @@
           }
         }
       },
-      "vatAuditOptions": {
-          "title": "VAT Audit Options",
+      "vatAuditSummaryResponse": {
+        "title": "VAT Audit Summary",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "i1yKcOrT2Rv9neYsKwvG"
+          },
+          "entryDateTime": {
+            "type": "string",
+            "example": "2023-05-18T09:45:57.204Z"
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "auditMetrics": {
+                "type": "object",
+                "properties": {
+                  "totalQualityOk": {
+                    "type": "integer",
+                    "description": "Count of transactions which could be audited",
+                    "example": 20
+                  },
+                  "totalAccurate": {
+                    "type": "integer",
+                    "description": "Count of transactions with no problems found",
+                    "example": 13
+                  },
+                  "totalExposure": {
+                    "type": "integer",
+                    "example": 4770
+                  }
+                }
+              },
+              "dataSummary": {
+                "type": "array",
+                "description": "Array of data quality issues in audit",
+                "items":{
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Description of problem",
+                      "type": "string",
+                      "example": "A blank value is not a correct value for \"buyer.VatIdCountry\". Check the mapping."
+                    }, 
+                    "count": {
+                      "description": "Count of transactions with this error",
+                      "type": "integer",
+                      "example": 1
+                    }
+                  }
+                }
+              },
+              "errors": {
+                "type": "array",
+                "description": "Summary of all errors in the audit",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "checkVatAmountDifference",
+                      "description": "Unique id of the audit error"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "example": "VAT amount",
+                      "description": "Label text for this error check"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "example": 6,
+                      "description": "Count of occurances of this error in audit"
+                    }
+                  }
+                }
+              },
+              "totalDocuments": {
+                "type": "integer",
+                "example": 25,
+                "description": "Total number of documents in the audit"
+              }
+            }
+          },
+          "dataDetails": {
+            "type": "object",
+            "properties": {
+              "createdBy": {
+                "type": "string",
+                "example": "api"
+              },
+              "dataSourceName": {
+                "type": "string",
+                "example": "2023-05-18T09:45:55.923Z.json"
+              }
+            }
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "doTaxCodeMapping": {
+                "type": "boolean",
+                "example": "false"
+              }
+            }
+          },
+          "results": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "example": "/v0/auditor/vat/audits/i1yKcOrT2Rv9neYsKwvG/results"
+              }
+            }
+          }
+        }
+      },
+      "vatAuditResultsResponse": {
+        "title": "VAT Audit Results",
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items":{
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "1a1da4fa-270c-4aae-bf4d-5b7af11b693d"
+                },
+                "docNumber": {
+                  "type": "string",
+                  "example": "BE 102202"
+                }, 
+                "docDate": {
+                  "type": "string",
+                  "example": "2023-02-05"
+                },
+                "auditResult":{
+                  "type": "object",
+                  "properties": {
+                    "errors":{
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "checkVatAmountDifference",
+                            "description": "Name of the error"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "VAT amount in data (630.00) does not match the value Auditor calculated (0.00)"
+                          },
+                          "exposure": {
+                            "type": "number",
+                            "example": 400
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "engineCheck",
+                            "description": "Identifies the error as engineCheck, requiredData, conditionCheck or unhandledException"
+                          }
+                        }
+                      }
+                    },
+                    "done": {
+                      "type": "boolean"
+                    },
+                    "parties": {
+                      "type": "object",
+                      "description": "Indentifies who was the company and counterparty for the transaction based on document type",
+                      "properties": {
+                        "company" : {
+                          "type": "string",
+                          "example": "seller",
+                          "description": "seller or buyer"
+                        },
+                        "companyName": {
+                          "type": "string",
+                          "example": "VAT Calc Demo Co BVBA"
+                        }, 
+                        "counterparty": {
+                          "type": "string",
+                          "example": "buyer",
+                          "description": "seller or buyer"
+                        },
+                        "counterpartyName": {
+                          "type": "string",
+                          "example": "BE Company Customer Ltd"
+                        }
+                      }
+                    },
+                    "hasErrors": {
+                      "type": "boolean",
+                      "description": "Flag whether there are errors in this transaction",
+                      "example": true
+                    },
+                    "exposure": {
+                      "type": "integer",
+                      "example": 630
+                    }
+                  }
+                },
+                "analysisResult": {
+                    "$ref": "#/components/schemas/determinationVatResponse200"
+                }
+              }
+            }
+          },
+          "count": {
+            "type": "object",
+            "properties": {
+              "totalInAudit": {
+                "type": "integer",
+                "description": "Total number of transactions in the audit batch",
+                "example": 30
+              },
+              "showing": {
+                "type": "integer",
+                "example": 20,
+                "description": "Number of transactions shown in this response"
+              }
+            }
+          },
+          "next": {
+            "type": "object",
+            "description": "Object to assist in fetching the next page of results",
+            "properties": {
+              "pageSize": {
+                "type": "integer",
+                "example": 20
+              },
+              "href": {
+                "type": "string",
+                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?startAfter=b5e9282e-8a40-4462-81c3-2ab28b904f57&pageSize=20",
+                "description": "Reference to the first page of results"
+              }
+            }
+          },
+          "first": {
+            "type": "object",
+            "description": "Object to assist in fetching the first page of results",
+            "properties": {
+              "href": {
+                "type": "string",
+                "example": "/v1/auditor/vat/audits/vJDk97ZoLnUuc1aoJXSM/results?pageSize=20",
+                "description": "Reference to the first page of results"
+              }
+            }
+          }
+        }
+      },
+      "vatAuditResultsErrorListResponse": {
+        "title": "VAT Audit Results - Error list",
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items":{
+              "type": "object",
+              "properties": {
+                "docNumber": {
+                  "type": "string",
+                  "example": "BE 102202"
+                }, 
+                "docDate": {
+                  "type": "string",
+                  "example": "2023-02-05"
+                },
+                "errorId": {
+                  "type": "string",
+                  "example": "checkVatIdCountry"
+                },
+                "errorType": {
+                  "type": "string",
+                  "example": "engineCheck"
+                },
+                "errorMessage": {
+                  "type": "string",
+                  "example": "VAT amount in data (0.00) does not match the value Auditor calculated (400.00)"
+                }, 
+                "exposure": {
+                  "type": "number",
+                  "example": 400
+                },
+                "type": {
+                  "type": "string",
+                  "example": "Domestic"
+                },
+                "transaction": {
+                  "type": "string",
+                  "example": "Supply of goods and services"
+                }, 
+                "placeOfSupply": {
+                  "type": "string",
+                  "example": "BE"
+                },
+                "exemption": {
+                  "type": "string",
+                  "example": "Waste and scrap"
+                }, 
+                "obligationToPay": {
+                  "type": "string",
+                  "example": "Customer"
+                }, 
+                "company": {
+                  "type": "string",
+                  "example": "VAT Calc Demo Co BVBA"
+                }, 
+                "counterparty": {
+                  "type": "string",
+                  "example": "CH Company GmbH"
+                }
+              }
+            }
+          }
+        }
+      },
+      "summaryTransactionResponse": {
+        "title": "VAT Determination Summary",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/determinationVatRequestBody"
+          },
+          "response": {
+            "$ref": "#/components/schemas/determinationVatResponse200"
+          },
+          "entryDateTime": {
+            "description": "Datetime the transaction was created on our platform",
+            "type": "string",
+            "example": "2022-06-28T14:12:35.000Z"
+          },
+          "_id": {
+            "description": "Unique id issued by our platform for this transaction",
+            "type": "string",
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+          },
+          "source": {
+            "description": "Entry point source on the platform",
+            "type": "string",
+            "example": "api"
+          }
+        }
+      },
+      "detailTransactionResponse": {
+        "title": "VAT Determination Detail",
+        "type": "object",
+        "properties": {
+          "entryDateTime": {
+            "description": "Datetime the transaction was created on our platform",
+            "type": "string",
+            "example": "2022-06-28T14:12:35.000Z"
+          },
+          "_id": {
+            "description": "Unique id issued by our platform for this transaction",
+            "type": "string",
+            "example": "7942cf02-2067-4b37-8e00-e3bd3926d6e5"
+          },
+          "source": {
+            "description": "Entry point source on the platform",
+            "type": "string",
+            "example": "api"
+          },
+          "determinationData": {
+            "type": "object",
+            "description": "Detailed insights into the transactions determination",
+            "properties": {
+              "calcBuffer": {
+                "type": "object"
+              },
+              "analysisResult": {
+                "type": "object"
+              },
+              "auditResult": {
+                "type": "object"
+              }
+            }
+          },
+          "transactionData": {
+            "type": "object",
+            "description": "Attributes of the transaction"
+          },
+          "apiRequestData": {
+            "type": "object",
+            "description": "If the transaction was loaded via API this will contain the request and response",
+            "properties": {
+              "request": {
+                "$ref": "#/components/schemas/determinationVatRequestBody"
+              },
+              "response": {
+                "$ref": "#/components/schemas/determinationVatResponse200"
+              }
+            }
+          }
+        }
+      },
+      "determinationVatResponse200": {
+        "title": "VAT Determination - Response",
+        "description": "",
+        "properties": {
+          "transaction1": {
+            "type": "string",
+            "title": "Transaction 1",
+            "example": "Supply of goods - BE - Intra-Community supply - N/A - 0 - 0 - 0"
+          },
+          "transaction2": {
+            "type": "string",
+            "example": "N/A - N/A - No exemption - N/A",
+            "title": "Transaction 2"
+          },
+          "rateT1": {
+            "type": "number",
+            "example": 0,
+            "title": "Rate T1"
+          },
+          "reversedOutputVat": {
+            "title": "Reversed output VAT",
+            "example": 0,
+            "type": "number"
+          },
+          "reversedOutputVatRate": {
+            "type": "number",
+            "title": "Reversed output VAT rate",
+            "example": 0
+          },
+          "deductibleInputVat": {
+            "example": 0,
+            "title": "Deductible input VAT",
+            "type": "number"
+          },
+          "invoiceMentioning": {
+            "example": "Article 138(1) Directive 2006/112 EC",
+            "type": "string",
+            "title": "Invoice mentioning"
+          },
+          "invoiceMentioningEu": {
+            "example": "Article 138(1) Council Directive 2006/112 EC",
+            "type": "string",
+            "title": "Invoice mentioning EU"
+          },
+          "taxableTransactionT1": {
+            "example": "Supply of goods",
+            "type": "string",
+            "title": "Taxable transaction"
+          },
+          "transType": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Transaction type"
+          },
+          "posT1": {
+            "example": "BE",
+            "type": "string",
+            "title": "Place of supply"
+          },
+          "exemptionDescriptionT1": {
+            "example": "Intra-Community supply",
+            "type": "string",
+            "title": "Exemption description"
+          },
+          "obligationToPayT1": {
+            "example": "N/A",
+            "type": "string",
+            "title": "Obligation to pay"
+          },      
+          "taxPoint": {
+            "type": "string",
+            "example": "2022-05-09T00:00:00.000Z",
+            "title": "Tax point"
+          },
+          "deductibleRate": {
+            "type": "number",
+            "title": "Deductible rate",
+            "example": 0
+          },
+          "sellerVatNo": {
+            "type": "string",
+            "title": "Seller VAT number country",
+            "example": "BE"
+          },
+          "buyerVatNo": {
+            "example": "DE",
+            "type": "string",
+            "title": "Buyer VAT number country"
+          },
+          "baseAmount": {
+            "type": "number",
+            "example": 100,
+            "title": "Base amount"
+          },
+          "vatAmount": {
+            "type": "number",
+            "title": "VAT amount",
+            "example": 0
+          },
+          "importVatAmount": {
+            "type": "number",
+            "title": "Import VAT amount",
+            "example": 0
+          },
+          "vatCode": {
+            "example": "BESICSG000",
+            "type": "string",
+            "title": "VAT code"
+          },
+          "taxCode": {
+            "title": "Tax code",
+            "type": "string",
+            "example": ["A3", "IC0", "B0"],
+            "description": "Only returned when the request uses the useTaxCodes=true query parameter "
+          },
+          "calculatedRate": {
+            "type": "number",
+            "title": "Calculated rate",
+            "example": 0
+          },
+          "uuid": {
+            "type": "string",
+            "title":"Unique id of transaction",
+            "example": "fea0f7da-074e-47e9-8bde-51b8b5f778da"
+          },
+          "vatBoxes": {
+            "title": "VAT box reporting",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "title": "Reporting country",
+                  "type": "string",
+                  "example": "BE"
+                },
+                "box": {
+                  "title": "Box name",
+                  "example": "01",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 0,
+                  "title": "Box value"
+                }
+              },
+              "title": "Items"
+            }
+          } 
+        },
+        "type": "object"
+      },
+      "determinationVatRequestBody": {
+        "$ref": "./schemas/vatDeterminationRequestBodySchema.json"
+      },
+      "vatUploadOptions": {
+          "title": "VAT Upload - Options",
           "type": "object",
           "required": [ "mappingId" ],
           "properties": {
             "mappingId": {
               "type": "string",
-              "example": "CTDCqBkBozNOQe1NFoaa"
+              "example": "CTDCqBkBozNOQe1NFoaa",
+              "description": "Provide the id of the data mapping to use with the payload",
+              "default": "default"
             },
             "sendToFiler": {
               "type": "boolean",
-              "default": false
+              "default": false,
+              "description": "Set this to add Filer to the data pipeline for this upload"
+            },
+            "sendToAuditor": {
+              "type": "boolean",
+              "default": false,
+              "description": "Set this to add Auditor to the data pipeline for this upload. \n\n This defaults to true when using POST to /vat/audits."
             },
             "doTaxCodeMapping": {
               "type": "boolean",
-              "default": false
+              "default": false,
+              "description": "If set, this will use Tax codes to enrich the data uploaded"
+            },
+            "renameFileIfDuplicate": {
+              "type": "boolean",
+              "default": false,
+              "description": "Set this to allow a duplicate file to be uploaded. \n\n The filename will be made unique by the upload process."
             }
           }
+      },
+      "vatUploadRequestBody": {
+        "title": "VAT Upload - Request",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/vatDataModelSchema"
+              }   
+          },
+          "options": {
+            "$ref": "#/components/schemas/vatUploadOptions"
+          }
+        }
+      },
+      "vatUploadSummaryListResponse": {
+        "title":"VAT Upload - Summary data",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "4e9a3622-c743-46e7-8bb0-f4fa51795164"
+          },
+          "entryDateTime": {
+            "type": "string",
+            "example": "2024-08-02T13:38:50.759Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Gen template test file.xlsx"
+          },
+          "totalDocuments": {
+            "type": "number",
+            "example": 10
+          },
+          "mappingName": {
+            "type": "string",
+            "example": "Tax Agile Test Mapping"
+          },
+          "dataSource": {
+            "type": "string",
+            "example": "api"
+          },
+          "status": {
+            "type": "string",
+            "example": "Complete"
+          },
+          "options": {
+            "type": "object",  
+            "$ref": "#/components/schemas/vatUploadOptions"
+          },
+          "resource": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "example": "/v1/datamanager/vat/uploads/4e9a3622-c743-46e7-8bb0-f4fa51795164"
+              }
+            }
+          }
+        }
+      },
+      "vatUploadsDetailResponse": {
+        "title": "VAT Upload - Detail data",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "4e9a3622-c743-46e7-8bb0-f4fa51795164"
+          },
+          "status": {
+            "type": "string",
+            "example": "Complete"
+          },
+          "uploadDetails": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the upload as stored on the platform",
+                "example": "2024-08-05T14:48:20.000Z.json"
+              }, 
+              "totalDocuments": {
+                "type": "number",
+                "example": 10,
+                "description": "The count of documents contained in this upload"
+              },
+              "entryDateTime": {
+                "type": "string",
+                "description": "Datetime the uploaded entered our platform",
+                "example": "2024-08-05T14:48:20.000Z"
+              }, 
+              "endDateTime": {
+                "type": "string",
+                "description": "Datetime the uploaded completed processing",
+                "example": "2024-08-05T14:49:40.000Z"
+              }, 
+              "mappingName": {
+                "type": "string",
+                "description": "The name the user would recognise for the data mapping used.",
+                "example": "Tax Agile Filer Mapping"
+              }, 
+              "dataSource": {
+                "type": "string",
+                "description": "Returns either 'api' or a string for a UI uploaded by statement.",
+                "example": "Uploaded in the UI by andy.lee@taxagile.io"
+              }
+            }
+          },
+          "options": {
+            "$ref": "#/components/schemas/vatUploadOptions"
+          },
+          "progress": {
+            "type": "object",
+            "properties": {
+              "auditorTasksProgress": {
+                "type": "number",
+                "description": "Range from 0 to 100 to indicate progress of the upload in VAT Auditor",
+                "example": 100
+              },
+              "filerTasksProgress": {
+                "type": "number",
+                "description": "Range from 0 to 100 to indicate progress of the upload in VAT Filer",
+                "example": 100
+              },
+              "progress": {
+                "type": "number",
+                "description": "Range from 0 to 100 which represents an overall progress including VAT Filer and VAT Auditor (if used).",
+                "example": 100
+
+              }, 
+              "disableDelete": {
+                "type": "boolean",
+                "description": "When returning true, a delete should not be offered to any user as the upload has not yet completed an operation.",
+                "example": true
+              }
+              
+            }
+          }
+        }
+
       }
     },
     "requestBodies": {},
