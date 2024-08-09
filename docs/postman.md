@@ -16,7 +16,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.2.5.postman_collection.json)
+* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.0.postman_collection.json)
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
@@ -46,25 +46,6 @@ for all the available options.
 
 There is a logical order to these requests, by first doing an Auth, the Bearer token is automatically 
 used on the following requests. 
-
-| Name | Functionality                                                                       |
-| :--- |:------------------------------------------------------------------------------------|
-| POST Auth | 	Takes `ACCOUNT_ID` and `API_KEY` environment variables and creates a new Bearer token. |
-| POST VAT Determination - ICS | Makes a VAT Determination which is not committed (saved).                           |
-| POST VAT Determination - local supply | Makes a VAT Determination which is not committed (saved).                           |
-| POST VAT Determination with commit | Makes a VAT Determination with the `commit=true` parameter so save the transaction.   |
-| POST VAT Determination with useTaxCodes | Makes a VAT Determination with the `useTaxCodes=true` parameter which uses ERP tax code mapping. |
-| POST VAT Determination with useTaxCodes and taxCodeScheme | Makes a VAT Determination with the `useTaxCodes=true` parameter and `taxCodeScheme="avalara"` which returns a calculated Avalara tax code. |
-| GET VAT Determination by ID | Returns a summary of the request sent and response given for the transaction; using the uuid returned on the commited determination as the ID.                                                                                    |
-| GET VAT Determination for date range |     	Queries the commited (saved) transactions and returns a paged result set. The example shows a date/time range filter, but other filter options are set on the request and can be enabled.                                                                                |
-| POST Create Audit with json | Submits transaction data to create an Audit. Returns an operation id to poll |
-| POST Create Audit - Excel (form-data) | Demonstrates the file upload usage |
-| POST Create Audit - Avalara VAT Reporting | How to use Avalara VAT Reporting XML as an input format |
-| GET Poll operations endpoint | Poll for a completed status |
-| GET Audit summary by ID | Using the audit resource id, fetch a summary of the audit |
-| GET Audit results by ID | Using the audit resource id, fetch the detail results of the audit with paged responses |
-| GET Audits - list latest 100 | List of latest 100 audits | 
-| DELETE Audit by ID | Remove an audit from the system |
 
 
 ## Postman settings
