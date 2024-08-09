@@ -1,19 +1,15 @@
-<style>
-th{ background-color: #343a98!important; color: #fff!important; }
-</style> 
-
-![Tax Agile Logo](docs/Tax-Agile-Short.png)
+<img src="docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
 [Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md)
 
-# Developer Hub
-The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile. 
+# Tax Agile - Developer Hub
+The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile via RESTful web services. 
 
 It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API requests](docs/postman.md) and documentation to [get started](docs/getting-started.md).
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.2.5-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.3.0-green.svg)]()
 
 
 ## Authentication
@@ -21,6 +17,11 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 * API key authentication
   * Credential pair of API key and Account id are used to create a Bearer token
   * The token is valid for 24hrs and is used as the Authentication on subsequent requests
+
+## Data manager
+
+* Introduced in v1.3.0 of the API - data manager route handles uploads of data
+  * Replaces the ```POST /v1/auditor/vat/audits``` resource as the way to send data to VAT Filer
 
 ## VAT Determination
 
@@ -42,10 +43,12 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 * Fetch audit results by id
 * Delete an audit by id
 
+## VAT Filer
+* API for VAT Filer will be coming soon, but you can already send data to VAT Filer using the ``` POST /v1/datamanager/vat/uploads ``` resource.
 
 ## Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.2.5.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.0.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 ## Need help?
