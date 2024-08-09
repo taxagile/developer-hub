@@ -1,8 +1,4 @@
-<style>
-th{ background-color: #343a98!important; color: #fff!important; }
-</style> 
-
-![Tax Agile Logo](Tax-Agile-Short.png)
+<img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
 [Home](../README.md) \| [Getting started](getting-started.md) \|  [Postman](postman.md) \| [Swagger](../docs/swagger/index.html) \| [Change log](changelog.md)
 
