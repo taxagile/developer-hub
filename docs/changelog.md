@@ -1,4 +1,7 @@
 # Change Log
+### v1.3.1
+* Changed ``` POST /v1/datamanager/vat/uploads ``` and ``` POST /v1/auditor/vat/audits ``` to validate the request body dates are sent in YYYY-MM-DD format. If not, a 400 will be returned.
+
 ### v1.3.0
 * Published ``` POST /v1/datamanager/vat/uploads ```
 * Published ``` GET /v1/datamanager/vat/uploads ```
