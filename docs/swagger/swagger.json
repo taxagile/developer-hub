@@ -735,7 +735,7 @@
         "tags":[ "VAT Calc" ]
       }
     },
-    "/v1/datamanger/vat/uploads": {
+    "/v1/datamanager/vat/uploads": {
       "post": {
         "tags": ["VAT Data manager"],
         "summary": "Create an upload of data with data pipeline options.",
@@ -861,7 +861,7 @@
         }
       }
     },
-    "/v1/datamanger/vat/uploads/{id}": {
+    "/v1/datamanager/vat/uploads/{id}": {
       "get": {
         "tags": ["VAT Data manager"],
         "summary": "Returns the specific upload record.",
