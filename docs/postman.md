@@ -22,7 +22,7 @@ This is the server hosting the API you want to make requests to, possible values
 | Server     | API_ROOT                      |
 |:-----------|:------------------------------|
 | Production | https://api.taxagile.io       |
-| Test       | https://test-api.taxagile.io  |
+| Staging       | https://staging-api.taxagile.io  |
 
 
 ### ACCOUNT_ID
