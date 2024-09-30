@@ -1,6 +1,14 @@
 # Change Log
 ### v1.3.1
+* Moved the API infrastructure to be accessed via a load balancer
+* Added staging-api.taxagile.io endpoint to swagger docs
+* Removed test-api.taxagile.io from documentation (deprecated)
+* Updated VAT Data model to include new item types
+  * Admission to virtual events
+  * Electric vehicle charging
 * Changed ``` POST /v1/datamanager/vat/uploads ``` and ``` POST /v1/auditor/vat/audits ``` to validate the request body dates are sent in YYYY-MM-DD format. If not, a 400 will be returned.
+* Updated Swagger.json as it had some minor typos in the v1.3.0 release.
+* Sample (same as v1.3.0 no changes) [Postman collection v1.3.0](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.0.postman_collection.json)
 
 ### v1.3.0
 * Published ``` POST /v1/datamanager/vat/uploads ```

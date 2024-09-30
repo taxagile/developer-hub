@@ -24,7 +24,7 @@ We have provided these documents to help you implement to our API:
 | [Postman Sample](postman.md)          | More interactive and demonstrable the Postman collection shows you real life examples of the requests and responses. <br /><br />You can duplicate and modify to test out your transaction types. <br /><br />Postman also allows you to export requests in other languages (C#, NodeJS, PHP, Ruby) so your developers can see the docs how they like to work. |
 
 ## FAQ
-<details><summary>Do I send to Production or Test?</summary>
+<details><summary>Do I send to Production or Staging?</summary>
 <p>
 <br />
 Both environments will function the same, however you will have a different set of credentials for 
@@ -35,10 +35,10 @@ If you want to make requests that are not saved, you can omit the `commit=true` 
 <table>
 <th>Server</th><th>API_ROOT</th>
 <tr><td>Production</td><td>https://api.taxagile.io </td></tr>
-<tr><td>Test</td><td>https://test-api.taxagile.io </td></tr>
+<tr><td>Staging</td><td>https://staging-api.taxagile.io </td></tr>
 </table>
 <br />
-Note: The Test environment may be running a new functionality pending deployment to Production!
+Note: The Staging environment may be running a new functionality pending deployment to Production!
 </p>
 </details>
 
