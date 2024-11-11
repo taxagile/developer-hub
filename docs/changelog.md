@@ -1,4 +1,10 @@
 # Change Log
+### v1.3.2
+* Updated the VAT Data Model schema in swagger docs
+  * Previously we were not correctly representing the data type `number` in the schema documentation.
+  * We have corrected that, so now the schema matches the examples provided in the Postman collection.
+* Sample (same as v1.3.0 no changes) [Postman collection v1.3.0](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.0.postman_collection.json)
+
 ### v1.3.1
 * Moved the API infrastructure to be accessed via a load balancer
 * Added staging-api.taxagile.io endpoint to swagger docs
