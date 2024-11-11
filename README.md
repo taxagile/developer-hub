@@ -9,7 +9,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.3.1-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.3.2-green.svg)]()
 
 
 ## Authentication
@@ -55,6 +55,12 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 ### Getting Credentials
 Get in touch via our website: [vatcalc.com/contact](https://www.vatcalc.com/contact/) to setup a demo and we can provide you with a trial!
+
+### FAQ
+* **Samples**: If you are having any trouble building a request from the Swagger documentation, first find the sample for that endpoint in the Postman collection as it contains working payloads, which might help you identify the issue. 
+* **Boolean data type**: Provide a boolean `true` or `false`, not a string `"true"` or `"false"`
+* **Numbers**: Financial values are represented in JSON as number types, for example `100.00` rather than `"100.00"`
+
 
 ### Contact Support
 Create a ticket in our [online service desk](https://vatcalc.freshdesk.com/support/home)

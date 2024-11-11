@@ -1,232 +1,600 @@
 {
-  "itemProperties": {
+  "transactionDetail": {
     "type": "object",
     "properties": {
-      "isAccommodation": {
+      "importedUnderDefermentScheme": {
         "type": "boolean",
-        "description": "is Accommodation?"
+        "example": true,
+        "description": "Are the goods imported under an import VAT deferment scheme?"
       },
-      "isTheSupplyOfStaffServices": {
+      "chainTransactionInvoice2": {
         "type": "boolean",
-        "description": "is TheSupplyOfStaffServices?"
+        "example": true,
+        "description": "Second invoice on chain transaction?"
       },
-      "isEducation": {
+      "isCustomsProcedureRemoval": {
         "type": "boolean",
-        "description": "is Education?"
+        "example": true,
+        "description": "Are goods removed from a customs procedure?"
       },
-      "isMovableProperty": {
+      "relevantContractsTax": {
         "type": "boolean",
-        "description": "is MovableProperty?"
+        "example": true,
+        "description": "Under Relevant Contracts Tax / CIS?"
       },
-      "isCapitalGood": {
+      "optedToTax": {
         "type": "boolean",
-        "description": "is CapitalGood?"
+        "example": true,
+        "description": "Has the supplier opted to tax?"
       },
-      "isGambling": {
-        "type": "boolean",
-        "description": "is Gambling?"
+      "statisticalProcedure": {
+        "type": "number",
+        "description": "Statistical procedure for intrastat"
       },
-      "isPublicPostalService": {
+      "isForProvisioningOfAirline": {
         "type": "boolean",
-        "description": "is PublicPostalService?"
+        "example": true,
+        "description": "For the provisioning of an airline?"
       },
-      "isGasElectricityHeatingCooling": {
+      "ExciseDutySuspensionRelease": {
         "type": "boolean",
-        "description": "is GasElectricityHeatingCooling?"
+        "example": true,
+        "description": "Are goods being released from excise duty suspension?"
       },
-      "isSuppliedByIntermediary": {
-        "type": "boolean",
-        "description": "is SuppliedByIntermediary?"
+      "taxCode": {
+        "type": "string",
+        "description": "Tax code from the source system"
       },
-      "isAncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities": {
+      "isTemporaryStorage": {
         "type": "boolean",
-        "description": "is AncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities?"
+        "example": true,
+        "description": "Goods placed under temporary storage?"
       },
-      "isWelfareAndSocialSecurity": {
+      "storedInDesignatedArea": {
         "type": "boolean",
-        "description": "is WelfareAndSocialSecurity?"
+        "example": true,
+        "description": "Stored in designated area?"
       },
-      "isArticle59Service": {
+      "isCustomsWarehouse": {
         "type": "boolean",
-        "description": "is Article59Service?"
+        "example": true,
+        "description": "Goods placed in customs warehouse?"
       },
-      "isAncillaryTransportServices": {
+      "isDonatedItem": {
         "type": "boolean",
-        "description": "is AncillaryTransportServices?"
+        "example": true,
+        "description": "Is/Was the item donated to the charity?"
       },
-      "isOnboardShipAircraftTrain": {
+      "underExciseDutySuspension": {
         "type": "boolean",
-        "description": "on board ship, aircraft ot train?"
+        "example": true,
+        "description": "Goods under excise duty suspension?"
       },
-      "isServicesConnectedWithImmovableProperty": {
+      "isCustomsProcedure": {
         "type": "boolean",
-        "description": "is ServicesConnectedWithImmovableProperty?"
+        "example": true,
+        "description": "Goods placed under customs procedure?"
       },
-      "isHireMeansOfTransport": {
+      "isExciseWarehouse": {
         "type": "boolean",
-        "description": "is HireMeansOfTransport?"
+        "example": true,
+        "description": "Excise warehouse regime?"
       },
-      "isValuationsOfAndWorkOnMoveableProperty": {
-        "type": "boolean",
-        "description": "is ValuationsOfAndWorkOnMoveableProperty?"
-      },
-      "isFinancialService": {
-        "type": "boolean",
-        "description": "is FinancialService?"
-      },
-      "isMedicalCare": {
-        "type": "boolean",
-        "description": "is MedicalCare?"
-      },
-      "isExciseGood": {
-        "type": "boolean",
-        "description": "is ExciseGood?"
-      },
-      "isTransportationOfGoods": {
-        "type": "boolean",
-        "description": "is TransportationOfGoods?"
-      },
-      "isAdmission": {
-        "type": "boolean",
-        "description": "is Admission?"
-      },
-      "isSecondHand": {
-        "type": "boolean",
-        "description": "is second hand?"
-      },
-      "isTransportationOfPersons": {
-        "type": "boolean",
-        "description": "is TransportationOfPersons?"
-      },
-      "isInsuranceOrReinsurance": {
-        "type": "boolean",
-        "description": "is InsuranceOrReinsurance?"
-      },
-      "isNewMeansOfTransport": {
-        "type": "boolean",
-        "description": "is NewMeansOfTransport?"
-      },
-      "isImmovableProperty": {
-        "type": "boolean",
-        "description": "is ImmovableProperty?"
-      },
-      "isService": {
-        "type": "boolean",
-        "description": "is Service?"
-      },
-      "isEnergyGood": {
-        "type": "boolean",
+      "taxCodeDescription": {
+        "type": "string",
         "description": ""
       },
-      "isGood": {
+      "cashAccounting": {
         "type": "boolean",
-        "description": "is Good?"
+        "example": true,
+        "description": "Using cash accounting?"
       },
-      "isDigitalService": {
+      "isInwardProcessing": {
         "type": "boolean",
-        "description": "is DigitalService?"
+        "example": true,
+        "description": "Goods placed under inward processing?"
       },
-      "isRestaurantOrCateringService": {
+      "isForProvisioningOfVessel": {
         "type": "boolean",
-        "description": "is RestaurantOrCateringService?"
+        "example": true,
+        "description": "For the provisioning of a vessel?"
+      },
+      "customsDutyAndLevyAmount": {
+        "type": "number",
+        "description": "Other duties taxes and levies on import"
+      },
+      "soldOnMarketplace": {
+        "type": "boolean",
+        "example": true,
+        "description": "Sold on a marketplace?"
+      },
+      "intrastatVatScheme": {
+        "type": "string",
+        "enum": [
+          "10",
+          "11",
+          "19",
+          "20",
+          "10",
+          "21",
+          "25",
+          "26",
+          "29",
+          "31"
+        ],
+        "description": "VAT scheme for intrastat"
+      },
+      "linkedToExport": {
+        "type": "boolean",
+        "example": true,
+        "description": "is the transaction related to an export?"
+      },
+      "warehouseFiscalRepresentative": {
+        "type": "boolean",
+        "example": true,
+        "description": "Appointed local fiscal representative?"
+      },
+      "insuranceAmount": {
+        "type": "number",
+        "description": "Insurance amount"
+      },
+      "businessUsage": {
+        "type": "number",
+        "description": "Percentage business use?"
+      },
+      "customsClearanceReference": {
+        "type": "string",
+        "description": ""
+      },
+      "splitPayment": {
+        "type": "boolean",
+        "example": true,
+        "description": "Split payment?"
+      },
+      "isFreeZone": {
+        "type": "boolean",
+        "example": true,
+        "description": "Goods placed in free zone?"
+      },
+      "durationOfHire": {
+        "type": "number",
+        "description": "Duration of hire (days)?"
+      },
+      "callOffStock": {
+        "type": "boolean",
+        "example": true,
+        "description": "Are the goods supplied under a call-off stock arrangement?"
+      },
+      "isBusinessEntertainment": {
+        "type": "boolean",
+        "example": true,
+        "description": "For business entertainment"
+      },
+      "isVatWarehouseRemoval": {
+        "type": "boolean",
+        "example": true,
+        "description": "Are the goods removed from a VAT warehouse?"
+      },
+      "natureOfTransaction": {
+        "type": "number",
+        "description": "Nature of transaction (intrastat)"
+      },
+      "reportingCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": ""
+      },
+      "chainTransactionInvoice1": {
+        "type": "boolean",
+        "example": true,
+        "description": "First invoice on chain transaction?"
+      },
+      "optedNotToTax": {
+        "type": "boolean",
+        "example": true,
+        "description": "Has the supplier opted not to tax?"
+      },
+      "isVatWarehouse": {
+        "type": "boolean",
+        "example": true,
+        "description": "VAT warehouse regime?"
+      },
+      "isSuccessiveSupply": {
+        "type": "boolean",
+        "example": true,
+        "description": "Part of a successive (chain) supply?"
+      },
+      "betweenContractors": {
+        "type": "boolean",
+        "example": true,
+        "description": "Transaction between two contractors?"
+      },
+      "shippingAndHandlingAmount": {
+        "type": "number",
+        "description": "Shipping and handling amount"
+      },
+      "isExternalTransit": {
+        "type": "boolean",
+        "example": true,
+        "description": "Goods under external transit (T1) procedure?"
       }
     }
   },
-  "date": {
+  "transportTerms": {
     "type": "object",
     "properties": {
-      "dateOfTransaction": {
+      "transport": {
         "type": "string",
-        "format": "date",
-        "description": "What is the date of the transaction?"
+        "enum": [
+          "Seller",
+          "Buyer",
+          "Third-party on behalf of seller",
+          "Third-party on behalf of buyer",
+          "None",
+          "Use incoterm"
+        ],
+        "description": "Which party takes care of the transport?"
       },
-      "docDate": {
-        "type": "string",
-        "format": "date",
-        "description": "What is the date of the document?"
+      "modeOfTransport": {
+        "type": "number",
+        "description": "Mode of transport (intrastat)"
       },
-      "supplyDate": {
+      "importerOfRecord": {
         "type": "string",
-        "format": "date",
-        "description": "Date of supply of good or service?"
+        "enum": [
+          "Seller",
+          "Buyer"
+        ],
+        "description": "Which party is the importer?"
       },
-      "originalDocDate": {
-        "type": "string",
-        "format": "date",
-        "description": "Date of original invoice"
+      "consignmentValue": {
+        "type": "number",
+        "description": "Value of the consignment?"
       },
-      "paymentDate": {
+      "incoterm": {
         "type": "string",
-        "format": "date",
-        "description": "What is the date of payment?"
+        "enum": [
+          "DDP",
+          "DPU",
+          "DAP",
+          "DDU",
+          "CFR",
+          "CIF",
+          "CPT",
+          "CIP",
+          "FOB",
+          "FAS",
+          "FCA",
+          "FPC",
+          "EXW"
+        ],
+        "description": "Incoterm"
+      }
+    }
+  },
+  "landAndPropertyDetail": {
+    "type": "object",
+    "properties": {
+      "isNewBuild": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the property a new build?"
+      },
+      "firstGrant": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is it the first grant of a major interest?"
+      },
+      "isConversion": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is this a conversion?"
+      },
+      "substantialReconstruction": {
+        "type": "boolean",
+        "example": true,
+        "description": "Has the property undergone substantial reconstruction?"
+      },
+      "conversionType": {
+        "type": "string",
+        "enum": [
+          "Non-residential to residential",
+          "Residential conversion (house to flat, 1 flat to 2 flats, etc)",
+          "Other"
+        ],
+        "description": "Type of conversion"
+      },
+      "leaseholdLength": {
+        "type": "number",
+        "description": "How long is the leasehold?"
+      },
+      "certficateOfUsage": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is there a certificate to confirm the property is for relevant residential or relevant charitable? "
+      },
+      "suppliedAsPartOfConstructionService": {
+        "type": "boolean",
+        "example": true,
+        "description": "Have the materials been supplied as part of a construction service?"
+      },
+      "typeOfBuilding": {
+        "type": "string",
+        "enum": [
+          "Dwelling",
+          "Relevant residential",
+          "Relevant charitable",
+          "Protected building",
+          "Commercial",
+          "Other"
+        ],
+        "description": "What is the type of building"
+      },
+      "freehold": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is it a freehold?"
+      }
+    }
+  },
+  "locations": {
+    "type": "object",
+    "properties": {
+      "shipToCounty": {
+        "type": "string",
+        "description": "Ship to county"
+      },
+      "departureCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the country of departure?"
+      },
+      "shipFrom": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Ship from"
+      },
+      "placeOfGoods": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the place of the goods?"
+      },
+      "placeOfService": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Where was the service carried out?"
+      },
+      "shipToPostcode": {
+        "type": "string",
+        "description": "Ship to postcode"
+      },
+      "regionShipFrom": {
+        "type": "string",
+        "description": "Region that the goods are shipped from"
+      },
+      "shipToAddress1": {
+        "type": "string",
+        "description": ""
+      },
+      "shipFromCity": {
+        "type": "string",
+        "description": "Ship from city"
+      },
+      "shipFromAddress2": {
+        "type": "string",
+        "description": "Ship from address 2"
+      },
+      "shipToAddress3": {
+        "type": "string",
+        "description": "Ship to address line 3"
+      },
+      "shipToCity": {
+        "type": "string",
+        "description": "Ship to city"
+      },
+      "regionShipTo": {
+        "type": "string",
+        "description": ""
+      },
+      "shipFromAddress3": {
+        "type": "string",
+        "description": "Ship from address line 3"
+      },
+      "shipTo": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Ship to"
+      },
+      "shipToAddress2": {
+        "type": "string",
+        "description": "Ship to address 2"
+      },
+      "shipFromAddress1": {
+        "type": "string",
+        "description": "Ship from address 1"
+      },
+      "arrivalCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the country of arrival?"
+      },
+      "countryImport": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the country of importation?"
+      },
+      "shipFromCounty": {
+        "type": "string",
+        "description": "Ship from country"
+      },
+      "shipFromPostcode": {
+        "type": "string",
+        "description": "Ship from postcode"
+      }
+    }
+  },
+  "vehicleDetail": {
+    "type": "object",
+    "properties": {
+      "kilometresTravelled": {
+        "type": "number",
+        "description": "How many kilometres has the vehicles travelled?"
+      },
+      "numberOfSeats": {
+        "type": "number",
+        "description": "How many seats in the vehicle"
+      },
+      "cubicCapacity": {
+        "type": "number",
+        "description": "What is the cubic capacity?"
+      },
+      "length": {
+        "type": "number",
+        "description": "What is the length of the vessel?"
+      },
+      "power": {
+        "type": "number",
+        "description": "What is the vehicle power?"
+      },
+      "age": {
+        "type": "number",
+        "description": "How old is the vehicle?"
+      }
+    }
+  },
+  "documentPayment": {
+    "type": "object",
+    "properties": {
+      "paymentTerms": {
+        "type": "string",
+        "description": "A textual description of the payment terms that apply to the amount due for payment (Including description of possible penalties). In case the Amount due for payment (BT-115) is positive, either the Payment due date (BT-9) or the Payment terms (BT-20) shall be present."
+      },
+      "paymentMeansCode": {
+        "type": "string",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36",
+          "37",
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44",
+          "45",
+          "46",
+          "47",
+          "48",
+          "49",
+          "50",
+          "51",
+          "52",
+          "53",
+          "54",
+          "55",
+          "56",
+          "57",
+          "58",
+          "59",
+          "60",
+          "61",
+          "62",
+          "63",
+          "64",
+          "65",
+          "66",
+          "67",
+          "68",
+          "69",
+          "70",
+          "74",
+          "75",
+          "76",
+          "77",
+          "78",
+          "91",
+          "92",
+          "93",
+          "94",
+          "95",
+          "96",
+          "97",
+          "98",
+          "ZZZ"
+        ],
+        "description": "The means, expressed as code, for how a payment is expected to be or has been settled."
+      },
+      "payeeFinancialAccountName": {
+        "type": "string",
+        "description": "The name of the payment account, at a payment service provider, to which payment should be made."
+      },
+      "payeeFinancialInstitutionBranchId": {
+        "type": "string",
+        "description": "An identifier for the payment service provider where a payment account is located. Such as a BIC or a national clearing code where required. No identification scheme Identifier to be used."
+      },
+      "paymentId": {
+        "type": "string",
+        "description": "A textual value used to establish a link between the payment and the Invoice, issued by the Seller. Used for creditor's critical reconciliation information. This information element helps the Seller to assign an incoming payment to the relevant payment process."
+      },
+      "payeeFinancialAccountId": {
+        "type": "string",
+        "description": "A unique identifier of the financial payment account, at a payment service provider, to which payment should be made. Such as IBAN or BBAN."
       }
     }
   },
   "item": {
     "type": "object",
     "properties": {
-      "vatRateToCheck": {
-        "type": "string",
-        "description": "What is the VAT rate to be checked by Auditor?"
-      },
-      "measurement": {
-        "type": "string",
-        "description": "Total of a unit of measurement"
-      },
-      "originalValueCurrency2": {
-        "type": "string",
-        "description": ""
-      },
-      "deductibleInputVat": {
-        "type": "string",
-        "description": "What amount of the input VAT is deductible?"
-      },
-      "totalAmountCurrency4": {
-        "type": "string",
-        "description": ""
-      },
-      "totalAmount": {
-        "type": "string",
-        "description": "What is the document total?"
-      },
-      "supplementaryUnits": {
-        "type": "string",
-        "description": "Supplementary units for intrastat"
-      },
-      "value": {
-        "type": "string",
-        "description": "What is the amount of the item?"
-      },
-      "description": {
-        "type": "string",
-        "description": "Item description"
-      },
-      "deductibleInputVatRate": {
-        "type": "string",
-        "description": "Deductible rate?"
-      },
-      "totalAmountCurrency2": {
-        "type": "string",
-        "description": ""
-      },
-      "userRateCategory": {
-        "type": "string",
-        "enum": [
-          "Auto",
-          "S",
-          "M",
-          "R",
-          "L",
-          "Z",
-          "P",
-          "K"
-        ],
-        "description": "User defined rate category"
-      },
-      "reversedVatRateToCheck": {
-        "type": "string",
-        "description": ""
-      },
       "unit": {
         "type": "string",
         "enum": [
@@ -240,130 +608,52 @@
         ],
         "description": "What is the item unit?"
       },
-      "origin": {
-        "type": "string",
-        "description": "What is the origin of the goods?"
+      "totalAmountCurrency4": {
+        "type": "number",
+        "description": ""
       },
-      "itemBeingStored": {
+      "vatAmountToCheckCurrency4": {
+        "type": "number",
+        "description": ""
+      },
+      "tariffCode": {
         "type": "string",
-        "enum": [
-          "Alcohol (other)",
-          "Beer",
-          "Coal and coke",
-          "Diesel",
-          "Electricity",
-          "Fuel",
-          "Gas oil",
-          "Heavy fuel oil (HFO)",
-          "Hydrogen",
-          "Kerosene",
-          "Petrol (leaded)",
-          "Liquid petroleum gas (LPG)",
-          "Lubricant",
-          "Mineral oils (including propane and butane; also including crude petroleum oils)",
-          "Natural gas",
-          "Petroleum",
-          "Spirits (alcohol)",
-          "Tobacco",
-          "Petrol (unleaded)",
-          "Wine",
-          "Potatoes",
-          "Olives",
-          "Coconuts, Brazil nuts and cashew nuts",
-          "Other nuts",
-          "Coffee, not roasted",
-          "Tea",
-          "Cereals",
-          "Husked rice",
-          "Grains and oil seeds (including soya beans) and oleaginous fruits",
-          "Vegetable oils and fats and their fractions, whether or not refined, but not chemically modified",
-          "Raw sugar",
-          "Cocoa beans, whole or broken, raw or roasted",
-          "Chemicals",
-          "Rubber, in primary forms or in plates, sheets or strip",
-          "Wool",
-          "Silver",
-          "Platinum (palladium, rhodium)",
-          "Copper",
-          "Nickel",
-          "Aluminium",
-          "Lead",
-          "Zinc",
-          "Tin",
-          "Other goods"
-        ],
-        "description": "What item is being stored?"
+        "description": "What is the tariff code?"
+      },
+      "vatAmountToCheckCurrency2": {
+        "type": "number",
+        "description": ""
       },
       "originalValue": {
-        "type": "string",
+        "type": "number",
         "description": "Tax base on the original invoice"
       },
-      "vatAmountToCheckCurrency3": {
-        "type": "string",
-        "description": ""
+      "supplementaryUnits": {
+        "type": "number",
+        "description": "Supplementary units for intrastat"
       },
-      "deductibleInputVatCurrency2": {
+      "description": {
         "type": "string",
-        "description": ""
+        "description": "Item description"
       },
-      "originalValueCurrency3": {
-        "type": "string",
-        "description": ""
+      "vatRateToCheck": {
+        "type": "number",
+        "description": "What is the VAT rate to be checked by Auditor?"
       },
-      "deductibleInputVatCurrency3": {
-        "type": "string",
-        "description": ""
-      },
-      "valueCurrency3": {
-        "type": "string",
-        "description": ""
-      },
-      "lineNumber": {
-        "type": "string",
-        "description": ""
-      },
-      "reversedVatAmountToCheckCurrency3": {
-        "type": "string",
-        "description": ""
-      },
-      "originalVatAmountToCheckCurrency2": {
-        "type": "string",
-        "description": ""
-      },
-      "totalAmountCurrency3": {
-        "type": "string",
+      "reversedVatAmountToCheck": {
+        "type": "number",
         "description": ""
       },
       "rateCategory": {
         "type": "string",
         "description": "What is the VAT rate category?"
       },
-      "vatAmountToCheck": {
-        "type": "string",
-        "description": "What is the VAT amount to be checked by Auditor?"
-      },
-      "deductibleInputVatCurrency4": {
-        "type": "string",
+      "reversedVatAmountToCheckCurrency3": {
+        "type": "number",
         "description": ""
       },
-      "itemID": {
-        "type": "string",
-        "description": "What is the ID of the item?"
-      },
-      "originalVatAmountToCheck": {
-        "type": "string",
-        "description": "Amount of VAT on the original invoice"
-      },
-      "reversedVatAmountToCheck": {
-        "type": "string",
-        "description": ""
-      },
-      "valueCurrency2": {
-        "type": "string",
-        "description": ""
-      },
-      "originalVatAmountToCheckCurrency3": {
-        "type": "string",
+      "reversedVatAmountToCheckCurrency4": {
+        "type": "number",
         "description": ""
       },
       "itemType": {
@@ -436,6 +726,7 @@
           "Estate agency services",
           "Extended warranty",
           "Financial services that aren't exempt",
+          "Firewood (logs, billets, woodchips, brushwood etc)",
           "Food and beverage (non-alcoholic)",
           "Footwear",
           "Fuel",
@@ -453,6 +744,10 @@
           "Heating or cooling energy through networks",
           "Heavy fuel oil (HFO)",
           "Hire of a motor vehicle",
+          "Hire of a bicycle",
+          "Hire of a trailer",
+          "Hire of a semi-trailer",
+          "Hire of a agricultural vehicles",
           "Hire of a vessel",
           "Hire of an aircraft",
           "Hire of goods",
@@ -485,6 +780,7 @@
           "Machinery",
           "Magazines",
           "Marketing",
+          "Manufactured goods",
           "Media streaming",
           "Medical equipment",
           "Medication",
@@ -612,401 +908,264 @@
           "Works of art",
           "Writers, composers, etc",
           "Zinc",
-          "Hire of a bicycle",
-          "Hire of a trailer",
-          "Hire of a semi-trailer",
-          "Hire of a agricultural vehicles",
-          "Firewood (logs, billets, woodchips, brushwood etc)",
-          "Manufactured goods",
           "Admission to virtual events",
           "Electric vehicle charging"
         ],
         "description": "Item"
       },
-      "originalVatAmountToCheckCurrency4": {
-        "type": "string",
+      "valueCurrency3": {
+        "type": "number",
         "description": ""
       },
-      "tariffCode": {
-        "type": "string",
-        "description": "What is the tariff code?"
-      },
-      "quantity": {
-        "type": "string",
-        "description": "Quantity"
-      },
-      "statisticalValue": {
-        "type": "string",
-        "description": "Statistical value for intrastat "
-      },
-      "originalValueCurrency4": {
-        "type": "string",
+      "deductibleInputVatCurrency4": {
+        "type": "number",
         "description": ""
       },
-      "vatAmountToCheckCurrency4": {
+      "itemID": {
         "type": "string",
-        "description": ""
-      },
-      "reversedVatAmountToCheckCurrency4": {
-        "type": "string",
-        "description": ""
+        "description": "What is the ID of the item?"
       },
       "valueCurrency4": {
-        "type": "string",
+        "type": "number",
         "description": ""
       },
-      "vatAmountToCheckCurrency2": {
+      "originalVatAmountToCheckCurrency3": {
+        "type": "number",
+        "description": ""
+      },
+      "userRateCategory": {
         "type": "string",
+        "enum": [
+          "Auto",
+          "S",
+          "M",
+          "R",
+          "L",
+          "Z",
+          "P",
+          "K",
+          "A",
+          "B"
+        ],
+        "description": "User defined rate category"
+      },
+      "originalValueCurrency3": {
+        "type": "number",
+        "description": ""
+      },
+      "deductibleInputVatCurrency3": {
+        "type": "number",
+        "description": ""
+      },
+      "reversedVatRateToCheck": {
+        "type": "number",
         "description": ""
       },
       "reversedVatAmountToCheckCurrency2": {
-        "type": "string",
-        "description": ""
-      }
-    }
-  },
-  "landAndPropertyDetail": {
-    "type": "object",
-    "properties": {
-      "substantialReconstruction": {
-        "type": "boolean",
-        "description": "Has the property undergone substantial reconstruction?"
-      },
-      "leaseholdLength": {
-        "type": "string",
-        "description": "How long is the leasehold?"
-      },
-      "isNewBuild": {
-        "type": "boolean",
-        "description": "Is the property a new build?"
-      },
-      "typeOfBuilding": {
-        "type": "string",
-        "enum": [
-          "Dwelling",
-          "Relevant residential",
-          "Relevant charitable",
-          "Protected building",
-          "Commercial",
-          "Other"
-        ],
-        "description": "What is the type of building"
-      },
-      "freehold": {
-        "type": "boolean",
-        "description": "Is it a freehold?"
-      },
-      "suppliedAsPartOfConstructionService": {
-        "type": "boolean",
-        "description": "Have the materials been supplied as part of a construction service?"
-      },
-      "certficateOfUsage": {
-        "type": "boolean",
-        "description": "Is there a certificate to confirm the property is for relevant residential or relevant charitable? "
-      },
-      "conversionType": {
-        "type": "string",
-        "enum": [
-          "Non-residential to residential",
-          "Residential conversion (house to flat, 1 flat to 2 flats, etc)",
-          "Other"
-        ],
-        "description": "Type of conversion"
-      },
-      "firstGrant": {
-        "type": "boolean",
-        "description": "Is it the first grant of a major interest?"
-      },
-      "isConversion": {
-        "type": "boolean",
-        "description": "Is this a conversion?"
-      }
-    }
-  },
-  "transactionDetail": {
-    "type": "object",
-    "properties": {
-      "isTemporaryStorage": {
-        "type": "boolean",
-        "description": "Goods placed under temporary storage?"
-      },
-      "isDonatedItem": {
-        "type": "boolean",
-        "description": "Is/Was the item donated to the charity?"
-      },
-      "isBusinessEntertainment": {
-        "type": "boolean",
-        "description": "For business entertainment"
-      },
-      "isCustomsProcedureRemoval": {
-        "type": "boolean",
-        "description": "Are goods removed from a customs procedure?"
-      },
-      "cashAccounting": {
-        "type": "boolean",
-        "description": "Using cash accounting?"
-      },
-      "intrastatVatScheme": {
-        "type": "string",
-        "enum": [
-          "10",
-          "11",
-          "19",
-          "20",
-          "10",
-          "21",
-          "25",
-          "26",
-          "29",
-          "31"
-        ],
-        "description": "VAT scheme for intrastat"
-      },
-      "underExciseDutySuspension": {
-        "type": "boolean",
-        "description": "Goods under excise duty suspension?"
-      },
-      "storedInDesignatedArea": {
-        "type": "boolean",
-        "description": "Stored in designated area?"
-      },
-      "isVatWarehouseRemoval": {
-        "type": "boolean",
-        "description": "Are the goods removed from a VAT warehouse?"
-      },
-      "isVatWarehouse": {
-        "type": "boolean",
-        "description": "VAT warehouse regime?"
-      },
-      "optedNotToTax": {
-        "type": "boolean",
-        "description": "Has the supplier opted not to tax?"
-      },
-      "linkedToExport": {
-        "type": "boolean",
-        "description": "is the transaction related to an export?"
-      },
-      "taxCodeDescription": {
-        "type": "string",
+        "type": "number",
         "description": ""
       },
-      "durationOfHire": {
+      "deductibleInputVatCurrency2": {
+        "type": "number",
+        "description": ""
+      },
+      "originalValueCurrency2": {
+        "type": "number",
+        "description": ""
+      },
+      "totalAmountCurrency2": {
+        "type": "number",
+        "description": ""
+      },
+      "quantity": {
+        "type": "number",
+        "description": "Quantity"
+      },
+      "origin": {
         "type": "string",
-        "description": "Duration of hire (days)?"
+        "description": "What is the origin of the goods?"
       },
-      "callOffStock": {
-        "type": "boolean",
-        "description": "Are the goods supplied under a call-off stock arrangement?"
+      "originalVatAmountToCheckCurrency4": {
+        "type": "number",
+        "description": ""
       },
-      "statisticalProcedure": {
+      "totalAmountCurrency3": {
+        "type": "number",
+        "description": ""
+      },
+      "originalVatAmountToCheckCurrency2": {
+        "type": "number",
+        "description": ""
+      },
+      "originalVatAmountToCheck": {
+        "type": "number",
+        "description": "Amount of VAT on the original invoice"
+      },
+      "itemBeingStored": {
         "type": "string",
-        "description": "Statistical procedure for intrastat"
+        "enum": [
+          "Alcohol (other)",
+          "Beer",
+          "Coal and coke",
+          "Diesel",
+          "Electricity",
+          "Fuel",
+          "Gas oil",
+          "Heavy fuel oil (HFO)",
+          "Hydrogen",
+          "Kerosene",
+          "Petrol (leaded)",
+          "Liquid petroleum gas (LPG)",
+          "Lubricant",
+          "Mineral oils (including propane and butane; also including crude petroleum oils)",
+          "Natural gas",
+          "Petroleum",
+          "Spirits (alcohol)",
+          "Tobacco",
+          "Petrol (unleaded)",
+          "Wine",
+          "Potatoes",
+          "Olives",
+          "Coconuts, Brazil nuts and cashew nuts",
+          "Other nuts",
+          "Coffee, not roasted",
+          "Tea",
+          "Cereals",
+          "Husked rice",
+          "Grains and oil seeds (including soya beans) and oleaginous fruits",
+          "Vegetable oils and fats and their fractions, whether or not refined, but not chemically modified",
+          "Raw sugar",
+          "Cocoa beans, whole or broken, raw or roasted",
+          "Chemicals",
+          "Rubber, in primary forms or in plates, sheets or strip",
+          "Wool",
+          "Silver",
+          "Platinum (palladium, rhodium)",
+          "Copper",
+          "Nickel",
+          "Aluminium",
+          "Lead",
+          "Zinc",
+          "Tin",
+          "Other goods"
+        ],
+        "description": "What item is being stored?"
       },
-      "relevantContractsTax": {
-        "type": "boolean",
-        "description": "Under Relevant Contracts Tax / CIS?"
+      "totalAmount": {
+        "type": "number",
+        "description": "What is the document total?"
       },
-      "insuranceAmount": {
-        "type": "string",
-        "description": "Insurance amount"
+      "lineNumber": {
+        "type": "number",
+        "description": ""
       },
-      "betweenContractors": {
-        "type": "boolean",
-        "description": "Transaction between two contractors?"
+      "measurement": {
+        "type": "number",
+        "description": "Total of a unit of measurement"
       },
-      "isExciseWarehouse": {
-        "type": "boolean",
-        "description": "Excise warehouse regime?"
+      "vatAmountToCheckCurrency3": {
+        "type": "number",
+        "description": ""
       },
-      "taxCode": {
-        "type": "string",
-        "description": "Tax code from the source system"
+      "deductibleInputVatRate": {
+        "type": "number",
+        "description": "Deductible rate?"
       },
-      "chainTransactionInvoice1": {
-        "type": "boolean",
-        "description": "First invoice on chain transaction?"
+      "deductibleInputVat": {
+        "type": "number",
+        "description": "What amount of the input VAT is deductible?"
       },
-      "chainTransactionInvoice2": {
-        "type": "boolean",
-        "description": "Second invoice on chain transaction?"
+      "statisticalValue": {
+        "type": "number",
+        "description": "Statistical value for intrastat "
       },
-      "splitPayment": {
-        "type": "boolean",
-        "description": "Split payment?"
+      "valueCurrency2": {
+        "type": "number",
+        "description": ""
       },
-      "isExternalTransit": {
-        "type": "boolean",
-        "description": "Goods under external transit (T1) procedure?"
+      "value": {
+        "type": "number",
+        "description": "What is the amount of the item?"
       },
-      "soldOnMarketplace": {
-        "type": "boolean",
-        "description": "Sold on a marketplace?"
+      "originalValueCurrency4": {
+        "type": "number",
+        "description": ""
       },
-      "isForProvisioningOfVessel": {
-        "type": "boolean",
-        "description": "For the provisioning of a vessel?"
-      },
-      "natureOfTransaction": {
-        "type": "string",
-        "description": "Nature of transaction (intrastat)"
-      },
-      "isInwardProcessing": {
-        "type": "boolean",
-        "description": "Goods placed under inward processing?"
-      },
-      "ExciseDutySuspensionRelease": {
-        "type": "boolean",
-        "description": "Are goods being released from excise duty suspension?"
-      },
-      "isCustomsWarehouse": {
-        "type": "boolean",
-        "description": "Goods placed in customs warehouse?"
-      },
-      "warehouseFiscalRepresentative": {
-        "type": "boolean",
-        "description": "Appointed local fiscal representative?"
-      },
-      "businessUsage": {
-        "type": "string",
-        "description": "Percentage business use?"
-      },
-      "shippingAndHandlingAmount": {
-        "type": "string",
-        "description": "Shipping and handling amount"
-      },
-      "isForProvisioningOfAirline": {
-        "type": "boolean",
-        "description": "For the provisioning of an airline?"
-      },
-      "isCustomsProcedure": {
-        "type": "boolean",
-        "description": "Goods placed under customs procedure?"
-      },
-      "isFreeZone": {
-        "type": "boolean",
-        "description": "Goods placed in free zone?"
-      },
-      "optedToTax": {
-        "type": "boolean",
-        "description": "Has the supplier opted to tax?"
-      },
-      "customsDutyAndLevyAmount": {
-        "type": "string",
-        "description": "Other duties taxes and levies on import"
-      },
-      "isSuccessiveSupply": {
-        "type": "boolean",
-        "description": "Part of a successive (chain) supply?"
-      },
-      "importedUnderDefermentScheme": {
-        "type": "boolean",
-        "description": "Are the goods imported under an import VAT deferment scheme?"
+      "vatAmountToCheck": {
+        "type": "number",
+        "description": "What is the VAT amount to be checked by Auditor?"
       }
     }
   },
-  "buyer": {
+  "seller": {
     "type": "object",
     "properties": {
-      "countriesVATRegistration": {
+      "warehouseLicenceNumber": {
         "type": "string",
-        "description": "In which countries does the customer have a VAT registration?"
+        "description": "Seller's VAT / excise warehouse licence number"
+      },
+      "combinationGroupID": {
+        "type": "string",
+        "description": "What is the name of the combination group this company belongs to?"
+      },
+      "isRegisteredForToms": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the seller registered for the Tour Operator Margin Scheme?"
       },
       "incorporationId": {
         "type": "string",
         "description": "Company incorporation Id"
       },
-      "buyerExciseNumber": {
-        "type": "string",
-        "description": "What is the customer's excise number?"
-      },
-      "city": {
-        "type": "string",
-        "description": ""
-      },
-      "isCharity": {
+      "isHospital": {
         "type": "boolean",
-        "description": "Is the buyer a charity?"
-      },
-      "countriesExciseRegistration": {
-        "type": "boolean",
-        "description": "In which countries does the customer have a VAT registration?"
-      },
-      "exportScheme": {
-        "type": "boolean",
-        "description": "Is the buyer registered with the export scheme?"
+        "example": true,
+        "description": "Is the seller a hospital?"
       },
       "id": {
         "type": "string",
-        "description": "What is the customer's company ID?"
+        "description": "What is the supplier's company ID?"
       },
-      "establishedCountry": {
+      "registrationThreshold": {
+        "type": "boolean",
+        "example": true,
+        "description": "Exceeded registration threshold?"
+      },
+      "countryNonUnionOssId": {
         "type": "string",
         "minLength": 2,
         "maxLength": 2,
         "example": "GB",
-        "description": "In which country is the buyer established?"
+        "description": "Country of non-Union OSS Id"
       },
-      "isTrader": {
-        "type": "boolean",
-        "description": "Is the customer a trader of the item?"
-      },
-      "warehouseLicenceNumber": {
+      "postCode": {
         "type": "string",
-        "description": "Buyer's VAT / excise warehouse licence number"
-      },
-      "customerOrPrincipal": {
-        "type": "string",
-        "enum": [
-          "Customer",
-          "Principal"
-        ],
-        "description": "Supply made directly to the Customer, or to a Principal?"
-      },
-      "isTravelAgent": {
-        "type": "boolean",
-        "description": "Is the buyer a travel agent?"
-      },
-      "isAirline": {
-        "type": "boolean",
-        "description": "Is the customer a airline that carries passengers or goods?"
-      },
-      "_id": {
-        "type": "string",
-        "description": "Internal Buyer ID"
-      },
-      "countriesImportDefermentLicence": {
-        "type": "string",
-        "description": "In which countries does the customer have a licence for import deferment?"
+        "description": "What is the postcode of the ship from address?"
       },
       "exciseNumberCountry": {
         "type": "string",
         "minLength": 2,
         "maxLength": 2,
         "example": "GB",
-        "description": "What is the country of the supplier's excise number?"
+        "description": "What is the country of the seller's excise ID?"
       },
-      "localTaxId": {
+      "sellerExciseNumber": {
         "type": "string",
-        "description": ""
+        "description": "What is the supplier's excise number?"
       },
-      "buyerVatId": {
-        "type": "string",
-        "description": "What is the customer's VAT ID?"
-      },
-      "isGasElecTaxableDealer": {
-        "type": "boolean",
-        "description": "Is the supply to a taxable dealer/trader?"
-      },
-      "establishmentReceivingSupply": {
+      "countrySellerIossId": {
         "type": "string",
         "minLength": 2,
         "maxLength": 2,
         "example": "GB",
-        "description": "Which establishment is receiving the supply?"
+        "description": "What is the country of the IOSS Id?"
       },
-      "postCode": {
+      "countryUnionOssId": {
         "type": "string",
-        "description": "What is the postcode of the ship to address?"
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Country of Union OSS Id"
       },
       "vatIdType": {
         "type": "string",
@@ -1018,9 +1177,224 @@
         ],
         "description": "What type of VAT registration is it?"
       },
-      "isRegisteredConsignee": {
+      "name": {
+        "type": "string",
+        "description": "Name of supplier"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "Taxable person",
+          "Non-taxable legal person",
+          "Private person",
+          "European Union body",
+          "Embassy",
+          "International body",
+          "NATO"
+        ],
+        "description": "What is the seller type?"
+      },
+      "sellerIossId": {
+        "type": "string",
+        "description": "What is the seller's IOSS ID?"
+      },
+      "sellerNonUnionOssId": {
+        "type": "string",
+        "description": "What is the seller's non-Union OSS ID?"
+      },
+      "countriesVATRegistration": {
+        "type": "string",
+        "description": "In which countries does the supplier have a VAT registration?"
+      },
+      "vatIdCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the country of the supplier's VAT ID?"
+      },
+      "isEligibleEducationalBody": {
         "type": "boolean",
-        "description": "Is the customer a registered consignee?"
+        "example": true,
+        "description": "Is the supplier an eligible educational body?"
+      },
+      "isCharity": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the seller a charity?"
+      },
+      "establishmentMakingSupply": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Which establishment is making the supply"
+      },
+      "sellerUnionOssId": {
+        "type": "string",
+        "description": "What is the seller's Union OSS ID?"
+      },
+      "registeredConsignor": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the supplier a registered consignor?"
+      },
+      "buildingNumber": {
+        "type": "number",
+        "description": ""
+      },
+      "county": {
+        "type": "string",
+        "description": ""
+      },
+      "_id": {
+        "type": "string",
+        "description": "Internal Seller ID"
+      },
+      "isTravelAgent": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the seller a travel agent?"
+      },
+      "vatGroupID": {
+        "type": "string",
+        "description": "What is the name of the VAT Group this company belongs to?"
+      },
+      "specialSolidarityContribution": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is Special Solidarity Contribution (CSS) applicable?"
+      },
+      "establishedCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "In which country is the seller established?"
+      },
+      "euDistanceSellingThreshold": {
+        "type": "boolean",
+        "example": true,
+        "description": "Exceeded EUR 10k in calendar year (Post-July 21)?"
+      },
+      "sellerVatId": {
+        "type": "string",
+        "description": "What is the seller's VAT ID?"
+      },
+      "registeredForDistanceSales": {
+        "type": "boolean",
+        "example": true,
+        "description": "Registered for distance sales in ship to country (Pre-July 21)?"
+      },
+      "localTaxId": {
+        "type": "string",
+        "description": ""
+      },
+      "countriesFixedEstablishment": {
+        "type": "string",
+        "description": "In which countries does the seller have a fixed establishment?"
+      },
+      "address": {
+        "type": "string",
+        "description": ""
+      },
+      "countriesImportDefermentLicence": {
+        "type": "string",
+        "description": "In which countries does the seller have a licence for import deferment?"
+      },
+      "countriesExciseRegistration": {
+        "type": "string",
+        "description": "In which countries does the supplier have an excise registration?"
+      },
+      "city": {
+        "type": "string",
+        "description": ""
+      }
+    }
+  },
+  "buyer": {
+    "type": "object",
+    "properties": {
+      "countriesVATRegistration": {
+        "type": "string",
+        "description": "In which countries does the customer have a VAT registration?"
+      },
+      "buyerExciseNumber": {
+        "type": "string",
+        "description": "What is the customer's excise number?"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of customer?"
+      },
+      "address": {
+        "type": "string",
+        "description": ""
+      },
+      "isRegisteredForToms": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the buyer registered for the Tour Operator Margin Scheme?"
+      },
+      "postCode": {
+        "type": "string",
+        "description": "What is the postcode of the ship to address?"
+      },
+      "buyerVatId": {
+        "type": "string",
+        "description": "What is the customer's VAT ID?"
+      },
+      "exciseNumberCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "What is the country of the supplier's excise number?"
+      },
+      "isGasElecTaxableDealer": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the supply to a taxable dealer/trader?"
+      },
+      "establishedCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "In which country is the buyer established?"
+      },
+      "_id": {
+        "type": "string",
+        "description": "Internal Buyer ID"
+      },
+      "establishmentReceivingSupply": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Which establishment is receiving the supply?"
+      },
+      "incorporationId": {
+        "type": "string",
+        "description": "Company incorporation Id"
+      },
+      "customerOrPrincipal": {
+        "type": "string",
+        "enum": [
+          "Customer",
+          "Principal"
+        ],
+        "description": "Supply made directly to the Customer, or to a Principal?"
+      },
+      "isTravelAgent": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the buyer a travel agent?"
+      },
+      "isAirline": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the customer a airline that carries passengers or goods?"
       },
       "type": {
         "type": "string",
@@ -1035,17 +1409,18 @@
         ],
         "description": "What is the buyer type?"
       },
-      "name": {
-        "type": "string",
-        "description": "Name of customer?"
-      },
-      "isHospital": {
+      "isVessel": {
         "type": "boolean",
-        "description": "Is the buyer a hospital?"
+        "example": true,
+        "description": "Is the customer a vessel that carries passengers or goods?"
       },
-      "combinationGroupID": {
+      "localTaxId": {
         "type": "string",
-        "description": "What is the name of the combination group this company belongs to?"
+        "description": ""
+      },
+      "city": {
+        "type": "string",
+        "description": ""
       },
       "vatIdCountry": {
         "type": "string",
@@ -1054,108 +1429,138 @@
         "example": "GB",
         "description": "What is the country of the buyer's VAT ID?"
       },
-      "countriesFixedEstablishment": {
-        "type": "string",
-        "description": "In which countries does the customer have a fixed establishment?"
-      },
-      "isRegisteredForToms": {
-        "type": "boolean",
-        "description": "Is the buyer registered for the Tour Operator Margin Scheme?"
-      },
       "vatGroupID": {
         "type": "string",
         "description": "What is the name of the VAT Group this company belongs to?"
       },
-      "address": {
+      "isRegisteredConsignee": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the customer a registered consignee?"
+      },
+      "isHospital": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the buyer a hospital?"
+      },
+      "countriesFixedEstablishment": {
+        "type": "string",
+        "description": "In which countries does the customer have a fixed establishment?"
+      },
+      "warehouseLicenceNumber": {
+        "type": "string",
+        "description": "Buyer's VAT / excise warehouse licence number"
+      },
+      "exportScheme": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the buyer registered with the export scheme?"
+      },
+      "countriesExciseRegistration": {
+        "type": "boolean",
+        "example": true,
+        "description": "In which countries does the customer have a VAT registration?"
+      },
+      "isCharity": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the buyer a charity?"
+      },
+      "id": {
+        "type": "string",
+        "description": "What is the customer's company ID?"
+      },
+      "vatIdType": {
+        "type": "string",
+        "enum": [
+          "Fixed establishment",
+          "Fiscal representative",
+          "Direct",
+          "Main establishment"
+        ],
+        "description": "What type of VAT registration is it?"
+      },
+      "isTrader": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the customer a trader of the item?"
+      },
+      "county": {
         "type": "string",
         "description": ""
       },
-      "isVessel": {
-        "type": "boolean",
-        "description": "Is the customer a vessel that carries passengers or goods?"
+      "combinationGroupID": {
+        "type": "string",
+        "description": "What is the name of the combination group this company belongs to?"
+      },
+      "countriesImportDefermentLicence": {
+        "type": "string",
+        "description": "In which countries does the customer have a licence for import deferment?"
       }
     }
   },
-  "locations": {
+  "date": {
     "type": "object",
     "properties": {
-      "shipFrom": {
+      "supplyDate": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Ship from"
+        "format": "date",
+        "example": "2030-12-30",
+        "description": "Date of supply of good or service?"
       },
-      "arrivalCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of arrival?"
-      },
-      "regionShipTo": {
-        "type": "string",
+      "dueDate": {
+        "type": "boolean",
+        "example": true,
         "description": ""
       },
-      "placeOfService": {
+      "docDate": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Where was the service carried out?"
+        "format": "date",
+        "example": "2030-12-30",
+        "description": "What is the date of the document?"
       },
-      "placeOfGoods": {
+      "originalDocDate": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the place of the goods?"
+        "format": "date",
+        "example": "2030-12-30",
+        "description": "Date of original invoice"
       },
-      "shipTo": {
+      "paymentDate": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Ship to"
+        "format": "date",
+        "example": "2030-12-30",
+        "description": "What is the date of payment?"
       },
-      "countryImport": {
+      "dateOfTransaction": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of importation?"
-      },
-      "departureCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of departure?"
-      },
-      "regionShipFrom": {
-        "type": "string",
-        "description": "Region that the goods are shipped from"
+        "format": "date",
+        "example": "2030-12-30",
+        "description": "What is the date of the transaction?"
       }
     }
   },
   "document": {
     "type": "object",
     "properties": {
+      "discount": {
+        "type": "number",
+        "description": "Discount percentage?"
+      },
+      "currency3": {
+        "type": "string",
+        "description": ""
+      },
       "docNumber": {
         "type": "string",
         "description": "What is the document number?"
       },
-      "originalDocNumber": {
+      "vatInclusiveOrExclusive": {
         "type": "string",
-        "description": "Number of original invoice"
-      },
-      "exchangeRate": {
-        "type": "string",
-        "description": "What is the exchange rate?"
-      },
-      "currency": {
-        "type": "string",
-        "description": "What is the currency on the document?"
+        "enum": [
+          "VAT inclusive",
+          "VAT exclusive"
+        ],
+        "description": "VAT inclusive / exclusive"
       },
       "currency4": {
         "type": "string",
@@ -1163,7 +1568,12 @@
       },
       "documentStatus": {
         "type": "boolean",
+        "example": true,
         "description": "Is this a cancelled document?"
+      },
+      "permitNumber": {
+        "type": "string",
+        "description": ""
       },
       "docType": {
         "type": "string",
@@ -1195,6 +1605,22 @@
         ],
         "description": "Type of document"
       },
+      "atcud": {
+        "type": "string",
+        "description": "ATCUD number"
+      },
+      "exchangeRate": {
+        "type": "number",
+        "description": "What is the exchange rate?"
+      },
+      "currency2": {
+        "type": "string",
+        "description": ""
+      },
+      "originalDocNumber": {
+        "type": "string",
+        "description": "Number of original invoice"
+      },
       "invoiceType": {
         "type": "string",
         "enum": [
@@ -1204,102 +1630,192 @@
         ],
         "description": "Invoice type"
       },
-      "lineNumber": {
-        "type": "string",
-        "description": "Line number on the document"
-      },
       "quantity": {
-        "type": "string",
+        "type": "number",
         "description": "Quantity"
       },
-      "currency2": {
+      "currency": {
         "type": "string",
+        "description": "What is the currency on the document?"
+      },
+      "lineNumber": {
+        "type": "number",
+        "description": "Line number on the document"
+      }
+    }
+  },
+  "itemProperties": {
+    "type": "object",
+    "properties": {
+      "isMedicalCare": {
+        "type": "boolean",
+        "example": true,
+        "description": "is MedicalCare?"
+      },
+      "isArticle59Service": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Article59Service?"
+      },
+      "isRestaurantOrCateringService": {
+        "type": "boolean",
+        "example": true,
+        "description": "is RestaurantOrCateringService?"
+      },
+      "isOnboardShipAircraftTrain": {
+        "type": "boolean",
+        "example": true,
+        "description": "on board ship, aircraft ot train?"
+      },
+      "isExciseGood": {
+        "type": "boolean",
+        "example": true,
+        "description": "is ExciseGood?"
+      },
+      "isNewMeansOfTransport": {
+        "type": "boolean",
+        "example": true,
+        "description": "is NewMeansOfTransport?"
+      },
+      "isValuationsOfAndWorkOnMoveableProperty": {
+        "type": "boolean",
+        "example": true,
+        "description": "is ValuationsOfAndWorkOnMoveableProperty?"
+      },
+      "isDigitalService": {
+        "type": "boolean",
+        "example": true,
+        "description": "is DigitalService?"
+      },
+      "isAncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities": {
+        "type": "boolean",
+        "example": true,
+        "description": "is AncillaryServicesRelatingToCulturalArtisticSportingScientificEducationalEntertainmentFairsExhibitionsOrSimilarActivities?"
+      },
+      "isPublicPostalService": {
+        "type": "boolean",
+        "example": true,
+        "description": "is PublicPostalService?"
+      },
+      "isSecondHand": {
+        "type": "boolean",
+        "example": true,
+        "description": "is second hand?"
+      },
+      "isSuppliedByIntermediary": {
+        "type": "boolean",
+        "example": true,
+        "description": "is SuppliedByIntermediary?"
+      },
+      "isCapitalGood": {
+        "type": "boolean",
+        "example": true,
+        "description": "is CapitalGood?"
+      },
+      "isMovableProperty": {
+        "type": "boolean",
+        "example": true,
+        "description": "is MovableProperty?"
+      },
+      "isHireMeansOfTransport": {
+        "type": "boolean",
+        "example": true,
+        "description": "is HireMeansOfTransport?"
+      },
+      "isTheSupplyOfStaffServices": {
+        "type": "boolean",
+        "example": true,
+        "description": "is TheSupplyOfStaffServices?"
+      },
+      "isServicesConnectedWithImmovableProperty": {
+        "type": "boolean",
+        "example": true,
+        "description": "is ServicesConnectedWithImmovableProperty?"
+      },
+      "isService": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Service?"
+      },
+      "isTransportationOfGoods": {
+        "type": "boolean",
+        "example": true,
+        "description": "is TransportationOfGoods?"
+      },
+      "isInsuranceOrReinsurance": {
+        "type": "boolean",
+        "example": true,
+        "description": "is InsuranceOrReinsurance?"
+      },
+      "isImmovableProperty": {
+        "type": "boolean",
+        "example": true,
+        "description": "is ImmovableProperty?"
+      },
+      "isEducation": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Education?"
+      },
+      "isTransportationOfPersons": {
+        "type": "boolean",
+        "example": true,
+        "description": "is TransportationOfPersons?"
+      },
+      "isAncillaryTransportServices": {
+        "type": "boolean",
+        "example": true,
+        "description": "is AncillaryTransportServices?"
+      },
+      "isAdmission": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Admission?"
+      },
+      "isGasElectricityHeatingCooling": {
+        "type": "boolean",
+        "example": true,
+        "description": "is GasElectricityHeatingCooling?"
+      },
+      "isGood": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Good?"
+      },
+      "isWelfareAndSocialSecurity": {
+        "type": "boolean",
+        "example": true,
+        "description": "is WelfareAndSocialSecurity?"
+      },
+      "isGambling": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Gambling?"
+      },
+      "isAccommodation": {
+        "type": "boolean",
+        "example": true,
+        "description": "is Accommodation?"
+      },
+      "isFinancialService": {
+        "type": "boolean",
+        "example": true,
+        "description": "is FinancialService?"
+      },
+      "isEnergyGood": {
+        "type": "boolean",
+        "example": true,
         "description": ""
-      },
-      "currency3": {
-        "type": "string",
-        "description": ""
-      },
-      "discount": {
-        "type": "string",
-        "description": "Discount percentage?"
-      },
-      "atcud": {
-        "type": "string",
-        "description": "ATCUD number"
-      },
-      "vatInclusiveOrExclusive": {
-        "type": "string",
-        "enum": [
-          "VAT inclusive",
-          "VAT exclusive"
-        ],
-        "description": "VAT inclusive / exclusive"
       }
     }
   },
   "thirdParties": {
     "type": "object",
     "properties": {
-      "isMarketplace": {
-        "type": "boolean",
-        "description": "From marketplace perspective?"
-      },
-      "mpEstablishedCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "In which country is the marketplace established?"
-      },
-      "partyAEstablishmentCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Establishment country of Party A"
-      },
-      "filingAgentVatId": {
-        "type": "string",
-        "description": "VAT Id of the agent/fiscal representative"
-      },
       "partyCIsVessel": {
         "type": "boolean",
+        "example": true,
         "description": "Is the end customer a vessel?"
-      },
-      "partyCEstablishmentCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Establishment country of Party C"
-      },
-      "partyCVatIdCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "VAT ID country of Party C"
-      },
-      "filingAgentContactName": {
-        "type": "string",
-        "description": "Contact name of the agent/fiscal representative"
-      },
-      "filingAgentCompanyName": {
-        "type": "string",
-        "description": "Name of the agent/fiscal representative"
-      },
-      "mpRegisteredForOSS": {
-        "type": "boolean",
-        "description": "Is the marketplace registered for OSS?"
-      },
-      "intermediaryRegisteredForIOSS": {
-        "type": "boolean",
-        "description": "Is the intermediary registered for IOSS?"
-      },
-      "carrierRegisteredForSpecialArrangements": {
-        "type": "boolean",
-        "description": "Is the carrier registered for Special Arrangements?"
       },
       "partyAVatIdCountry": {
         "type": "string",
@@ -1312,295 +1828,395 @@
         "type": "string",
         "description": "Tax Id of the legal representative of the fiscal representative "
       },
-      "mpRegisteredForIOSS": {
-        "type": "boolean",
-        "description": "Is the marketplace registered for IOSS?"
-      },
       "filingAgentAddress": {
         "type": "string",
         "description": "Address of the agent/fiscal representative"
+      },
+      "filingAgentCompanyName": {
+        "type": "string",
+        "description": "Name of the agent/fiscal representative"
+      },
+      "partyCEstablishmentCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Establishment country of Party C"
+      },
+      "carrierRegisteredForSpecialArrangements": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the carrier registered for Special Arrangements?"
+      },
+      "intermediaryRegisteredForIOSS": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the intermediary registered for IOSS?"
+      },
+      "filingAgentContactName": {
+        "type": "string",
+        "description": "Contact name of the agent/fiscal representative"
+      },
+      "filingAgentVatId": {
+        "type": "string",
+        "description": "VAT Id of the agent/fiscal representative"
+      },
+      "mpRegisteredForOSS": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the marketplace registered for OSS?"
+      },
+      "isMarketplace": {
+        "type": "boolean",
+        "example": true,
+        "description": "From marketplace perspective?"
+      },
+      "partyAEstablishmentCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "Establishment country of Party A"
+      },
+      "mpRegisteredForIOSS": {
+        "type": "boolean",
+        "example": true,
+        "description": "Is the marketplace registered for IOSS?"
+      },
+      "mpEstablishedCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "In which country is the marketplace established?"
+      },
+      "partyCVatIdCountry": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "example": "GB",
+        "description": "VAT ID country of Party C"
       }
     }
   },
-  "transportTerms": {
+  "eInvoice": {
     "type": "object",
     "properties": {
-      "consignmentValue": {
+      "accountingCost": {
         "type": "string",
-        "description": "Value of the consignment?"
+        "description": "A textual value that specifies where to book the relevant data into the Buyer's financial accounts"
       },
-      "incoterm": {
+      "deliveryLocationSchemeId": {
         "type": "string",
         "enum": [
-          "DDP",
-          "DPU",
-          "DAP",
-          "DDU",
-          "CFR",
-          "CIF",
-          "CPT",
-          "CIP",
-          "FOB",
-          "FAS",
-          "FCA",
-          "FPC",
-          "EXW"
+          "0002",
+          "0003",
+          "0004",
+          "0005",
+          "0006",
+          "0007",
+          "0008",
+          "0009",
+          "0010",
+          "0011",
+          "0012",
+          "0013",
+          "0014",
+          "0015",
+          "0016",
+          "0017",
+          "0018",
+          "0019",
+          "0020",
+          "0021",
+          "0022",
+          "0023",
+          "0024",
+          "0025",
+          "0026",
+          "0027",
+          "0028",
+          "0029",
+          "0030",
+          "0031",
+          "0032",
+          "0033",
+          "0034",
+          "0035",
+          "0036",
+          "0037",
+          "0038",
+          "0039",
+          "0040",
+          "0041",
+          "0042",
+          "0043",
+          "0044",
+          "0045",
+          "0046",
+          "0047",
+          "0048",
+          "0049",
+          "0050",
+          "0051",
+          "0052",
+          "0053",
+          "0054",
+          "0055",
+          "0056",
+          "0057",
+          "0058",
+          "0059",
+          "0060",
+          "0061",
+          "0062",
+          "0063",
+          "0064",
+          "0065",
+          "0066",
+          "0067",
+          "0068",
+          "0069",
+          "0070",
+          "0071",
+          "0072",
+          "0073",
+          "0074",
+          "0075",
+          "0076",
+          "0077",
+          "0078",
+          "0079",
+          "0080",
+          "0081",
+          "0082",
+          "0083",
+          "0084",
+          "0085",
+          "0086",
+          "0087",
+          "0088",
+          "0089",
+          "0090",
+          "0091",
+          "0093",
+          "0094",
+          "0095",
+          "0096",
+          "0097",
+          "0098",
+          "0099",
+          "0100",
+          "0101",
+          "0102",
+          "0104",
+          "0105",
+          "0106",
+          "0107",
+          "0108",
+          "0109",
+          "0110",
+          "0111",
+          "0112",
+          "0113",
+          "0114",
+          "0115",
+          "0116",
+          "0117",
+          "0118",
+          "0119",
+          "0120",
+          "0121",
+          "0122",
+          "0123",
+          "0124",
+          "0125",
+          "0126",
+          "0127",
+          "0128",
+          "0129",
+          "0130",
+          "0131",
+          "0132",
+          "0133",
+          "0134",
+          "0135",
+          "0136",
+          "0137",
+          "0138",
+          "0139",
+          "0140",
+          "0141",
+          "0142",
+          "0143",
+          "0144",
+          "0145",
+          "0146",
+          "0147",
+          "0148",
+          "0149",
+          "0150",
+          "0151",
+          "0152",
+          "0153",
+          "0154",
+          "0155",
+          "0156",
+          "0157",
+          "0158",
+          "0159",
+          "0160",
+          "0161",
+          "0162",
+          "0163",
+          "0164",
+          "0165",
+          "0166",
+          "0167",
+          "0168",
+          "0169",
+          "0170",
+          "0171",
+          "0172",
+          "0173",
+          "0174",
+          "0175",
+          "0176",
+          "0177",
+          "0178",
+          "0179",
+          "0180",
+          "0183",
+          "0184",
+          "0185",
+          "0186",
+          "0187",
+          "0188",
+          "0189",
+          "0190",
+          "0191",
+          "0192",
+          "0193",
+          "0194",
+          "0195",
+          "0196",
+          "0197",
+          "0198",
+          "0199",
+          "0200",
+          "0201",
+          "0202",
+          "0203",
+          "0204",
+          "0205",
+          "0206",
+          "0207",
+          "0208",
+          "0209",
+          "0210",
+          "0211",
+          "0212",
+          "0213",
+          "0214",
+          "0215",
+          "0216",
+          "0217",
+          "0218",
+          "0219",
+          "0220",
+          "0221",
+          "0222",
+          "0223",
+          "0224",
+          "0225",
+          "0226",
+          "0227",
+          "0228",
+          "0229",
+          "0230"
         ],
-        "description": "Incoterm"
+        "description": ""
       },
-      "transport": {
+      "allowanceOrChargeAmount": {
+        "type": "boolean",
+        "example": true,
+        "description": ""
+      },
+      "sellerElectronicAddress": {
+        "type": "string",
+        "description": ""
+      },
+      "allowanceOrChargeReasonCode": {
         "type": "string",
         "enum": [
-          "Seller",
-          "Buyer",
-          "Third-party on behalf of seller",
-          "Third-party on behalf of buyer",
-          "None",
-          "Use incoterm"
+          "41",
+          "42",
+          "60",
+          "62",
+          "63",
+          "64",
+          "65",
+          "66",
+          "67",
+          "68",
+          "70",
+          "71",
+          "88",
+          "95",
+          "100",
+          "102",
+          "103",
+          "104",
+          "105"
         ],
-        "description": "Which party takes care of the transport?"
+        "description": "The reason for the document level allowance or charge, expressed as text. The Document level allowance reason code and the Document level allowance reason shall indicate the same allowance reason"
       },
-      "importerOfRecord": {
+      "deliveryLocationId": {
         "type": "string",
-        "enum": [
-          "Seller",
-          "Buyer"
-        ],
-        "description": "Which party is the importer?"
+        "description": "Peppol - An identifier for the location at which the goods and services are delivered."
       },
-      "modeOfTransport": {
+      "deliveryPartyName": {
         "type": "string",
-        "description": "Mode of transport (intrastat)"
+        "description": "Delivery party name"
+      },
+      "buyerReference": {
+        "type": "string",
+        "description": ""
+      },
+      "buyerElectronicAddress": {
+        "type": "string",
+        "description": ""
+      },
+      "documentNote": {
+        "type": "string",
+        "description": ""
       }
     }
   },
-  "seller": {
+  "accounting": {
     "type": "object",
     "properties": {
-      "countriesVATRegistration": {
-        "type": "string",
-        "description": "In which countries does the supplier have a VAT registration?"
-      },
-      "countryNonUnionOssId": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Country of non-Union OSS Id"
-      },
-      "countriesImportDefermentLicence": {
-        "type": "string",
-        "description": "In which countries does the seller have a licence for import deferment?"
-      },
-      "combinationGroupID": {
-        "type": "string",
-        "description": "What is the name of the combination group this company belongs to?"
-      },
-      "sellerNonUnionOssId": {
-        "type": "string",
-        "description": "What is the seller's non-Union OSS ID?"
-      },
-      "sellerUnionOssId": {
-        "type": "string",
-        "description": "What is the seller's Union OSS ID?"
-      },
-      "sellerVatId": {
-        "type": "string",
-        "description": "What is the seller's VAT ID?"
-      },
-      "registrationThreshold": {
-        "type": "boolean",
-        "description": "Exceeded registration threshold?"
-      },
-      "vatIdCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of the supplier's VAT ID?"
-      },
-      "countriesExciseRegistration": {
-        "type": "string",
-        "description": "In which countries does the supplier have a VAT registration?"
-      },
-      "address": {
-        "type": "string",
+      "bookingAmountExlVAT": {
+        "type": "number",
         "description": ""
       },
-      "localTaxId": {
+      "accountNumber": {
         "type": "string",
+        "description": "GL account number"
+      },
+      "bookingDate": {
+        "type": "string",
+        "format": "date",
+        "example": "2030-12-30",
         "description": ""
       },
-      "countrySellerIossId": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of the IOSS Id?"
-      },
-      "isRegisteredForToms": {
-        "type": "boolean",
-        "description": "Is the seller registered for the Tour Operator Margin Scheme?"
-      },
-      "vatIdType": {
-        "type": "string",
-        "enum": [
-          "Fixed establishment",
-          "Fiscal representative",
-          "Direct",
-          "Main establishment"
-        ],
-        "description": "What type of VAT registration is it?"
-      },
-      "postCode": {
-        "type": "string",
-        "description": "What is the postcode of the ship from address?"
-      },
-      "sellerIossId": {
-        "type": "string",
-        "description": "What is the seller's IOSS ID?"
-      },
-      "countriesFixedEstablishment": {
-        "type": "string",
-        "description": "In which countries does the seller have a fixed establishment?"
-      },
-      "isHospital": {
-        "type": "boolean",
-        "description": "Is the seller a hospital?"
-      },
-      "_id": {
-        "type": "string",
-        "description": "Internal Seller ID"
-      },
-      "incorporationId": {
-        "type": "string",
-        "description": "Company incorporation Id"
-      },
-      "buildingNumber": {
-        "type": "string",
+      "bookingAmountVAT": {
+        "type": "number",
         "description": ""
       },
-      "registeredForDistanceSales": {
-        "type": "boolean",
-        "description": "Registered for distance sales in ship to country (Pre-July 21)?"
-      },
-      "isEligibleEducationalBody": {
-        "type": "boolean",
-        "description": "Is the supplier an eligible educational body?"
-      },
-      "county": {
+      "bookingCurrency": {
         "type": "string",
         "description": ""
-      },
-      "type": {
-        "type": "string",
-        "enum": [
-          "Taxable person",
-          "Non-taxable legal person",
-          "Private person",
-          "European Union body",
-          "Embassy",
-          "International body",
-          "NATO"
-        ],
-        "description": "What is the seller type?"
-      },
-      "id": {
-        "type": "string",
-        "description": "What is the supplier's company ID?"
-      },
-      "establishedCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "In which country is the seller established?"
-      },
-      "city": {
-        "type": "string",
-        "description": ""
-      },
-      "sellerExciseNumber": {
-        "type": "string",
-        "description": "What is the supplier's excise number?"
-      },
-      "establishmentMakingSupply": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Which establishment is making the supply"
-      },
-      "registeredConsignor": {
-        "type": "boolean",
-        "description": "Is the supplier a registered consignor?"
-      },
-      "warehouseLicenceNumber": {
-        "type": "string",
-        "description": "Seller's VAT / excise warehouse licence number"
-      },
-      "isTravelAgent": {
-        "type": "boolean",
-        "description": "Is the seller a travel agent?"
-      },
-      "name": {
-        "type": "string",
-        "description": "Name of supplier"
-      },
-      "isCharity": {
-        "type": "boolean",
-        "description": "Is the seller a charity?"
-      },
-      "euDistanceSellingThreshold": {
-        "type": "boolean",
-        "description": "Exceeded EUR 10k in calendar year (Post-July 21)?"
-      },
-      "vatGroupID": {
-        "type": "string",
-        "description": "What is the name of the VAT Group this company belongs to?"
-      },
-      "countryUnionOssId": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "Country of Union OSS Id"
-      },
-      "exciseNumberCountry": {
-        "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
-        "example": "GB",
-        "description": "What is the country of the seller's excise ID?"
-      }
-    }
-  },
-  "vehicleDetail": {
-    "type": "object",
-    "properties": {
-      "cubicCapacity": {
-        "type": "string",
-        "description": "What is the cubic capacity?"
-      },
-      "kilometresTravelled": {
-        "type": "string",
-        "description": "How many kilometres has the vehicles travelled?"
-      },
-      "age": {
-        "type": "string",
-        "description": "How old is the vehicle?"
-      },
-      "numberOfSeats": {
-        "type": "string",
-        "description": "How many seats in the vehicle"
-      },
-      "length": {
-        "type": "string",
-        "description": "What is the length of the vessel?"
-      },
-      "power": {
-        "type": "string",
-        "description": "What is the vehicle power?"
       }
     }
   }
