@@ -617,7 +617,9 @@
           "Hire of a semi-trailer",
           "Hire of a agricultural vehicles",
           "Firewood (logs, billets, woodchips, brushwood etc)",
-          "Manufactured goods"
+          "Manufactured goods",
+          "Admission to virtual events",
+          "Electric vehicle charging"
         ],
         "description": "Item"
       },
