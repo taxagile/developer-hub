@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n ## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.3.1",
+    "version": "1.3.3",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -739,10 +739,10 @@
       "post": {
         "tags": ["VAT Data manager"],
         "summary": "Create an upload of data with data pipeline options.",
-        "description": "Send data in either json or multi-part form data. \n\n Providing options which link the upload to pipeline options like enrichment and sending to Filer or Auditor. \n\nIn **v1.3.1** we added validation to the json payload that dates are in the format 'YYYY-MM-DD'.",
+        "description": "Send data in either json or multi-part form data. \n\n Providing options which link the upload to pipeline options like enrichment and sending to Filer or Auditor. \n\nIn **v1.3.1** we added validation to the json payload that dates are in the format 'YYYY-MM-DD'. \n\nIn **v1.3.3** we added the ability to send JSON and use a data mapping to transform incomplete JSON into our Tax Agile JSON format.",
         "requestBody": {
           "required": true,
-          "description": "The request can be sent as an `application/json` in the request body, or a `multipart/form-data`. \n\n ### application/json \n\n An array of data [ vatDataModelSchema ] transactions, plus an options object which specifies data pipeline.  When sending Tax Agile data model format JSON, the mappingId should be set to 'default'.\n\n ### multipart/form-data \n\n The form two fields 'file' and 'options'. \n\n - The 'options' field takes a json {} with the pipeline options.\n\n - The 'file' field takes a file object which can be either an Excel xlsx file, or an Avalara iVAT Reporting XML file.\n\nIf sending the Avalara XML format you **must** set the Content-Type of the 'file' field to `application/vnd.avalara.ivat.reporting+xml` and the mappingId set to `vnd.avalara.ivat.reporting+xml`.\n\nCheck out the example in the Postman Sample Collection as the multipart/form-data request has it's own Content-Type, as does the 'options' field. \n\n #### Note: Maximum file size 5mb",
+          "description": "The request can be sent as an `application/json` in the ***request body***, or a `multipart/form-data` file. \n\n ### application/json \n\n The request body must be an object, containing a data and options object `{ data: [], options {}}`. The data array can be in ***vatDataModelSchema*** or a bespoke format and use a data mapping to transform the body. The options object specifies the data pipeline, stating if the data is sent to Filer and/or Auditor and the data mapping id to use.  When sending Tax Agile data model format JSON, the mappingId should be set to `default`.\n\n ### multipart/form-data \n\n The form has ***two fields*** `file` and `options`. \n\n - The 'options' field takes a json {} with the pipeline options.\n\n - The 'file' field takes a file object which can be either an Excel xlsx file, or an Avalara iVAT Reporting XML file.\n\nIf sending the Avalara XML format you **must** set the ***Content-Type** of the file field to `application/vnd.avalara.ivat.reporting+xml` and the mappingId set to `vnd.avalara.ivat.reporting+xml`.\n\nCheck out the example in the Postman Sample Collection as the multipart/form-data request has it's own Content-Type, as does the 'options' field. \n\n #### Note: Maximum file size 5mb",
           "content": {
             "application/json": {
               "schema": {
@@ -791,7 +791,7 @@
             }
           },
           "400": {
-            "description": "Bad request \n\n DMV001 - Invalid content-type in request header \n\n DMV002- Mapping id missing from request \n\n DMV003 - Data mapping record not found - check mappingId \n\n DMV005 - File not uploaded to storage \n\n DMV006 - Unhandled error \n\n DMV007 - Request body in an unexpected format. Check content-type is set correctly  \n\n DMV008 - Id is missing from request path \n\n DMV011 - Unhandled error \n\n DMV014 - Delete not available while still processing data \n\n DMV015 - Conflict: File already exists \n\n DMV016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n IO001 - File not found or not of a supported type",
+            "description": "Bad request \n\n DMV001 - Invalid content-type in request header \n\n DMV002 - Mapping id missing from request \n\n DMV003 - Data mapping record not found - check mappingId  \n\n DMV004 - Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` \n\n DMV005 - File not uploaded to storage \n\n DMV006 - Unhandled error \n\n DMV007 - Request body in an unexpected format. Check content-type is set correctly  \n\n DMV008 - Id is missing from request path \n\n DMV011 - Unhandled error \n\n DMV014 - Delete not available while still processing data \n\n DMV015 - Conflict: File already exists \n\n DMV016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n IO001 - File not found or not of a supported type",
             "content": {
               "application/json": {
                 "example": {

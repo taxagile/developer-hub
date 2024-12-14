@@ -1,4 +1,9 @@
 # Change Log
+### v1.3.3
+* Changed ``` POST /v1/datamanager/vat/uploads ``` to support a data mapping being used on a JSON body payload
+* Sample [Postman collection v1.3.3](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.3.postman_collection.json)
+
+
 ### v1.3.2
 * Updated the VAT Data Model schema in swagger docs
   * Previously we were not correctly representing the data type `number` in the schema documentation.
