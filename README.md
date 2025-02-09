@@ -9,7 +9,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.3.3-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.3.4-green.svg)]()
 
 
 ## Authentication
@@ -24,7 +24,6 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
   * Replaces the ```POST /v1/auditor/vat/audits``` resource as the way to send data to VAT Filer
 
 ## VAT Determination
-
 * Send a transaction for VAT Determination
   * Receiving back context rich error messaging if your transaction is missing a field required for the determination to complete
   * Returns an analysis for the transaction
