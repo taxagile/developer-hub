@@ -1,4 +1,9 @@
 # Change Log
+### v1.3.5
+* Changed ``` GET /v1/determination/vat/transactions/:id ``` to return a more specific value in the field `source`. Previously it would state `api` but not it states `calculator-api`.
+* Sample [Postman collection v1.3.5](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.5.postman_collection.json)
+
+
 ### v1.3.4
 * Changed ``` POST /v1/datamanager/vat/uploads ``` to add more validation multpart/form-data use-case, returning more detailed error codes/messages
 * Sample (same as v1.3.3 no changes) [Postman collection v1.3.3](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.3.postman_collection.json)
