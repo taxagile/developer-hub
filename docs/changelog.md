@@ -1,8 +1,23 @@
 # Change Log
+### v1.3.6
+* Introduced the Companies resource within the 'Developer Previews' folder of the Sample Postman collection. These are previews and are declared with the `v0` versioning so may change without notice. We would welcome feedback on any issues found on these endpoints, so we can move to `v1` published endpoints in early 2026.
+  * Preview ``` POST /v0/companies ```
+  * Preview ``` GET /v0/companies ```
+  * Preview ``` GET /v0/companies/{id} ```
+  * Preview ``` PUT /v0/companies/{id} ```
+  * Preview ``` DELETE /v0/companies/{id} ```
+* Sample [Postman collection v1.3.6](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.6.postman_collection.json)
+
+> **TLS minimum version 1.2** 
+> 
+> With this release, we planned to disable earlier TLS versions and disable the CBC ciphers. However, due to this release being made on 29/Nov between Black Friday and Cyber Monday; we postponed this change, until our next release. 
+>
+> Please ensure your API client is supporting TLS 1.2.
+
+
 ### v1.3.5
 * Changed ``` GET /v1/determination/vat/transactions/:id ``` to return a more specific value in the field `source`. Previously it would state `api` but not it states `calculator-api`.
 * Sample [Postman collection v1.3.5](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.5.postman_collection.json)
-
 
 ### v1.3.4
 * Changed ``` POST /v1/datamanager/vat/uploads ``` to add more validation multpart/form-data use-case, returning more detailed error codes/messages

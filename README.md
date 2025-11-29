@@ -9,7 +9,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.3.5-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.3.6-green.svg)]()
 
 
 ## Authentication
@@ -47,7 +47,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 ## Jump to:
 * [Swagger API docs](https://taxagile.github.io/developer-hub)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.5.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.6.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 ## Need help?
