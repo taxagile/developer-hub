@@ -1,5 +1,13 @@
+<img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
+
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
+
 # Change Log
-### v1.3.6
+### v1.3.7 - 2025-12-05
+* TLS minimum version of 1.2 is now enforced, with weaker CBC ciphers not offered.
+* We added a [Coming soon](coming-soon.md) page to this Developer Hub to give you some early visibility of API changes in development.
+
+### v1.3.6 - 2025-11-29
 * Introduced the Companies resource within the 'Developer Previews' folder of the Sample Postman collection. These are previews and are declared with the `v0` versioning so may change without notice. We would welcome feedback on any issues found on these endpoints, so we can move to `v1` published endpoints in early 2026.
   * Preview ``` POST /v0/companies ```
   * Preview ``` GET /v0/companies ```

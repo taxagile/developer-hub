@@ -1,6 +1,6 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
 
 # Getting started
 The Tax Agile API is a RESTful implementation closely following [Microsoft API design guidance](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) 
