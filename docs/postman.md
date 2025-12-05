@@ -1,6 +1,6 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md) \|  [Postman](postman.md) \| [Swagger](../docs/swagger/index.html) \| [Change log](changelog.md)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
 
 # Postman sample collection
 The Postman collection is available to help you get started integrating to the Tax Agile API; and is published with

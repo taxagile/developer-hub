@@ -1,6 +1,6 @@
 <img src="docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md)
+[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md) \| [Coming soon](docs/coming-soon.md)
 
 # Tax Agile - Developer Hub
 The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile via RESTful web services. 
@@ -9,7 +9,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.3.6-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.3.7-green.svg)]()
 
 
 ## Authentication
