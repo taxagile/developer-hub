@@ -4,9 +4,6 @@
 
 # Coming soon
 ## Q4/2025
-### Calculator API - v1 changes
-Additional data will be provided in the response body, we are building them to minimise the impact, so existing fields won't be changing their name or path in the response.  This is expected to be released in December (exact time depends on QA).
-
 ### VAT Filer - v0 preview
 We are continuing our implentation of VAT Filer using the API, this has so far included some Alpha endpoints being used internally, which you may have seen demonstrated. As we complete this work, we will be moving the first endpoints into Developer Preview in late Q4/2025 or early Q1/2026 as `v0` endpoints which may still undergo signficant changes. 
 
@@ -23,7 +20,6 @@ If you are interested in integrating to this API and would like to be kept infor
 # Developer Previews
 ## VAT transactions
 We have included endpoints under the `datamanager/vat/transactions` route in the "Developer Preview" of the Postman sample collection. 
-
 
 ## Companies 
 Companies API is included from the v1.3.6 Postman sample collection under "Developer Previews" and includes POST, PUT, GET and DELETE operations. 
