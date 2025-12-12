@@ -3,7 +3,7 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
 
 # Change Log
-### v1.3.8 - 2025-12-11
+### v1.3.8 - 2025-12-12
 * The "VAT Determination - Response" object schema was updated to include additional attributes which affects:
   * Changed ```POST /v1/determination/vat/transactions```
   * Changed ```GET /v1/determination/vat/transactions```
