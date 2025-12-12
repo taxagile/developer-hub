@@ -3,7 +3,7 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n ## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.3.5",
+    "version": "1.3.8",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -3908,7 +3908,7 @@
           },      
           "taxPoint": {
             "type": "string",
-            "example": "2022-05-09T00:00:00.000Z",
+            "example": "2025-05-09T00:00:00.000Z",
             "title": "Tax point"
           },
           "deductibleRate": {
@@ -3950,7 +3950,19 @@
             "title": "Tax code",
             "type": "string",
             "example": ["A3", "IC0", "B0"],
-            "description": "Only returned when the request uses the useTaxCodes=true query parameter "
+            "description": "Only returned when the request uses the useTaxCodes=true query parameter"
+          },
+          "peppolVatexCode": {
+            "title": "Peppol tax code",
+            "type": "string",
+            "description": "Tax code for exempt and reverse charge transactions per Peppol specification",
+            "example": "VATEX-EU-79-C"
+          },
+          "peppolTaxCategoryId": {
+            "title": "Peppol tax code category",
+            "type": "string",
+            "description": "Tax category ID to define the VAT treatment per Peppol specification",
+            "example": "K"
           },
           "calculatedRate": {
             "type": "number",
@@ -3986,7 +3998,27 @@
               },
               "title": "Items"
             }
-          } 
+          },
+          "provisions": {
+            "title": "Provisions",
+            "description": "Legal provisions for the various categories of VAT, such as place of supply, exemption, etc.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "title": "Provision category name",
+                  "type": "string",
+                  "example": "Taxable_persons"
+                },
+                "text": {
+                  "title": "Provision name",
+                  "type": "string",
+                  "example": "Article_9_1"
+                }
+              }
+            }
+          }
         },
         "type": "object"
       },
