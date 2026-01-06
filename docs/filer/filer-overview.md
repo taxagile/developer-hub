@@ -74,7 +74,7 @@ These query parameters can be used in compound:
 ## Companies
 Having used the filings resource to understand the capabilities of VAT Filer, the next task is to setup a Filing and this is done within the `companies/` resource, as the obligation to make a filing is owned by the company and their VAT registrations.
 
-This is a snippet of a request body for ``` POST /v0/companies ``` which is providing values from the previous endpoint, to setup the AT VAT Return within the `filings` array `[]`: 
+This is a snippet of a request body for ``` POST /v0/companies ``` which is providing values from the previous endpoint, to setup the PL VAT Return within the `filings` array `[]`: 
 
 ```json
 {
