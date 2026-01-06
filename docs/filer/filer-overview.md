@@ -233,8 +233,9 @@ For example:
 ```
 
 **Questions**
+
 | Key | Usage |
-|:---- | :---- |
+|:----- | :---- |
 | `id` | Unique identifier which is then used when providing the answer. |
 | `sectionIndex` | Not fully implemented, automatic numbering is generated. | 
 | `orderIndex` | Not fully implemented, automatic numbering is generated. |
