@@ -9,8 +9,8 @@ which means we have methods (actions) that are performed against resources over 
 All requests and responses are in application/json, and we return consistent error objects in the form:
 ```json
 {
-"errorCode": "<code>",
-"message": "<text>"
+  "errorCode": "<code>",
+  "message": "<text>"
 }
 ```
 If more than one error is triggered, we will return the first, instead of returning an array of errors. 
@@ -72,4 +72,5 @@ to fetch it, you may get a 404 Not Found; but a second later it will be found.
 
 - [Swagger document](swagger/index.html)
 - [Postman sample collection](postman.md)
+- [Filer getting started](filer/filer-overview.md)
 

@@ -3,6 +3,15 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
 
 # Change Log
+### v1.3.9 - 2026-01-06
+* Introduced VAT Filer via the API - see [VAT Filer - Overview](filer/filer-overview.md) for in-depth getting started documentation
+  * Preview ``` GET /v0/filer/vat/filings ```
+  * Preview ``` GET /v0/filer/vat/filings/events ```
+  * Preview ``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/:id/metadata ```
+  * Preview ``` POST /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/:id ```
+* Sample [Postman collection v1.3.9](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.9.postman_collection.json)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.3.9)
+
 ### v1.3.8 - 2025-12-12
 * The "VAT Determination - Response" object schema was updated to include additional attributes which affects:
   * Changed ```POST /v1/determination/vat/transactions```
