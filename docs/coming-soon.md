@@ -17,7 +17,7 @@ Companies API is included from the v1.3.6 Postman sample collection under "Devel
 
 We plan to convert this preview into an official a documented `v1` resource in Q1/2026.
 
-### VAT Filer
+## VAT Filer
 We are continuing our implentation of VAT Filer using the API, and at the very start of 2026 we released some of the VAT Filer endpoints into Developer Preview marked with the `v0` version. 
 
 The journeys included are: 
