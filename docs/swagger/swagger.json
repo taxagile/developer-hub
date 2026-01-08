@@ -9,7 +9,7 @@
       "url": "https://vatcalc.freshdesk.com/support/home"
     },
     "x-logo": {
-      "url": "https://github.com/taxagile/developer-hub/blob/main/docs/Tax_Agile_Logo_White_on_Purple.png?raw=true&width=40",
+      "url": "https://github.com/taxagile/developer-hub/blob/main/docs/Tax_Agile_Logo_White_on_Purple_sml.png?raw=true",
       "alText": "Tax Agile logo" 
     }
   },
@@ -150,7 +150,7 @@
           },
           "400": {
             "x-summary": "Bad request",
-            "description": "Bad request\n| Code | Description |\n|------|-------------|\n| VA001 | Invalid content-type in request header |\n| VA002 | Mapping id missing from request |\n| VA003 | Data mapping record not found - check mappingId |\n| VA005 | File not uploaded to storage |\n| VA006 | Unhandled error |\n| VA007 | Request body in an unexpected format. Check content-type is set correctly |\n| VA008 | Id is missing from request path |\n| VA011 | Unhandled error |\n| VA014 | Delete not available while still processing data |\n| VA015 | Conflict: File already exists |\n| VA016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| IO001 | File not found or not of a supported type |",
+            "description": "Bad request\n| Error code | Message |\n|------|-------------|\n| VA001 | Invalid content-type in request header |\n| VA002 | Mapping id missing from request |\n| VA003 | Data mapping record not found - check mappingId |\n| VA005 | File not uploaded to storage |\n| VA006 | Unhandled error |\n| VA007 | Request body in an unexpected format. Check content-type is set correctly |\n| VA008 | Id is missing from request path |\n| VA011 | Unhandled error |\n| VA014 | Delete not available while still processing data |\n| VA015 | Conflict: File already exists |\n| VA016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -510,7 +510,7 @@
           },
           "400": {
             "x-summary": "Bad request",
-            "description": "Bad request\n\n| Code | Description |\n|------|-------------|\n| VD001 | Request body data malformed |\n| VD002 | Unhandled content-type |\n| VD003 | Missing field in data |\n| VD007 | Specified taxCodeScheme is not supported |",
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| VD001 | Request body data malformed |\n| VD002 | Unhandled content-type |\n| VD003 | Missing field in data |\n| VD007 | Specified taxCodeScheme is not supported |",
             "content": {
               "application/json": {
                 "example": {
@@ -798,7 +798,7 @@
           },
           "400": {
             "x-summary": "Bad request",
-            "description": "Bad request\n\n| Code | Description |\n|------|-------------|\n| DMV001 | Invalid content-type in request header |\n| DMV002 | Mapping id missing from request |\n| DMV003 | Data mapping record not found - check mappingId |\n| DMV004 | Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` |\n| DMV005 | File not uploaded to storage |\n| DMV006 | Unhandled error |\n| DMV007 | Request body in an unexpected format. Check content-type is set correctly |\n| DMV011 | Unhandled error |\n| DMV014 | Delete not available while still processing data |\n| DMV016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| DMV018 | Invalid field name: <field> expected 'file' |\n| DMV019 | File type not of supported type |\n| DMV020 | File content validation failed - content does not match claimed file type |\n| DMV021 | File type validation error |\n| DMV022 | No file was provided on request |\n| DMV023 | Error processing multipart form data |\n| IO001 | File not found or not of a supported type |",
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| DMV001 | Invalid content-type in request header |\n| DMV002 | Mapping id missing from request |\n| DMV003 | Data mapping record not found - check mappingId |\n| DMV004 | Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` |\n| DMV005 | File not uploaded to storage |\n| DMV006 | Unhandled error |\n| DMV007 | Request body in an unexpected format. Check content-type is set correctly |\n| DMV011 | Unhandled error |\n| DMV014 | Delete not available while still processing data |\n| DMV016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| DMV018 | Invalid field name: <field> expected 'file' |\n| DMV019 | File type not of supported type |\n| DMV020 | File content validation failed - content does not match claimed file type |\n| DMV021 | File type validation error |\n| DMV022 | No file was provided on request |\n| DMV023 | Error processing multipart form data |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -1081,6 +1081,98 @@
       }
     },
     "/v1/companies": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Create company",
+        "description": "Creates a new company from a JSON request body, returning a unique company internal ID.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/companyCreateRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Company created successfully",
+            "headers": {
+              "Location": {
+                "description": "URI of the created company.",
+                "schema": {
+                  "type": "string",
+                  "example": "/v1/companies/232e67cf-ff4c-41a2-a472-93a58b373ad4"
+                }
+              },
+              "Retry-After": {
+                "description": "Seconds to wait before retry.",
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "Unique internal ID of the created company. \n\nUsed in other API requests referencing `company/:id` as part of a resource path or query.",
+                      "example": "232e67cf-ff4c-41a2-a472-93a58b373ad4"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Error code | Message |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM002",
+                  "message": "Not allowed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": ["Companies"],
         "summary": "Get companies paginated list",
@@ -1155,190 +1247,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaginatedCompaniesResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/error401"
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "COM001",
-                  "message": "Internal error details"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["Companies"],
-        "summary": "Create single company",
-        "description": "Creates a new company.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CompanyCreateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Company created successfully",
-            "headers": {
-              "Location": {
-                "description": "URI of the created company",
-                "schema": {
-                  "type": "string",
-                  "example": "/v1/companies/123e4567-e89b-12d3-a456-426614174000"
-                }
-              },
-              "Retry-After": {
-                "description": "Seconds to wait before retry",
-                "schema": {
-                  "type": "integer",
-                  "example": 1
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string",
-                      "description": "UUID of the created company"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "x-summary": "Bad request",
-            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/error401"
-          },
-          "403": {
-            "description": "Forbidden - Insufficient permissions",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "COM002",
-                  "message": "Not allowed"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
-                },
-                "example": {
-                  "errorCode": "COM001",
-                  "message": "Internal error details"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/companies/import": {
-      "post": {
-        "tags": ["Companies"],
-        "summary": "Import array of companies",
-        "description": "Imports multiple companies at once. Optionally deletes existing companies first.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["data"],
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/CompanyCreateRequest"
-                    },
-                    "minItems": 1
-                  },
-                  "options": {
-                    "type": "object",
-                    "properties": {
-                      "deleteExisting": {
-                        "type": "boolean",
-                        "description": "If true, deletes all existing companies before importing"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Companies imported",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "string",
-                        "description": "UUID of created company, null if creation failed"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Company name"
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "Status of import for this company"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "x-summary": "Bad request",
-            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM006 | Invalid data in request |",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -1459,7 +1367,7 @@
           },
           "400": {
             "x-summary": "Bad request",
-            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM004 | Id is missing from request path |\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
+            "description": "Bad request - Invalid input\n\n| Error code | Message |\n|------|-------------|\n| COM004 | Id is missing from request path |\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
             "content": {
               "application/json": {
                 "schema": {
@@ -1582,6 +1490,99 @@
           }
         }
       }
+    },
+    "/v1/companies/import": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Import array of companies",
+        "description": "Imports multiple companies at once. Optionally deletes existing companies first.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["data"],
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/companyCreateRequestBody"
+                    },
+                    "minItems": 1
+                  },
+                  "options": {
+                    "type": "object",
+                    "properties": {
+                      "deleteExisting": {
+                        "type": "boolean",
+                        "description": "If true, deletes all existing companies before importing"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Companies imported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "UUID of created company, null if creation failed"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Company name"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status of import for this company"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Error code | Message |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM006 | Invalid data in request |",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -1591,7 +1592,7 @@
     },
     {
       "name": "Companies",
-      "description": "API for managing companies in the VAT calculation system"
+      "description": "Endpoints supporting create, list, update or delete operations on the companies resource."
     },
     {
       "name": "Operations",
@@ -3939,7 +3940,7 @@
           "contacts": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyContact"
+              "$ref": "#/components/schemas/companyContactRequest"
             }
           },
           "domains": {
@@ -3947,10 +3948,10 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/CompanyVatDomainProperties"
+                  "$ref": "#/components/schemas/companyVatDomainProperties"
                 },
                 {
-                  "$ref": "#/components/schemas/CompanySalesTaxDomainProperties"
+                  "$ref": "#/components/schemas/companySalesTaxDomainProperties"
                 }
               ]
             }
@@ -3968,7 +3969,9 @@
           },
           "financialYearStart": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2026-01-01"
           },
           "lastUpdatedDateTime": {
             "type": "string",
@@ -4013,68 +4016,73 @@
           }
         }
       },
-      "CompanyContact": {
+      "companyContactRequest": {
         "type": "object",
-        "required": ["contactId", "isDefault"],
         "properties": {
-          "contactId": {
-            "type": "string"
-          },
           "description": {
-            "type": "string"
+            "description": "A description of the contact record for example: 'Local agent'.",
+            "type": "string",
+            "example": "Local agent"
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "description": "Email address of contact.",
+            "format": "string",
+            "example": "user@localagent.com"
           },
           "name": {
-            "type": "string"
-          },
-          "isDefault": {
-            "type": "boolean"
+            "type": "string",
+            "description": "Contact's name",
+            "example": "Harry Jones"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "description":"Contact telephone number.",
+            "example": "+44 7707 001 007"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "If setting >1 contact, then one must be designated as the default contact.",
+            "example": true
           }
         }
       },
-      "CompanyCreateRequest": {
+      "companyCreateRequestBody": {
+        "title": "Company - Create request body",
         "type": "object",
-        "description": "Company object for creation (excludes _id, entryDateTime, lastUpdatedDateTime)",
+        "description": "",
         "required": [
-          "contacts",
-          "domains",
           "establishedCountry",
-          "linkedCompanies",
-          "locations",
           "name",
-          "sampleCompany"
+          "type"
         ],
         "properties": {
           "booksClosingDay": {
             "type": "integer",
-            "minimum": 1,
-            "maximum": 31
+            "example": 0
           },
           "companyCode": {
             "type": "string",
-            "description": "User-defined short code for the company"
+            "description": "User defined short code for the company, not mandatory but recommended to include at creation. \n\n This code is used when loading transaction data for the company and when setting up tax codes.",
+            "example": "ABC123"
           },
           "contacts": {
             "type": "array",
+            "description": "A company can have contacts and for future use it supports setting up >1 contact, but in current implementation only 1 contact is used by the application. \n\nAn empty array `[]` is valid.\n\nIf creating the contact as part of the company creation request, then any or all fields may be provided.",
             "items": {
-              "$ref": "#/components/schemas/CompanyContact"
+              "$ref": "#/components/schemas/companyContactRequest"
             }
           },
           "domains": {
             "type": "array",
+            "description": "Tax domain specific attributes for the company, for example VAT Domain attributes. \n\nThis is the main object sub-structure of a Company, focussing on the VAT Domain, this is where `registrations` and `filings` are provisioned.\n\nAn empty array `[]` is valid. \n\n *Note: This object supports different data formats for different tax domains. The documentation states `oneOf` and lists both VAT and Sales Tax domains, but at time of publishing (Q1/2026) only VAT Domain is implemanted.*",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/CompanyVatDomainProperties"
+                  "$ref": "#/components/schemas/companyVatDomainProperties"
                 },
                 {
-                  "$ref": "#/components/schemas/CompanySalesTaxDomainProperties"
+                  "$ref": "#/components/schemas/companySalesTaxDomainProperties"
                 }
               ]
             }
@@ -4083,40 +4091,42 @@
             "type": "string",
             "minLength": 2,
             "maxLength": 2,
-            "description": "ISO 3166-1 alpha-2 country code",
-            "example": "GB"
+            "description": "Main establishment country using ISO 3166-1 alpha-2 country code format.",
+            "example": "BE"
           },
           "financialYearStart": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Financial year start date in YYYY-MM-DD format.",
+            "example": "2026-01-01"
           },
           "linkedCompanies": {
             "type": "array",
+            "description": "Companies can be linked to other companies by defining parent-child relationships. \n\nThis can be where companyCode values are consolidated, or for VAT groups.",
             "items": {
               "$ref": "#/components/schemas/CompanyLink"
             }
           },
           "locations": {
             "type": "array",
+            "description": "A company can have locations and for future use it supports setting up >1 location, but in current implementation only 1 location is used by the application. \n\nAn empty array `[]` is valid.",
             "items": {
               "$ref": "#/components/schemas/CompanyLocation"
             }
           },
           "name": {
             "type": "string",
-            "description": "Company name"
+            "description": "Company name. \n\nThis is presented in the UX as the full human readable name of the company.",
+            "example": "ACME Packaging Europe GMBH"
           },
           "registrationNumber": {
             "type": "string",
-            "description": "Company registration number"
-          },
-          "sampleCompany": {
-            "type": "boolean",
-            "description": "Flag indicating if this is a sample company"
+            "description": "Company registration number.",
+            "example": "1234567890"
           },
           "type": {
             "type": "string",
-            "nullable": true,
+            "description": "Type of person. \n\nMust use one of the explicit string values listed in the enumeration list.",
             "enum": [
               "Taxable person",
               "Private individual",
@@ -4125,7 +4135,8 @@
               "Embassy",
               "International body",
               "NATO"
-            ]
+            ],
+            "example": "Taxable person"
           }
         }
       },
@@ -4232,8 +4243,9 @@
           }
         }
       },
-      "CompanySalesTaxDomainProperties": {
+      "companySalesTaxDomainProperties": {
         "type": "object",
+        "title": "Sales tax",
         "required": ["domainId", "nexus"],
         "properties": {
           "domainId": {
@@ -4329,67 +4341,115 @@
           }
         }
       },
-      "CompanyVatDomainProperties": {
+      "companyVatDomainProperties": {
         "type": "object",
+        "title": "VAT",
+        "description": "Properties of the company for VAT.",
         "required": ["domainId"],
         "properties": {
           "avalaraTaxCodesAllowed": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Recognize Avalara's generic tax codes?",
+            "example": false,
+            "default": false
           },
           "domainId": {
             "type": "string",
-            "enum": ["vat"]
+            "description": "Literal string identifying the type of domain record, for VAT it must be set to `vat`.",
+            "enum": ["vat"],
+            "example": "vat"
           },
           "isAirline": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company an airline?",
+            "default": false,
+            "example": false
           },
           "isCharity": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a charity?",
+            "default": false,
+            "example": false
           },
           "isGasElecTaxableDealer": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a gas or electricity dealer?",
+            "default": false,
+            "example": false
           },
           "isGovernment": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a Government?",
+            "default": false,
+            "example": false
           },
           "isHospital": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a hospital?",
+            "default": false,
+            "example": false
           },
           "isMarketplace": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a marketplace?",
+            "default": false,
+            "example": false
+
           },
           "isTrader": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a trader?",
+            "default": false,
+            "example": false
           },
           "isTravelAgent": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a travel agent?",
+            "default": false,
+            "example": false
           },
           "isVessel": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Is the company a vessel?",
+            "default": false,
+            "example": false
           },
           "mpEstablishedCountry": {
             "type": "string",
+            "description": "Marketplace established country using ISO 3166-1 alpha-2 country code.",
             "minLength": 2,
-            "maxLength": 2
+            "maxLength": 2,
+            "example": "NL"
           },
           "mpRegisteredForIOSS": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Marketplace registered for IOSS? \n\nOnly needs to be provided if company is a marketplace.",
+            "example": false
           },
           "mpRegisteredForOSS": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Marketplace registered for OSS? \n\nOnly needs to be provided if company is a marketplace.",
+            "example": false
           },
           "registrations": {
             "type": "array",
+            "description": "VAT Registration records.",
             "items": {
               "$ref": "#/components/schemas/CompanyVatRegistration"
             }
           },
           "reportSalesAlsoOnPurchaseSide": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Report sales also on purchase side?",
+            "example": false,
+            "default": false
           },
           "signConvention": {
             "type": "string",
-            "enum": ["", "allPos", "sap"]
+            "description": "Set handling of incoming data signing (positive/negative).",
+            "enum": ["", "allPos", "sap"],
+            "example": "allPos", 
+            "default": ""
           }
         }
       },
@@ -4796,7 +4856,7 @@
                     },
                     "exposure": {
                       "type": "integer",
-                      "example": 630
+                                           "example": 630
                     }
                   }
                 },
