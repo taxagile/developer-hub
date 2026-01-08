@@ -7,6 +7,10 @@
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
+    },
+    "x-logo": {
+      "url": "https://github.com/taxagile/developer-hub/blob/main/docs/Tax_Agile_Logo_White_on_Purple.png?raw=true&width=40",
+      "alText": "Tax Agile logo" 
     }
   },
   "externalDocs": {
@@ -145,7 +149,8 @@
             }
           },
           "400": {
-            "description": "Bad request \n\n VA001 - Invalid content-type in request header \n\n VA002 - Mapping id missing from request \n\n VA003 - Data mapping record not found - check mappingId \n\n VA005 - File not uploaded to storage \n\n VA006 - Unhandled error \n\n VA007 - Request body in an unexpected format. Check content-type is set correctly \n\n VA008 - Id is missing from request path \n\n VA011 - Unhandled error \n\n VA014 - Delete not available while still processing data \n\n VA015 - Conflict: File already exists \n\n VA016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n IO001 - File not found or not of a supported type",
+            "x-summary": "Bad request",
+            "description": "Bad request\n| Code | Description |\n|------|-------------|\n| VA001 | Invalid content-type in request header |\n| VA002 | Mapping id missing from request |\n| VA003 | Data mapping record not found - check mappingId |\n| VA005 | File not uploaded to storage |\n| VA006 | Unhandled error |\n| VA007 | Request body in an unexpected format. Check content-type is set correctly |\n| VA008 | Id is missing from request path |\n| VA011 | Unhandled error |\n| VA014 | Delete not available while still processing data |\n| VA015 | Conflict: File already exists |\n| VA016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -504,7 +509,8 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request \n\n VD001 - Request body data malformed \n\n VD002 - Unhandled content-type \n\n VD003 - Missing field in data \n\n VD007 - Specified taxCodeScheme is not supported",
+            "x-summary": "Bad request",
+            "description": "Bad request\n\n| Code | Description |\n|------|-------------|\n| VD001 | Request body data malformed |\n| VD002 | Unhandled content-type |\n| VD003 | Missing field in data |\n| VD007 | Specified taxCodeScheme is not supported |",
             "content": {
               "application/json": {
                 "example": {
@@ -791,7 +797,8 @@
             }
           },
           "400": {
-            "description": "Bad request \n\n DMV001 - Invalid content-type in request header \n\n DMV002 - Mapping id missing from request \n\n DMV003 - Data mapping record not found - check mappingId  \n\n DMV004 - Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` \n\n DMV005 - File not uploaded to storage \n\n DMV006 - Unhandled error \n\n DMV007 - Request body in an unexpected format. Check content-type is set correctly  \n\n DMV011 - Unhandled error \n\n DMV014 - Delete not available while still processing data  \n\n DMV016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n DMV018 - Invalid field name: <field> expected 'file' \n\n DMV019 - File type not of supported type \n\n DMV020 - File content validation failed - content does not match claimed file type \n\n DMV021 - File type validation error \n\n DMV022 - No file was provided on request \n\n DMV023 - Error processing multipart form data \n\n IO001 - File not found or not of a supported type",
+            "x-summary": "Bad request",
+            "description": "Bad request\n\n| Code | Description |\n|------|-------------|\n| DMV001 | Invalid content-type in request header |\n| DMV002 | Mapping id missing from request |\n| DMV003 | Data mapping record not found - check mappingId |\n| DMV004 | Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` |\n| DMV005 | File not uploaded to storage |\n| DMV006 | Unhandled error |\n| DMV007 | Request body in an unexpected format. Check content-type is set correctly |\n| DMV011 | Unhandled error |\n| DMV014 | Delete not available while still processing data |\n| DMV016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| DMV018 | Invalid field name: <field> expected 'file' |\n| DMV019 | File type not of supported type |\n| DMV020 | File content validation failed - content does not match claimed file type |\n| DMV021 | File type validation error |\n| DMV022 | No file was provided on request |\n| DMV023 | Error processing multipart form data |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -1219,7 +1226,8 @@
             }
           },
           "400": {
-            "description": "Bad request - Invalid input \n\n COM005 - Invalid content-type \n\n COM007 - Invalid company in request",
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
             "content": {
               "application/json": {
                 "schema": {
@@ -1325,7 +1333,8 @@
             }
           },
           "400": {
-            "description": "Bad request - Invalid input \n\n COM005 - Invalid content-type \n\n COM006 - Invalid data in request",
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM005 | Invalid content-type |\n| COM006 | Invalid data in request |",
             "content": {
               "application/json": {
                 "schema": {
@@ -1449,7 +1458,8 @@
             "description": "Company updated successfully"
           },
           "400": {
-            "description": "Bad request - Invalid input \n\n COM004 - Id is missing from request path \n\n COM005 - Invalid content-type \n\n COM007 - Invalid company in request",
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Code | Description |\n|------|-------------|\n| COM004 | Id is missing from request path |\n| COM005 | Invalid content-type |\n| COM007 | Invalid company in request |",
             "content": {
               "application/json": {
                 "schema": {
@@ -1600,6 +1610,20 @@
       "description": "VAT Data manager for uploads - includes details of the data pipeline options selected. "
     }
   ],
+  "x-tagGroups": [
+    {
+      "name": "Products",
+      "tags": ["VAT Auditor", "VAT Calculator"]
+    },
+    {
+      "name": "Config",
+      "tags": ["Authentication", "Operations"]
+    },
+    {
+      "name": "Master data",
+      "tags": ["Companies"]
+    }
+  ],
   "security": [
     {
       "BearerAuth": []
@@ -1627,7 +1651,10 @@
             "type": "string"
           }
         },
-        "example": "{ errorCode: 'DM001', message: 'File type not allowed' }"
+        "example": { 
+          "errorCode": "XX123", 
+          "message": "This type not allowed" 
+        }
       },
       "vatDataModelSchema": {
         "title":"VAT Data Model",
