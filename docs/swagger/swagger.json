@@ -1246,7 +1246,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedCompaniesResponse"
+                  "$ref": "#/components/schemas/getCompaniesResponse200"
                 }
               }
             }
@@ -1275,7 +1275,7 @@
       "get": {
         "tags": ["Companies"],
         "summary": "Get company by id",
-        "description": "Retrieves a single company by its UUID",
+        "description": "TODO wrong schema - Retrieves a single company by its UUID",
         "parameters": [
           {
             "name": "id",
@@ -1294,7 +1294,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Company"
+                  "$ref": "#/components/schemas/companyUpdateSchema"
                 }
               }
             }
@@ -1356,7 +1356,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Company"
+                "$ref": "#/components/schemas/companyUpdateSchema"
               }
             }
           }
@@ -3911,8 +3911,9 @@
         ],
         "additionalProperties": false
       },
-      "Company": {
+      "companyUpdateSchema": {
         "type": "object",
+        "description": "TODO - Out of date, needs copying from create schema",
         "required": [
           "_id",
           "contacts",
@@ -3980,13 +3981,13 @@
           "linkedCompanies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyLink"
+              "$ref": "#/components/schemas/companyLink"
             }
           },
           "locations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyLocation"
+              "$ref": "#/components/schemas/companyLocation"
             }
           },
           "name": {
@@ -4104,14 +4105,14 @@
             "type": "array",
             "description": "Companies can be linked to other companies by defining parent-child relationships. \n\nThis can be where companyCode values are consolidated, or for VAT groups.",
             "items": {
-              "$ref": "#/components/schemas/CompanyLink"
+              "$ref": "#/components/schemas/companyLink"
             }
           },
           "locations": {
             "type": "array",
             "description": "A company can have locations and for future use it supports setting up >1 location, but in current implementation only 1 location is used by the application. \n\nAn empty array `[]` is valid.",
             "items": {
-              "$ref": "#/components/schemas/CompanyLocation"
+              "$ref": "#/components/schemas/companyLocation"
             }
           },
           "name": {
@@ -4140,28 +4141,24 @@
           }
         }
       },
-      "CompanyFilingsWorkflowActor": {
+      "companyFilingsWorkflowActor": {
         "type": "object",
         "required": ["userUid"],
         "properties": {
           "isDefault": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Set to true.",
+            "example": true
           },
           "userUid": {
-            "type": "string"
-          },
-          "validFrom": {
             "type": "string",
-            "format": "date-time"
-          },
-          "validTo": {
-            "type": "string",
-            "format": "date-time"
+            "description": "The internal User's unique ID, available on `GET /v0/user` (Note: /v0/user is not yet a published endpoint)."
           }
         }
       },
-      "CompanyLink": {
+      "companyLink": {
         "type": "object",
+        "description": "A relationship between companies.",
         "required": ["type", "children", "parents"],
         "properties": {
           "type": {
@@ -4171,17 +4168,18 @@
           "children": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyLinkReference"
+              "$ref": "#/components/schemas/companyLinkReference"
             }
           },
           "parents": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyLinkReference"
+              "$ref": "#/components/schemas/companyLinkReference"
             }
           },
           "scope": {
             "type": "object",
+            "description": "Scope describes the relationship, and is used for VAT Groups where the `key` is `countryCode` and the `value` is the countryCode for example: `BE`.",
             "properties": {
               "key": {
                 "type": "string"
@@ -4193,7 +4191,7 @@
           }
         }
       },
-      "CompanyLinkReference": {
+      "companyLinkReference": {
         "type": "object",
         "required": ["companyCode", "companyId"],
         "properties": {
@@ -4203,43 +4201,50 @@
           },
           "companyId": {
             "type": "string",
-            "description": "Immutable internal company ID"
+            "description": "Internal company ID"
           }
         }
       },
-      "CompanyLocation": {
+      "companyLocation": {
         "type": "object",
-        "required": ["country", "isDefault", "locationId"],
         "properties": {
           "line1": {
-            "type": "string"
+            "description": "First line of location address.",
+            "type": "string",
+            "example": "42 High Street."
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "example": "London"
           },
           "county": {
-            "type": "string"
+            "type": "string",
+            "example": "New county"
           },
           "country": {
             "type": "string",
+            "description": "Country code using ISO 3166-1 alpha-2 country code format.",
             "minLength": 2,
             "maxLength": 2,
             "example": "GB"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "A name of this location, e.g. Head office.",
+            "example": "Head office"
           },
           "isDefault": {
-            "type": "boolean"
-          },
-          "locationId": {
-            "type": "string"
+            "type": "boolean",
+            "example": true
           },
           "state": {
-            "type": "string"
+            "type": "string",
+            "example": "State Abc"
           },
           "postalCode": {
-            "type": "string"
+            "type": "string",
+            "description": "Post code or ZIP code of this location.",
+            "example": "BN1 1AA"
           }
         }
       },
@@ -4255,7 +4260,7 @@
           "nexus": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanySalesTaxNexusProperties"
+              "$ref": "#/components/schemas/companySalesTaxNexusProperties"
             }
           },
           "registrations": {
@@ -4277,7 +4282,7 @@
           }
         }
       },
-      "CompanySalesTaxNexusProperties": {
+      "companySalesTaxNexusProperties": {
         "type": "object",
         "required": [
           "country",
@@ -4326,18 +4331,6 @@
           "validFrom": {
             "type": "string",
             "format": "date-time"
-          }
-        }
-      },
-      "CompanyTaskSettings": {
-        "type": "object",
-        "required": ["createPreparerTask", "preparerTaskDaysBefore"],
-        "properties": {
-          "createPreparerTask": {
-            "type": "boolean"
-          },
-          "preparerTaskDaysBefore": {
-            "type": "integer"
           }
         }
       },
@@ -4394,7 +4387,6 @@
             "description": "Is the company a marketplace?",
             "default": false,
             "example": false
-
           },
           "isTrader": {
             "type": "boolean",
@@ -4433,9 +4425,9 @@
           },
           "registrations": {
             "type": "array",
-            "description": "VAT Registration records.",
+            "description": "VAT Registrations setup as part of this company.",
             "items": {
-              "$ref": "#/components/schemas/CompanyVatRegistration"
+              "$ref": "#/components/schemas/companyVatRegistration"
             }
           },
           "reportSalesAlsoOnPurchaseSide": {
@@ -4453,129 +4445,186 @@
           }
         }
       },
-      "CompanyVatFilingsSettings": {
+      "companyVatFilingsSettings": {
         "type": "object",
-        "required": ["filingId", "frequency"],
+        "description": "An active Filing for example a VAT Return. \n\nIn order to populate some attributes in this record, first used the `GET /filer/vat/filings/` endpoint to learn the capabilities on the platform. \n\nConsider using the query parameter to filter by the country/filing you are looking to setup `GET /filer/vat/filings?countryCode=BE&category=vat-return`.",
+        "required": ["country", "filingId", "frequency"],
         "properties": {
           "country": {
             "type": "string",
+            "description": "Two digit country code (ISO 3166-1 alpha-2)",
             "minLength": 2,
             "maxLength": 2
           },
           "deadlineExtendedByDays": {
-            "type": "integer"
+            "type": "integer",
+            "description": "The number of days to move the deadline for this filing.\n\nIt can be a positive or negative number, to bring the due date earlier (negative) or later (positive).",
+            "example": 0,
+            "default": 0
           },
           "deadlineExtendedByMonths": {
-            "type": "integer"
+            "type": "integer",
+            "description": "The number of months to move the deadline for this filing.\n\nIt can be a positive or negative number, to bring the due date earlier (negative) or later (positive).",
+            "example": 0,
+            "default": 0
           },
           "filingId": {
-            "type": "string"
+            "type": "string",
+            "description": "This is an ID of the filing within the platform; to find the values use the endpoint `GET /filer/vat/filings` which also accepts query parameters of `countryCode` and `category`.\n\nFor example: `GET /filer/vat/filings?countryCode=BE&category=vat-return`.",
+            "example": "1CbBkT8GufLXR7QyM2eB"
           },
           "frequency": {
             "type": "string",
-            "description": "Period type reference"
+            "description": "Period type reference, each filing has a set of valid values which can be used.\n\nFirst fetch capabilities using `GET /filer/vat/filings` to get the valid values for the frequency field.",
+            "example": "quarter"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "The name of the filing, as returned by the capabilities endpoint: `GET /filer/vat/filings`.",
+            "example": "VAT Return (U 30)"
           },
           "taskSettings": {
-            "$ref": "#/components/schemas/CompanyTaskSettings"
+            "type": "object",
+            "description": "Control whether Tasks are created for the Filing Preparer.\n\nObject is optional.\n\nFunctionality not fully implemented.",
+            "properties": {
+              "createPreparerTask": {
+                "type": "boolean",
+                "description": "Enable or disable the generation of tasks for the Preparer of this filing.",
+                "example": true
+              },
+              "preparerTaskDaysBefore": {
+                "type": "integer",
+                "description": "Set the number of days before the filing deadline, when the preparer should be sent the Task.",
+                "example": 35
+              }
+            }
           },
           "preparers": {
             "type": "array",
+            "description": "The user assigned to prepare the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
             "items": {
-              "$ref": "#/components/schemas/CompanyFilingsWorkflowActor"
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
             }
           },
           "reviewers": {
             "type": "array",
+            "description": "The user assigned to review the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
             "items": {
-              "$ref": "#/components/schemas/CompanyFilingsWorkflowActor"
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
             }
           },
           "submitters": {
             "type": "array",
+            "description": "The user assigned to submit the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
             "items": {
-              "$ref": "#/components/schemas/CompanyFilingsWorkflowActor"
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
             }
           }
         }
       },
-      "CompanyVatRegistration": {
+      "companyVatRegistration": {
         "type": "object",
+        "description": "VAT Registrations for this company.",
         "required": ["country", "registrationId", "vatRegistrationType"],
         "properties": {
           "country": {
             "type": "string",
+            "description": "Two digit country code (ISO 3166-1 alpha-2)",
             "minLength": 2,
             "maxLength": 2,
             "example": "BE"
           },
           "distanceSales": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Distance sales.",
+            "example": false
           },
           "exportScheme": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Export scheme.",
+            "example": false
           },
           "filings": {
             "type": "array",
+            "description": "Filings setup for this country. \n\nCan be an empty array `[]`.",
             "items": {
-              "$ref": "#/components/schemas/CompanyVatFilingsSettings"
+              "$ref": "#/components/schemas/companyVatFilingsSettings"
             }
           },
           "fixedRate": {
-            "type": "string"
+            "type": "string",
+            "description": "Fixed rate as a string.",
+            "example": "16.5"
           },
           "importLicence": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Import licence.",
+            "example": false
           },
           "IOSS": {
-            "type": "string"
+            "type": "string",
+            "description": "IOSS Number.",
+            "example": "IM1234567890"
           },
           "isRegisteredForToms": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Tour Operators Margin Scheme.",
+            "example": false
           },
           "localTaxNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "Local tax number.",
+            "example": "123456789"
           },
           "methodRecovery": {
             "type": "string",
-            "enum": ["standard", "special"]
+            "description": "Method of recovery.",
+            "enum": ["standard", "special"],
+            "example": "standard",
+            "default": ""
           },
           "nonUnionOSS": {
-            "type": "string"
+            "type": "string",
+            "description": "Non-union OSS number.",
+            "example": "NU123456789"
           },
           "registrationId": {
-            "type": "string"
+            "type": "string",
+            "description": "VAT Registration ID - without a leading country code.", 
+            "example": "1234567890"
           },
           "typeOfVatPayer": {
             "type": "string",
-            "enum": ["full", "exempt", "mixed"]
+            "description": "Type of VAT payer",
+            "enum": ["full", "exempt", "mixed"],
+            "example": "",
+            "default": ""
           },
           "unionOSS": {
-            "type": "string"
-          },
-          "validUntil": {
             "type": "string",
-            "format": "date-time"
+            "description": "Union OSS number.",
+            "example": "EU123456789"
           },
           "vatRegistrationType": {
             "type": "string",
+            "description": "Type or registration.",
             "enum": [
               "mainEstablishment",
               "fixedEstablishment",
               "direct",
               "fiscalRepresentative"
-            ]
+            ],
+            "example": "mainEstablishment"
           },
           "warehouseLicenceNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "VAT warehouse licence number.",
+            "example": "GBWH123456789000"
           }
         }
       },
-      "PaginatedCompaniesResponse": {
+      "getCompaniesResponse200": {
         "type": "object",
-        "required": ["count", "data", "page", "pageSize"],
         "properties": {
           "count": {
             "type": "integer",
@@ -4583,8 +4632,9 @@
           },
           "data": {
             "type": "array",
+            "description": "TODO - schema is wrong!",
             "items": {
-              "$ref": "#/components/schemas/Company"
+              "$ref": "#/components/schemas/companyUpdateSchema"
             }
           },
           "page": {
