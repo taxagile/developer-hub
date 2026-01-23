@@ -1,0 +1,21 @@
+openapi:
+  onlyRequiredInSamples: true
+  hideReplay: true
+  sortRequiredPropsFirst: false
+  excludeFromSearch: true
+  theme:
+    sidebar:
+      backgroundColor: '#f6f4f7'
+      activeTextColor: '#363c9a'
+    rightPanel:
+      backgroundColor: '#363c9a'
+    logo:
+      maxHeight: '80px'
+      maxWidth: '80px'
+    typography:
+      links: 
+        color: '#363c9a'
+      fontFamily: 'Nunito Sans, sans-serif'
+      headings:
+        fontFamily: 'Nunito Sans, sans-serif'
+        fontWeight: '800'

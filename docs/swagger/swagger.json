@@ -3,10 +3,14 @@
   "info": {
     "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n ## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.3.8",
+    "version": "1.4.0",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
+    },
+    "x-logo": {
+      "url": "https://github.com/taxagile/developer-hub/blob/main/docs/Tax_Agile_Logo_White_on_Purple_sml.png?raw=true",
+      "alText": "Tax Agile logo" 
     }
   },
   "externalDocs": {
@@ -145,7 +149,8 @@
             }
           },
           "400": {
-            "description": "Bad request \n\n VA001 - Invalid content-type in request header \n\n VA002 - Mapping id missing from request \n\n VA003 - Data mapping record not found - check mappingId \n\n VA005 - File not uploaded to storage \n\n VA006 - Unhandled error \n\n VA007 - Request body in an unexpected format. Check content-type is set correctly \n\n VA008 - Id is missing from request path \n\n VA011 - Unhandled error \n\n VA014 - Delete not available while still processing data \n\n VA015 - Conflict: File already exists \n\n VA016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n IO001 - File not found or not of a supported type",
+            "x-summary": "Bad request",
+            "description": "Bad request\n| Error code | Message |\n|------|-------------|\n| VA001 | Invalid content-type in request header |\n| VA002 | Mapping id missing from request |\n| VA003 | Data mapping record not found - check mappingId |\n| VA005 | File not uploaded to storage |\n| VA006 | Unhandled error |\n| VA007 | Request body in an unexpected format. Check content-type is set correctly |\n| VA008 | Id is missing from request path |\n| VA011 | Unhandled error |\n| VA014 | Delete not available while still processing data |\n| VA015 | Conflict: File already exists |\n| VA016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -504,7 +509,8 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad request \n\n VD001 - Request body data malformed \n\n VD002 - Unhandled content-type \n\n VD003 - Missing field in data \n\n VD007 - Specified taxCodeScheme is not supported",
+            "x-summary": "Bad request",
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| VD001 | Request body data malformed |\n| VD002 | Unhandled content-type |\n| VD003 | Missing field in data |\n| VD007 | Specified taxCodeScheme is not supported |",
             "content": {
               "application/json": {
                 "example": {
@@ -791,7 +797,8 @@
             }
           },
           "400": {
-            "description": "Bad request \n\n DMV001 - Invalid content-type in request header \n\n DMV002 - Mapping id missing from request \n\n DMV003 - Data mapping record not found - check mappingId  \n\n DMV004 - Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` \n\n DMV005 - File not uploaded to storage \n\n DMV006 - Unhandled error \n\n DMV007 - Request body in an unexpected format. Check content-type is set correctly  \n\n DMV011 - Unhandled error \n\n DMV014 - Delete not available while still processing data  \n\n DMV016 - <field> has an invalid data format. Expected format is YYYY-MM-DD \n\n DMV018 - Invalid field name: <field> expected 'file' \n\n DMV019 - File type not of supported type \n\n DMV020 - File content validation failed - content does not match claimed file type \n\n DMV021 - File type validation error \n\n DMV022 - No file was provided on request \n\n DMV023 - Error processing multipart form data \n\n IO001 - File not found or not of a supported type",
+            "x-summary": "Bad request",
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| DMV001 | Invalid content-type in request header |\n| DMV002 | Mapping id missing from request |\n| DMV003 | Data mapping record not found - check mappingId |\n| DMV004 | Request data not validated. If sending JSON - check you are sending an array called data: `{ data: [], options: {} }` |\n| DMV005 | File not uploaded to storage |\n| DMV006 | Unhandled error |\n| DMV007 | Request body in an unexpected format. Check content-type is set correctly |\n| DMV011 | Unhandled error |\n| DMV014 | Delete not available while still processing data |\n| DMV016 | <field> has an invalid data format. Expected format is YYYY-MM-DD |\n| DMV018 | Invalid field name: <field> expected 'file' |\n| DMV019 | File type not of supported type |\n| DMV020 | File content validation failed - content does not match claimed file type |\n| DMV021 | File type validation error |\n| DMV022 | No file was provided on request |\n| DMV023 | Error processing multipart form data |\n| IO001 | File not found or not of a supported type |",
             "content": {
               "application/json": {
                 "example": {
@@ -1049,7 +1056,6 @@
                 }
               }
             }
-
           },
           "401": {
             "$ref": "#/components/responses/error401"
@@ -1071,7 +1077,522 @@
               }
             }
           }
-         }
+        }
+      }
+    },
+    "/v0/companies": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Create company",
+        "description": "Creates a new company from a JSON request body, returning a unique company internal ID.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/companyCreateRequestBody"
+              },
+              "examples": {
+                "sample-1": {
+                  "summary": "Mandatory fields",
+                  "value": {
+                    "companyCode": "ABC123",
+                    "name": "ACME Packaging Europe GMBH",
+                    "establishedCountry": "BE",
+                    "type": "Taxable person"
+                  }
+                },
+                "sample-2": {
+                  "summary": "Company with VAT Return in Austria",
+                  "value": {
+                    "companyCode": "ABC123",
+                    "contacts": [
+                      {
+                        "description": "Local agent",
+                        "email": "user@localagent.com",
+                        "name": "Harry Jones",
+                        "phone": "+44 7707 001 007",
+                        "isDefault": true
+                      }
+                    ],
+                    "domains": [
+                      {
+                        "domainId": "vat",
+                        "registrations": [
+                          {
+                            "country": "AT",
+                            "distanceSales": false,
+                            "exportScheme": false,
+                            "filings": [
+                              {
+                                "country": "AT",
+                                "deadlineExtendedByDays": 0,
+                                "deadlineExtendedByMonths": 0,
+                                "filingId": "1CbBkT8GufLXR7QyM2eB",
+                                "frequency": "quarter"
+                              }
+                            ],
+                            "localTaxNumber": "123456789",
+                            "registrationId": "1234567890",
+                            "vatRegistrationType": "mainEstablishment"
+                          }
+                        ]
+                      }
+                    ],
+                    "establishedCountry": "BE",
+                    "financialYearStart": "2026-01-01",
+                    "locations": [
+                      {
+                        "line1": "42 High Street.",
+                        "city": "London",
+                        "country": "GB",
+                        "description": "Head office",
+                        "isDefault": true,
+                        "postalCode": "BN1 1AA"
+                      }
+                    ],
+                    "name": "ACME Packaging Europe GMBH",
+                    "registrationNumber": "1234567890",
+                    "type": "Taxable person"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Company created",
+            "headers": {
+              "Location": {
+                "description": "URI of the created company.",
+                "schema": {
+                  "type": "string",
+                  "example": "/v0/companies/232e67cf-ff4c-41a2-a472-93a58b373ad4"
+                }
+              },
+              "Retry-After": {
+                "description": "Seconds to wait before retry.",
+                "schema": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "Unique internal ID of the created company. \n\nUsed in other API requests referencing `company/:id` as part of a resource path or query.",
+                      "example": "232e67cf-ff4c-41a2-a472-93a58b373ad4"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Error code | Message / Reason |\n|------|-------------|\n| SV001 | Schema validation failed - check structure of request body is correct. Check required fields and enumerated values. |\n| COM005 | Invalid content-type - must be application/json.|\n| COM007 | Invalid company in request - the object has passed schema validation but the data in the fields is generating this error. An example would be an invalid country code. |\n| COM008 | Company code must be unique - the companyCode provided already exists in the companies setup. |\n| COM009 | _id is not allowed when creating a company with verb: POST |\n| COM010 | Invalid VAT fields provided in request - the VAT domain properties or child elements `registrations` or `filings` have failed validation. |\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM002",
+                  "message": "Not allowed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get companies paginated list",
+        "description": "Retrieves a paginated list of companies with optional filtering",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "string",
+              "default": "1"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "type": "string",
+              "default": "10"
+            }
+          },
+          {
+            "name": "companyCode",
+            "in": "query",
+            "description": "Filter by exact company code match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyCodeIncludes",
+            "in": "query",
+            "description": "Filter by company code using trigram search",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by exact company name match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nameIncludes",
+            "in": "query",
+            "description": "Filter by company name using trigram search",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "establishedInCountryCode",
+            "in": "query",
+            "description": "Filter by country where company is established (ISO 3166-1 alpha-2)",
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2,
+              "example": "BE"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of companies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCompaniesResponse200"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/companies/{id}": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get company by id",
+        "description": "TODO wrong schema - Retrieves a single company by its UUID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Company UUID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/companyResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Missing ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM004",
+                  "message": "Id is missing from request path"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "description": "Company not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM003",
+                  "message": "Company with id 123e4567-e89b-12d3-a456-426614174000 not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Companies"],
+        "summary": "Update a company",
+        "description": "Updates an existing company object.\n\nAn idempotent operation, the request body must contain the complete updated company object.\n\nNote: The data provided in the request body will overwrite data already set, this not a PATCH, so it is **not** suitable for partial updates.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Company unique internal id. \n\nThis will need to match the value provided in the request body `_id` field.",
+            "example": "232e67cf-ff4c-41a2-a472-93a58b373ad4",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/companyUpdateRequestBody"
+              },
+              "examples": {
+                "sample-1": {
+                  "summary": "Mandatory fields",
+                  "value": {
+                    "_id": "232e67cf-ff4c-41a2-a472-93a58b373ad4",
+                    "companyCode": "ABC1234567890",
+                    "name": "ACME Packaging Europe GMBH",
+                    "establishedCountry": "BE",
+                    "type": "Taxable person"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "x-summary": "No content",
+            "description": "Request was accepted and company was updated."
+          },
+          "400": {
+            "x-summary": "Bad request",
+            "description": "Bad request - Invalid input\n\n| Error code | Message / Reason |\n|------|-------------|\n| SV001 | Schema validation failed - check structure of request body is correct. Check required fields and enumerated values. |\n| COM004 | Id is missing from request path - malformed request uri. There must be a resource id in the request path.|\n| COM005 | Invalid content-type - must be application/json.|\n| COM007 | Invalid company in request - the object has passed schema validation but the data in the fields is generating this error. An example would be an invalid country code. |\n| COM008 | Company code must be unique - the companyCode provided already exists in the companies setup. |\n| COM010 | Invalid VAT fields provided in request - the VAT domain properties or child elements `registrations` or `filings` have failed validation. |\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM002",
+                  "message": "Not allowed"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Company not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM003",
+                  "message": "Company with id 123e4567-e89b-12d3-a456-426614174000 not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Delete company by id",
+        "description": "Deletes a company by its UUID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Company UUID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Company deleted successfully"
+          },
+          "400": {
+            "description": "Bad request - Missing ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM004",
+                  "message": "Id is missing from request path"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "403": {
+            "description": "Forbidden - Insufficient permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM002",
+                  "message": "Not allowed"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Company not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM003",
+                  "message": "Company with id 123e4567-e89b-12d3-a456-426614174000 not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "COM001",
+                  "message": "Internal error details"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -1079,6 +1600,10 @@
     {
       "name": "Authentication",
       "description": "Use API key to fetch a short-lived session JWT."
+    },
+    {
+      "name": "Companies",
+      "description": "Endpoints supporting create, list, update or delete operations on the companies resource."
     },
     {
       "name": "Operations",
@@ -1095,6 +1620,20 @@
     {
       "name": "VAT Data manager",
       "description": "VAT Data manager for uploads - includes details of the data pipeline options selected. "
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Products",
+      "tags": ["VAT Auditor", "VAT Calculator"]
+    },
+    {
+      "name": "Config",
+      "tags": ["Authentication", "Operations"]
+    },
+    {
+      "name": "Master data",
+      "tags": ["Companies"]
     }
   ],
   "security": [
@@ -1124,7 +1663,10 @@
             "type": "string"
           }
         },
-        "example": "{ errorCode: 'DM001', message: 'File type not allowed' }"
+        "example": { 
+          "errorCode": "EXA001", 
+          "message": "The provided <field> is not valid" 
+        }
       },
       "vatDataModelSchema": {
         "title":"VAT Data Model",
@@ -3380,6 +3922,831 @@
         ],
         "additionalProperties": false
       },
+      "companyContactRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "A description of the contact record for example: 'Local agent'.",
+            "type": "string",
+            "example": "Local agent"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of contact.",
+            "format": "string",
+            "example": "user@localagent.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "Contact's name",
+            "example": "Harry Jones"
+          },
+          "phone": {
+            "type": "string",
+            "description":"Contact telephone number.",
+            "example": "+44 7707 001 007"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "If setting >1 contact, then one must be designated as the default contact.",
+            "example": true
+          }
+        }
+      },
+      "companyCreateRequestBody": {
+        "title": "Company - Create request body",
+        "type": "object",
+        "description": "",
+        "required": [
+          "companyCode",
+          "establishedCountry",
+          "name",
+          "type"
+        ],
+        "properties": {
+          "booksClosingDay": {
+            "type": "integer",
+            "example": 0
+          },
+          "companyCode": {
+            "type": "string",
+            "description": "User defined short code for the company, mandatory and **must be unique**. \n\n This code is used when loading transaction data for the company and when setting up tax codes.",
+            "example": "ABC123"
+          },
+          "contacts": {
+            "type": "array",
+            "description": "A company can have contacts and for future use it supports setting up >1 contact, but in current implementation only 1 contact is used by the application. \n\nAn empty array `[]` is valid.\n\nIf creating the contact as part of the company creation request, then any or all fields may be provided.",
+            "items": {
+              "$ref": "#/components/schemas/companyContactRequest"
+            }
+          },
+          "domains": {
+            "type": "array",
+            "description": "Tax domain specific attributes for the company, for example VAT Domain attributes. \n\nThis is the main object sub-structure of a Company, focussing on the VAT Domain, this is where `registrations` and `filings` are provisioned.\n\nAn empty array `[]` is valid. \n\n *Note: This object supports different data formats for different tax domains. The documentation states `oneOf` and lists both VAT and Sales Tax domains, but at time of publishing (Q1/2026) only VAT Domain is implemanted.*",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/companyVatDomainProperties"
+                },
+                {
+                  "$ref": "#/components/schemas/companySalesTaxDomainProperties"
+                }
+              ]
+            }
+          },
+          "establishedCountry": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "description": "Main establishment country using ISO 3166-1 alpha-2 country code format.",
+            "example": "BE"
+          },
+          "financialYearStart": {
+            "type": "string",
+            "format": "date",
+            "description": "Financial year start date in YYYY-MM-DD format.",
+            "example": "2026-01-01"
+          },
+          "linkedCompanies": {
+            "type": "array",
+            "description": "Companies can be linked to other companies by defining parent-child relationships. \n\nThis can be where companyCode values are consolidated, or for VAT groups.\n\nThis is not mandatory and an empty array `[]` is valid.",
+            "items": {
+              "$ref": "#/components/schemas/companyLink"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "description": "A company can have locations and for future use it supports setting up >1 location, but in current implementation only 1 location is used by the application. \n\nThis is not mandatory and an empty array `[]` is valid.",
+            "items": {
+              "$ref": "#/components/schemas/companyLocation"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Company name. \n\nThis is presented in the UX as the full human readable name of the company.",
+            "example": "ACME Packaging Europe GMBH"
+          },
+          "registrationNumber": {
+            "type": "string",
+            "description": "Company registration number.",
+            "example": "1234567890"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of person. \n\nMust use one of the explicit string values listed in the enumeration list.",
+            "enum": [
+              "Taxable person",
+              "Private individual",
+              "Non-taxable legal person",
+              "European Union body",
+              "Embassy",
+              "International body",
+              "NATO"
+            ],
+            "example": "Taxable person"
+          }
+        }
+      },
+      "companyUpdateRequestBody": {
+        "title": "Company - Update request body",
+        "description": "Company object representation when used on `PUT` update.\n\nMatches the `POST` company object except for the id values.",
+        "type": "object",
+        "required": [
+          "_id",
+          "companyCode",
+          "establishedCountry",
+          "name",
+          "type"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique internal identifier of the company resource.",
+            "example": "232e67cf-ff4c-41a2-a472-93a58b373ad4"
+          },
+          "booksClosingDay": {
+            "type": "integer",
+            "example": 0
+          },
+          "companyCode": {
+            "type": "string",
+            "description": "User defined short code for the company, not mandatory but recommended to include at creation. \n\n This code is used when loading transaction data for the company and when setting up tax codes.",
+            "example": "ABC123"
+          },
+          "contacts": {
+            "type": "array",
+            "description": "A company can have contacts and for future use it supports setting up >1 contact, but in current implementation only 1 contact is used by the application. \n\nAn empty array `[]` is valid.\n\nIf creating the contact as part of the company creation request, then any or all fields may be provided.",
+            "items": {
+              "$ref": "#/components/schemas/companyContactRequest"
+            }
+          },
+          "domains": {
+            "type": "array",
+            "description": "Tax domain specific attributes for the company, for example VAT Domain attributes. \n\nThis is the main object sub-structure of a Company, focussing on the VAT Domain, this is where `registrations` and `filings` are provisioned.\n\nAn empty array `[]` is valid. \n\n *Note: This object supports different data formats for different tax domains. The documentation states `oneOf` and lists both VAT and Sales Tax domains, but at time of publishing (Q1/2026) only VAT Domain is implemanted.*",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/companyVatDomainProperties"
+                },
+                {
+                  "$ref": "#/components/schemas/companySalesTaxDomainProperties"
+                }
+              ]
+            }
+          },
+          "establishedCountry": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "description": "Main establishment country using ISO 3166-1 alpha-2 country code format.",
+            "example": "BE"
+          },
+          "financialYearStart": {
+            "type": "string",
+            "format": "date",
+            "description": "Financial year start date in YYYY-MM-DD format.",
+            "example": "2026-01-01"
+          },
+          "linkedCompanies": {
+            "type": "array",
+            "description": "Companies can be linked to other companies by defining parent-child relationships. \n\nThis can be where companyCode values are consolidated, or for VAT groups.",
+            "items": {
+              "$ref": "#/components/schemas/companyLink"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "description": "A company can have locations and for future use it supports setting up >1 location, but in current implementation only 1 location is used by the application. \n\nAn empty array `[]` is valid.",
+            "items": {
+              "$ref": "#/components/schemas/companyLocation"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Company name. \n\nThis is presented in the UX as the full human readable name of the company.",
+            "example": "ACME Packaging Europe GMBH"
+          },
+          "registrationNumber": {
+            "type": "string",
+            "description": "Company registration number.",
+            "example": "1234567890"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of person. \n\nMust use one of the explicit string values listed in the enumeration list.",
+            "enum": [
+              "Taxable person",
+              "Private individual",
+              "Non-taxable legal person",
+              "European Union body",
+              "Embassy",
+              "International body",
+              "NATO"
+            ],
+            "example": "Taxable person"
+          }
+        }
+      },
+      "companyResponseBody": {
+        "title": "Company - Update request body",
+        "description": "Company object representation when a company resource is fetched `GET /companies/:id`.",
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique internal identifier of the company resource.",
+            "example": "232e67cf-ff4c-41a2-a472-93a58b373ad4"
+          },
+          "booksClosingDay": {
+            "type": "integer",
+            "example": 0
+          },
+          "companyCode": {
+            "type": "string",
+            "description": "User defined short code for the company, not mandatory but recommended to include at creation. \n\n This code is used when loading transaction data for the company and when setting up tax codes.",
+            "example": "ABC123"
+          },
+          "contacts": {
+            "type": "array",
+            "description": "A company can have contacts and for future use it supports setting up >1 contact, but in current implementation only 1 contact is used by the application. \n\nAn empty array `[]` is valid.\n\nIf creating the contact as part of the company creation request, then any or all fields may be provided.",
+            "items": {
+              "$ref": "#/components/schemas/companyContactRequest"
+            }
+          },
+          "domains": {
+            "type": "array",
+            "description": "Tax domain specific attributes for the company, for example VAT Domain attributes. \n\nThis is the main object sub-structure of a Company, focussing on the VAT Domain, this is where `registrations` and `filings` are provisioned.\n\nAn empty array `[]` is valid. \n\n *Note: This object supports different data formats for different tax domains. The documentation states `oneOf` and lists both VAT and Sales Tax domains, but at time of publishing (Q1/2026) only VAT Domain is implemanted.*",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/companyVatDomainProperties"
+                },
+                {
+                  "$ref": "#/components/schemas/companySalesTaxDomainProperties"
+                }
+              ]
+            }
+          },
+          "establishedCountry": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2,
+            "description": "Main establishment country using ISO 3166-1 alpha-2 country code format.",
+            "example": "BE"
+          },
+          "financialYearStart": {
+            "type": "string",
+            "format": "date",
+            "description": "Financial year start date in YYYY-MM-DD format.",
+            "example": "2026-01-01"
+          },
+          "linkedCompanies": {
+            "type": "array",
+            "description": "Companies can be linked to other companies by defining parent-child relationships. \n\nThis can be where companyCode values are consolidated, or for VAT groups.",
+            "items": {
+              "$ref": "#/components/schemas/companyLink"
+            }
+          },
+          "locations": {
+            "type": "array",
+            "description": "A company can have locations and for future use it supports setting up >1 location, but in current implementation only 1 location is used by the application. \n\nAn empty array `[]` is valid.",
+            "items": {
+              "$ref": "#/components/schemas/companyLocation"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Company name. \n\nThis is presented in the UX as the full human readable name of the company.",
+            "example": "ACME Packaging Europe GMBH"
+          },
+          "registrationNumber": {
+            "type": "string",
+            "description": "Company registration number.",
+            "example": "1234567890"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of person. \n\nMust use one of the explicit string values listed in the enumeration list.",
+            "enum": [
+              "Taxable person",
+              "Private individual",
+              "Non-taxable legal person",
+              "European Union body",
+              "Embassy",
+              "International body",
+              "NATO"
+            ],
+            "example": "Taxable person"
+          }
+        }
+      },
+      "companyFilingsWorkflowActor": {
+        "type": "object",
+        "required": ["userUid"],
+        "properties": {
+          "isDefault": {
+            "type": "boolean",
+            "description": "Set to true.",
+            "example": true
+          },
+          "userUid": {
+            "type": "string",
+            "description": "The internal User's unique ID, available on `GET /v0/user` (Note: /v0/user is not yet a published endpoint)."
+          }
+        }
+      },
+      "companyLink": {
+        "type": "object",
+        "description": "A relationship between companies.",
+        "required": ["type", "children", "parents"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["vat-group", "consolidation"]
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/companyLinkReference"
+            }
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/companyLinkReference"
+            }
+          },
+          "scope": {
+            "type": "object",
+            "description": "Scope describes the relationship, and is used for VAT Groups where the `key` is `countryCode` and the `value` is the countryCode for example: `BE`.",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "companyLinkReference": {
+        "type": "object",
+        "required": ["companyCode", "companyId"],
+        "properties": {
+          "companyCode": {
+            "type": "string",
+            "description": "User-facing company code"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Internal company ID"
+          }
+        }
+      },
+      "companyLocation": {
+        "type": "object",
+        "properties": {
+          "line1": {
+            "description": "First line of location address.",
+            "type": "string",
+            "example": "42 High Street."
+          },
+          "city": {
+            "type": "string",
+            "example": "London"
+          },
+          "county": {
+            "type": "string",
+            "example": "New county"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code using ISO 3166-1 alpha-2 country code format.",
+            "minLength": 2,
+            "maxLength": 2,
+            "example": "GB"
+          },
+          "description": {
+            "type": "string",
+            "description": "A name of this location, e.g. Head office.",
+            "example": "Head office"
+          },
+          "isDefault": {
+            "type": "boolean",
+            "example": true
+          },
+          "state": {
+            "type": "string",
+            "example": "State Abc"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Post code or ZIP code of this location.",
+            "example": "BN1 1AA"
+          }
+        }
+      },
+      "companySalesTaxDomainProperties": {
+        "type": "object",
+        "title": "Sales tax",
+        "required": ["domainId", "nexus"],
+        "properties": {
+          "domainId": {
+            "type": "string",
+            "enum": ["sales-tax"]
+          },
+          "nexus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/companySalesTaxNexusProperties"
+            }
+          },
+          "registrations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "registationId": {
+                  "type": "string"
+                },
+                "filings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "companySalesTaxNexusProperties": {
+        "type": "object",
+        "required": [
+          "country",
+          "hasLocalNexus",
+          "hasPermanentEstablishment",
+          "jurisCode",
+          "jurisName",
+          "jurisdictionTypeId",
+          "localNexusTypeId",
+          "nexusTaxTypeGroup",
+          "nexusTypeId",
+          "region",
+          "validFrom"
+        ],
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "hasLocalNexus": {
+            "type": "boolean"
+          },
+          "hasPermanentEstablishment": {
+            "type": "boolean"
+          },
+          "jurisCode": {
+            "type": "string"
+          },
+          "jurisName": {
+            "type": "string"
+          },
+          "jurisdictionTypeId": {
+            "type": "string"
+          },
+          "localNexusTypeId": {
+            "type": "string"
+          },
+          "nexusTaxTypeGroup": {
+            "type": "string"
+          },
+          "nexusTypeId": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "companyVatDomainProperties": {
+        "type": "object",
+        "title": "VAT",
+        "description": "Properties of the company for VAT.",
+        "required": ["domainId"],
+        "properties": {
+          "avalaraTaxCodesAllowed": {
+            "type": "boolean",
+            "description": "Recognize Avalara's generic tax codes?",
+            "example": false,
+            "default": false
+          },
+          "domainId": {
+            "type": "string",
+            "description": "Literal string identifying the type of domain record, for VAT it must be set to `vat`.",
+            "enum": ["vat"],
+            "example": "vat"
+          },
+          "isAirline": {
+            "type": "boolean",
+            "description": "Is the company an airline?",
+            "default": false,
+            "example": false
+          },
+          "isCharity": {
+            "type": "boolean",
+            "description": "Is the company a charity?",
+            "default": false,
+            "example": false
+          },
+          "isGasElecTaxableDealer": {
+            "type": "boolean",
+            "description": "Is the company a gas or electricity dealer?",
+            "default": false,
+            "example": false
+          },
+          "isGovernment": {
+            "type": "boolean",
+            "description": "Is the company a Government?",
+            "default": false,
+            "example": false
+          },
+          "isHospital": {
+            "type": "boolean",
+            "description": "Is the company a hospital?",
+            "default": false,
+            "example": false
+          },
+          "isMarketplace": {
+            "type": "boolean",
+            "description": "Is the company a marketplace?",
+            "default": false,
+            "example": false
+          },
+          "isTrader": {
+            "type": "boolean",
+            "description": "Is the company a trader?",
+            "default": false,
+            "example": false
+          },
+          "isTravelAgent": {
+            "type": "boolean",
+            "description": "Is the company a travel agent?",
+            "default": false,
+            "example": false
+          },
+          "isVessel": {
+            "type": "boolean",
+            "description": "Is the company a vessel?",
+            "default": false,
+            "example": false
+          },
+          "mpEstablishedCountry": {
+            "type": "string",
+            "description": "Marketplace established country using ISO 3166-1 alpha-2 country code.",
+            "minLength": 2,
+            "maxLength": 2,
+            "example": "NL"
+          },
+          "mpRegisteredForIOSS": {
+            "type": "boolean",
+            "description": "Marketplace registered for IOSS? \n\nOnly needs to be provided if company is a marketplace.",
+            "example": false
+          },
+          "mpRegisteredForOSS": {
+            "type": "boolean",
+            "description": "Marketplace registered for OSS? \n\nOnly needs to be provided if company is a marketplace.",
+            "example": false
+          },
+          "registrations": {
+            "type": "array",
+            "description": "VAT Registrations setup as part of this company.",
+            "items": {
+              "$ref": "#/components/schemas/companyVatRegistration"
+            }
+          },
+          "reportSalesAlsoOnPurchaseSide": {
+            "type": "boolean",
+            "description": "Report sales also on purchase side?",
+            "example": false,
+            "default": false
+          },
+          "signConvention": {
+            "type": "string",
+            "description": "Set handling of incoming data signing (positive/negative).",
+            "enum": ["", "allPos", "sap"],
+            "example": "allPos", 
+            "default": ""
+          }
+        }
+      },
+      "companyVatFilingsSettings": {
+        "type": "object",
+        "description": "An active Filing for example a VAT Return. \n\nIn order to populate some attributes in this record, first used the `GET /filer/vat/filings/` endpoint to learn the capabilities on the platform. \n\nConsider using the query parameter to filter by the country/filing you are looking to setup `GET /filer/vat/filings?countryCode=BE&category=vat-return`.",
+        "required": ["country", "filingId", "frequency"],
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Two digit country code (ISO 3166-1 alpha-2).\n\nNote: This will be the same country code as for the VAT regisration being setup.\n\nIf the country code provided here does not match the registration's country code the request will return a 400 Bad request.",
+            "minLength": 2,
+            "maxLength": 2,
+            "example": "AT"
+          },
+          "deadlineExtendedByDays": {
+            "type": "integer",
+            "description": "The number of days to move the deadline for this filing.\n\nIt can be a positive or negative number, to bring the due date earlier (negative) or later (positive).",
+            "example": 0,
+            "default": 0
+          },
+          "deadlineExtendedByMonths": {
+            "type": "integer",
+            "description": "The number of months to move the deadline for this filing.\n\nIt can be a positive or negative number, to bring the due date earlier (negative) or later (positive).",
+            "example": 0,
+            "default": 0
+          },
+          "filingId": {
+            "type": "string",
+            "description": "This is an ID of the filing within the platform; to find the values use the endpoint `GET /filer/vat/filings` which also accepts query parameters of `countryCode` and `category`.\n\nFor example: `GET /filer/vat/filings?countryCode=BE&category=vat-return`.",
+            "example": "1CbBkT8GufLXR7QyM2eB"
+          },
+          "frequency": {
+            "type": "string",
+            "description": "Frequency of return. Each filing has a set of valid values which can be used.\n\nFirst fetch capabilities using `GET /filer/vat/filings` to get the valid values for the frequency field.\n\nIf you set this incorrectly the request will fail with a 400 Bad request.",
+            "example": "quarter"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the filing, we recommend you don't include this in a POST request as the application will infer it from the filingId value.",
+            "example": "VAT Return (U 30)"
+          },
+          "taskSettings": {
+            "type": "object",
+            "description": "Control whether Tasks are created for the Filing Preparer.\n\nNot required.\n\nFunctionality not fully implemented.",
+            "properties": {
+              "createPreparerTask": {
+                "type": "boolean",
+                "description": "Enable or disable the generation of tasks for the Preparer of this filing.",
+                "example": true
+              },
+              "preparerTaskDaysBefore": {
+                "type": "integer",
+                "description": "Set the number of days before the filing deadline, when the preparer should be sent the Task.",
+                "example": 35
+              }
+            }
+          },
+          "preparers": {
+            "type": "array",
+            "description": "The user assigned to prepare the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
+            "items": {
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
+            }
+          },
+          "reviewers": {
+            "type": "array",
+            "description": "The user assigned to review the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
+            "items": {
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
+            }
+          },
+          "submitters": {
+            "type": "array",
+            "description": "The user assigned to submit the filing. \n\nNot required. \n\nThe data structure is supporting future capabilities of allowing more than 1 person in this role; but currently the platform only supports 1 person.",
+            "items": {
+              "$ref": "#/components/schemas/companyFilingsWorkflowActor"
+            }
+          }
+        }
+      },
+      "companyVatRegistration": {
+        "type": "object",
+        "description": "VAT Registrations for this company.",
+        "required": ["country", "registrationId", "vatRegistrationType"],
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Two digit country code (ISO 3166-1 alpha-2)",
+            "minLength": 2,
+            "maxLength": 2,
+            "example": "BE"
+          },
+          "distanceSales": {
+            "type": "boolean",
+            "description": "Distance sales.",
+            "example": false
+          },
+          "exportScheme": {
+            "type": "boolean",
+            "description": "Export scheme.",
+            "example": false
+          },
+          "filings": {
+            "type": "array",
+            "description": "Filings setup for this country. \n\nCan be an empty array `[]`.",
+            "items": {
+              "$ref": "#/components/schemas/companyVatFilingsSettings"
+            }
+          },
+          "fixedRate": {
+            "type": "string",
+            "description": "Fixed rate as a string.",
+            "example": "16.5"
+          },
+          "importLicence": {
+            "type": "boolean",
+            "description": "Import licence.",
+            "example": false
+          },
+          "IOSS": {
+            "type": "string",
+            "description": "IOSS Number.",
+            "example": "IM1234567890"
+          },
+          "isRegisteredForToms": {
+            "type": "boolean",
+            "description": "Tour Operators Margin Scheme.",
+            "example": false
+          },
+          "localTaxNumber": {
+            "type": "string",
+            "description": "Local tax number.",
+            "example": "123456789"
+          },
+          "methodRecovery": {
+            "type": "string",
+            "description": "Method of recovery.",
+            "enum": ["standard", "special"],
+            "example": "standard",
+            "default": ""
+          },
+          "nonUnionOSS": {
+            "type": "string",
+            "description": "Non-union OSS number.",
+            "example": "NU123456789"
+          },
+          "registrationId": {
+            "type": "string",
+            "description": "VAT Registration ID - without a leading country code.", 
+            "example": "1234567890"
+          },
+          "typeOfVatPayer": {
+            "type": "string",
+            "description": "Type of VAT payer",
+            "enum": ["full", "exempt", "mixed"],
+            "example": "",
+            "default": ""
+          },
+          "unionOSS": {
+            "type": "string",
+            "description": "Union OSS number.",
+            "example": "EU123456789"
+          },
+          "vatRegistrationType": {
+            "type": "string",
+            "description": "Type or registration.",
+            "enum": [
+              "mainEstablishment",
+              "fixedEstablishment",
+              "direct",
+              "fiscalRepresentative"
+            ],
+            "example": "mainEstablishment"
+          },
+          "warehouseLicenceNumber": {
+            "type": "string",
+            "description": "VAT warehouse licence number.",
+            "example": "GBWH123456789000"
+          }
+        }
+      },
+      "getCompaniesResponse200": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Total number of companies matching the query"
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of companies",
+            "items": {
+              "$ref": "#/components/schemas/companyResponseBody"
+            }
+          },
+          "page": {
+            "type": "string",
+            "description": "Current page number"
+          },
+          "pageSize": {
+            "type": "string",
+            "description": "Number of items per page"
+          }
+        }
+      },
       "longRunningAccepted202": {
         "title": "Operation Accepted",
         "type": "object",
@@ -3639,7 +5006,7 @@
                     },
                     "exposure": {
                       "type": "integer",
-                      "example": 630
+                                           "example": 630
                     }
                   }
                 },

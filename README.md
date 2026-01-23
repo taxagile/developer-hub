@@ -1,15 +1,15 @@
 <img src="docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md) \| [Coming soon](docs/coming-soon.md)
+[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md) \| [Coming soon](docs/coming-soon.md) | [Tax Agile API - new!](docs/redoc-static.html)
 
 # Tax Agile - Developer Hub
 The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile via RESTful web services. 
 
-It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API requests](docs/postman.md) and documentation to [get started](docs/getting-started.md).
+It includes [API OAS3 docs](docs/redoc-static.html), [sample API requests](docs/postman.md) and documentation to [get started](docs/getting-started.md).
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.3.9-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.4.0-green.svg)]()
 
 
 ## Authentication
@@ -46,7 +46,7 @@ It includes [API Swagger OAS3 docs](docs/swagger/index.html), [sample API reques
 * API for VAT Filer will be coming soon, but you can already send data to VAT Filer using the ``` POST /v1/datamanager/vat/uploads ``` resource.
 
 ## Jump to:
-* [Swagger API docs](https://taxagile.github.io/developer-hub)
+* [API OAS3 docs](docs/redoc-static.html)
 * [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.9.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 

@@ -1,8 +1,19 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](redoc-static.html)
 
 # Change Log
+### v1.4.0 - 2026-01-??
+* Added OAS documentation for the `companies` resource in both [Swagger](swagger/index.html) and [Redocly](redoc-static.html)
+  * Documented ``` POST /v0/companies ```
+  * Documented ``` GET /v0/companies ```
+  * Documented ``` GET /v0/companies/{id} ```
+  * Documented ``` PUT /v0/companies/{id} ```
+  * Documented ``` DELETE /v0/companies/{id} ```
+* This adds significant capabilities to the Tax Agile API, and has warranted a version point update from v1.3.x to v1.4.x but does not introduce any breaking changes to existing functionality.
+* Sample [Postman collection v1.3.9](Tax%20Agile%20-%20sample%20collection%20-%20v1.3.9.postman_collection.json)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.0)
+
 ### v1.3.9 - 2026-01-06
 * Introduced VAT Filer via the API - see [VAT Filer - Overview](filer/filer-overview.md) for in-depth getting started documentation
   * Preview ``` GET /v0/filer/vat/filings ```

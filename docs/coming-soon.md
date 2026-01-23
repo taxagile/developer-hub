@@ -1,10 +1,10 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](redoc-static.html)
 
 # Coming soon
 ## Q1/2026
-* We intend to issue the `v1` for **Companies** with full documentation in Swagger early in the quarter
+* We have updated documentation for **Companies** and continue to prepare to make the official `v1` this quarter.
 * The VAT Filer API will have more functionality added to the Developer Preview as we round out the capabilities to allow a better embedded filing experience. This is dependant on early adoption feedback so we aren't sure when the Filer endpoints will mature to `v1` but it will be soon.
 
 
@@ -13,9 +13,8 @@
 We have included endpoints under the `datamanager/vat/transactions` route in the "Developer Preview" of the Postman sample collection. 
 
 ## Companies 
-Companies API is included from the v1.3.6 Postman sample collection under "Developer Previews" and includes POST, PUT, GET and DELETE operations. 
-
-We plan to convert this preview into an official a documented `v1` resource in Q1/2026.
+Companies API is included in the Postman sample collection under "Developer Previews" and includes POST, PUT, GET and DELETE operations. 
+The companies resource is currently close to being published as `v1` but remains as `v0` until we have had more feedback.
 
 ## VAT Filer
 We are continuing our implentation of VAT Filer using the API, and at the very start of 2026 we released some of the VAT Filer endpoints into Developer Preview marked with the `v0` version. 
