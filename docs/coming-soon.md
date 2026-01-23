@@ -1,6 +1,6 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](redoc-static.html)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](../redoc-static.html)
 
 # Coming soon
 ## Q1/2026
