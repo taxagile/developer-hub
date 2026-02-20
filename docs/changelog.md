@@ -3,7 +3,13 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](../redoc-static.html)
 
 # Change Log
-### v1.4.0 - 2026-01-??
+### v1.4.1 - 2026-02-21
+* Changes were made to the configuration of our load balances that handle API traffic.
+* No changes for clients of the main API in this version.
+* For Connector Partners this version provides the preview of the provisioning api service (contact us directly for further information)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.1)
+
+### v1.4.0 - 2026-01-23
 * Added OAS documentation for the `companies` resource in both [Swagger](swagger/index.html) and [Redocly](redoc-static.html)
   * Documented ``` POST /v0/companies ```
   * Documented ``` GET /v0/companies ```
