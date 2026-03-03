@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": " [Home](../../) | [Getting started](../getting-started.html) | [Postman](../postman.html) | [Swagger](#/) \n ## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
+    "description": "## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.4.0",
+    "version": "1.4.2",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -108,11 +108,11 @@
             },
             "multipart/form-data": {
               "schema": {
-                "type": "object", 
+                "type": "object",
                 "properties": {
-                  "file":{
+                  "file": {
                     "type": "string",
-                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                   },
                   "options": {
                     "$ref": "#/components/schemas/vatUploadOptions"
@@ -120,7 +120,6 @@
                 }
               }
             }
-    
           }
         },
         "responses": {
@@ -180,17 +179,19 @@
               }
             }
           }
-         }
+        }
       },
       "get": {
-        "tags": [ "VAT Auditor"],
+        "tags": [
+          "VAT Auditor"
+        ],
         "summary": "Summary list of audits.",
         "description": "## Lists the (100) most recent audits. \n If there a no items in the list this will return an empty array, on a 200 OK.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "application/json" : {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -206,11 +207,11 @@
                       },
                       "dataSourceName": {
                         "type": "string",
-                        "example":"2023-03-30T15:13:17.094Z.json"
+                        "example": "2023-03-30T15:13:17.094Z.json"
                       },
                       "mappingName": {
                         "type": "string",
-                        "example":"Tax Agile default json schema"
+                        "example": "Tax Agile default json schema"
                       },
                       "dataSource": {
                         "type": "string",
@@ -221,8 +222,6 @@
                         "example": "Complete"
                       }
                     }
-  
-
                   }
                 }
               }
@@ -234,11 +233,13 @@
         }
       }
     },
-    "/v1/auditor/vat/audits/{id}":{
+    "/v1/auditor/vat/audits/{id}": {
       "get": {
-        "tags": [ "VAT Auditor"],
+        "tags": [
+          "VAT Auditor"
+        ],
         "summary": "Summary of a specific audit.",
-        "description": "## Summary of a specific audit. \n The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
+        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
         "parameters": [
           {
             "name": "id",
@@ -251,7 +252,7 @@
             }
           }
         ],
-        "responses": { 
+        "responses": {
           "200": {
             "description": "OK",
             "content": {
@@ -299,7 +300,9 @@
         }
       },
       "delete": {
-        "tags": [ "VAT Auditor"],
+        "tags": [
+          "VAT Auditor"
+        ],
         "summary": "Removes audit results and data from the platform.",
         "description": "## Deletes audit and associated data.",
         "parameters": [
@@ -316,7 +319,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete request accepted with no content"           
+            "description": "Delete request accepted with no content"
           },
           "400": {
             "description": "Bad request",
@@ -352,12 +355,14 @@
               }
             }
           }
-         }
+        }
       }
     },
-    "/v1/auditor/vat/audits/{id}/results":{
+    "/v1/auditor/vat/audits/{id}/results": {
       "get": {
-        "tags": [ "VAT Auditor"],
+        "tags": [
+          "VAT Auditor"
+        ],
         "summary": "Results of a specific audit.",
         "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions. \n\nTo get a JSON summary of each error in the audit, use the `format=errorList` query parameter _only_ (don't combine with pageSize and startAfter). It returns the first 10,000 errors.",
         "parameters": [
@@ -379,7 +384,7 @@
             "schema": {
               "type": "integer"
             },
-            "example":"100"
+            "example": "100"
           },
           {
             "name": "startAfter",
@@ -389,7 +394,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"b5e9282e-8a40-4462-81c3-2ab28b904f57"
+            "example": "b5e9282e-8a40-4462-81c3-2ab28b904f57"
           },
           {
             "name": "format",
@@ -402,16 +407,20 @@
             "example": "errorList"
           }
         ],
-        "responses": { 
+        "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                   "oneOf": [
-                    { "$ref": "#/components/schemas/vatAuditResultsResponse" },
-                    { "$ref": "#/components/schemas/vatAuditResultsErrorListResponse"}
-                   ]
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/vatAuditResultsResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/vatAuditResultsErrorListResponse"
+                    }
+                  ]
                 }
               }
             }
@@ -527,7 +536,9 @@
             "$ref": "#/components/responses/error401"
           }
         },
-        "tags": [ "VAT Calculator" ]
+        "tags": [
+          "VAT Calculator"
+        ]
       },
       "get": {
         "summary": "Fetch a collection of transactions with filter params.",
@@ -541,7 +552,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"2022-06-28T00:00:00.000Z"
+            "example": "2022-06-28T00:00:00.000Z"
           },
           {
             "name": "entryDateTimeTo",
@@ -551,7 +562,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"2022-06-28T23:59:59.999Z"
+            "example": "2022-06-28T23:59:59.999Z"
           },
           {
             "name": "page",
@@ -561,7 +572,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"1"
+            "example": "1"
           },
           {
             "name": "pageSize",
@@ -571,7 +582,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"20"
+            "example": "20"
           },
           {
             "name": "docNumber",
@@ -581,7 +592,7 @@
             "schema": {
               "type": "string"
             },
-            "example":"12345678"
+            "example": "12345678"
           },
           {
             "name": "vatCode",
@@ -591,8 +602,9 @@
             "schema": {
               "type": "string"
             },
-            "example":"BESICSG000"
-          }],
+            "example": "BESICSG000"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -677,7 +689,9 @@
             "$ref": "#/components/responses/error401"
           }
         },
-        "tags": [ "VAT Calculator" ]
+        "tags": [
+          "VAT Calculator"
+        ]
       }
     },
     "/v1/determination/vat/transactions/{id}": {
@@ -688,11 +702,15 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json":{
+              "application/json": {
                 "schema": {
                   "oneOf": [
-                    {"$ref": "#/components/schemas/summaryTransactionResponse"},
-                    {"$ref": "#/components/schemas/detailTransactionResponse"}
+                    {
+                      "$ref": "#/components/schemas/summaryTransactionResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/detailTransactionResponse"
+                    }
                   ]
                 }
               }
@@ -738,12 +756,16 @@
             "example": true
           }
         ],
-        "tags":[ "VAT Calculator" ]
+        "tags": [
+          "VAT Calculator"
+        ]
       }
     },
     "/v1/datamanager/vat/uploads": {
       "post": {
-        "tags": ["VAT Data manager"],
+        "tags": [
+          "VAT Data manager"
+        ],
         "summary": "Create an upload of data with data pipeline options.",
         "description": "Send data in either json or multi-part form data. \n\n Providing options which link the upload to pipeline options like enrichment and sending to Filer or Auditor. \n\nIn **v1.3.1** we added validation to the json payload that dates are in the format 'YYYY-MM-DD'. \n\nIn **v1.3.3** we added the ability to send JSON and use a data mapping to transform incomplete JSON into our Tax Agile JSON format.",
         "requestBody": {
@@ -757,11 +779,11 @@
             },
             "multipart/form-data": {
               "schema": {
-                "type": "object", 
+                "type": "object",
                 "properties": {
-                  "file":{
+                  "file": {
                     "type": "string",
-                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+                    "format": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                   },
                   "options": {
                     "$ref": "#/components/schemas/vatUploadOptions"
@@ -843,9 +865,11 @@
             }
           }
         }
-      }, 
+      },
       "get": {
-        "tags": ["VAT Data manager"],
+        "tags": [
+          "VAT Data manager"
+        ],
         "summary": "Summary list of the most recent 100 uploads.",
         "description": "Summary list of the most recent 100 uploads.",
         "responses": {
@@ -870,7 +894,9 @@
     },
     "/v1/datamanager/vat/uploads/{id}": {
       "get": {
-        "tags": ["VAT Data manager"],
+        "tags": [
+          "VAT Data manager"
+        ],
         "summary": "Returns the specific upload record.",
         "description": "",
         "parameters": [
@@ -919,7 +945,9 @@
         }
       },
       "delete": {
-        "tags": ["VAT Data manager"],
+        "tags": [
+          "VAT Data manager"
+        ],
         "summary": "Deletes the upload including the data created by the upload pipeline.",
         "description": "This endpoint deletes the upload resource, and the associated data created during the upload. \n\n If sendToFiler was used when loading the data, then deleting the upload, removes the data from the returns in VAT Filer. ",
         "parameters": [
@@ -973,12 +1001,13 @@
             }
           }
         }
-
-      } 
+      }
     },
     "/v1/operations/{id}": {
       "get": {
-        "tags": [ "Operations"],
+        "tags": [
+          "Operations"
+        ],
         "summary": "Status of a long-running operation.",
         "description": "## Returns details of a long-running operation. \n\n Use this endpoint to poll for completion of an operation. When the operation completes this endpoint returns a new location header and href in body of the new resource on a `302 See Other` status.",
         "parameters": [
@@ -1017,7 +1046,6 @@
                 }
               }
             }
-        
           },
           "303": {
             "description": "See Other - Operation complete",
@@ -1082,7 +1110,9 @@
     },
     "/v0/companies": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Create company",
         "description": "Creates a new company from a JSON request body, returning a unique company internal ID.",
         "requestBody": {
@@ -1239,7 +1269,9 @@
         }
       },
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Get companies paginated list",
         "description": "Retrieves a paginated list of companies with optional filtering",
         "parameters": [
@@ -1338,7 +1370,9 @@
     },
     "/v0/companies/{id}": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Get company by id",
         "description": "TODO wrong schema - Retrieves a single company by its UUID",
         "parameters": [
@@ -1412,7 +1446,9 @@
         }
       },
       "put": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Update a company",
         "description": "Updates an existing company object.\n\nAn idempotent operation, the request body must contain the complete updated company object.\n\nNote: The data provided in the request body will overwrite data already set, this not a PATCH, so it is **not** suitable for partial updates.",
         "parameters": [
@@ -1514,7 +1550,9 @@
         }
       },
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Delete company by id",
         "description": "Deletes a company by its UUID.",
         "parameters": [
@@ -1594,6 +1632,695 @@
           }
         }
       }
+    },
+    "/v0/filer/vat/filings": {
+      "get": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "List available filings",
+        "description": "Returns a paginated list of filings available on the platform. Use the returned `id` values as the `filingId` when setting up filing events on company registrations.",
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "query",
+            "required": false,
+            "description": "Filter by ISO 3166-1 alpha-2 country code (e.g. `GB`, `DE`)",
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2
+            },
+            "example": "BE"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Filter by filing category",
+            "schema": {
+              "$ref": "#/components/schemas/filingCategories"
+            },
+            "example": "vat-return"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Page number (1-based)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "Number of results per page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of filings available based on query parameters provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedFilingInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid country code or category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFF001",
+                  "message": "Invalid country code"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFF000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/filer/vat/filings/events": {
+      "get": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "List filing events",
+        "description": "Returns a paginated list of filing events based on company setup on the account, filtered by due date range. The date range must not exceed 365 days.",
+        "parameters": [
+          {
+            "name": "dueDateFrom",
+            "in": "query",
+            "required": true,
+            "description": "Start of due date range (inclusive), format `YYYY-MM-DD`",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "example": "2025-01-01"
+          },
+          {
+            "name": "dueDateTo",
+            "in": "query",
+            "required": true,
+            "description": "End of due date range (inclusive), format `YYYY-MM-DD`. Must be \u2265 `dueDateFrom` and within 365 days of it.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "example": "2025-12-31"
+          },
+          {
+            "name": "companyId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by company ID",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2cb5fb93-64ca-4ce2-ae3f-ad9d67c90578"
+          },
+          {
+            "name": "companyCode",
+            "in": "query",
+            "required": false,
+            "description": "Filter by company code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ABC123"
+          },
+          {
+            "name": "countryCode",
+            "in": "query",
+            "required": false,
+            "description": "Filter by country code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "BE"
+          },
+          {
+            "name": "filingCategory",
+            "in": "query",
+            "required": false,
+            "description": "Filter by filing category",
+            "schema": {
+              "$ref": "#/components/schemas/filingCategories"
+            },
+            "example": "vat-return"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter by filing status",
+            "schema": {
+              "$ref": "#/components/schemas/filingStatus"
+            }
+          },
+          {
+            "name": "preparerUserId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by preparer identifier (id)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reviewerUserId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by reviewer identifier (id)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "submitterUserId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by submitter identifier (id)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "periodKey",
+            "in": "query",
+            "required": false,
+            "description": "Filter by period key",
+            "schema": {
+              "type": "string"
+            },
+            "example": "12-2026"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Page number (1-based)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "Number of results per page (max 200)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of filing events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/paginatedFilingEventResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error \u2014 missing or invalid query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {
+                  "missingDueDateFrom": {
+                    "summary": "Missing dueDateFrom",
+                    "value": {
+                      "errorCode": "VFF003",
+                      "message": "dueDateFrom is required"
+                    }
+                  },
+                  "invalidDateFormat": {
+                    "summary": "Invalid date format",
+                    "value": {
+                      "errorCode": "VFF006",
+                      "message": "dueDateFrom must be in YYYY-MM-DD format"
+                    }
+                  },
+                  "dateRangeExceeded": {
+                    "summary": "Date range exceeds 365 days",
+                    "value": {
+                      "errorCode": "VFF014",
+                      "message": "Date range must not exceed 365 days"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFF000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/filer/vat/filings/events/companies/{companyId}/filings/{filingId}/periods/{periodKey}/reports": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyParam"
+        },
+        {
+          "$ref": "#/components/parameters/FilingParam"
+        },
+        {
+          "$ref": "#/components/parameters/PeriodParam"
+        }
+      ],
+      "get": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "Get report options for a filing event",
+        "description": "Returns the available report options for the identified filing event, including links to the view and filing report endpoints.",
+        "responses": {
+          "200": {
+            "description": "Report options",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportOptions"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/filer/vat/filings/events/companies/{companyId}/filings/{filingId}/periods/{periodKey}/reports/{report}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyParam"
+        },
+        {
+          "$ref": "#/components/parameters/FilingParam"
+        },
+        {
+          "$ref": "#/components/parameters/PeriodParam"
+        },
+        {
+          "name": "report",
+          "in": "path",
+          "required": true,
+          "description": "The type of report",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "filing"
+            ]
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "Retrieve an HTML view report",
+        "description": "Returns the specified report for the filing event. The `view` report returns an HTML page. All other report types return a message directing callers to use `POST` for `filing` reports. \n\n First call the metadata endpoint to understand the options available, like languages available.",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language code for the report (ISO 639-2, e.g. `pol`, `eng`, `default`)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eng"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Report content \u2014 `text/html` for `view`",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request \u2014 use POST for filing report, or invalid report type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {
+                  "usePost": {
+                    "summary": "Use POST for filing reports",
+                    "value": {
+                      "errorCode": "VFR002",
+                      "message": "Use POST for reports/filing"
+                    }
+                  },
+                  "invalidReport": {
+                    "summary": "Invalid report type",
+                    "value": {
+                      "errorCode": "VFR003",
+                      "message": "Invalid report type"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "description": "Filing event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR004",
+                  "message": "Filing event not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "Generate a filing report - e-File (xml, csv, txt, boe)",
+        "description": "Generates the output filing document for the identified filing event. The `report` path parameter must be `filing`. \n\n First call the metadata endpoint to know the questions to answer as part of this generation.\n\nProvide any required questionnaire answers and the required formatId in the request body.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Filing output document \u2014 content type depends on the requested format",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {}
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request \u2014 invalid report type, missing questions, or unsupported format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {
+                  "invalidReport": {
+                    "summary": "Only `filing` supported via POST",
+                    "value": {
+                      "errorCode": "VFR003",
+                      "message": "Invalid report type for POST"
+                    }
+                  },
+                  "missingFormat": {
+                    "summary": "Format not provided",
+                    "value": {
+                      "errorCode": "VFR016",
+                      "message": "Format is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "description": "Filing event not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR004",
+                  "message": "Filing event not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v0/filer/vat/filings/events/companies/{companyId}/filings/{filingId}/periods/{periodKey}/reports/{report}/metadata": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyParam"
+        },
+        {
+          "$ref": "#/components/parameters/FilingParam"
+        },
+        {
+          "$ref": "#/components/parameters/PeriodParam"
+        },
+        {
+          "name": "report",
+          "in": "path",
+          "required": true,
+          "description": "The report type \u2014 must be `filing` for metadata",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "filing"
+            ]
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "VAT Filer"
+        ],
+        "summary": "Get filing report metadata",
+        "description": "Returns the available output formats for the filing report. Optionally filter by `formatId` or `format` (mutually exclusive) to retrieve the matching format definition including its questionnaire questions.",
+        "parameters": [
+          {
+            "name": "formatId",
+            "in": "query",
+            "required": false,
+            "description": "Return metadata for a specific format definition ID. Mutually exclusive with `format`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "Return metadata filtered by format extension (e.g. `xml`, `csv`). Mutually exclusive with `formatId`.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filing metadata including available formats. The `questions` array is included on each format only when a single matching definition is found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/filingReportMetadataSummary"
+                    },
+                    {
+                      "$ref": "#/components/schemas/filingReportMetadataDetail"
+                    }
+                  ]
+
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid report type or conflicting filter parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "examples": {
+                  "invalidReport": {
+                    "summary": "Metadata only available for filing reports",
+                    "value": {
+                      "errorCode": "VFR003",
+                      "message": "Metadata is only available for the filing report"
+                    }
+                  },
+                  "conflictingFilters": {
+                    "summary": "formatId and format are mutually exclusive",
+                    "value": {
+                      "errorCode": "VFR019",
+                      "message": "formatId and format are mutually exclusive"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "404": {
+            "description": "Filing event or format definition not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR012",
+                  "message": "Filing format not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "VFR000",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -1620,20 +2347,34 @@
     {
       "name": "VAT Data manager",
       "description": "VAT Data manager for uploads - includes details of the data pipeline options selected. "
+    },
+    {
+      "name": "VAT Filer",
+      "description": "VAT Filer provides filings, filing events, filing reports, based on data loaded using Data manager."
     }
   ],
   "x-tagGroups": [
     {
       "name": "Products",
-      "tags": ["VAT Auditor", "VAT Calculator"]
+      "tags": [
+        "VAT Auditor",
+        "VAT Calculator",
+        "VAT Filer"
+      ]
     },
     {
-      "name": "Config",
-      "tags": ["Authentication", "Operations"]
+      "name": "Orchestration",
+      "tags": [
+        "Authentication",
+        "VAT Data manager",
+        "Operations"
+      ]
     },
     {
       "name": "Master data",
-      "tags": ["Companies"]
+      "tags": [
+        "Companies"
+      ]
     }
   ],
   "security": [
@@ -1663,16 +2404,15 @@
             "type": "string"
           }
         },
-        "example": { 
-          "errorCode": "EXA001", 
-          "message": "The provided <field> is not valid" 
+        "example": {
+          "errorCode": "EXA001",
+          "message": "The provided <field> is not valid"
         }
       },
       "vatDataModelSchema": {
-        "title":"VAT Data Model",
-        "type":"object",
-        "properties": 
-        {
+        "title": "VAT Data Model",
+        "type": "object",
+        "properties": {
           "transactionDetail": {
             "type": "object",
             "properties": {
@@ -3943,7 +4683,7 @@
           },
           "phone": {
             "type": "string",
-            "description":"Contact telephone number.",
+            "description": "Contact telephone number.",
             "example": "+44 7707 001 007"
           },
           "isDefault": {
@@ -4242,7 +4982,9 @@
       },
       "companyFilingsWorkflowActor": {
         "type": "object",
-        "required": ["userUid"],
+        "required": [
+          "userUid"
+        ],
         "properties": {
           "isDefault": {
             "type": "boolean",
@@ -4258,11 +5000,18 @@
       "companyLink": {
         "type": "object",
         "description": "A relationship between companies.",
-        "required": ["type", "children", "parents"],
+        "required": [
+          "type",
+          "children",
+          "parents"
+        ],
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["vat-group", "consolidation"]
+            "enum": [
+              "vat-group",
+              "consolidation"
+            ]
           },
           "children": {
             "type": "array",
@@ -4292,7 +5041,10 @@
       },
       "companyLinkReference": {
         "type": "object",
-        "required": ["companyCode", "companyId"],
+        "required": [
+          "companyCode",
+          "companyId"
+        ],
         "properties": {
           "companyCode": {
             "type": "string",
@@ -4350,11 +5102,16 @@
       "companySalesTaxDomainProperties": {
         "type": "object",
         "title": "Sales tax",
-        "required": ["domainId", "nexus"],
+        "required": [
+          "domainId",
+          "nexus"
+        ],
         "properties": {
           "domainId": {
             "type": "string",
-            "enum": ["sales-tax"]
+            "enum": [
+              "sales-tax"
+            ]
           },
           "nexus": {
             "type": "array",
@@ -4437,7 +5194,9 @@
         "type": "object",
         "title": "VAT",
         "description": "Properties of the company for VAT.",
-        "required": ["domainId"],
+        "required": [
+          "domainId"
+        ],
         "properties": {
           "avalaraTaxCodesAllowed": {
             "type": "boolean",
@@ -4448,7 +5207,9 @@
           "domainId": {
             "type": "string",
             "description": "Literal string identifying the type of domain record, for VAT it must be set to `vat`.",
-            "enum": ["vat"],
+            "enum": [
+              "vat"
+            ],
             "example": "vat"
           },
           "isAirline": {
@@ -4538,8 +5299,12 @@
           "signConvention": {
             "type": "string",
             "description": "Set handling of incoming data signing (positive/negative).",
-            "enum": ["", "allPos", "sap"],
-            "example": "allPos", 
+            "enum": [
+              "",
+              "allPos",
+              "sap"
+            ],
+            "example": "allPos",
             "default": ""
           }
         }
@@ -4547,7 +5312,11 @@
       "companyVatFilingsSettings": {
         "type": "object",
         "description": "An active Filing for example a VAT Return. \n\nIn order to populate some attributes in this record, first used the `GET /filer/vat/filings/` endpoint to learn the capabilities on the platform. \n\nConsider using the query parameter to filter by the country/filing you are looking to setup `GET /filer/vat/filings?countryCode=BE&category=vat-return`.",
-        "required": ["country", "filingId", "frequency"],
+        "required": [
+          "country",
+          "filingId",
+          "frequency"
+        ],
         "properties": {
           "country": {
             "type": "string",
@@ -4625,7 +5394,11 @@
       "companyVatRegistration": {
         "type": "object",
         "description": "VAT Registrations for this company.",
-        "required": ["country", "registrationId", "vatRegistrationType"],
+        "required": [
+          "country",
+          "registrationId",
+          "vatRegistrationType"
+        ],
         "properties": {
           "country": {
             "type": "string",
@@ -4679,7 +5452,10 @@
           "methodRecovery": {
             "type": "string",
             "description": "Method of recovery.",
-            "enum": ["standard", "special"],
+            "enum": [
+              "standard",
+              "special"
+            ],
             "example": "standard",
             "default": ""
           },
@@ -4690,13 +5466,17 @@
           },
           "registrationId": {
             "type": "string",
-            "description": "VAT Registration ID - without a leading country code.", 
+            "description": "VAT Registration ID - without a leading country code.",
             "example": "1234567890"
           },
           "typeOfVatPayer": {
             "type": "string",
             "description": "Type of VAT payer",
-            "enum": ["full", "exempt", "mixed"],
+            "enum": [
+              "full",
+              "exempt",
+              "mixed"
+            ],
             "example": "",
             "default": ""
           },
@@ -4753,7 +5533,7 @@
         "properties": {
           "_id": {
             "description": "Unique operation id",
-            "type": "string", 
+            "type": "string",
             "example": "ceb50cb0-0135-4fdf-bcd3-dbfc9d4d9adc"
           },
           "href": {
@@ -4769,7 +5549,7 @@
         "properties": {
           "_id": {
             "description": "Unique operation id",
-            "type": "string", 
+            "type": "string",
             "example": "7942cf02-2067-4b37-8e00-e3bd3926d6"
           },
           "status": {
@@ -4790,12 +5570,12 @@
         "properties": {
           "_id": {
             "description": "Unique operation id",
-            "type": "string", 
+            "type": "string",
             "example": "7942cf02-2067-4b37-8e00-e3bd3926d6"
           },
           "status": {
             "description": "Operation status",
-            "type":"string",
+            "type": "string",
             "example": "Complete"
           },
           "href": {
@@ -4842,14 +5622,14 @@
               "dataSummary": {
                 "type": "array",
                 "description": "Array of data quality issues in audit",
-                "items":{
+                "items": {
                   "type": "object",
                   "properties": {
                     "message": {
                       "description": "Description of problem",
                       "type": "string",
                       "example": "A blank value is not a correct value for \"buyer.VatIdCountry\". Check the mapping."
-                    }, 
+                    },
                     "count": {
                       "description": "Count of transactions with this error",
                       "type": "integer",
@@ -4868,7 +5648,7 @@
                       "type": "string",
                       "example": "checkVatAmountDifference",
                       "description": "Unique id of the audit error"
-                    }, 
+                    },
                     "name": {
                       "type": "string",
                       "example": "VAT amount",
@@ -4928,7 +5708,7 @@
         "properties": {
           "transactions": {
             "type": "array",
-            "items":{
+            "items": {
               "type": "object",
               "properties": {
                 "_id": {
@@ -4938,15 +5718,15 @@
                 "docNumber": {
                   "type": "string",
                   "example": "BE 102202"
-                }, 
+                },
                 "docDate": {
                   "type": "string",
                   "example": "2023-02-05"
                 },
-                "auditResult":{
+                "auditResult": {
                   "type": "object",
                   "properties": {
-                    "errors":{
+                    "errors": {
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -4979,7 +5759,7 @@
                       "type": "object",
                       "description": "Indentifies who was the company and counterparty for the transaction based on document type",
                       "properties": {
-                        "company" : {
+                        "company": {
                           "type": "string",
                           "example": "seller",
                           "description": "seller or buyer"
@@ -4987,7 +5767,7 @@
                         "companyName": {
                           "type": "string",
                           "example": "VAT Calc Demo Co BVBA"
-                        }, 
+                        },
                         "counterparty": {
                           "type": "string",
                           "example": "buyer",
@@ -5006,12 +5786,12 @@
                     },
                     "exposure": {
                       "type": "integer",
-                                           "example": 630
+                      "example": 630
                     }
                   }
                 },
                 "analysisResult": {
-                    "$ref": "#/components/schemas/determinationVatResponse200"
+                  "$ref": "#/components/schemas/determinationVatResponse200"
                 }
               }
             }
@@ -5065,13 +5845,13 @@
         "properties": {
           "transactions": {
             "type": "array",
-            "items":{
+            "items": {
               "type": "object",
               "properties": {
                 "docNumber": {
                   "type": "string",
                   "example": "BE 102202"
-                }, 
+                },
                 "docDate": {
                   "type": "string",
                   "example": "2023-02-05"
@@ -5087,7 +5867,7 @@
                 "errorMessage": {
                   "type": "string",
                   "example": "VAT amount in data (0.00) does not match the value Auditor calculated (400.00)"
-                }, 
+                },
                 "exposure": {
                   "type": "number",
                   "example": 400
@@ -5099,7 +5879,7 @@
                 "transaction": {
                   "type": "string",
                   "example": "Supply of goods and services"
-                }, 
+                },
                 "placeOfSupply": {
                   "type": "string",
                   "example": "BE"
@@ -5107,15 +5887,15 @@
                 "exemption": {
                   "type": "string",
                   "example": "Waste and scrap"
-                }, 
+                },
                 "obligationToPay": {
                   "type": "string",
                   "example": "Customer"
-                }, 
+                },
                 "company": {
                   "type": "string",
                   "example": "VAT Calc Demo Co BVBA"
-                }, 
+                },
                 "counterparty": {
                   "type": "string",
                   "example": "CH Company GmbH"
@@ -5272,7 +6052,7 @@
             "example": "N/A",
             "type": "string",
             "title": "Obligation to pay"
-          },      
+          },
           "taxPoint": {
             "type": "string",
             "example": "2025-05-09T00:00:00.000Z",
@@ -5316,7 +6096,11 @@
           "taxCode": {
             "title": "Tax code",
             "type": "string",
-            "example": ["A3", "IC0", "B0"],
+            "example": [
+              "A3",
+              "IC0",
+              "B0"
+            ],
             "description": "Only returned when the request uses the useTaxCodes=true query parameter"
           },
           "peppolVatexCode": {
@@ -5338,7 +6122,7 @@
           },
           "uuid": {
             "type": "string",
-            "title":"Unique id of transaction",
+            "title": "Unique id of transaction",
             "example": "fea0f7da-074e-47e9-8bde-51b8b5f778da"
           },
           "vatBoxes": {
@@ -5393,37 +6177,39 @@
         "$ref": "./schemas/vatDeterminationRequestBodySchema.json"
       },
       "vatUploadOptions": {
-          "title": "VAT Upload - Options",
-          "type": "object",
-          "required": [ "mappingId" ],
-          "properties": {
-            "mappingId": {
-              "type": "string",
-              "example": "CTDCqBkBozNOQe1NFoaa",
-              "description": "Provide the id of the data mapping to use with the payload",
-              "default": "default"
-            },
-            "sendToFiler": {
-              "type": "boolean",
-              "default": false,
-              "description": "Set this to add Filer to the data pipeline for this upload"
-            },
-            "sendToAuditor": {
-              "type": "boolean",
-              "default": false,
-              "description": "Set this to add Auditor to the data pipeline for this upload. \n\n This defaults to true when using POST to /vat/audits."
-            },
-            "doTaxCodeMapping": {
-              "type": "boolean",
-              "default": false,
-              "description": "If set, this will use Tax codes to enrich the data uploaded"
-            },
-            "renameFileIfDuplicate": {
-              "type": "boolean",
-              "default": false,
-              "description": "Set this to allow a duplicate file to be uploaded. \n\n The filename will be made unique by the upload process."
-            }
+        "title": "VAT Upload - Options",
+        "type": "object",
+        "required": [
+          "mappingId"
+        ],
+        "properties": {
+          "mappingId": {
+            "type": "string",
+            "example": "CTDCqBkBozNOQe1NFoaa",
+            "description": "Provide the id of the data mapping to use with the payload",
+            "default": "default"
+          },
+          "sendToFiler": {
+            "type": "boolean",
+            "default": false,
+            "description": "Set this to add Filer to the data pipeline for this upload"
+          },
+          "sendToAuditor": {
+            "type": "boolean",
+            "default": false,
+            "description": "Set this to add Auditor to the data pipeline for this upload. \n\n This defaults to true when using POST to /vat/audits."
+          },
+          "doTaxCodeMapping": {
+            "type": "boolean",
+            "default": false,
+            "description": "If set, this will use Tax codes to enrich the data uploaded"
+          },
+          "renameFileIfDuplicate": {
+            "type": "boolean",
+            "default": false,
+            "description": "Set this to allow a duplicate file to be uploaded. \n\n The filename will be made unique by the upload process."
           }
+        }
       },
       "vatUploadRequestBody": {
         "title": "VAT Upload - Request",
@@ -5433,7 +6219,7 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/vatDataModelSchema"
-              }   
+            }
           },
           "options": {
             "$ref": "#/components/schemas/vatUploadOptions"
@@ -5441,7 +6227,7 @@
         }
       },
       "vatUploadSummaryListResponse": {
-        "title":"VAT Upload - Summary data",
+        "title": "VAT Upload - Summary data",
         "type": "object",
         "properties": {
           "_id": {
@@ -5473,7 +6259,7 @@
             "example": "Complete"
           },
           "options": {
-            "type": "object",  
+            "type": "object",
             "$ref": "#/components/schemas/vatUploadOptions"
           },
           "resource": {
@@ -5506,7 +6292,7 @@
                 "type": "string",
                 "description": "The name of the upload as stored on the platform",
                 "example": "2024-08-05T14:48:20.000Z.json"
-              }, 
+              },
               "totalDocuments": {
                 "type": "number",
                 "example": 10,
@@ -5516,17 +6302,17 @@
                 "type": "string",
                 "description": "Datetime the uploaded entered our platform",
                 "example": "2024-08-05T14:48:20.000Z"
-              }, 
+              },
               "endDateTime": {
                 "type": "string",
                 "description": "Datetime the uploaded completed processing",
                 "example": "2024-08-05T14:49:40.000Z"
-              }, 
+              },
               "mappingName": {
                 "type": "string",
                 "description": "The name the user would recognise for the data mapping used.",
                 "example": "Tax Agile Filer Mapping"
-              }, 
+              },
               "dataSource": {
                 "type": "string",
                 "description": "Returns either 'api' or a string for a UI uploaded by statement.",
@@ -5554,18 +6340,379 @@
                 "type": "number",
                 "description": "Range from 0 to 100 which represents an overall progress including VAT Filer and VAT Auditor (if used).",
                 "example": 100
-
-              }, 
+              },
               "disableDelete": {
                 "type": "boolean",
                 "description": "When returning true, a delete should not be offered to any user as the upload has not yet completed an operation.",
                 "example": true
               }
-              
             }
           }
         }
-
+      },
+      "filingStatus": {
+        "type": "string",
+        "enum": [
+          "Open",
+          "Draft",
+          "Approved",
+          "Submitted"
+        ],
+        "description": "The workflow status of a filing event"
+      },
+      "filingCategories": {
+        "type": "string",
+        "enum": [
+          "vat-return",
+          "vat-book",
+          "annual-vat-return",
+          "ec-sales-listing",
+          "intrastat-arrivals",
+          "intrastat-dispatches",
+          "customer-listing",
+          "intrastat-combined",
+          "oss-return",
+          "union-oss-return",
+          "saf-t",
+          "ec-purchase-listing",
+          "ec-combined-listing",
+          "supplier-and-customer-listing",
+          "register"
+        ]
+      },
+      "filingInfo": {
+        "type": "object",
+        "description": "Summary of a filing available on the platform",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "example": "PL"
+          },
+          "dueDate": {
+            "type": "object",
+            "description": "Due date offset from end of period",
+            "properties": {
+              "months": {
+                "type": "integer",
+                "description": "Number of calendar months after period end"
+              },
+              "days": {
+                "type": "integer",
+                "description": "Number of days after the month offset"
+              }
+            }
+          },
+          "category": {
+            "type": "string",
+            "description": "Filing category",
+            "$ref": "#/components/schemas/filingCategories",
+            "example": "vat-return"
+          },
+          "frequencies": {
+            "type": "array",
+            "description": "Supported filing frequencies (e.g. month, quarter, year)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the filing",
+            "example": "6lxvlAsBZikljpKymB5R"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the filing",
+            "example": "JPK_V7M"
+          }
+        }
+      },
+      "filingEventResponse": {
+        "type": "object",
+        "description": "A single filing event instance",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "description": "The company ID"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Display name of the company"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Country code of the filing"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Due date for this filing event"
+          },
+          "filingCategory": {
+            "type": "string",
+            "$ref": "#/components/schemas/filingCategories"
+          },
+          "filingId": {
+            "type": "string",
+            "description": "Identifier of the filing template"
+          },
+          "filingName": {
+            "type": "string",
+            "description": "Display name of the filing form"
+          },
+          "periodKey": {
+            "type": "string",
+            "description": "The period key (e.g. `2024-Q1`)"
+          },
+          "preparerUserId": {
+            "type": "string",
+            "description": "Assigned preparer identifier"
+          },
+          "reviewerUserId": {
+            "type": "string",
+            "description": "Assigned reviewer identifier"
+          },
+          "status": {
+            "$ref": "#/components/schemas/filingStatus"
+          },
+          "submitterUserId": {
+            "type": "string",
+            "description": "Assigned submitter identifier"
+          },
+          "href": {
+            "type": "string",
+            "format": "string",
+            "description": "Self-link to the filing event reports endpoint"
+          }
+        }
+      },
+      "paginationLink": {
+        "type": "object",
+        "description": "Pagination navigation link",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Target page number"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Page size used for the link"
+          },
+          "href": {
+            "type": "string",
+            "format": "string",
+            "description": "URL to the target page"
+          }
+        }
+      },
+      "paginatedFilingInfoResponse": {
+        "type": "object",
+        "description": "Paginated list of filing templates",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Total number of matching results"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/filingInfo"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page number"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Number of results per page"
+          },
+          "next": {
+            "$ref": "#/components/schemas/paginationLink"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/paginationLink"
+          }
+        }
+      },
+      "paginatedFilingEventResponse": {
+        "type": "object",
+        "description": "Paginated list of filing events",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "Total number of matching results"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/filingEventResponse"
+            }
+          },
+          "next": {
+            "$ref": "#/components/schemas/paginationLink"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/paginationLink"
+          }
+        }
+      },
+      "reportOptions": {
+        "type": "object",
+        "description": "Available report types for a filing event",
+        "properties": {
+          "view": {
+            "type": "object",
+            "properties": {
+              "languages": {
+                "type": "array",
+                "description": "Available language codes for the view report",
+                "items": {
+                  "type": "string"
+                }, 
+                "example": ["pol", "eng"]
+              },
+              "href": {
+                "type": "string",
+                "format": "string",
+                "description": "Link to the view report endpoint",
+                "example": "/vN/filer/vat/filings/events/companies/916b42c6-07d6-49cb-a44d-4d9c24e46363/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports/view"
+              }
+            }
+          },
+          "filing": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "format": "string",
+                "description": "Link to the filing report endpoint",
+                "example": "/vN/filer/vat/filings/events/companies/916b42c6-07d6-49cb-a44d-4d9c24e46363/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports/filing"
+              }
+            }
+          }
+        }
+      },
+      "filingReportQuestion": {
+        "type": "object",
+        "description": "A question in the filing report questionnaire",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique question identifier"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the question"
+          },
+          "answer": {
+            "type": "string",
+            "description": "Current answer value (optional)",
+            "nullable": true
+          }
+        }
+      },
+      "postReportRequest": {
+        "type": "object",
+        "description": "Request body for generating a filing report",
+        "required": [
+          "questions", "formatId"
+        ],
+        "properties": {
+          "formatId": {
+            "type": "string",
+            "description": "Specific format definition ID, as shown by the metadata endpoint",
+            "example": "008e23c7-e749-4151-9f91-16b7568a2b24"
+          },
+          "questions": {
+            "type": "array",
+            "description": "Answered questionnaire questions",
+            "items": {
+              "$ref": "#/components/schemas/filingReportQuestion"
+            }
+          }
+        }
+      },
+      "cachePersistResponse": {
+        "type": "object",
+        "description": "Result of persisting a cache snapshot",
+        "properties": {
+          "resource": {
+            "type": "string",
+            "description": "Resource path of the cached snapshot"
+          },
+          "snapshotId": {
+            "type": "string",
+            "description": "Unique identifier of the created snapshot"
+          }
+        }
+      },
+      "deleteCacheResponse": {
+        "type": "object",
+        "description": "Result of deleting cached snapshots",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Confirmation message",
+            "example": "Cache deleted successfully"
+          }
+        }
+      },
+      "filingReportMetadataSummary": {
+        "type": "object",
+        "description": "A single output format definition for a filing report",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique format definition ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the format"
+          },
+          "extension": {
+            "type": "string",
+            "description": "File extension (e.g. `xml`, `csv`)"
+          }
+        }
+      },
+      "filingReportMetadataDetail": {
+        "type": "object",
+        "description": "A single output format definition for a filing report",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique format definition ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the format"
+          },
+          "extension": {
+            "type": "string",
+            "description": "File extension (e.g. `xml`, `csv`)"
+          },
+          "questions": {
+            "type": "array",
+            "description": "Questionnaire questions \u2014 only included when a single matching definition is returned",
+            "items": {
+              "$ref": "#/components/schemas/filingReportQuestion"
+            }
+          }
+        }
+      },
+      "filingMetadataResponse": {
+        "type": "object",
+        "description": "Available output formats for a filing report",
+        "properties": {
+          "formats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/filingReportMetadataSummary"
+            }
+          }
+        }
       }
     },
     "requestBodies": {},
@@ -5597,6 +6744,38 @@
             }
           }
         }
+      }
+    },
+    "parameters": {
+      "CompanyParam": {
+        "name": "companyId",
+        "in": "path",
+        "required": true,
+        "description": "The company ID",
+        "schema": {
+          "type": "string"
+        },
+        "example": "916b42c6-07d6-49cb-a44d-4d9c24e46363"
+      },
+      "FilingParam": {
+        "name": "filingId",
+        "in": "path",
+        "required": true,
+        "description": "The filing ID",
+        "schema": {
+          "type": "string"
+        }, 
+        "example": "6lxvlAsBZikljpKymB5R"
+      },
+      "PeriodParam": {
+        "name": "periodKey",
+        "in": "path",
+        "required": true,
+        "description": "The period key",
+        "schema": {
+          "type": "string"
+        },
+        "example": "11-2025"
       }
     }
   }

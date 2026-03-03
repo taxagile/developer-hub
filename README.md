@@ -1,6 +1,6 @@
 <img src="docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [Swagger](docs/swagger/index.html) \| [Change log](docs/changelog.md) \| [Coming soon](docs/coming-soon.md) | [Tax Agile API - new!](redoc-static.html)
+[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [API Documentation](redoc-static.html) \| [Change log](docs/changelog.md)
 
 # Tax Agile - Developer Hub
 The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile via RESTful web services. 
@@ -9,7 +9,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.4.0-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.4.2-green.svg)]()
 
 
 ## Authentication
@@ -43,11 +43,19 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 * Delete an audit by id
 
 ## VAT Filer
-* API for VAT Filer will be coming soon, but you can already send data to VAT Filer using the ``` POST /v1/datamanager/vat/uploads ``` resource.
+* List VAT Filer capabilites, all filings available on the platform, filter by countryCode and type
+* List Filing Events based on date range 
+* Fetch visual view of the filing for the user review
+* Fetch the electronic filing having answered statutory questions
+* Stable preview in Q1/2026 moving to `v1` in Q2/2026
+
+## Companies
+* Create, read, update and delete company resources
+* Previewed in Nov '25, published as `v0` Jan '26 - stable and ready to use. Moving to `v1` in Q1/2026
 
 ## Jump to:
 * [API OAS3 docs](docs/redoc-static.html)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.9.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.4.2.postman_collection.json) (right click 'Save As...' to save a local copy)
 
 
 ## Need help?
@@ -56,7 +64,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 Get in touch via our website: [vatcalc.com/contact](https://www.vatcalc.com/contact/) to setup a demo and we can provide you with a trial!
 
 ### FAQ
-* **Samples**: If you are having any trouble building a request from the Swagger documentation, first find the sample for that endpoint in the Postman collection as it contains working payloads, which might help you identify the issue. 
+* **Samples**: If you are having any trouble building a request from the OAS documentation, first find the sample for that endpoint in the Postman collection as it contains working payloads, which might help you identify the issue. 
 * **Boolean data type**: Provide a boolean `true` or `false`, not a string `"true"` or `"false"`
 * **Numbers**: Financial values are represented in JSON as number types, for example `100.00` rather than `"100.00"`
 

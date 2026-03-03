@@ -1,6 +1,6 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](../redoc-static.html)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md) 
 
 # Getting started
 The Tax Agile API is a RESTful implementation closely following [Microsoft API design guidance](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) 
@@ -20,7 +20,7 @@ We have provided these documents to help you implement to our API:
 
 | Document                              | What you need it for                                                                                                                                                                                                                                                                                                                                           |
 |:--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Swagger API Doc](swagger/index.html) | This is a standard for developers and it contains all of the options available on the API.                                                                                                                                                                                                                                                                     |
+| [API Documentation](../redoc-static.html) | This is a standard for developers and it contains all of the options available on the API.                                                                                                                                                                                                                                                                     |
 | [Postman Sample](postman.md)          | More interactive and demonstrable the Postman collection shows you real life examples of the requests and responses. <br /><br />You can duplicate and modify to test out your transaction types. <br /><br />Postman also allows you to export requests in other languages (C#, NodeJS, PHP, Ruby) so your developers can see the docs how they like to work. |
 
 ## FAQ
@@ -70,7 +70,7 @@ to fetch it, you may get a 404 Not Found; but a second later it will be found.
 
 ## See also
 
-- [Swagger document](swagger/index.html)
+- [API Documentation](../redoc-static.html)
 - [Postman sample collection](postman.md)
 - [Filer getting started](filer/filer-overview.md)
 

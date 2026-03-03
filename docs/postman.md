@@ -1,6 +1,6 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](../redoc-static.html)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md) 
 
 # Postman sample collection
 The Postman collection is available to help you get started integrating to the Tax Agile API; and is published with
@@ -12,7 +12,7 @@ duplicate the sample collection and modify the requests to meet your implementat
 
 ## Setup
 
-* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.3.9.postman_collection.json) (Right-click on like, and 'Save as...')
+* [Download the sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.4.2.postman_collection.json) (Right-click on like, and 'Save as...')
 * Setup an [Environment](https://learning.postman.com/docs/sending-requests/managing-environments/) and set these three fields...
 
 ### API_ROOT
@@ -37,7 +37,7 @@ This is a uuid string which will be provided by us when you start to implement t
 
 ## Demo requests
 In the collection we have included the use-cases which match what our customers use; but there may be options
-available on the API which are not demonstrated in the collection, please check our [Swagger](../docs/swagger/index.html) 
+available on the API which are not demonstrated in the collection, please check our [API Documentation](../redoc-static.html)
 for all the available options.
 
 There is a logical order to these requests, by first doing an Auth, the Bearer token is automatically 

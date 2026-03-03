@@ -1,8 +1,13 @@
 <img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [Swagger](swagger/index.html) \| [Change log](changelog.md) \| [Coming soon](coming-soon.md) | [Tax Agile API - new!](../redoc-static.html)
+[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
 
 # Change Log
+### v1.4.2 - 2026-03-??
+* Removed Swagger UX from developer hub, replaced with Redoc version [API Documentation](../redoc-static.html)
+* Updated Developer preview of VAT Filer API including the [VAT Filer - Overview](filer/filer-overview.md) in-depth getting started guide
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.2)
+
 ### v1.4.1 - 2026-02-21
 * Changes were made to the configuration of our load balances that handle API traffic.
 * No changes for clients of the main API in this version.
@@ -10,7 +15,7 @@
 * Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.1)
 
 ### v1.4.0 - 2026-01-23
-* Added OAS documentation for the `companies` resource in both [Swagger](swagger/index.html) and [Redocly](redoc-static.html)
+* Added OAS documentation for the `companies` resource in [API Documentation](../redoc-static.html)
   * Documented ``` POST /v0/companies ```
   * Documented ``` GET /v0/companies ```
   * Documented ``` GET /v0/companies/{id} ```
