@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <title>{{title}}</title>
+    <!-- needed for adaptive design -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link rel="icon" type="image/png" href="docs/swagger/dist/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="docs/swagger/dist/favicon-16x16.png" sizes="16x16" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    {{{redocHead}}}
+    <style>
+      @media print {
+        /* Break before each operation section (id pattern: "tag/<Tag>/operation/<OperationId>") */
+        div[id*='/operation/'] {
+          break-before: page;
+          page-break-before: always; /* legacy browsers */
+        }
+
+        /* Avoid a blank first page — suppress the break on the very first operation */
+        div[id*='/operation/']:first-of-type {
+          break-before: avoid;
+          page-break-before: avoid;
+        }
+
+        /* Keep operation title with its content */
+        div[id*='/operation/'] h2 {
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+
+        /* Hide the sidebar and search when printing */
+        .menu-content {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {{{redocHTML}}}
+  </body>
+</html>

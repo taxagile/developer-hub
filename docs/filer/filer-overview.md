@@ -1,9 +1,25 @@
 <img src="../../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
 
-[Home](../../README.md) \| [Getting started](../getting-started.md)  \|  [Postman](../postman.md) \| [Swagger](../swagger/index.html) \| [Change log](../changelog.md) \| [Coming soon](../coming-soon.md)
+[Home](../../README.md) \| [Getting started](../getting-started.md)  \|  [Postman](../postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](../changelog.md)
 
 # VAT Filer via API - Overview
-This page provides a high-level overview of the endpoints which support the VAT Filer product when working over the RESTful API. There are some dependencies and sequencing which are helpful to understand from the start. 
+This page provides a high-level overview of the endpoints which support the VAT Filer product when working over the RESTful API. There are some dependencies and sequencing which are helpful to understand from the start.
+
+The infomation here, is duplicating the examples in the Postman sample collection, and uses endpoints documented in our OAS documentation, but using markdown we are more clearly help you understand the dependencies between the API requests and responses.
+
+## Steps
+The steps you need to complete are listed below, in the order you should follow, and the order the examples are provided in the Postman sample collection:
+<ol>
+<li>Discover the filings published by VAT Filer - to get their unique ids, frequencies and types</li>
+<li>Setup a filing, on a VAT Registration of a Company (using the unique filing id from Step #1)</li>
+<li>Fetch filing events for the Company and period (filtered by countryCode)</li>
+<li>For a specific filing event (company, return, period combined) learn about the reports available - to build the next calls</li>
+<li>Fetch the visual (html) 'view' summary to show the user, allowing them to confirm filing is correct</li>
+<li>Learn about the electronic formats available for that filing, to offer a user selection</li>
+<li>For a specific format of the electronic filing, fetch the statutory questions</li>
+<li>Fetch the electronic filing, providing answers to the questions</li>
+</ol>
+
 
 ## Filings
 VAT Filer prepares _filings_ and so _filings_ are the main RESTful resource within this API, and is located under the filer root and the VAT sub-route:
@@ -24,7 +40,7 @@ Is a paginated list of filings using the standard `count, data, next` pattern:
     "count": 163,
     "data": [
         {
-            "_id": "1CbBkT8GufLXR7QyM2eB",
+            "id": "1CbBkT8GufLXR7QyM2eB",
             "countryCode": "AT",
             "name": "VAT Return (U 30)",
             "category": "VAT Return",
@@ -49,7 +65,7 @@ The response returns key information which is required in subsequent VAT Filer A
 
 | Key | Usage |
 |:------|:--- |
-| `_id` | The unique id of this particular filing, it is required as a path parameter in many other endpoints. |
+| `id` | The unique id of this particular filing, it is required as a path parameter in many other endpoints. |
 | `frequencies` | An array of allowed values to be set for this filing frequency. |
 | `dueDate` | Object includes the filing due date values; knowing these you can set an offset on the companies if you want to set the deadline earlier or later. |
 
@@ -72,7 +88,7 @@ These query parameters can be used in compound:
 ```GET /v0/filer/vat/filings?pageSize=20&category=vat-return&countryCode=PL ```
 
 ## Companies
-Having used the filings resource to understand the capabilities of VAT Filer, the next task is to setup a Filing and this is done within the `companies/` resource, as the obligation to make a filing is owned by the company and their VAT registrations.
+Having used the filings resource to understand the capabilities of VAT Filer, the next task in the sequence is to setup a Filing and this is done within the `companies/` resource, as the obligation to make a filing is owned by the company and their VAT registration.
 
 This is a snippet of a request body for ``` POST /v0/companies ``` which is providing values from the previous endpoint, to setup the PL VAT Return within the `filings` array `[]`: 
 
@@ -112,51 +128,40 @@ This is a snippet of a request body for ``` POST /v0/companies ``` which is prov
 ## Events
 Bring together a filing obligation and a company, you get Filing Events which are provided on the following endpoint: 
 
-``` GET /v0/filer/vat/filings/events?company=<id>&page=1&pageSize=10 ```
+``` GET /v0/filer/vat/filings/events?companyId=<id>&dueDateFrom=<date>&dueDateTo=<date>&page=1&pageSize=10 ```
 
-Where a company ID is mandatory.
-
-> **Note: This route is changing in the next Release!** 
-> 
-> It will become ```GET /v0/filer/vat/filings/events/companies/:id```
-> 
-> To be more consistent with the other endpoints in the VAT Filer set. The response body is also expected to change, but the use-case it serves will remain the same, so the current example does provide a preview of future behaviour - but expect response body to follow the standard `count, data, next` paginated pattern and some events attributes may be added or removed.
+Where a `dueDateFrom` and `dueDateTo` are mandatory.
 
 *Sample Response*
 
-_Note: The format of this response is changing in the next Release!_
-
 ```json
 {
-    "filings": [
+    "data": [
         {
             "filingId": "6lxvlAsBZikljpKymB5R",
-            "formName": "JPK_V7M / JPK_V7K",
-            "country": "PL",
-            "type": "VAT Return",
+            "filingName": "JPK_V7M / JPK_V7K",
+            "countryCode": "PL",
+            "filingCategory": "vat-return",
             "periodKey": "11-2025",
             "companyId": "<id>",
             "companyName": "TESTCOMP",
-            "preparer": "",
-            "reviewer": "",
-            "submitter": "",
+            "preparerUserId": "",
+            "reviewerUserId": "",
+            "submitterUserId": "",
             "status": "Open",
             "dueDate": "2025-12-25",
             "href": "/v0/filer/vat/filings/events/companies/:id/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports"
         }
     ],
-    "count": {
-        "totalEvents": 1,
-        "showing": 1
-    },
-    "first": {
-        "page": 1,
+    "count": 293,
+    "next": {
+        "page": 2,
         "pageSize": 10,
-        "href": "/v0/filer/vat/filings/events?company=<id>&page=1&pageSize=10"
+        "href": "/v0/filer/vat/filings/events?dueDateFrom=<date>&dueDateTo=<date>&companyId=<id>&page=2&pageSize=10"
     }
 }
 ```
-This is an instance of the Filing Event, which has the combination of company ID, the filing ID and the period key, these three values uniquely identify the specific filing and is used next to fetch the reports that show data loaded.
+
 
 ## Reports
 Following the resource hierarchy, the `href` provided in the previous request points to the `reports` resource:
@@ -172,6 +177,25 @@ The request:
 
 ``` GET /v0/filer/vat/filings/events/companies/UNOUG5tXvJgeac3nIACm/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports ```
 
+*Sample Response*
+
+```json
+{
+  "view": {
+    "languages": [
+      "eng",
+      "pol"
+    ],
+    "href": "/v0/filer/vat/filings/events/companies/ef5ff54e-53fc-4497-8db3-5311073fb026/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports/view"
+  },
+  "filing": {
+    "href": "/v0/filer/vat/filings/events/companies/ef5ff54e-53fc-4497-8db3-5311073fb026/filings/6lxvlAsBZikljpKymB5R/periods/11-2025/reports/filing"
+  }
+}
+```
+
+It is returning the information needed to make the next request in the logical sequence. Showing here that you may select the `view` or the `filing`; and if you are using the `view` value, there are some languages available to use as query parameters. 
+
 ### reports/:id
 The `/reports` resource takes a path parameter (`:id`) which is an enumeration of available reports; which are sub-resources, which have differing capabilities lower down the path hierarchy depending on the report id value:
 
@@ -180,9 +204,6 @@ The `/reports` resource takes a path parameter (`:id`) which is an enumeration o
 | `view` | An HTML view of the filing, populated with box values over a background image. Ideal for presenting to users for confirmation of the filing data. |
 | `filing` | The actual filing in an official submittable format as mandated by the Tax Authority. This can be a combination of filing data from upload _plus_ answers to specific filing questions. |
 
-The up-to-date list of values is available from a helper endpoint: 
-
-``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports ```
 
 ### reports/view
 The `/view` report endpoint returns a visual of the Filing in HTML format.
@@ -193,44 +214,70 @@ Where multiple languages are supported in the report they can be provided as 3-d
 
 ``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/view?lang=eng ```
 
-_Note: A future iteration will provide a helper endpoint to list the available languages for a specific view._
-
 ### reports/filing
-The `/filing` report endpoint deviates a little from RESTful convention (for good reason) so the specifics are carefully documented here.
+The `/filing` report endpoint deviates a little from RESTful convention, the specifics are carefully documented here.
 
-Firstly, it is not possible to simply GET `../reports/filing` and expect the filing report to be returned as a response. This is because the process of creating an official filing usually contains the requirement to answer questions as part of the submittable format. 
+Firstly, it is not possible to simply GET `../reports/filing` and expect the filing report to be returned as a response. This is because the process of creating an official filing often contains the requirement to answer questions as part of the submittable format. 
 
-The first step is to fetch filing metadata, providing a query parameter of the formatting wanted (for example, 'xml' or 'csv'):
+The first step is to fetch filing metadata, which returns the available formats to select from...
 
 #### GET /reports/filing/metadata
-``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/filing/metadata?format=xml ```
+``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/filing/metadata ```
 
-_Note: A future iteration will provide a helper endpoint to list the available formats for a specific filing._
+*Sample Response*
 
-The filing/metadata resource returns attributes about this filing, the prime attribute is the array of `"questions": []`
+In this example, there are two formats available, so a summary is returned:
 
-For example: 
 ```json
 {
-    "format": "xml",
-    "questions": [
-        {
-            "id": "indicate-the-type-of-return",
-            "sectionIndex": 0,
-            "orderIndex": 0,
-            "required": false,
-            "label": "Indicate the type of return",
-            "type": "select",
-            "options": [
-                "Regular submission",
-                "Correction"
-            ],
-            "previousAnswer": "Regular submission",
-        },
-        { ... }
-    ]
+  "formats": [
+    {
+      "id": "008e23c7-e749-4151-9f91-16b7568a2b24",
+      "name": "Official XML",
+      "extension": "xml"
+    },
+    {
+      "id": "b10e7c71-6d5e-4fac-9955-d55dd6d415a2",
+      "name": "General SAF-T CSV",
+      "extension": "csv"
+    }
+  ]
 }
 ```
+
+Which you can then narrow down to a single response, but using the id as a query parameter: 
+``` GET /v0/filer/vat/filings/events/companies/:id/filings/:id/periods/:id/reports/filing/metadata?formatId=<id> ```
+
+*Sample Response*
+
+```json
+{
+  "formats": [
+    {
+      "id": "008e23c7-e749-4151-9f91-16b7568a2b24",
+      "name": "Official XML",
+      "extension": "xml",
+      "questions": [
+        {
+          "id": "indicate-the-type-of-return",
+          "sectionIndex": 0,
+          "orderIndex": 0,
+          "required": false,
+          "label": "Indicate the type of return",
+          "type": "select",
+          "options": [
+            "Regular submission",
+            "Correction"
+          ],
+          "previousAnswer": "Regular submission"
+        }
+      ]
+    }
+  ]
+}
+```
+The array of `questions` provide the unique data item required to prepare the filing of this format, based on the legislation of that filing.  The questions array is structured to provide enough data points to build an intelligent UX for users to complete a form with their answers.
+
 
 **Questions**
 
@@ -245,7 +292,7 @@ For example:
 | `type` | Values: `text`, `number`, `date`, `select` or `boolean`. |
 | `options` | If the `type` is a `select` then the `options` array is a set of possible values for the answer. |
 
-Having received the questions for the filing, the API caller should prompt the user for answers to these questions. When the user has provided answers, then the API caller should submit the answers as part of the POST `/reports/filing` request body to then get the submittable filing as the _synchronous_ response.
+Submit the answers as part of the POST `/reports/filing` request body to then get the submittable filing as the _synchronous_ response.
 
 > *Warning - always fetch metadata!*
 >
@@ -269,15 +316,7 @@ Having received the questions for the filing, the API caller should prompt the u
         {
             "answer": "Regular submission",
             "id": "indicate-the-type-of-return",
-            "sectionIndex": 0,
-            "orderIndex": 0,
-            "required": false,
             "label": "Indicate the type of return",
-            "type": "select",
-            "options": [
-                "Regular submission",
-                "Correction"
-            ],
         }
     ]
 ```
