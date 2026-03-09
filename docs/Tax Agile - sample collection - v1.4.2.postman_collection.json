@@ -2571,7 +2571,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{API_ROOT}}/v0/filer/vat/filings/events?company={{vfCompanyId}}&page=1&pageSize=10&dueDateFrom=2026-01-01&dueDateTo=2026-02-01&countryCode=DE",
+                  "raw": "{{API_ROOT}}/v0/filer/vat/filings/events?companyId={{vfCompanyId}}&page=1&pageSize=10&dueDateFrom=2026-01-01&dueDateTo=2026-02-01&countryCode=PL",
                   "host": [
                     "{{API_ROOT}}"
                   ],
@@ -2584,7 +2584,7 @@
                   ],
                   "query": [
                     {
-                      "key": "company",
+                      "key": "companyId",
                       "value": "{{vfCompanyId}}"
                     },
                     {
@@ -2605,7 +2605,7 @@
                     },
                     {
                       "key": "countryCode",
-                      "value": "DE"
+                      "value": "PL"
                     }
                   ]
                 }
