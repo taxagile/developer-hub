@@ -3,7 +3,15 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
 
 # Change Log
-### v1.4.2 - 2026-03-??
+
+### v1.4.3 - 2026-05-08
+* DEPRECATION ALERT: ``` POST /v1/auditor/vat/audits ``` - deprecated from 2026-06-12
+* DEPRECATION ALERT: ``` DELETE /v1/auditor/vat/audits ``` - deprecated from 2026-06-12
+* Updated [API Documentation](../redoc-static.html) to add DEPRECATION alert on ``` /v1/auditor/vat/audits ``
+* Sample [Postman collection v1.4.3](Tax%20Agile%20-%20sample%20collection%20-%20v1.4.3.postman_collection.json)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.3)
+
+### v1.4.2 - 2026-03-06
 * Removed Swagger UX from developer hub, replaced with Redoc version [API Documentation](../redoc-static.html)
 * Updated Developer preview of VAT Filer API including the [VAT Filer - Overview](filer/filer-overview.md) in-depth getting started guide
 * Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.2)

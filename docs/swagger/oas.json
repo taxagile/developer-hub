@@ -3,7 +3,7 @@
   "info": {
     "description": "## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -95,7 +95,7 @@
       "post": {
         "tags": [ "VAT Auditor"],
         "summary": "Create a new audit.",
-        "description": "## Submit transaction data to VAT Auditor \n Send it as either body JSON, or as an Excel xlsx as multipart form-data, which has been mapped to our data model.\n\nThis endpoint returns with an operation token to use with the `GET /operations/{id}` endpoint to poll for the Audit completion.\n\nIn **v1.3.0** we added the `POST /datamanager/vat/uploads` endpoint which should now be used for sending data to VAT Filer, previously this resource supported that use-case, but that is now _deprecated_. \n\nIn **v1.3.1** we added validation to the json payload that dates are in the format 'YYYY-MM-DD'.",
+        "description": "## Submit transaction data to VAT Auditor\n ### Deprecated - Unavailable from 2026-06-12\nData upload moved to `POST /datamanager/vat/uploads` endpoint in v1.3.0 (2024-08-09) - use of the legacy behaviour of using this endpoint, will be removed in the next release.",
         "parameters": [],
         "requestBody": { 
           "required": true,
@@ -186,7 +186,7 @@
           "VAT Auditor"
         ],
         "summary": "Summary list of audits.",
-        "description": "## Lists the (100) most recent audits. \n If there a no items in the list this will return an empty array, on a 200 OK.",
+        "description": "## Lists the (100) most recent audits.\n### Deprecated - Unavailable from 2026-06-12\nIf there a no items in the list this will return an empty array, on a 200 OK.",
         "responses": {
           "200": {
             "description": "OK",
@@ -239,7 +239,7 @@
           "VAT Auditor"
         ],
         "summary": "Summary of a specific audit.",
-        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
+        "description": "\n### Deprecated - Unavailable from 2026-06-12\nThe `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is a summary of the audit including metrics, data summary, datasource information, and includes results href.",
         "parameters": [
           {
             "name": "id",
@@ -304,7 +304,7 @@
           "VAT Auditor"
         ],
         "summary": "Removes audit results and data from the platform.",
-        "description": "## Deletes audit and associated data.",
+        "description": "## Deletes audit and associated data.\n### Deprecated - Unavailable from 2026-06-12 ",
         "parameters": [
           {
             "name": "id",
@@ -364,7 +364,7 @@
           "VAT Auditor"
         ],
         "summary": "Results of a specific audit.",
-        "description": "The `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions. \n\nTo get a JSON summary of each error in the audit, use the `format=errorList` query parameter _only_ (don't combine with pageSize and startAfter). It returns the first 10,000 errors.",
+        "description": "### Deprecated - Unavailable from 2026-06-12 \nThe `{id}` for the path parameter is provided by the `GET /operations/{id}` response as the `href` field in the body and also the `location` header. \n\n It is also avaialable from the summary list of audits `GET /auditor/vat/audits` endpoint. \n\n The response body is an array of transactions, showing data errors, audit check issues and successful transactions. \n\nTo get a JSON summary of each error in the audit, use the `format=errorList` query parameter _only_ (don't combine with pageSize and startAfter). It returns the first 10,000 errors.",
         "parameters": [
           {
             "name": "id",
