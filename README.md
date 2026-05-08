@@ -9,7 +9,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.4.2-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.4.3-green.svg)]()
 
 
 ## Authentication
@@ -21,9 +21,9 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 ## Data manager
 
 * Introduced in v1.3.0 of the API - data manager route handles uploads of data
-  * Replaces the ```POST /v1/auditor/vat/audits``` resource as the way to send data to VAT Filer
 
 ## VAT Determination
+
 * Send a transaction for VAT Determination
   * Receiving back context rich error messaging if your transaction is missing a field required for the determination to complete
   * Returns an analysis for the transaction
@@ -35,12 +35,9 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
   * This can be used to collect data from Tax Agile and store in your data warehouse
 
 ## VAT Auditor
-* Create an Audit 
-  * Receive an operation id to poll for audit completion
-* Get a list of audits on the system
-* Fetch summary details of a specific audit by id
-* Fetch audit results by id
-* Delete an audit by id
+* Get a list of audits from uploads on the system
+* Fetch summary details of a specific audit by upload id
+* Fetch audit results by upload id
 
 ## VAT Filer
 * List VAT Filer capabilites, all filings available on the platform, filter by countryCode and type
