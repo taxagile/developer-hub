@@ -4,6 +4,14 @@
 
 # Change Log
 
+### v1.4.4 - 2026-05-22
+* Changes were made to the structure of the request/response body for the `/v0/companies` resource. Three fields were promoted from the registration level into the VAT domain level. The changed fields are `fixedRate`, `methodRecovery` and `typeOfVatPayer`.
+  * Changed request ``` POST /v0/companies ```
+  * Changed response ``` GET /v0/companies/{id} ```
+  * Changed request ``` PUT /v0/companies/{id} ```
+* Updated [API Documentation](../redoc-static.html)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.4)
+
 ### v1.4.3 - 2026-05-08
 * DEPRECATION ALERT: ``` POST /v1/auditor/vat/audits ``` - deprecated from 2026-06-12
 * DEPRECATION ALERT: ``` DELETE /v1/auditor/vat/audits ``` - deprecated from 2026-06-12

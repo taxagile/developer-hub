@@ -3,7 +3,7 @@
   "info": {
     "description": "## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
@@ -5212,6 +5212,11 @@
             ],
             "example": "vat"
           },
+          "fixedRate": {
+            "type": "string",
+            "description": "Fixed rate as a string.",
+            "example": "16.5"
+          },
           "isAirline": {
             "type": "boolean",
             "description": "Is the company an airline?",
@@ -5266,6 +5271,16 @@
             "default": false,
             "example": false
           },
+          "methodRecovery": {
+            "type": "string",
+            "description": "Method of recovery.",
+            "enum": [
+              "standard",
+              "special"
+            ],
+            "example": "standard",
+            "default": ""
+          },
           "mpEstablishedCountry": {
             "type": "string",
             "description": "Marketplace established country using ISO 3166-1 alpha-2 country code.",
@@ -5305,6 +5320,17 @@
               "sap"
             ],
             "example": "allPos",
+            "default": ""
+          },
+          "typeOfVatPayer": {
+            "type": "string",
+            "description": "Type of VAT payer",
+            "enum": [
+              "full",
+              "exempt",
+              "mixed"
+            ],
+            "example": "",
             "default": ""
           }
         }
@@ -5424,11 +5450,6 @@
               "$ref": "#/components/schemas/companyVatFilingsSettings"
             }
           },
-          "fixedRate": {
-            "type": "string",
-            "description": "Fixed rate as a string.",
-            "example": "16.5"
-          },
           "importLicence": {
             "type": "boolean",
             "description": "Import licence.",
@@ -5449,16 +5470,6 @@
             "description": "Local tax number.",
             "example": "123456789"
           },
-          "methodRecovery": {
-            "type": "string",
-            "description": "Method of recovery.",
-            "enum": [
-              "standard",
-              "special"
-            ],
-            "example": "standard",
-            "default": ""
-          },
           "nonUnionOSS": {
             "type": "string",
             "description": "Non-union OSS number.",
@@ -5468,17 +5479,6 @@
             "type": "string",
             "description": "VAT Registration ID - without a leading country code.",
             "example": "1234567890"
-          },
-          "typeOfVatPayer": {
-            "type": "string",
-            "description": "Type of VAT payer",
-            "enum": [
-              "full",
-              "exempt",
-              "mixed"
-            ],
-            "example": "",
-            "default": ""
           },
           "unionOSS": {
             "type": "string",
