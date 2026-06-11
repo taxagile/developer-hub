@@ -4,6 +4,12 @@
 
 # Change Log
 
+### v1.4.5 - 2026-06-12
+* Removed - ``` /v1/auditor/vat/audits ``` 
+* Updated [API Documentation](../redoc-static.html) to remove ``` /v1/auditor/vat/audits ``
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.5)
+
+
 ### v1.4.4 - 2026-05-22
 * Changes were made to the structure of the request/response body for the `/v0/companies` resource. Three fields were promoted from the registration level into the VAT domain level. The changed fields are `fixedRate`, `methodRecovery` and `typeOfVatPayer`.
   * Changed request ``` POST /v0/companies ```
