@@ -3,6 +3,12 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
 
 # Change Log
+### v1.4.6 - 2026-07-03
+* Updated some endpoints currently in Developer Preview:
+  * Added query parameter to ``` GET /v0/datamanager/vat/transactions ``` of `uploadId=` to allow query by the file upload unique ID
+  * Added a route into the VAT Filer preview ``` PUT /v0/filer/vat/filings/events/companies/:c/filings/:f/periods/:p/status ``` which takes a body of `{ "status": "approved" }` and updates a particular return's filing status.
+* Sample [Postman collection v1.4.6](Tax%20Agile%20-%20sample%20collection%20-%20v1.4.6.postman_collection.json)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.6)
 
 ### v1.4.5 - 2026-06-12
 * Removed - ``` /v1/auditor/vat/audits ``` 
