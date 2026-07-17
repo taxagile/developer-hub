@@ -499,8 +499,60 @@
         "tags": [
           "VAT Data manager"
         ],
-        "summary": "Summary list of the most recent 100 uploads.",
-        "description": "Summary list of the most recent 100 uploads.",
+        "summary": "Summary list of uploads.",
+        "description": "Returns a paginated, filterable summary list of uploads. Optionally filter by `name`, and/or an `entryDateTimeFrom`/`entryDateTimeTo` date range.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional. Filter uploads by the file name used for the upload.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "vat-return-june.xlsx"
+          },
+          {
+            "name": "entryDateTimeFrom",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format from which to select uploads to return. Optional.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-07-13T11:00:00.000Z"
+          },
+          {
+            "name": "entryDateTimeTo",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format of the end of the date time range. Optional.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-07-15T23:59:59.999Z"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number of the result set you want to fetch. Optional, defaults to 1.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of uploads to return in a page of results. Optional, defaults to 20.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -511,6 +563,20 @@
                   "items": {
                     "$ref": "#/components/schemas/vatUploadSummaryListResponse"
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| DMV028 | name must not be empty |\n| DMV029 | Invalid entryDateTimeFrom or entryDateTimeTo query parameter - must be an ISO 8601 datetime string |\n| DMV030 | Unreasonable parameter value |",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "DMV028",
+                  "message": "name must not be empty"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -625,6 +691,163 @@
                 "example": {
                   "errorCode": "DMV006",
                   "message": "Error encountered deleting upload {id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List long-running operations.",
+        "description": "## Returns a list of long-running operations. \n\n Use this endpoint to fetch a collection of operations, optionally filtered by `status` and/or an `entryDateTimeFrom`/`entryDateTimeTo` date range. Each item's `href` points to the operation itself while incomplete, or to the completed resource once the operation has finished.",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Optional. Filter the returned operations by status.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "inprogress",
+                "complete",
+                "cancelled"
+              ]
+            },
+            "example": "complete"
+          },
+          {
+            "name": "entryDateTimeFrom",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format from which to select operations to return. Optional.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-07-13T11:00:00.000Z"
+          },
+          {
+            "name": "entryDateTimeTo",
+            "in": "query",
+            "description": "Datetime stamp in UTC ISO string format of the end of the date time range. Optional.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-07-15T23:59:59.999Z"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number of the result set you want to fetch. Optional, defaults to 1.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of operations to return in a page of results. Optional, defaults to 20.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/operationsListResponse200"
+                },
+                "example": {
+                  "count": 7,
+                  "data": [
+                    {
+                      "_id": "ceec76ad-a173-4d60-be74-335ff4279470",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-15T08:19:20.926Z",
+                      "href": "/v1/datamanager/vat/uploads/ceec76ad-a173-4d60-be74-335ff4279470"
+                    },
+                    {
+                      "_id": "45589b19-4c95-466f-a3da-f20c210bdc32",
+                      "status": "Pending",
+                      "entryDateTime": "2026-07-14T21:30:49.476Z",
+                      "href": "/v1/operations/45589b19-4c95-466f-a3da-f20c210bdc32"
+                    },
+                    {
+                      "_id": "d2bc5e35-49a0-4852-a123-da04371fc028",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-13T11:05:07.751Z",
+                      "href": "/v1/datamanager/vat/uploads/d2bc5e35-49a0-4852-a123-da04371fc028"
+                    },
+                    {
+                      "_id": "6b29a963-9843-4f23-b305-731dfc24894e",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-13T10:55:54.053Z",
+                      "href": "/v1/datamanager/vat/uploads/6b29a963-9843-4f23-b305-731dfc24894e"
+                    },
+                    {
+                      "_id": "39246154-9ba9-4612-8a07-cdba0bee6f67",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-13T10:52:22.050Z",
+                      "href": "/v1/datamanager/vat/uploads/39246154-9ba9-4612-8a07-cdba0bee6f67"
+                    },
+                    {
+                      "_id": "e07c0d53-7dba-42cf-aa86-a984af5aa366",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-13T10:40:26.897Z",
+                      "href": "/v1/datamanager/vat/uploads/e07c0d53-7dba-42cf-aa86-a984af5aa366"
+                    },
+                    {
+                      "_id": "0f76e141-416a-4c46-8c39-6b352c06c66f",
+                      "status": "Complete",
+                      "entryDateTime": "2026-07-13T09:43:44.191Z",
+                      "href": "/v1/datamanager/vat/uploads/0f76e141-416a-4c46-8c39-6b352c06c66f"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request\n\n| Error code | Message |\n|------|-------------|\n| OP004 | Invalid status query parameter - must be one of pending, inprogress, complete, cancelled |\n| OP005 | Invalid entryDateTimeFrom or entryDateTimeTo query parameter - must be an ISO 8601 datetime string |",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                },
+                "example": {
+                  "errorCode": "OP004",
+                  "message": "Invalid status query parameter - must be one of pending, inprogress, complete, cancelled"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/error401"
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errorCode": "OP003",
+                  "message": "Error encountered fetching operations"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
                 }
               }
             }
@@ -5206,6 +5429,46 @@
             "description": "Resource uri",
             "type": "string",
             "example": "/v1/auditor/vat/audits/6gmTpTAM3xC7m3v66xB8"
+          }
+        }
+      },
+      "operationsListResponse200": {
+        "title": "Operations List",
+        "type": "object",
+        "properties": {
+          "count": {
+            "description": "Total number of operations matching the query",
+            "type": "integer",
+            "format": "int32",
+            "example": 7
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "description": "Unique operation id",
+                  "type": "string",
+                  "example": "ceec76ad-a173-4d60-be74-335ff4279470"
+                },
+                "status": {
+                  "description": "Operation status",
+                  "type": "string",
+                  "example": "Complete"
+                },
+                "entryDateTime": {
+                  "description": "Datetime the operation was created",
+                  "type": "string",
+                  "example": "2026-07-15T08:19:20.926Z"
+                },
+                "href": {
+                  "description": "Location to poll for operation status, or the resource once complete",
+                  "type": "string",
+                  "example": "/v1/datamanager/vat/uploads/ceec76ad-a173-4d60-be74-335ff4279470"
+                }
+              }
+            }
           }
         }
       },

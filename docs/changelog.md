@@ -3,6 +3,13 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
 
 # Change Log
+### v1.4.7 - 2026-07-17
+* Added ``` GET /v1/operations ``` to list operations with query parameters of `status`, `entryDateTimeFrom` and `entryDateTimeTo`
+* Updated ``` GET /v1/datamanager/vat/uploads ``` with query parameters `name`, `entryDateTimeFrom` and `entryDateTimeTo`
+* Updated [API Documentation](../redoc-static.html)
+* Updated [Postman collection v1.4.7](Tax%20Agile%20-%20sample%20collection%20-%20v1.4.7.postman_collection.json)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.7)
+
 ### v1.4.6 - 2026-07-03
 * Updated some endpoints currently in Developer Preview:
   * Added query parameter to ``` GET /v0/datamanager/vat/transactions ``` of `uploadId=` to allow query by the file upload unique ID
