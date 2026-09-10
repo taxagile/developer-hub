@@ -3,7 +3,7 @@
   "info": {
     "description": "## Tax Agile API provides a RESTful implementation of the functionality in our web application.\n\n Requres an Account ID and API Key pair for the `POST /v1/auth` endpoint which will return a short-lived JWT Bearer token in the response. \n\n Use the Bearer token in the Authorization header of subsequent requests. \n\n Please [contact us](https://www.vatcalc.com/contact/) if you would like a demo and access. \n\n  ##### Find out more about our products on our website [vatcalc.com](https://www.vatcalc.com/)\n",
     "title": "Tax Agile API Specification",
-    "version": "1.4.4",
+    "version": "1.4.8",
     "contact": {
       "name": "Tax Agile Support",
       "url": "https://vatcalc.freshdesk.com/support/home"
