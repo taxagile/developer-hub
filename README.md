@@ -9,7 +9,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.4.7-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-v1.4.8-green.svg)]()
 
 
 ## Authentication
