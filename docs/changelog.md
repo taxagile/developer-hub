@@ -3,9 +3,6 @@
 [Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
 
 # Change Log
-### Unreleased
-* Added `splitPayments` (boolean) to the VAT determination response: true when the split payment mechanism applies to the transaction (Poland and Italy)
-
 ### v1.4.8 - 2026-09-10
 * Added developer preview endpoints in the sample postman collection
 * Updated [Postman collection v1.4.8](Tax%20Agile%20-%20sample%20collection%20-%20v1.4.8.postman_collection.json)

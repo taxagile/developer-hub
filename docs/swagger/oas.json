@@ -6002,12 +6002,6 @@
             "description": "Tax category ID to define the VAT treatment per Peppol specification",
             "example": "K"
           },
-          "splitPayments": {
-            "title": "Split payment applies",
-            "type": "boolean",
-            "description": "True when the split payment mechanism applies to the transaction (currently Poland, mandatory split payment for Annex 15 goods, and Italy, split payment for public bodies), false otherwise. Returned for sales and purchase documents. The VAT treatment itself is unchanged.",
-            "example": true
-          },
           "calculatedRate": {
             "type": "number",
             "title": "Calculated rate",
