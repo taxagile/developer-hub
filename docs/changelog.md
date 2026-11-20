@@ -1,8 +1,15 @@
-<img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
-
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md)
-
 # Change Log
+### v1.4.9 - 2026-11-20
+* Added `splitPayments` (boolean) to the ``` POST /v1/determination/vat/transactions ``` response: true when the split payment mechanism applies to the transaction (Poland and Italy)
+* Added the `Error` status to ``` GET /v1/operations/{id} ```, returned with HTTP 200 when an operation fails. `Error` is a final status: stop polling, and for an upload fetch ``` GET /v1/datamanager/vat/uploads/{id} ``` to see the error message
+* Added `error` as a `status` filter value on ``` GET /v1/operations ```
+* Corrected the ``` GET /v1/operations ``` documentation: the OP003, OP004 and OP005 messages, the `pageSize` default (10), and the `entryDateTimeFrom` default (30 days before the request)
+* Updated [API Documentation](../redoc-static.html) to Redoc 3, with a new layout and a light and dark mode
+* Added downloads for the full OpenAPI specification and the VAT data model (JSON schema) to the [API Documentation](../redoc-static.html)
+* Moved the OpenAPI files from `docs/swagger` to `docs/oas`. The data model schema is still available at its old location, so existing links keep working
+* Added a [VAT Filer overview](filer/filer-overview.md) link to the navigation, and fixed broken links to the API documentation and the Postman sample collection
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.9)
+
 ### v1.4.8 - 2026-09-10
 * Added developer preview endpoints in the sample postman collection
 * Updated [Postman collection v1.4.8](Tax%20Agile%20-%20sample%20collection%20-%20v1.4.8.postman_collection.json)

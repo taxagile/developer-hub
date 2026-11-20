@@ -1,7 +1,3 @@
-<img src="../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
-
-[Home](../README.md) \| [Getting started](getting-started.md)  \|  [Postman](postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](changelog.md) 
-
 # Getting started
 The Tax Agile API is a RESTful implementation closely following [Microsoft API design guidance](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design) 
 which means we have methods (actions) that are performed against resources over https; in a stateless way.

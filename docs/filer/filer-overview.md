@@ -1,7 +1,3 @@
-<img src="../../docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
-
-[Home](../../README.md) \| [Getting started](../getting-started.md)  \|  [Postman](../postman.md) \| [API Documentation](../redoc-static.html) \| [Change log](../changelog.md)
-
 # VAT Filer via API - Overview
 This page provides a high-level overview of the endpoints which support the VAT Filer product when working over the RESTful API. There are some dependencies and sequencing which are helpful to understand from the start.
 

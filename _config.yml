@@ -1,0 +1,7 @@
+theme: jekyll-theme-primer
+title: Tax Agile Developer Hub
+description: API documentation for integrating with Tax Agile
+
+# Kept in the repo as a maintainer note, but not published as a page
+exclude:
+  - docs/oas/redocly-generate.md

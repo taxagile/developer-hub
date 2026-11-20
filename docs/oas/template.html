@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <title>{{title}}</title>
+    <!-- needed for adaptive design -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link rel="icon" type="image/png" href="docs/oas/dist/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="docs/oas/dist/favicon-16x16.png" sizes="16x16" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    {{{redocHead}}}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /* Tax Agile brand for Redoc 3. Redoc defines its defaults with :where(:root), so these win. */
+      :root {
+        --ta-purple: #363c9a;
+        --ta-purple-hover: #2b307b;
+        --ta-purple-active: #22266a;
+        --ta-purple-tint: #e9e8f5;
+        --ta-purple-tint-hover: #dddcef;
+        --ta-sidebar-bg: #f6f4f7;
+        --ta-font: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+        --font-family-base: var(--ta-font);
+        --heading-font-family: var(--ta-font);
+        --heading-font-weight: 700;
+
+        --color-primary-base: var(--ta-purple);
+        --color-primary-hover: var(--ta-purple-hover);
+        --color-primary-active: var(--ta-purple-active);
+        --color-primary-text: var(--ta-purple);
+        --color-primary-text-hover: var(--ta-purple-hover);
+        --color-primary-text-active: var(--ta-purple-active);
+        --color-primary-bg: var(--ta-purple-tint);
+        --color-primary-bg-hover: var(--ta-purple-tint-hover);
+        --color-primary-border: var(--ta-purple);
+
+        --link-color-primary: var(--ta-purple);
+        --link-color-primary-hover: var(--ta-purple-hover);
+        --link-color-primary-pressed: var(--ta-purple-active);
+        --link-color-visited: var(--ta-purple);
+
+        --sidebar-bg-color: var(--ta-sidebar-bg);
+        --sidebar-logo-max-height: 80px;
+        --sidebar-logo-max-width: 80px;
+      }
+      /* Redoc 3 puts a "Copy" menu (Copy for LLM, Open in Claude, Open in ChatGPT) on every section heading, with no
+         option to turn it off, so it is hidden here. */
+      [data-testid='page-actions'] {
+        display: none !important;
+      }
+      /* Dark mode: a lighter purple so links and accents stay readable on the dark background. */
+      :root:has(.redoc.dark) {
+        --ta-purple: #9ea3f0;
+        --ta-purple-hover: #b8bcf5;
+        --ta-purple-active: #d0d3fa;
+        --ta-purple-tint: #2a2d55;
+        --ta-purple-tint-hover: #33376a;
+        --sidebar-bg-color: var(--bg-color);
+      }
+    </style>
+    <style>
+      @media print {
+        /* Break before each operation section (Redoc 3: data-section-id="/<tag>/paths/<path>/<method>") */
+        div[data-section-id*='/paths/'] {
+          break-before: page;
+          page-break-before: always; /* legacy browsers */
+        }
+
+        /* Avoid a blank first page — suppress the break on the very first operation */
+        div[data-section-id*='/paths/']:first-of-type {
+          break-before: avoid;
+          page-break-before: avoid;
+        }
+
+        /* Keep operation title with its content */
+        div[data-section-id*='/paths/'] h2 {
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+
+        /* Hide the sidebar and search when printing */
+        .menu-content {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {{{redocHTML}}}
+    <script>
+      // Redoc 3 hard-codes the download panel's wording ("Download OpenAPI description", and the tooltip "Download
+      // description" on every button) with no option to change it, so it is rewritten here once Redoc has rendered.
+      (function () {
+        var PANEL_TITLE = 'Download';
+        var DEFAULT_TOOLTIP = 'Download description';
+        // Matched on the downloadUrls entries in redocly.yaml.
+        function tooltipFor(href) {
+          if (!href) return null;
+          if (href.indexOf('tax-agile-api.json') !== -1) return 'Download the OAS file';
+          if (href.indexOf('/schemas/') !== -1) return 'Download the VAT data model';
+          return null;
+        }
+        var lastDownloadHref = null;
+
+        function rememberDownloadButton(event) {
+          var trigger = event.target.closest && event.target.closest("[data-component-name='Tooltip/Tooltip']");
+          var link = trigger && trigger.querySelector('a[download][href]');
+          if (link) lastDownloadHref = link.getAttribute('href');
+        }
+        document.addEventListener('mouseover', rememberDownloadButton, true);
+        document.addEventListener('focusin', rememberDownloadButton, true);
+
+        function relabel() {
+          document
+            .querySelectorAll("[data-testid='panel-download-openapi-description'] [data-testid='title']")
+            .forEach(function (title) {
+              if (title.textContent !== PANEL_TITLE) title.textContent = PANEL_TITLE;
+            });
+          document.querySelectorAll("[data-component-name='Buttons/DownloadButton'] a[href]").forEach(function (link) {
+            var label = tooltipFor(link.getAttribute('href'));
+            if (label && link.getAttribute('aria-label') !== label) link.setAttribute('aria-label', label);
+          });
+          var tooltip = tooltipFor(lastDownloadHref);
+          if (tooltip) {
+            document.querySelectorAll("[data-testid='" + DEFAULT_TOOLTIP + "']").forEach(function (body) {
+              if (body.textContent === DEFAULT_TOOLTIP) body.textContent = tooltip;
+            });
+          }
+        }
+        new MutationObserver(relabel).observe(document.body, { childList: true, subtree: true });
+        relabel();
+      })();
+    </script>
+  </body>
+</html>

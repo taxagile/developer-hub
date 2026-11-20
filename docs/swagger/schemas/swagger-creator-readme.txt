@@ -1,2 +1,0 @@
-Note: that the $ref does not include vatDataModelSchema.json in the data [] element of vatAuditRequestBody
-So when updating the data model, copy the contents of vatDataModelSchema into the vatDataModelSchema.properties {}
