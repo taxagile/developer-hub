@@ -1,16 +1,11 @@
-<img src="docs/Tax_Agile_Logo_White_on_Purple.png" width="80">
-
-[Home](https://taxagile.github.io/developer-hub/) \| [Getting started](docs/getting-started.md) \|  [Postman](docs/postman.md) \| [API Documentation](redoc-static.html) \| [Change log](docs/changelog.md)
-
 # Tax Agile - Developer Hub
 The Tax Agile Developer Hub contains resources for developers integrating with Tax Agile via RESTful web services. 
 
-It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postman.md) and documentation to [get started](docs/getting-started.md).
+It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postman.md), and documentation to [get started](docs/getting-started.md).
 
 
 # Overview of the API
-[![Generic badge](https://img.shields.io/badge/Version-v1.4.8-green.svg)]()
-
+[![Version](https://img.shields.io/badge/Version-v1.4.9-green.svg)](docs/changelog.md) [![API docs](https://img.shields.io/badge/API_docs-OpenAPI_3-blue.svg?logo=openapiinitiative)](redoc-static.html) [![Data model](https://img.shields.io/badge/Data_model-JSON_schema-purple.svg?logo=json)](docs/oas/schemas/vatDataModelSchema.json)
 
 ## Authentication
 
@@ -40,6 +35,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 * Fetch audit results by upload id
 
 ## VAT Filer
+* New to VAT Filer? Start with the [VAT Filer overview](docs/filer/filer-overview.md), which walks through the API calls in order and how they depend on each other
 * List VAT Filer capabilites, all filings available on the platform, filter by countryCode and type
 * List Filing Events based on date range 
 * Fetch visual view of the filing for the user review
@@ -51,8 +47,9 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 * Previewed in Nov '25, published as `v0` Jan '26 - stable and ready to use. Moving to `v1` in Q1/2026
 
 ## Jump to:
-* [API OAS3 docs](docs/redoc-static.html)
-* [Postman sample collection](./Tax%20Agile%20-%20sample%20collection%20-%20v1.4.2.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [API OAS3 docs](redoc-static.html)
+* [Postman sample collection](docs/Tax%20Agile%20-%20sample%20collection%20-%20v1.4.8.postman_collection.json) (right click 'Save As...' to save a local copy)
+* [VAT Filer overview](docs/filer/filer-overview.md)
 
 
 ## Need help?
