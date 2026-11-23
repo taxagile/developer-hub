@@ -1,4 +1,9 @@
 # Change Log
+### v1.4.10 - 2026-11-23
+* The VAT data model is now published as [indirectTaxDataModelVat](oas/schemas/indirectTaxDataModelVat.json), refreshed to the current data model, including the latest `item.itemType` values. It's used by ``` POST /v1/determination/vat/transactions ``` and ``` POST /v1/datamanager/vat/uploads ```
+* Updated [API Documentation](../redoc-static.html)
+* Release note [Release](https://github.com/taxagile/developer-hub/releases/tag/v1.4.10)
+
 ### v1.4.9 - 2026-11-20
 * Added `splitPayments` (boolean) to the ``` POST /v1/determination/vat/transactions ``` response: true when the split payment mechanism applies to the transaction (Poland and Italy)
 * Added the `Error` status to ``` GET /v1/operations/{id} ```, returned with HTTP 200 when an operation fails. `Error` is a final status: stop polling, and for an upload fetch ``` GET /v1/datamanager/vat/uploads/{id} ``` to see the error message

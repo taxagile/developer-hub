@@ -59,6 +59,15 @@
       [data-testid='page-actions'] {
         display: none !important;
       }
+      /* Long enums (more than 10 values, such as item.itemType) list one value per line instead of wrapping into a
+         block. Short enums stay on one line. 12 children = the "Enum:" label + 10 values + the "+N more" toggle. */
+      [data-testid='schema-enum-values']:has(> :nth-child(12)) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      [data-testid='schema-enum-values']:has(> :nth-child(12)) > button {
+        align-self: flex-start;
+      }
       /* Dark mode: a lighter purple so links and accents stay readable on the dark background. */
       :root:has(.redoc.dark) {
         --ta-purple: #9ea3f0;

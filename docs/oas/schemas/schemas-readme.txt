@@ -1,4 +1,1 @@
-Note: that the $ref does not include vatDataModelSchema.json in the data [] element of vatAuditRequestBody
-So when updating the data model, copy the contents of vatDataModelSchema into the vatDataModelSchema.properties {}
-
-A copy of vatDataModelSchema.json is kept at docs/swagger/schemas/ so existing links continue to work.
+indirectTaxDataModelVat.json is generated from Tax Agile's content model. Do not edit it by hand.

@@ -3,11 +3,13 @@ openapi:
   hideReplay: true
   sortRequiredPropsFirst: false
   excludeFromSearch: true
+  # Long enums (item.itemType has 350+ values) show the first 10, then a "+N more" toggle
+  maxDisplayedEnumValues: 10
   # Download buttons on the API docs page. tax-agile-api.json is the bundled spec (external $refs inlined), built with:
   # npx @redocly/cli bundle docs/oas/oas.json --output docs/oas/tax-agile-api.json
   downloadUrls:
     - title: OpenAPI specification
       url: docs/oas/tax-agile-api.json
     - title: VAT data model (JSON schema)
-      url: docs/oas/schemas/vatDataModelSchema.json
+      url: docs/oas/schemas/indirectTaxDataModelVat.json
   # Colours and fonts are CSS variables in docs/oas/template.html (Redoc 3 has no theme option)
