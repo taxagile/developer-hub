@@ -5,7 +5,7 @@ It includes [API OAS3 docs](redoc-static.html), [sample API requests](docs/postm
 
 
 # Overview of the API
-[![Version](https://img.shields.io/badge/Version-v1.4.9-green.svg)](docs/changelog.md) [![API docs](https://img.shields.io/badge/API_docs-OpenAPI_3-blue.svg?logo=openapiinitiative)](redoc-static.html) [![Data model](https://img.shields.io/badge/Data_model-JSON_schema-purple.svg?logo=json)](docs/oas/schemas/vatDataModelSchema.json)
+[![Version](https://img.shields.io/badge/Version-v1.4.10-green.svg)](docs/changelog.md) [![API docs](https://img.shields.io/badge/API_docs-OpenAPI_3-blue.svg?logo=openapiinitiative)](redoc-static.html) [![Data model](https://img.shields.io/badge/Data_model-JSON_schema-purple.svg?logo=json)](docs/oas/schemas/indirectTaxDataModelVat.json)
 
 ## Authentication
 
